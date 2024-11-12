@@ -1,0 +1,326 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<link href="../../../../docs/common/styles.css" rel="STYLESHEET">
+<title>Example Monk Traditions </title>
+</head>
+
+<body>
+
+<div align="center">
+  <table class="banner" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td>
+        <p align="center" class="banner">Example Monk Traditions 
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div align="center">
+  <table border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td><img border="0" src="../../../../docs/common/empty.gif" width="1" height="15"></td>
+    </tr>
+  </table>
+</div>
+
+<p class="section">Introduction
+
+<p class="body">This document provides examples of the mechanics for other monk traditions. 
+
+<h4>Way of Shadow</h4><p class="body">Below are the necessary mechanics to model the Way of Shadow and associated abilities.</p><pre class="xml">
+  &lt;thing id="cMnkWaySha" name="Way of Shadow" description="Placeholder..." compset="CustomSpec" uniqueness="unique"&gt;
+    &lt;tag group="SpecSource" tag="cHelpMnk"/&gt;
+    &lt;tag group="abCategory" tag="MnkMonTrad" name="Monk Monastic Tradition"/&gt;
+    &lt;tag group="Helper" tag="Primary"/&gt;
+    &lt;bootstrap thing="cMnkShaSte"&gt;
+      &lt;autotag group="ClSpecWhen" tag="6"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cMnkCloSha"&gt;
+      &lt;autotag group="ClSpecWhen" tag="11"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cMnkOpport"&gt;
+      &lt;autotag group="ClSpecWhen" tag="17"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cMnkShaArt"&gt;
+      &lt;autotag group="ClSpecWhen" tag="3"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cMnkShaArt" name="Shadow Arts" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="abDuration" tag="Constant"/&gt;
+    &lt;tag group="abAction" tag="None"/&gt;
+    &lt;bootstrap thing="spMinoIllu"&gt;
+      &lt;autotag group="Helper" tag="SpellLike"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="spDarkness"&gt;
+      &lt;autotag group="Helper" tag="SpellLike"/&gt;
+      &lt;assignval field="livename" value="Darkness (2 ki)"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="spDarkvisi"&gt;
+      &lt;autotag group="Helper" tag="SpellLike"/&gt;
+      &lt;assignval field="livename" value="Darkvision (2 ki)"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="spPassTrac"&gt;
+      &lt;autotag group="Helper" tag="SpellLike"/&gt;
+      &lt;assignval field="livename" value="Pass without Trace (2 ki)"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="spSilence"&gt;
+      &lt;autotag group="Helper" tag="SpellLike"/&gt;
+      &lt;assignval field="livename" value="Silence (2 ki)"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cMnkShaSte" name="Shadow Step" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;fieldval field="abRange" value="60"/&gt;
+    &lt;tag group="abDuration" tag="Instant"/&gt;
+    &lt;tag group="abRange" tag="Feet"/&gt;
+    &lt;tag group="abAction" tag="Bonus"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cMnkCloSha" name="Cloak of Shadows" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="abDuration" tag="Permanent"/&gt;
+    &lt;tag group="abAction" tag="Action"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cMnkOpport" name="Opportunist" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;fieldval field="abRange" value="5"/&gt;
+    &lt;tag group="abDuration" tag="Instant"/&gt;
+    &lt;tag group="abAction" tag="Reaction"/&gt;
+    &lt;tag group="abRange" tag="Feet"/&gt;
+    &lt;/thing&gt;
+
+  </pre><h4>Way of the Four Elements</h4><p class="body">Below are the necessary mechanics to model the Way of the Four Elements and associated abilities.</p><pre class="xml">
+  &lt;thing id="cMnkWaFoEl" name="Way of the Four Elements" description="Placeholder..." compset="CustomSpec" uniqueness="unique"&gt;
+    &lt;tag group="SpecSource" tag="cHelpMnk"/&gt;
+    &lt;tag group="abCategory" tag="MnkMonTrad" name="Monk Monastic Tradition"/&gt;
+    &lt;tag group="Helper" tag="Primary"/&gt;
+    &lt;bootstrap thing="cMnkEleAtt"&gt;
+      &lt;autotag group="ClSpecWhen" tag="3"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;eval phase="PostLevel" priority="9000"&gt;&lt;![CDATA[
+       doneif (tagis[Helper.Disable] &lt;&gt; 0)
+
+       linkage[table].field[cSpec2ndNm].text = "Elemental Disciplines"
+       linkage[table].field[cSpec2ndSi].text = "Elemental Discipline"
+
+       linkage[table].field[cCustScTot].arrayvalue[2] += 1
+       linkage[table].field[cCustScTot].arrayvalue[5] += 2
+       linkage[table].field[cCustScTot].arrayvalue[10] += 3
+       linkage[table].field[cCustScTot].arrayvalue[16] += 4]]&gt;&lt;/eval&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cMnkEleAtt" name="Elemental Attunement" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;tag group="abRange" tag="Sight"/&gt;
+    &lt;tag group="abDuration" tag="Instant"/&gt;
+    &lt;tag group="abAction" tag="Action"/&gt;
+    &lt;tag group="SpecSource" tag="cHelpMnk"/&gt;
+    &lt;tag group="abCategory" tag="MnkEleDisc" name="Monk Elemental Discipline"/&gt;
+    &lt;/thing&gt;
+
+  </pre><h4>Elemental Disciplines</h4><p class="body">Below are the necessary mechanics to model the Way of the Four Elements elemental disciplines.</p><pre class="xml">
+  &lt;thing id="cMnkBreWin" name="Breath of Winter" description="Placeholder..." compset="CustomSpec" summary="Placeholder..." uniqueness="unique"&gt;
+    &lt;tag group="SpecSource" tag="cHelpMnk"/&gt;
+    &lt;tag group="abCategory" tag="MnkEleDisc"/&gt;
+    &lt;tag group="Helper" tag="Secondary"/&gt;
+    &lt;tag group="abAction" tag="None"/&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="abDuration" tag="Constant"/&gt;
+    &lt;bootstrap thing="spConeCold"&gt;
+      &lt;autotag group="Helper" tag="SpellLike"/&gt;
+      &lt;assignval field="livename" value="Cone of Cold (6 ki)"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;exprreq message="17th Level required."&gt;&lt;![CDATA[#levelcount[Monk] &gt;= 17]]&gt;&lt;/exprreq&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cMnkClNoWi" name="Clench of the North Wind" description="Placeholder..." compset="CustomSpec" summary="Placeholder..." uniqueness="unique"&gt;
+    &lt;tag group="SpecSource" tag="cHelpMnk"/&gt;
+    &lt;tag group="abCategory" tag="MnkEleDisc"/&gt;
+    &lt;tag group="Helper" tag="Secondary"/&gt;
+    &lt;tag group="abAction" tag="None"/&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="abDuration" tag="Constant"/&gt;
+    &lt;bootstrap thing="spHoldPers"&gt;
+      &lt;autotag group="Helper" tag="SpellLike"/&gt;
+      &lt;assignval field="livename" value="Hold Person (3 ki)"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;exprreq message="6th Level required."&gt;&lt;![CDATA[#levelcount[Monk] &gt;= 6]]&gt;&lt;/exprreq&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cMnkEtMoDe" name="Eternal Mountain Defense" description="Placeholder..." compset="CustomSpec" summary="Placeholder..." uniqueness="unique"&gt;
+    &lt;tag group="SpecSource" tag="cHelpMnk"/&gt;
+    &lt;tag group="abCategory" tag="MnkEleDisc"/&gt;
+    &lt;tag group="Helper" tag="Secondary"/&gt;
+    &lt;tag group="abAction" tag="None"/&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="abDuration" tag="Constant"/&gt;
+    &lt;bootstrap thing="spStoneski"&gt;
+      &lt;autotag group="Helper" tag="SpellLike"/&gt;
+      &lt;assignval field="livename" value="Stoneskin (5 ki)"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;exprreq message="11th Level required."&gt;&lt;![CDATA[#levelcount[Monk] &gt;= 11]]&gt;&lt;/exprreq&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cMnkFaFiSn" name="Fangs of the Fire Snake" description="Placeholder..." compset="CustomSpec" summary="Placeholder..." uniqueness="unique"&gt;
+    &lt;fieldval field="abRange" value="10"/&gt;
+    &lt;fieldval field="abDuration" value="1"/&gt;
+    &lt;tag group="abRange" tag="Feet"/&gt;
+    &lt;tag group="abDuration" tag="Round"/&gt;
+    &lt;tag group="abAction" tag="Free"/&gt;
+    &lt;tag group="Helper" tag="Secondary"/&gt;
+    &lt;tag group="SpecSource" tag="cHelpMnk"/&gt;
+    &lt;tag group="abCategory" tag="MnkEleDisc"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cMnkFiFoTh" name="Fist of Four Thunders" description="Placeholder..." compset="CustomSpec" summary="Placeholder..." uniqueness="unique"&gt;
+    &lt;tag group="SpecSource" tag="cHelpMnk"/&gt;
+    &lt;tag group="abCategory" tag="MnkEleDisc"/&gt;
+    &lt;tag group="Helper" tag="Secondary"/&gt;
+    &lt;tag group="abAction" tag="None"/&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="abDuration" tag="Constant"/&gt;
+    &lt;bootstrap thing="spThunderw"&gt;
+      &lt;autotag group="Helper" tag="SpellLike"/&gt;
+      &lt;assignval field="livename" value="Thunderwave (2 ki)"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cMnkFiUnAi" name="Fist of Unbroken Air" description="Placeholder..." compset="CustomSpec" summary="Placeholder..." uniqueness="unique"&gt;
+    &lt;fieldval field="abRange" value="30"/&gt;
+    &lt;tag group="SpecSource" tag="cHelpMnk"/&gt;
+    &lt;tag group="abCategory" tag="MnkEleDisc"/&gt;
+    &lt;tag group="abRange" tag="Feet"/&gt;
+    &lt;tag group="abDuration" tag="Instant"/&gt;
+    &lt;tag group="abAction" tag="Action"/&gt;
+    &lt;tag group="Helper" tag="Secondary"/&gt;
+    &lt;tag group="abSave" tag="HalfEffect"/&gt;
+    &lt;tag group="abSave" tag="aSTR"/&gt;
+    &lt;tag group="StandardDC" tag="aWIS"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cMnkFlaPhe" name="Flames of the Phoenix" description="Placeholder..." compset="CustomSpec" summary="Placeholder..." uniqueness="unique"&gt;
+    &lt;tag group="SpecSource" tag="cHelpMnk"/&gt;
+    &lt;tag group="abCategory" tag="MnkEleDisc"/&gt;
+    &lt;tag group="Helper" tag="Secondary"/&gt;
+    &lt;tag group="abAction" tag="None"/&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="abDuration" tag="Constant"/&gt;
+    &lt;bootstrap thing="spFireball"&gt;
+      &lt;autotag group="Helper" tag="SpellLike"/&gt;
+      &lt;assignval field="livename" value="Fireball (4 ki)"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;exprreq message="11th Level required."&gt;&lt;![CDATA[#levelcount[Monk] &gt;= 11]]&gt;&lt;/exprreq&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cMnkGonSum" name="Gong of the Summit" description="Placeholder..." compset="CustomSpec" summary="Placeholder..." uniqueness="unique"&gt;
+    &lt;tag group="SpecSource" tag="cHelpMnk"/&gt;
+    &lt;tag group="abCategory" tag="MnkEleDisc"/&gt;
+    &lt;tag group="Helper" tag="Secondary"/&gt;
+    &lt;tag group="abAction" tag="None"/&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="abDuration" tag="Constant"/&gt;
+    &lt;bootstrap thing="spShatter"&gt;
+      &lt;autotag group="Helper" tag="SpellLike"/&gt;
+      &lt;assignval field="livename" value="Shatter (3 ki)"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;exprreq message="6th Level required."&gt;&lt;![CDATA[#levelcount[Monk] &gt;= 6]]&gt;&lt;/exprreq&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cMnkMisSta" name="Mist Stance" description="Placeholder..." compset="CustomSpec" summary="Placeholder..." uniqueness="unique"&gt;
+    &lt;tag group="SpecSource" tag="cHelpMnk"/&gt;
+    &lt;tag group="abCategory" tag="MnkEleDisc"/&gt;
+    &lt;tag group="Helper" tag="Secondary"/&gt;
+    &lt;tag group="abAction" tag="None"/&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="abDuration" tag="Constant"/&gt;
+    &lt;bootstrap thing="spGaseForm"&gt;
+      &lt;autotag group="Helper" tag="SpellLike"/&gt;
+      &lt;assignval field="livename" value="Gaseous Form (4 ki, self only)"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;exprreq message="11th Level required."&gt;&lt;![CDATA[#levelcount[Monk] &gt;= 11]]&gt;&lt;/exprreq&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cMnkRidWhi" name="Ride the Wind" description="Placeholder..." compset="CustomSpec" summary="Placeholder..." uniqueness="unique"&gt;
+    &lt;tag group="SpecSource" tag="cHelpMnk"/&gt;
+    &lt;tag group="abCategory" tag="MnkEleDisc"/&gt;
+    &lt;tag group="Helper" tag="Secondary"/&gt;
+    &lt;tag group="abAction" tag="None"/&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="abDuration" tag="Constant"/&gt;
+    &lt;bootstrap thing="spFly"&gt;
+      &lt;autotag group="Helper" tag="SpellLike"/&gt;
+      &lt;assignval field="livename" value="Fly (4 ki, self only)"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;exprreq message="11th Level required."&gt;&lt;![CDATA[#levelcount[Monk] &gt;= 11]]&gt;&lt;/exprreq&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cMnkRiHuFl" name="River of Hungry Flame" description="Placeholder..." compset="CustomSpec" summary="Placeholder..." uniqueness="unique"&gt;
+    &lt;tag group="SpecSource" tag="cHelpMnk"/&gt;
+    &lt;tag group="abCategory" tag="MnkEleDisc"/&gt;
+    &lt;tag group="Helper" tag="Secondary"/&gt;
+    &lt;tag group="abAction" tag="None"/&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="abDuration" tag="Constant"/&gt;
+    &lt;bootstrap thing="spWallFire"&gt;
+      &lt;autotag group="Helper" tag="SpellLike"/&gt;
+      &lt;assignval field="livename" value="Wall of Fire (5 ki)"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;exprreq message="17th Level required."&gt;&lt;![CDATA[#levelcount[Monk] &gt;= 17]]&gt;&lt;/exprreq&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cMnkRuGaSp" name="Rush of the Gale Spirits" description="Placeholder..." compset="CustomSpec" summary="Placeholder..." uniqueness="unique"&gt;
+    &lt;tag group="SpecSource" tag="cHelpMnk"/&gt;
+    &lt;tag group="abCategory" tag="MnkEleDisc"/&gt;
+    &lt;tag group="Helper" tag="Secondary"/&gt;
+    &lt;tag group="abAction" tag="None"/&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="abDuration" tag="Constant"/&gt;
+    &lt;bootstrap thing="spGustWind"&gt;
+      &lt;autotag group="Helper" tag="SpellLike"/&gt;
+      &lt;assignval field="livename" value="Gust of Wind (2 ki)"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cMnkSwCiSt" name="Sweeping Cinder Strike" description="Placeholder..." compset="CustomSpec" summary="Placeholder..." uniqueness="unique"&gt;
+    &lt;tag group="SpecSource" tag="cHelpMnk"/&gt;
+    &lt;tag group="abCategory" tag="MnkEleDisc"/&gt;
+    &lt;tag group="Helper" tag="Secondary"/&gt;
+    &lt;tag group="abAction" tag="None"/&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="abDuration" tag="Constant"/&gt;
+    &lt;bootstrap thing="spBurnHand"&gt;
+      &lt;autotag group="Helper" tag="SpellLike"/&gt;
+      &lt;assignval field="livename" value="Burning Hands (2 ki)"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cMnkWatWhi" name="Water Whip" description="Placeholder..." compset="CustomSpec" summary="Placeholder..." uniqueness="unique"&gt;
+    &lt;fieldval field="abRange" value="30"/&gt;
+    &lt;tag group="SpecSource" tag="cHelpMnk"/&gt;
+    &lt;tag group="abCategory" tag="MnkEleDisc"/&gt;
+    &lt;tag group="abRange" tag="Feet"/&gt;
+    &lt;tag group="abDuration" tag="Instant"/&gt;
+    &lt;tag group="Helper" tag="Secondary"/&gt;
+    &lt;tag group="abSave" tag="HalfEffect"/&gt;
+    &lt;tag group="StandardDC" tag="aWIS"/&gt;
+    &lt;tag group="abAction" tag="Bonus"/&gt;
+    &lt;tag group="abSave" tag="aDEX"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cMnkWaRoEa" name="Wave of Rolling Earth" description="Placeholder..." compset="CustomSpec" summary="Placeholder..." uniqueness="unique"&gt;
+    &lt;tag group="SpecSource" tag="cHelpMnk"/&gt;
+    &lt;tag group="abCategory" tag="MnkEleDisc"/&gt;
+    &lt;tag group="Helper" tag="Secondary"/&gt;
+    &lt;tag group="abAction" tag="None"/&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="abDuration" tag="Constant"/&gt;
+    &lt;bootstrap thing="spWallSton"&gt;
+      &lt;autotag group="Helper" tag="SpellLike"/&gt;
+      &lt;assignval field="livename" value="Wall of Stone (6 ki)"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;exprreq message="17th Level required."&gt;&lt;![CDATA[#levelcount[Monk] &gt;= 17]]&gt;&lt;/exprreq&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cMnkShFlRi" name="Shape the Flowing River" description="Placeholder..." compset="CustomSpec" summary="Placeholder..." uniqueness="unique"&gt;
+    &lt;fieldval field="abRange" value="120"/&gt;
+    &lt;fieldval field="abDuration" value="1"/&gt;
+    &lt;tag group="abRange" tag="Feet"/&gt;
+    &lt;tag group="abDuration" tag="Round"/&gt;
+    &lt;tag group="Helper" tag="Secondary"/&gt;
+    &lt;tag group="SpecSource" tag="cHelpMnk"/&gt;
+    &lt;tag group="abCategory" tag="MnkEleDisc"/&gt;
+    &lt;tag group="abAction" tag="Action"/&gt;
+    &lt;/thing&gt;
+
+  </pre>
+
+<p class="body"><a href="../5ededit.htm">Go Back</a>.
+
+</body>
+
+</html>

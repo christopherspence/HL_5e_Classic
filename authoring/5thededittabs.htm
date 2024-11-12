@@ -1,0 +1,609 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<link href="../../../docs/common/styles.css" rel="STYLESHEET">
+<title>5th Edition SRD data files - Editor Tabs</title>
+</head>
+
+<body>
+
+<div align="center">
+  <table class="banner" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td>
+        <p align="center" class="banner">5E SRD Editor - Editor Tabs
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div align="center">
+  <table border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td><img border="0" src="../../../docs/common/empty.gif" width="1" height="15"></td>
+    </tr>
+  </table>
+</div>
+
+<p class="section">Introduction
+
+<p class="body">This document explains the purposes of many individual tabs within the editor. You're assumed to be familiar with the
+<a href="../../../docs/redirect/kit_editor.htm">Editor Instructions</a> before reading this; if not, please go back and check them out before continuing.
+
+<p class="section">General Information
+
+<p class="body">As you've read in the <a href="../../../docs/redirect/kit_editor.htm">Editor Instructions</a>, most of the controls on each tab are the same - every tab allows you to specify a name, description, and so forth. Each tab also has a table of fields which are specific to that tab.
+
+<p class="body">The same field can appear on multiple tabs (for example, many different tabs allow you to specify a cost in gold pieces), but many only appear on a single tab. To find out more about a field, move the mouse over the info control (<img src="./tabs_info.png">) on its far right. A window will appear explaining the purpose of the control; sometimes the information there may refer you to this document for further explanations.
+
+
+<p class="section">Tabs
+
+        <table border=0 cellspacing=0 cellpadding=0>
+          <tr>
+            <td><img border="0" src="../../../docs/common/empty.gif" width="1" height="10"></td>
+          </tr>
+          <tr>
+            <td valign="top">
+
+<ul class="bullet">
+<li class="bullet"><a href="#adjustment">Adjustment</a></li>
+<li class="bullet"><a href="#armor">Armor</a></li>
+<li class="bullet"><a href="#magicarmor">Armor, Magic</a></li>
+<li class="bullet"><a href="#class">Class</a></li>
+<li class="bullet"><a href="#classlevel">Class Level</a></li>
+<li class="bullet"><a href="#classspecial">Class Special</a></li>
+<!--
+<li class="bullet"><a href="#variantclass">Class Variant</a></li>
+<li class="bullet"><a href="#monsterclass">Class, Monster</a></li>
+<li class="bullet"><a href="#clericdomain">Cleric Domain</a></li>
+-->
+<li class="bullet"><a href="#customability">Custom Ability</a></li>
+<li class="bullet"><a href="#feat">Feat</a></li>
+<li class="bullet"><a href="#gear">Gear</a></li>
+<!--
+<li class="bullet"><a href="#itempower">Item Power</a></li>
+-->
+<li class="bullet"><a href="#language">Language</a></li>
+</ul>
+
+</td>
+            <td valign="top">
+
+<ul class="bullet">
+<!--
+<li class="bullet"><a href="#material">Material</a></li>
+-->
+<li class="bullet"><a href="#mechanic">Mechanics</a></li>
+<!--
+<li class="bullet"><a href="#metamagic">Metamagic</a></li>
+-->
+<li class="bullet"><a href="#minion">Minion/Hireling</a></li>
+<li class="bullet"><a href="#potion">Potion</a></li>
+<!--
+<li class="bullet"><a href="#psionic">Psionic</a></li>
+-->
+<li class="bullet"><a href="#race">Race</a></li>
+<!--
+<li class="bullet"><a href="#companion">Race, Animal Companion</a></li>
+-->
+<li class="bullet"><a href="#ring">Ring</a></li>
+<li class="bullet"><a href="#rod">Rod</a></li>
+<li class="bullet"><a href="#simple">Simple</a></li>
+<li class="bullet"><a href="#skill">Skill</a></li>
+<li class="bullet"><a href="#special">Special</a></li>
+</ul>
+
+</td>
+
+            <td>
+            <td valign="top">
+
+<ul class="bullet">
+<!--
+<li class="bullet"><a href="#skilltrick">Skill Trick</a></li>
+-->
+<li class="bullet"><a href="#spell">Spell</a></li>
+<li class="bullet"><a href="#staff">Staff</a></li>
+<li class="bullet"><a href="#template">Template</a></li>
+<!--
+<li class="bullet"><a href="#trait">Trait</a></li>
+-->
+<li class="bullet"><a href="#wand">Wand</a></li>
+<li class="bullet"><a href="#weapon">Weapon</a></li>
+<li class="bullet"><a href="#magicweapon">Weapon, Magic</a></li>
+<li class="bullet"><a href="#wondrous">Wondrous</a></li>
+<li class="bullet"><a href="#hidden">*Hidden</a></li>
+<li class="bullet"><a href="#preclude">*Preclude</a></li>
+</ul>
+
+            </td>
+          </tr>
+        </table>
+
+<p class="body">Other tabs will be made available in the future, allowing the editing of more esoteric items.
+
+
+<p class="section"><a name="adjustment"/>Adjustment
+
+<p class="body">Adjustments can be added on the Adjustments tab. They allow temporary changes to be made to the hero, typically due to in-game effects. For example, an adjustment might reduce your attributes or increase your proficiency at a certain skill.
+
+
+<p class="section"><a name="armor"/>Armor
+
+<p class="body">Allows the creation of non-magical sets of armor, as well as shields.
+
+
+<p class="section"><a name="magicarmor"/>Armor, Magic
+
+<p class="body">Allows the creation of magical sets of armor and shields.
+
+<ul class="bullet">
+<!--
+<li class="bullet">If this suit of armor counts as another type of item (for example, Robes of the Archmagi are also Wondrous Items), select that item in the <font class="strong">"Magic Item Type"</font> list.</li>
+-->
+<li class="bullet">To copy the statistics from an existing mundane armor thing, add <font class="strong">"mSpecMagic"</font> as a child and have it bootstrap the armor. For example, to inherit the behaviors of Leather Armor, you would bootstrap the <font class="strong">"mLeather"</font> pick.</li>
+<li class="bullet">If your armor inherits the details of another piece of armor (as described in the previous point), choices you make here override it. For example, specifying a different AC (for example) will override the AC on the armor you are inheriting from. If you want to keep the default values, don't set them.</li>
+<li class="bullet">If your armor bootstraps one or more special abilities you can use the <font class="strong">"Special Tag"</font> entry to define a tag that identifies the armor, then assign it to the bootstrapped ability. If you do this, the ability on the Special tab will be identified as having the armor as its source.</li>
+</ul>
+
+
+<p class="section"><a name="class"/>Class
+
+<p class="body">The Class thing does the "behind the scenes"  work of managing skill & language proficiencies, spellcasting abilities, etc. For each Class, a <a href="#classlevel">Class Level</a> must be defined that appears in the list to be selected by the user, then bootstraps the Class object.
+
+<ul class="bullet">
+<li class="bullet">When you create a new record on the Class tab, the Class Wizard is shown. This lets you enter the basic details required for the class, then generates an appropriate Class Level object and panel, and offers to reload the game system.</li>
+<li class="bullet"><font class="strong">Note!</font> To change the hit dice or alignment restrictions for your class, see the <a href="#classlevel">Class Level tab</a>.</li>
+<li class="bullet">Under the "Spellcasting Details" section, you can configure how the class uses magic, including the attribute used to get bonus spells and the number of spells known per level.</li>
+<li class="bullet">To use all the spells of another class, set the "Uses Which Spells" entry (located just under "Spellcasting Details") to the name of that class. For example, if you want your class to have access to the same spells as the Sorcerer, select <font class="strong">"Sorcerer"</font> in the list. You can also select a cleric domain to have those spells made available to your class.</li>
+<!--
+<li class="bullet">If your class uses different attributes to determine its maximum spell level and bonus spells, you can choose a "Max Spell Level Attribute" from the "Spellcasting Details" section. If left blank, the bonus spell attribute is used.</li>
+-->
+<li class="bullet">The "Spellcaster Type" entry allows you to choose how this class casts spells. Each choice has an example of another class that uses that mechanism. For example, if you want your class to cast spells like a Bard, select the <font class="strong">"Spontaneous (Bard)"</font> tag.</li>
+<!--
+<li class="bullet">To allow your class to choose from an alternate list of spells, you must configure its <font class="strong">"Secondary Spells"</font>. Secondary spells are used by clerics (to pick domain spells) and wizards (to pick specialized spells). You can choose which schools and classes to allow secondary spells to be chosen from, or you can assign tags from the <font class="strong">SecSchAllw</font> (for schools) and <font class="strong">SecClsAllw</font> (for classes) tag groups. For example, to allow the class to take secondary spells from the Conjuration school, you would assign the tag "SecSchAllw.Conjur"; to allow it to take spells from the Cleric class, you would assign the tag "SecClsAllw.Cleric".</li>
+<li class="bullet">If you want to restrict the bonus feats your class can take to a specific list (such as only Item Creation feats, or only Fighter bonus feats) you can select categories and individual feats by clicking the "Bonus Feats Allowed" button. To exclude specific feats, use the "Bonus Feats Disallowed" button.</li>
+-->
+<li class="bullet">If your class allows the user to choose from a variety of custom abilities you can enter the term for those abilities into the "Custom Ability Name" field. This ensures that the term is displayed correctly in validation messages and on the class panel.</li>
+<li class="bullet">To allow your class to pick another classes custom abilities in addition to its own, choose the classes to be copied in the <font class="strong">"Allow Class Abilities"</font> section.</li>
+<li class="bullet">The "Special Ability Info" and "Spell Info" entries allow you to edit the information shown when you mouse over the "Spells" and "Special" button on your class tab. This information is only used for display.</li>
+<!--
+<li class="bullet">The "Minions" section at the end of the list allows you to choose what kind, if any, of companion the class receives. Select the type of companion (e.g. Animal Companion or Arcane Familiar) from the "Choose Companion Type" list, and then enter the level at which you receive it.</li>
+-->
+<li class="bullet">If your class grants you special abilities, you should define those abilities on the <a href="#class">Class Special</a> tab, then add bootstraps for them to the class. This ensures they only appear when you take the class.</li>
+<li class="bullet">For your class panel to be marked "Invalid" when something with the class is wrong, make sure to specify the <font class="strong">"Linked Panel Id"</font>. (This information is automatically filled in by the "Create Panel" button.)</li>
+</ul>
+
+<p class="section"><a name="classlevel"/>Class Level
+
+<p class="body">Allows the creation of "Class Levels". These are the things that appear in the class list for you to select when creating a character. For each class, a <a href="#class">Class</a> object should be created, and the class should link and bootstrap it.
+
+<ul class="bullet">
+<li class="bullet">This tab allows you to specify the number of sides on your hit dice, and any alignment restrictions for the class. For example, you can make your class require any Good alignment, or Lawful Neutral, or you can forbid it from being Chaotic.</li>
+<li class="bullet">You can specify the maximum number of levels that can be taken in the class in the <font class="strong">"Max #"</font> control, located beside the Unique Id. If you create a new class using the class wizard, this defaults to 20.</li>
+<li class="bullet">If you're creating a normal class, everything under the "Class Level" heading should be filled in; for a monster class, you can ignore that, and look at the "Monster Class" section instead.</li>
+</ul>
+
+
+<p class="section"><a name="classspecial"/>Class Special
+
+<p class="body">Special abilities assigned by classes should be created here. If you want to define user-selectable abilities, use the <a href="#customability">Custom Ability</a> tab.
+
+<ul class="bullet">
+<li class="bullet">If you don't want the ability to appear on the Special tab, select the <font class="strong">"Upgrade - DON'T show in list?"</font> checkbox. This can be useful when the ability adds a passive bonus that is already incorporated into your statistics. The ability will still appear on the class tab.</li>
+<li class="bullet">If the ability is lost when you become an ex-member of the class, check the <font class="strong">"Lost If Ex-Member?"</font> entry.</li>
+<li class="bullet">If the description text for the special ability is long, make sure to specify a shorter <font class="strong">"Summary"</font> for it. This ensures that the text on the Specials tab isn't cut off.</li>
+</ul>
+
+<!--
+<p class="section"><a name="variantclass"/>Class Variant
+
+<p class="body">Variant Classes modify the properties of a class.  In various places, they are called "Variant Classes", "Class Feature Variations", "Alternate Class Features", or "Racial Substitution Levels".
+
+<ul class="bullet">
+
+<li class="bullet">Every Variant Class <font class="strong">must</font> have a "Class To Modify" selected.</li>
+<li class="bullet">If a Variant Class modifies only one level of a class, enter that level in the "Variant Class Level" field.  If it alters all the levels of a class, leave this value blank.  If a level is selected, any modifications to the Hit Dice or Skill Points are only applied to that level.  All other modifications will apply to all levels.</li>
+<li class="bullet">If an aspect of the class has not changed, there is no need to enter any values for the class modification.  For example, if this class variant gets the same number of skill points per level as an un-varied member of this class, the "Skill Points per Level Override" can be left blank.</li>
+<li class="bullet">If information in an array (ex: the number of bonus feats per level) or a matrix (ex: the number of spells known) is changed by a variant class, only the difference needs to be entered.  For example, if a class receives one fewer 2nd-level spell known at 4th level and thereafter, in the matrix, column 2 is the 2nd-level spells, and the 4th row down (labeled "3") represents level 4.  Enter <font class="strong">-1</font>  in this box.  HeroLab will assume that a value you enter applies for the rest of a column, so in this case, the -2 2nd-level spell known will be applied at 4th level, 5th level, and so on.</li>
+<li class="bullet">If the Variant Class receives a minion at a different level than the normal class does, enter the new value for that type of minion (Animal Companion, Paladin Mount, etc.).  If tis class variant does not get that type of minion, enter <font class="strong">-1</font>.</li>
+
+</ul>
+
+<p class="section"><a name="monsterclass"/>Class, Monster
+
+<p class="body">Monster classes are special classes that, instead if applying a level adjustment, add one or more "levels" of the monster. Once the character reaches maximum "level" in the monster class, he can start taking levels in other classes too.
+
+<ul class="bullet">
+<li class="bullet">When you create a new monster class, a wizard appears that initializes and sets up the class for you.</li>
+<li class="bullet">For monster classes, different levels apply different bonuses. For example, at level 1, you might get 1 hit dice and +1 to attack bonus; level 2 might give you +2 to an ability score; level 3 might give you another hit dice and attack bonus increase. Instead of allowing you to pick these from a list, the "Monster Class" tab allows you to enter the progression of these fields from level 1 onwards.<br><br>For the class just presented as an example, you would enter <font class="strong">"1"</font> for the attack bonus at the first level, a blank for the second level, and then <font class="strong">"2"</font> for the attack bonus for the third level.<br><br>(Levels that are the same as the previous entry can just be left blank.)</li>
+</ul>
+
+
+<p class="section"><a name="clericdomain"/>Cleric Domain
+
+<p class="body">A Cleric can select up to two domains, granting him varied powers and abilities.
+
+<ul class="bullet">
+<li class="bullet">Each domain must specify a new <font class="strong">"Domain Tag"</font>. Make sure to define one, or your domain may not behave as expected.</li>
+<li class="bullet">If your domain adds special abilities, you should create them on the <a href="#special">Special</a> tab and bootstrap them from here.</li>
+</ul>
+-->
+
+
+<p class="section"><a name="customability"/>Custom Ability
+
+<p class="body">Custom Abilities are defined by some classes. These are different from normal special abilities because users can choose between them on the class tab.
+
+<ul class="bullet">
+<li class="bullet">If your custom ability may only be selected once, make sure to mark it as <font class="strong">"Unique"</font>. The "Uniqueness" menu can be found toward the top of the tab.</li>
+<li class="bullet">If the description text for the special ability is long, make sure to specify a shorter <font class="strong">"Summary"</font> for it. This ensures that the text on the Specials tab isn't cut off.</li>
+</ul>
+
+
+<p class="section"><a name="feat"/>Feat
+
+<p class="body">This tab allows the creation of new feats.
+
+<ul class="bullet">
+<li class="bullet">If your feat may only be selected once, make sure to mark it as <font class="strong">"Add Once"</font>. The "Uniqueness" droplist can be found toward the top of the tab. Some feats, such as Toughness, can be taken multiple times, and should select "No", but others may not. If a feat can only be taken once, choose "Add Once" from the droplist - this allows the user to add it once, regardless of whether any classes have.</li>
+<!--
+<li class="bullet">If you are creating a Metamagic feat, make sure to create a <a href="#metamagic">Metamagic</a> thing to go with it on the "Metamagic" tab.</li>
+-->
+<li class="bullet">To allow the user to choose what the feat affects, pick something from the <font class="strong">"Show What?"</font> list. A menu will be shown with the feat, allowing the user to select a weapon, skill, or something else. If you want to allow the user to choose from selections chosen only by the hero, choose the "Restrict To" -> "Picks on Hero" option. If you know what you're doing, you can also specify a custom tag expression to select what should be shown in the list.</li>
+<li class="bullet">If the description text for the special ability is long, make sure to specify a shorter <font class="strong">"Summary"</font> for it. This ensures that the text on the Specials tab isn't cut off.</li>
+</ul>
+
+
+<p class="section"><a name="gear"/>Gear
+
+<p class="body">This tab allows the creation of new gear.
+
+<ul class="bullet">
+<li class="bullet">If your gear is a container of some sort (like a backpack or a treasure vault), check either the <font class="strong">"Is a Container?"</font> or <font class="strong">"Is a Top-Level Container?"</font> fields. Gear held in top-level containers doesn't count toward the weight carried by the hero.</li>
+</ul>
+
+
+<!--
+<p class="section"><a name="itempower"/>Item Power
+
+<p class="body">Item Powers can be applied to custom magic weapons and armor.
+
+<ul class="bullet">
+<li class="bullet">Item Powers can either be priced as "equivalent to a +1 bonus" or in gold.</li>
+<li class="bullet">To restrict the item power from being added to certain weapons, edit the <font class="strong">"Requirements"</font>. This allows you to restrict the power to (for example) certain weapons or armor only.</li>
+</ul>
+-->
+
+
+<p class="section"><a name="language"/>Language
+
+<p class="body">This tab allows you to add new Languages.
+
+<!--
+<p class="section"><a name="material"/>Material
+
+<p class="body">You can create new materials for use with weapons and armor on the Material tab. When you add custom or magic armor to the Weapons or Armor tabs in the main Hero Lab window, you can then choose a special materials that they are made out of.
+
+<ul class="bullet">
+<li class="bullet">You can choose which types of equipment your material applies to - for example, you can forbid it from being chosen by weapons or armor just by unchecking the relevant "Apply to" boxes.</li>
+<li class="bullet">When specifying the cost of a material, you can miss out redundant costs. For example, if you're creating a material that costs 1000g to use for 2-handed weapons, 500g for other weapons, and 100g for everything else, you just need to specify 3 costs - the default cost (100g), the weapon cost (500g) and the 2-handed weapon cost (1000g). Hero Lab "fills in the blanks" and automatically deduces that all armor should cost 100g, based on the values you entered.</li>
+</ul>
+-->
+
+
+<p class="section"><a name="mechanic"/>Mechanics
+
+<p class="body">All mechanics are automatically attached to every character.  They are designed to help users define house rules, since if a mechanic has a script, it will be run on every character and the mechanic can be used to bootstrap one or more things (other than mechanics) to all characters.
+
+<p class="body">The fields and checkboxes in the main section of the editor only apply if an option is selected for the first item <font class="strong">"Overrides...?"</font>.  If it is, then this mechanic has the special purpose of defining some element of how characters are created, like the XP cost for each level or the number of feats available at each level.
+
+</ul>
+
+
+<!--
+<p class="section"><a name="metamagic"/>Metamagic
+
+<p class="body">The Metamagic tab allows you to add new Metamagic effects. Note that when creating a new Metamagic feat, you need to create the <a href="#feat">Feat</a> separately, then create a Metamagic effect that checks for the presence of the feat.
+
+<ul class="bullet">
+<li class="bullet">Make sure to define a summary for your metamagic effect. There's only space for half a dozen words describing it on the Metamagic form!</li>
+<li class="bullet">You should add a pre-requisite to make sure that the user doesn't take metamagic feats to which he isn't entitled. For example:
+
+<pre class="xml">
+
+~ If we're creating a new spell on a scroll, we should be valid - someone else
+~ had the metamagic feat, we don't need it.
+validif (parent.tagis[Helper.OnScroll] &lt;&gt; 0)
+
+~ Next, check to see if we have the appropriate feat.
+@valid = hero.pickexists[<font class="strong">&lt;metamagic feat id&gt;</font>]
+
+</pre>
+
+You can also add more complex pre-requisites, such as the power not being applicable to certain spells.
+
+</li>
+</ul>
+-->
+
+<p class="section"><a name="minion"/>Minions & Hirelings
+
+<p class="body">This tab allows the creation of new minions and hirelings.
+
+<table border="0" cellspacing="0" cellpadding="10">
+  <tr><td><img src="tabs_minion_edit_button.png"/></td>
+  <td>
+
+<ul class="bullet">
+<li class="bullet">The Minion to be added is handled on the &quot;Minion&quot; button on the right-hand side of the editor.</li>
+</ul>
+    </td></tr>
+  </table>
+
+<table border="0" cellspacing="0" cellpadding="10">
+  <tr><td><img src="tabs_minion_form.png"/></td>
+  <td>
+
+<ul class="bullet">
+<li class="bullet">Within the minion form, begin by entering an Id for the minion - this is only used for tracking within Hero Lab, and will not be seen by the user.  "Mount" is used for all the existing mounts and trained animals, and "Hireling" is used for intelligent hirelings.</li>
+<li class="bullet">The "Maintains Own Mode?" checkbox should be left checked - it controls some basic elements of how minions are set up within Hero Lab.</li>
+<li class="bullet">The "Inherit Rules from Master?" checkbox should be checked - that way, the minion will use whatever "Hero Settings" are made for the master on the "Configure Hero" form.</li>
+
+<li class="bullet">If your minion has a pre-selected race (like Light Horse or Riding Dog), press the "Bootstraps" button, "Click to add another bootstrap", and then use the "Choose" button to select the race you want to add.  Then, press "OK" to leave the bootstraps form, and press the "Tags" button, and "Click to add another tag".  Enter <font class="strong">"Hero"</font> as the "Group Id" and <font class="strong">"FixedRace"</font> as the "Tag Id".  The "Name" and "Abbreviation" fields should be left blank.</li>
+
+</ul>
+    </td></tr>
+  </table>
+
+
+
+
+<p class="section"><a name="potion"/>Potion
+
+<p class="body">The Potion tab allows you to define new potions and oils. (Elixirs are typically thought of as <a href="#wondrous">Wondrous Items</a>.)
+
+<!--
+<p class="section"><a name="psionic"/>Psionic
+
+<p class="body">The Psionic tab creates new psionic powers.
+
+<ul class="bullet">
+<li class="bullet">When creating powers, you must create a different power thing for each class that wants to use the power (for example, if the power should be used by Psions and another by Psychic Warriors, you would create two copies, one for each class). You can do this faster by using the <font class="strong">"Duplicate"</font> button at the bottom-left of the editor.</li>
+</ul>
+-->
+
+
+<p class="section"><a name="race"/>Race
+
+<p class="body">The Race tab allows you to create new races.
+
+<ul class="bullet">
+<li class="bullet">If you want to make a race that always has attributes set at certain levels - for example, if you're making a race that will be widely used as NPCs with similar stars - just set the attribute adjustments appropriately. For example, if you want all "Blood Orcs" to have 25 strength by default, set their strength modifier to +15 - when the Blood Orc race is added, the hero's strength will rise to 25.</li>
+<li class="bullet">If your race should "count as" another race for some purpose (for example, some abilities grant bonuses to Elves, and Half-Elves "count as" Elves), make sure to select that race in the <font class="strong">"Counts As Races..."</font> entry.</li>
+<li class="bullet">If your race can be taken as an arcane familiar or animal companion, make sure to configure it appropriately under the <font class="strong">"Companion Details"</font> section, otherwise it won't appear in the appropriate list of races.</li>
+</ul>
+
+<!--
+<p class="section"><a name="companion"/>Race, Animal Companion
+
+<p class="body">The Race tab allows you to create new races that can be selected as animal companions.  Unfortunately, there are enough differences between the information that is required for a normal member of a race and an animal companion from that race that a separate definition is required for each version.
+
+<ul class="bullet">
+<li class="bullet">The arrays for attributes, natural armor, size, etc. all use row 0 = level 1, row 1 = level 2, etc.  For an animal companion, these values refer to the master's druid level (or Ranger level -3, etc.).</li>
+<li class="bullet">The starting Attribute/natural armor etc. values are entered in row 0, and any changes in the row that corresponds to that level.  Changes are entered as the total value at that point.  For example, the ape gets STR 13 to start, so you would enter <font class="strong">"3"</font> into row 0 of the strength array.  For attributes, subtract 10 from the listed starting attribute value to figure out what value should be entered in row 0.  At 4th level (row 3), the ape gains +8 STR.  Added to the +3 we already means you would enter, <font class="strong">"11"</font> into row 3 of the strength array.</li>
+<li class="bullet">You do not need do enter the standard progressions that apply to all animal companions (Attack, saves, feats, armor, STR/DEX) into any of the options in this editor entry.  Those are all calculated by Hero Lab.  Anything added here is in addition to those progressions.</li>
+<li class="bullet">The <font class="strong">"Size Progression"</font> array works slightly differently.  Each step of increase in size is entered as <font class="strong">"1"</font> in this array, so an Ape, which increases from medium to large at 4th level (one step), would enter <font class="strong">"Medium"</font> in the <font class="strong">"Starting Size"</font> menu, and<font class="strong">"1"</font> in row 3 of the <font class="strong">"Size Progression"</font> array.</li>
+<li class="bullet">If your race should "count as" another race for some purpose (for example, some abilities grant bonuses to Elves, and Half-Elves "count as" Elves), make sure to select that race in the <font class="strong">"Counts As Races..."</font> entry.</li>
+<li class="bullet">All animal companions have Acrobatics, Climb, Fly, Perception, Stealth, and Swim as their class skills.  If a race has more class skills than this, the additional skills can be selected in the <font class="strong">"Class Skills"</font> section.  Selecting the default skills again will not do anything, but it won't cause any problems, either.</li>
+<li class="bullet">If your race can be taken by classes that have restrictions on which companions they can select (Paladin and Ranger), those are selected in the <font class="strong">"Minion Allowed For?"</font> section.  Leaving this blank means that they are only available to Druids and Clerics/Druids with the Animal Domain.</li>
+<li class="bullet">All natural attacks added to an animal companion should have their damage set to the base stats.  Each time a size increase is noted on the "Size Progression" table, all natural attacks are assumed to increase in damage steps as well, so an attack that started as 1d6 will change to 1d8 when the animal companion increases in size.  If you do not want it to work this way (for example, a Constrictor Snake's constrict attack only becomes available at level 4, at the same time the race increases in size), you would go to the weapon's entry in the "Bootstraps" menu, and press the "Tags" button.  Add a new row, then enter <font class="strong">"Helper"</font> as the Group Id and <font class="strong">"CompNoSize"</font> as the Tag Id.  Spelling and capitalization are important.</li>
+<li class="bullet">If a special ability or natural attack is not available until a later level, add it as you would a normal special/attack, then go to the "Bootstraps" menu on the top right, and select "Condition"  Set the Phase to <font class="strong">"First"</font> (which is the default), and the Priority to <font class="strong">"502"</font>  This timing is important.  The value you will be checking is calculated at First/501, and if the test is much later, it could interfere with other things.  Now, in the "Tag Expression" section, enter <font class="strong">" fieldval:anCompLev >= 4"</font> or <font class="strong">" fieldval:anCompLev >= 4"</font> (or >= whatever level it becomes available at).  Capitalization and spelling are very important in that expression.</li>
+</ul>
+-->
+
+<p class="section"><a name="ring"/>Ring
+
+<p class="body">The Ring tab allows you to define new rings.
+
+<ul class="bullet">
+<li class="bullet">If the description text for the special ability is long, make sure to specify a shorter <font class="strong">"Summary"</font> for it. This ensures that the text on the Specials tab isn't cut off.</li>
+</ul>
+
+
+<p class="section"><a name="rod"/>Rod
+
+<p class="body">The Rod tab allows you to define new rods. Note that for rods which are also magic weapons, the weapon should be defined on the <a href="#magicweapons">Magic Weapons</a> tab, and bootstrapped from the rod.
+
+<ul class="bullet">
+<li class="bullet">If the description text for the special ability is long, make sure to specify a shorter <font class="strong">"Summary"</font> for it. This ensures that the text on the Specials tab isn't cut off.</li>
+</ul>
+
+
+<p class="section"><a name="simple"/>Simple
+
+<p class="body">Simple things have no behaviors defined for them and are used to store validation scripts.  They can also be used if you need to create a dummy item or placeholder that will not have other behaviors that would interfere with the purpose you intend.
+<ul class="bullet">
+<li class="bullet">Simple things are not automatically added to the hero, something else must bootstrap them.</li>
+</ul>
+
+<p class="section"><a name="skill"/>Skill
+
+<p class="body">The Skills tab allows you to create new skills.
+
+<!--
+<ul class="bullet">
+<li class="bullet">Unless you want your skill to be added multiple times (like "Knowledge: Other" can be, but not "Listen", for example), mark it as <font class="strong">"Unique"</font>.</li>
+<li class="bullet">If you want your skill to appear in the list of skills you can add, but not be given to the Hero automatically, check the <font class="strong">"Must Add Manually?"</font> entry.</li>
+<li class="bullet">Skills that are Perform, Knowledge, Profession and Craft subskills must be marked as such using the <font class="strong">"Skill Category"</font> entry.</li>
+</ul>
+-->
+
+<!--
+<p class="section"><a name="skilltrick"/>Skill Trick
+
+<p class="body">This tab allows the creation of new skill tricks. You add skill tricks to your hero by adding the "Skill Trick" skill; every 2 points in the skill allow you to add a single skill trick.
+
+<ul class="bullet">
+<li class="bullet">If your skill trick may only be selected once, make sure to mark it as <font class="strong">"Unique"</font>. The "Is Unique?" checkbox can be found toward the top of the tab.</li>
+<li class="bullet">To allow the user to choose what the skill trick affects, pick something from the <font class="strong">"Show What?"</font> list. A menu will be shown with the skill trick, allowing the user to select a weapon, skill, or something else. If you want to allow the user to choose from selections chosen only by the hero, choose the "Restrict To" -> "Picks on Hero" option. If you know what you're doing, you can also specify a custom tag expression to select what should be shown in the list.</li>
+<li class="bullet">If the description text for the special ability is long, make sure to specify a shorter <font class="strong">"Summary"</font> for it. This ensures that the text on the Specials tab isn't cut off.</li>
+</ul>
+-->
+
+<p class="section"><a name="special"/>Special
+
+<p class="body">The Special tab creates things which appear on the <font class="strong">"Special"</font> tab within Hero Lab.
+
+<ul class="bullet">
+<li class="bullet">You don't need to specify a <font class="strong">"Source"</font> for your special ability. If you don't, make sure to assign a "SpecSource" tag when something else bootstraps it, or it will just appear in the list with no explanation of where it came from.</li>
+<li class="bullet">If the special ability is bootstrapped by multiple sources, make sure you mark it as <font class="strong">"Unique"</font>. If you don't, it'll appear multiple times in the list.</li>
+<li class="bullet">If the description text for the special ability is long, make sure to specify a shorter <font class="strong">"Summary"</font> for it. This ensures that the text on the Specials tab isn't cut off.</li>
+</ul>
+
+
+<p class="section"><a name="spell"/>Spell
+
+<p class="body">The Spell tab creates new spells.
+
+<!--
+<ul class="bullet">
+<li class="bullet">When creating spells, you must create a different spell thing for each class that wants to use the spell (for example, if the spell should be used by Sorcerers and Clerics, you would create two copies, one for each class). You can do this faster by using the <font class="strong">"Duplicate"</font> button at the bottom-left of the editor.</li>
+</ul>
+-->
+
+
+<p class="section"><a name="staff"/>Staff
+
+<p class="body">The Staff tab allows you to define new staves. Note that staffs which are also magic weapons (for example, the Staff of the Woodlands) should be defined on the <a href="#magicweapons">Magic Weapons</a> tab.
+
+<ul class="bullet">
+<li class="bullet">If the description text for the special ability is long, make sure to specify a shorter <font class="strong">"Summary"</font> for it. This ensures that the text on the Specials tab isn't cut off.</li>
+</ul>
+
+
+<p class="section"><a name="template"/>Template
+
+<p class="body">The Template tab allows you to create new templates, added from the class list.
+<!--
+<ul class="bullet">
+<li class="bullet">If your template bootstraps one or more special abilities (for example, Damage Reduction or Spell Resistance) you can use the <font class="strong">"Special Tag"</font> entry to define a tag that identifies the armor, then assign it to the bootstrapped ability. If you do this, the ability on the Special tab will be identified as having the template as its source.</li>
+<li class="bullet">If you specify a <font class="strong">"Skill Point Multiplier"</font> and <font class="strong">"Skill Points per Level"</font> entries, they will override those of your race. If your race doesn't get skill points and class skills, they have no effect.</li>
+</ul>
+
+<p class="section"><a name="trait"/>Trait
+
+<p class="body">This tab allows the creation of new traits.
+
+<ul class="bullet">
+<li class="bullet">If your trait may only be selected once, make sure to mark it as <font class="strong">"Unique"</font>. The "Is Unique?" checkbox can be found toward the top of the tab.</li>
+<li class="bullet">To allow the user to choose what the trait affects, pick something from the <font class="strong">"Show What?"</font> list. A menu will be shown with the trait, allowing the user to select a weapon, skill, or something else. If you want to allow the user to choose from selections chosen only by the hero, choose the "Restrict To" -> "Picks on Hero" option. If you know what you're doing, you can also specify a custom tag expression to select what should be shown in the list.</li>
+<li class="bullet">If the description text for the special ability is long, make sure to specify a shorter <font class="strong">"Summary"</font> for it. This ensures that the text on the Specials tab isn't cut off.</li>
+</ul>
+-->
+
+<p class="section"></a><a name="wand"/>Wand
+
+<p class="body">The Wand tab allows you to define new wands.
+
+<ul class="bullet">
+<li class="bullet">If the description text for the special ability is long, make sure to specify a shorter <font class="strong">"Summary"</font> for it. This ensures that the text on the Specials tab isn't cut off.</li>
+</ul>
+
+
+<p class="section"></a><a name="weapon"/>Weapon
+
+<p class="body">Allows the creation of non-magical weapons.
+
+<ul class="bullet">
+<!--
+<li class="bullet">Most weapons have a damage value that increases or decreases if the weapon changes size. However, sometimes you might want to give a weapon a strange damage value - for example, some sort of firearm that always hits for 2d12 damage. When you need to do this, ignore the "Damage Dice" field, and enter the text for the damage in the "Fixed Damage" field. That damage will always be displayed for the weapon, regardless of ability scores or other bonuses.
+-->
+
+<li class="bullet">Weapons have pre-requisites generated for them automatically, but if you want to make a weapon that has complex proficiency requirements, you need to specify that the weapon doesn't generate a pre-requisite, and then write a pre-req script yourself.
+
+<!--The script you use should look something like this:
+
+<pre class="xml">
+
+~ First, check to see if the hero has the overall proficiency for the weapon type -
+~ if this is an exotic weapon, we can't do any of this checking, since there's no
+~ overall &quot;All Exotic Weapons&quot; proficiency.
+@valid = 0
+@valid = hero.tagis[Hero.ProfMart] ~ delete if not a martial weapon
+@valid = hero.tagis[Hero.ProfSimple] ~ delete if not a simple weapon
+if (@valid &lt;&gt; 0) then
+  done
+  endif
+
+~ Next, check to see if we're specifically allowed this weapon by our class
+~ or some other source
+@valid = hero.tagis[WepProf.<font class="strong">&lt;weapon id&gt;</font>]
+if (@valid &lt;&gt; 0) then
+  done
+  endif
+
+~ Finally, if the language has been added to the hero already, it's valid -
+~ the above checks are done automatically elsewhere.
+@valid = @ispick
+
+</pre>
+
+You can also use the weapon id of another weapon (for example, Composite Longbows and Shortbows would use the unique id of the regular Longbow / Shortbow, since they share a proficiency), and apply other techniques such as restricting based on attributes or race.
+
+</li>
+-->
+</ul>
+
+
+<p class="section"><a name="magicweapon"/>Weapon, Magic
+
+<p class="body">Allows the creation of magical weapons.
+
+<ul class="bullet">
+<!--
+<li class="bullet">If this weapon counts as another type of item (for example, the Rod of Flailing is also a Rod), select that item in the <font class="strong">"Magic Item Type"</font> list.</li>
+-->
+<li class="bullet">To copy the statistics from an existing mundane weapon thing, add <font class="strong">"wSpecMagic"</font> as a child and have it bootstrap the weapon. For example, to inherit the behaviors of the Longsword, you would bootstrap the <font class="strong">"wLongsword"</font> pick.</li>
+<li class="bullet">If your weapon inherits the details of another weapon (as described in the previous point), choices you make here override it. For example, specifying a different primary damage value (for example) will override the damage on the weapon you are inheriting from. If you want to keep the default values, don't set them.</li>
+<li class="bullet">If your weapon bootstraps one or more special abilities, you can use the <font class="strong">"Special Tag"</font> entry to define a tag that identifies the weapon, then assign it to the bootstrapped ability. If you do this, the ability on the Special tab will be identified as having the weapon as its source.</li>
+</ul>
+
+
+<p class="section"><a name="wondrous"/>Wondrous
+
+<p class="body">This tab allows the creation of new Wondrous Items.
+
+<ul class="bullet">
+<li class="bullet">If your item is a container of some sort (like a bag of holding), check either the <font class="strong">"Is a Container?"</font> or <font class="strong">"Is a Top-Level Container?"</font> fields. Gear held in top-level containers doesn't count toward the weight carried by the hero.</li>
+<li class="bullet">If the description text for the special ability is long, make sure to specify a shorter <font class="strong">"Summary"</font> for it. This ensures that the text on the Specials tab isn't cut off.</li>
+</ul>
+
+
+<p class="section"><a name="hidden"/>*Hidden
+
+<p class="body">The special Hidden tab allows you to hide other things within the data files. For example, if your game does not use a specific skill, you can simply hide that skill by creating a hidden element with the unique id of the skill to hide.
+
+<ul class="bullet">
+<li class="bullet">Hidden elements only have one field - the "Thing Unique Id" field. Simply enter the unique id of the thing to be hidden here.
+<li class="bullet">Pressing the "Test Now!" button for a hidden element offers to reload the data files, since hidden elements cannot be tested like records on other tabs.
+<li class="bullet">You can learn more about hidden elements in the <a href="http://hlkitwiki.wolflair.com/index.php5/Hidden_Element_(Data)">Hero Lab authoring kit wiki</a>.
+</ul>
+
+<p class="section"><a name="preclude"/>*Preclude
+
+<p class="body">The special Preclude tab allows you to disable existing things when a specified source is selected. For example, if your homebrew "Jim's World" setting doesn't use the Acrobatics skill, you can create a Preclude element with the unique id of the "Jim's World" source and the "Acrobatics" skill. As long as that source is selected, the Acrobatics skill will be ignored.
+
+<ul class="bullet">
+<li class="bullet">Preclude elements have two fields - the "Thing Unique Id" field, which should hold the unique id of the thing to preclude, and the "Source Id" field, which should hold the unique id of the source under which the thing is precluded.
+<li class="bullet">Pressing the "Test Now!" button for a preclude element offers to reload the data files, since preclude elements cannot be tested like records on other tabs.
+</ul>
+
+<p class="body"><a href="5ededit.htm">Go Back</a>.
+
+</body>
+
+</html>

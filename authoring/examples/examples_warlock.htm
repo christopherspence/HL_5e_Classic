@@ -1,0 +1,218 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<link href="../../../../docs/common/styles.css" rel="STYLESHEET">
+<title>Example Warlock Patrons </title>
+</head>
+
+<body>
+
+<div align="center">
+  <table class="banner" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td>
+        <p align="center" class="banner">Example Warlock Patrons 
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div align="center">
+  <table border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td><img border="0" src="../../../../docs/common/empty.gif" width="1" height="15"></td>
+    </tr>
+  </table>
+</div>
+
+<p class="section">Introduction
+
+<p class="body">This document provides examples of the mechanics for other warlock patrons. 
+
+<h4>The Archfey</h4><p class="body">Below are the necessary mechanics to model the Archfey patron and associated abilities.</p><pre class="xml">
+  &lt;thing id="cWlkArchfe" name="The Archfey" description="Placeholder..." compset="CustomSpec" summary="Placeholder..." uniqueness="unique"&gt;
+    &lt;tag group="SpecSource" tag="cHelpWlk"/&gt;
+    &lt;tag group="abCategory" tag="WlkOthPatr" name="Warlock Otherworldly Patron"/&gt;
+    &lt;tag group="Helper" tag="Primary"/&gt;
+    &lt;tag group="Helper" tag="SpecUp"/&gt;
+    &lt;tag group="ClsAllowSp" tag="spFaerFire"/&gt;
+    &lt;tag group="ClsAllowSp" tag="spSleep"/&gt;
+    &lt;tag group="ClsAllowSp" tag="spCalmEmot"/&gt;
+&lt;!-- Not in SRD
+    &lt;tag group="ClsAllowSp" tag="spPhanForc"/&gt;
+--&gt;
+    &lt;tag group="ClsAllowSp" tag="spBlink"/&gt;
+    &lt;tag group="ClsAllowSp" tag="spPlanGrow"/&gt;
+    &lt;tag group="ClsAllowSp" tag="spDomiBeas"/&gt;
+    &lt;tag group="ClsAllowSp" tag="spGreaInvi"/&gt;
+    &lt;tag group="ClsAllowSp" tag="spDomiPers"/&gt;
+    &lt;tag group="ClsAllowSp" tag="spSeeming"/&gt;
+    &lt;bootstrap thing="cWlkFeyPre"&gt;
+      &lt;autotag group="ClSpecWhen" tag="1"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cWlkMisEsc"&gt;
+      &lt;autotag group="ClSpecWhen" tag="6"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cWlkBegDef"&gt;
+      &lt;autotag group="ClSpecWhen" tag="10"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cWlkDarDel"&gt;
+      &lt;autotag group="ClSpecWhen" tag="14"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;eval phase="PostLevel" priority="10000"&gt;
+
+      doneif (islinkage[table] = 0)
+
+      perform linkage[table].pushtags[ClsAllowSp.?]&lt;/eval&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cWlkFeyPre" name="Fey Presence" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;fieldval field="abRange" value="10"/&gt;
+    &lt;fieldval field="abDuration" value="1"/&gt;
+    &lt;fieldval field="trkMax" value="1"/&gt;
+    &lt;tag group="abDuration" tag="Round"/&gt;
+    &lt;tag group="abRange" tag="Feet"/&gt;
+    &lt;tag group="abSave" tag="aWIS"/&gt;
+    &lt;tag group="StandardDC" tag="aCHA"/&gt;
+    &lt;tag group="User" tag="Tracker"/&gt;
+    &lt;tag group="abAction" tag="Action"/&gt;
+    &lt;tag group="Usage" tag="ShortRest"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cWlkMisEsc" name="Misty Escape" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;fieldval field="abRange" value="60"/&gt;
+    &lt;fieldval field="abDuration" value="1"/&gt;
+    &lt;fieldval field="trkMax" value="1"/&gt;
+    &lt;tag group="abRange" tag="Feet"/&gt;
+    &lt;tag group="User" tag="Tracker"/&gt;
+    &lt;tag group="abDuration" tag="Round"/&gt;
+    &lt;tag group="Usage" tag="ShortRest"/&gt;
+    &lt;tag group="abAction" tag="Reaction"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cWlkBegDef" name="Beguiling Defenses" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;fieldval field="abDuration" value="1"/&gt;
+    &lt;tag group="abDuration" tag="Minute"/&gt;
+    &lt;tag group="abRange" tag="Sight"/&gt;
+    &lt;tag group="abAction" tag="Reaction"/&gt;
+    &lt;tag group="abSave" tag="aWIS"/&gt;
+    &lt;tag group="StandardDC" tag="aCHA"/&gt;
+    &lt;eval phase="PostLevel" priority="10000"&gt;&lt;![CDATA[
+      ~ If we're not shown, just get out now
+      doneif (tagis[Helper.ShowSpec] = 0)
+
+      ~ If we're disabled, do nothing
+      doneif (tagis[Helper.Disable] &lt;&gt; 0)
+
+      perform hero.assign[CondImm.pcnCharmed]]]&gt;&lt;/eval&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cWlkDarDel" name="Dark Delirium" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;fieldval field="abDuration" value="1"/&gt;
+    &lt;fieldval field="trkMax" value="1"/&gt;
+    &lt;fieldval field="abRange" value="60"/&gt;
+    &lt;tag group="User" tag="Tracker"/&gt;
+    &lt;tag group="abDuration" tag="Minute"/&gt;
+    &lt;tag group="Usage" tag="ShortRest"/&gt;
+    &lt;tag group="abSave" tag="aWIS"/&gt;
+    &lt;tag group="StandardDC" tag="aCHA"/&gt;
+    &lt;tag group="abRange" tag="Feet"/&gt;
+    &lt;tag group="abAction" tag="Action"/&gt;
+    &lt;/thing&gt;
+
+  </pre><h4>The Great Old One</h4><p class="body">Below are the necessary mechanics to model the Great Old One patron and associated abilities.</p><pre class="xml">
+  &lt;thing id="cWlkGrOlOn" name="The Great Old One" description="Placeholder..." compset="CustomSpec" summary="Placeholder..." uniqueness="unique"&gt;
+    &lt;tag group="SpecSource" tag="cHelpWlk"/&gt;
+    &lt;tag group="abCategory" tag="WlkOthPatr" name="Warlock Otherworldly Patron"/&gt;
+    &lt;tag group="Helper" tag="Primary"/&gt;
+    &lt;tag group="Helper" tag="SpecUp"/&gt;
+&lt;!-- Not in SRD
+    &lt;tag group="ClsAllowSp" tag="spDissWhis"/&gt;
+--&gt;
+    &lt;tag group="ClsAllowSp" tag="spHideLaug"/&gt;
+    &lt;tag group="ClsAllowSp" tag="spDeteThou"/&gt;
+&lt;!-- Not in SRD
+    &lt;tag group="ClsAllowSp" tag="spPhanForc"/&gt;
+--&gt;
+    &lt;tag group="ClsAllowSp" tag="spClairvoy"/&gt;
+    &lt;tag group="ClsAllowSp" tag="spSending"/&gt;
+    &lt;tag group="ClsAllowSp" tag="spDomiBeas"/&gt;
+    &lt;tag group="ClsAllowSp" tag="spBlacTent"/&gt;
+    &lt;tag group="ClsAllowSp" tag="spDomiPers"/&gt;
+    &lt;tag group="ClsAllowSp" tag="spTelekine"/&gt;
+    &lt;bootstrap thing="cWlkAwaMin"&gt;
+      &lt;autotag group="ClSpecWhen" tag="1"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cWlkEntWar"&gt;
+      &lt;autotag group="ClSpecWhen" tag="6"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cWlkThoShi"&gt;
+      &lt;autotag group="ClSpecWhen" tag="10"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cWlkCreThr"&gt;
+      &lt;autotag group="ClSpecWhen" tag="14"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;eval phase="PostLevel" priority="10000"&gt;
+
+      doneif (islinkage[table] = 0)
+
+      perform linkage[table].pushtags[ClsAllowSp.?]&lt;/eval&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cWlkAwaMin" name="Awakened Mind" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;fieldval field="abRange" value="30"/&gt;
+    &lt;tag group="abRange" tag="Feet"/&gt;
+    &lt;tag group="abDuration" tag="Constant"/&gt;
+    &lt;tag group="abAction" tag="None"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cWlkEntWar" name="Entropic Ward" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;fieldval field="trkMax" value="1"/&gt;
+    &lt;fieldval field="abDuration" value="1"/&gt;
+    &lt;tag group="abRange" tag="Sight"/&gt;
+    &lt;tag group="Usage" tag="ShortRest"/&gt;
+    &lt;tag group="User" tag="Tracker"/&gt;
+    &lt;tag group="abAction" tag="Reaction"/&gt;
+    &lt;tag group="abDuration" tag="Round"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cWlkThoShi" name="Thought Shield" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;tag group="abDuration" tag="Constant"/&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="abAction" tag="None"/&gt;
+    &lt;eval phase="PostLevel" priority="10000"&gt;&lt;![CDATA[
+      ~ If we're not shown, just get out now
+      doneif (tagis[Helper.ShowSpec] = 0)
+
+      doneif (tagis[Helper.Disable] &lt;&gt; 0)
+
+      perform hero.assign[DamageRes.dtPsychic]]]&gt;&lt;/eval&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cWlkCreThr" name="Create Thrall" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;fieldval field="trkMax" value="1"/&gt;
+    &lt;tag group="abRange" tag="Touch"/&gt;
+    &lt;tag group="User" tag="Tracker"/&gt;
+    &lt;tag group="abDuration" tag="Permanent"/&gt;
+    &lt;tag group="Usage" tag="Active"/&gt;
+    &lt;tag group="abAction" tag="Action"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cWlkExSpLi" name="Expanded Spell List" description="Placeholder..." compset="ClSpecial" summary="Your patron adds additional spell choices to your list."&gt;
+    &lt;tag group="abAction" tag="None"/&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="abDuration" tag="Constant"/&gt;
+    &lt;eval phase="PostLevel" priority="10000"&gt;&lt;![CDATA[
+      ~ If we're not shown, just get out now
+      doneif (tagis[Helper.ShowSpec] = 0)
+
+      ~ If we're disabled, do nothing
+      doneif (tagis[Helper.Disable] &lt;&gt; 0)
+
+      doneif (isroot = 0)
+
+      doneif (root.islinkage[table] = 0)
+
+      perform root.linkage[table].pushtags[ClsAllowSp.?]]]&gt;&lt;/eval&gt;
+    &lt;/thing&gt;
+
+  </pre>
+
+<p class="body"><a href="../5ededit.htm">Go Back</a>.
+
+</body>
+
+</html>

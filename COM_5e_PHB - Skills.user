@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document signature="Hero Lab Data">
+  <thing id="skCraft" name="Craft (Jeweler)" compset="Skill">
+    <tag group="Helper" tag="Custom"/>
+    </thing>
+  <thing id="skCraftSmith" name="Craft (Smith)" compset="Skill">
+    <tag group="Helper" tag="Custom"/>
+    </thing>
+  <thing id="skMason" name="Craft (Mason)" compset="Skill">
+    <tag group="Helper" tag="Custom"/>
+    </thing>
+  </document>

@@ -1,0 +1,89 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<link href="../../../../docs/common/styles.css" rel="STYLESHEET">
+<title>Example Sorcerer Bloodlines </title>
+</head>
+
+<body>
+
+<div align="center">
+  <table class="banner" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td>
+        <p align="center" class="banner">Example Sorcerer Bloodlines 
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div align="center">
+  <table border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td><img border="0" src="../../../../docs/common/empty.gif" width="1" height="15"></td>
+    </tr>
+  </table>
+</div>
+
+<p class="section">Introduction
+
+<p class="body">This document provides examples of the mechanics for other sorcerer bloodlines. 
+
+<h4>Wild Magic</h4><p class="body">Below are the necessary mechanics to model the Wild Magic bloodline and associated abilities.</p><pre class="xml">
+  &lt;thing id="cSorWilMag" name="Wild Magic" description="Placeholder..." compset="CustomSpec" summary="Placeholder..." uniqueness="unique"&gt;
+    &lt;tag group="SpecSource" tag="cHelpSor" name="Sorcerer" abbrev="Sorcerer"/&gt;
+    &lt;tag group="Helper" tag="Primary"/&gt;
+    &lt;bootstrap thing="cSorTidCha"&gt;
+      &lt;autotag group="ClSpecWhen" tag="1"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cSorBenLuc"&gt;
+      &lt;autotag group="ClSpecWhen" tag="6"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cSorConCha"&gt;
+      &lt;autotag group="ClSpecWhen" tag="14"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cSorSpeBom"&gt;
+      &lt;autotag group="ClSpecWhen" tag="18"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cSorWiMaSu"&gt;
+      &lt;autotag group="ClSpecWhen" tag="1"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cSorWiMaSu" name="Wild Magic Surge" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;tag group="abAction" tag="None"/&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="abDuration" tag="Constant"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cSorTidCha" name="Tides of Chaos" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;fieldval field="trkMax" value="1"/&gt;
+    &lt;tag group="abDuration" tag="Instant"/&gt;
+    &lt;tag group="abAction" tag="Free"/&gt;
+    &lt;tag group="User" tag="Tracker"/&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="Usage" tag="Day"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cSorBenLuc" name="Bend Luck" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;tag group="abRange" tag="Sight"/&gt;
+    &lt;tag group="abDuration" tag="Instant"/&gt;
+    &lt;tag group="abAction" tag="Reaction"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cSorConCha" name="Controlled Chaos" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;tag group="abAction" tag="None"/&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="abDuration" tag="Constant"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cSorSpeBom" name="Spell Bombardment" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;tag group="abAction" tag="None"/&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="abDuration" tag="Constant"/&gt;
+    &lt;/thing&gt;
+
+  </pre>
+
+<p class="body"><a href="../5ededit.htm">Go Back</a>.
+
+</body>
+
+</html>

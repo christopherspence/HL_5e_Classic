@@ -1,0 +1,180 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<link href="../../../docs/common/styles.css" rel="STYLESHEET">
+<title>Tutorial 3 - Adding a Class</title>
+</head>
+
+<body>
+
+<div align="center">
+  <table class="banner" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td>
+        <p align="center" class="banner">Tutorial 3 - Adding a Class
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div align="center">
+  <table border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td><img border="0" src="../../../docs/common/empty.gif" width="1" height="15"></td>
+    </tr>
+  </table>
+</div>
+
+<p class="section">Introduction
+
+<p class="body">In this tutorial, we're going to add a new class, the Black Knight. This is a very simple class that doesn't have many features, but once you know how to set up the basic elements of a class, you can go back and customize it to your heart's content.
+
+<p class="body"><font class="strong">This tutorial assumes you're familiar with the contents of the <a href="5thededittut1.htm">first</a> and <a href="5thededittut2.htm">second</a> tutorials, in which you added a feat then a race and subrace. If you haven't made yourself familiar with these, you might want to check them out first.</font>
+
+<p class="section">Loading the Editor
+<p class="body">As usual, load the editor from the Hero Lab "Tools" menu and re-open the "tutorial" file that we've been working on so far. We'll add our classes to this file.
+
+<p class="section">Create a Class
+
+<p class="body">Switch to the "Class" tab (it's part of the "Class" group of tabs). Create a new, blank class, by clicking the "New (Blank)" button below the empty list. You'll be prompted for some initial information about the class to get started.
+
+        <table border=0 cellspacing=0 cellpadding=0>
+          <tr>
+            <td><img border="0" src="../../../docs/common/empty.gif" width="1" height="10"></td>
+          </tr>
+          <tr>
+            <td valign="center"><img class="border" src="./tut3_classstart.png"></td>
+            <td><img border="0" src="../../../docs/common/empty.gif" width="10" height="1"></td>
+            <td valign="center">
+              <p class="body">Our class is going to be called "Black Knight", so enter that as the name. Classes are often identified by a 3 letter abbreviation (such as "Wiz" for Wizard), and the standard practice is to use this as part of the unique ID. "BKn" seems like it would be a good abbreviation, so set the unique ID to "cHelpBKn" and fill that in for the Abbreviation line in the central column.
+
+              <p class="body">For the Hit Dice Number of sides, type in "12", since we want our black knight to be Invincible!
+            </td>
+          </tr>
+        </table>
+
+<p class="body">Once you've entered the initial data for the class, Hero Lab will reload the game system (this is a special behavior for classes, as they're more complex than other types of Thing). Once the game reloads, you're ready to continue editing your class as normal.
+
+        <table border=0 cellspacing=0 cellpadding=0>
+          <tr>
+            <td><img border="0" src="../../../docs/common/empty.gif" width="1" height="10"></td>
+          </tr>
+          <tr>
+            <td valign="center"><img class="border" src="./tut3_primattr.png"></td>
+            <td><img border="0" src="../../../docs/common/empty.gif" width="10" height="1"></td>
+            <td valign="center">
+
+            </td>
+          </tr>
+        </table>
+
+              <p class="body">Let's customize our new class by changing some stuff! Open the Class Primary Abilities and select one of the attributes there (remember, if you're curious what this selection does, you can click on the ? to the right of the entry). In this case, you'll see that the Primary Ability score we choose is related to minimum attributes required to multiclass with this class.
+
+              <p class="body">Go down the column, filling in things like save, skill, and weapon proficiencies, etc. Save and Test Now to integrate the work you've done. As we have done in previous tutorials, return to the main Hero Lab window and test your new class. There's now a "Black Knight" panel, but if you switch to it it looks a bit boring - let's add some stuff to that now.
+
+<p class="section">Adding a special ability
+
+<p class="body">We're going to add a simple special ability that the black knight gets at level 2. Switch to the "Class Special" tab of the editor (it should appear close to the "Class" and "Class Level" tabs), and create a new (blank) ability. Call your new ability <font class="strong">"I Move for No Man"</font> and give it an appropriate unique id, such as <font class="strong">"cBKnMovNoM"</font> (since it's a class special ability, it should include the Black Knight's class abbreviation in the unique id).
+
+<p class="body">In the description box, type "As a bonus action, the black knight can brace himself such that any attack or ability check that would force him to leave his current position has disadvantage until his next turn." Save and integrate the class ability, and then return to the Class Helper to link them together with a bootstrap.
+
+        <table border=0 cellspacing=0 cellpadding=0>
+          <tr>
+            <td><img border="0" src="../../../docs/common/empty.gif" width="1" height="10"></td>
+          </tr>
+          <tr>
+            <td valign="center"><img class="border" src="./tut3_specboot.png"></td>
+            <td><img border="0" src="../../../docs/common/empty.gif" width="10" height="1"></td>
+            <td valign="center">
+              <p class="body">Unlike when we bootstraped the Leafy Camouflage to the subrace in Tutorial 2, we need to specify some extra information specific to this instance of bootstrapping, the level at which we gain the class ability. Fortunately, it is possible to set fields and tags of things when bootstrapping them.
+
+              <p class="body">Once you've added the bootstrap and clicked out of the window with the checkboxes, you'll see the bootstrapped ability in the editor and to the right of its name are the two most common alterations. "Gain at Lvl" is one of those common alterations, and should default to 1. You can use the dropdown to change it to "2", meaning the class will gain the ability at level 2. Note that any less common alterations can be added through the 4 other buttons on the right.
+
+              <p class="body">Press OK to leave this form.  Save the record and use the Test button one last time.
+            </td>
+          </tr>
+        </table>
+
+<p class="body">Back in the main Hero Lab window, add one level of black knight and switch to its tab. Note that "I Move for No Man" is greyed-out - since we don't get it until level 2! Add another level to gain the ability and it now appears in the list of special abilities in the specials tab. You've now learned how to add a class and to add special abilities for that class!
+
+<p class="section">What next?
+<p class="body">We've barely scratched the surface of what you could do to improve the class - it's nowhere near complete. Here's some things that you can do to improve the class:
+
+<p class="section">Make the special ability "pretty"
+<p class="body">If you look at the "I Move for No Man" ability, you'll notice that the text is too long, and runs off the edge of the table. You can fix that by specifying a more concise version of the description in the "Summary Text" field for the ability, such as "Bonus action to give foe disadvantage on rolls to move you for 1 rd." and hitting the "Test Now!" button.
+
+<p class="section">Add Alignment Restrictions
+<p class="body">On the "Class" tab of the editor, you can choose which alignments are required or forbidden to your class. For example, you could make your class require any Good alignment, or Lawful Neutral, or you could forbid it from being Chaotic.
+
+<p class="section">Add more special abilities
+<p class="body">Add some more special abilities that are activated at different levels, so the Black Knight tab doesn't look quite as empty.
+
+<p class="section">Add some "once per day" abilities
+
+<p class="body">Our "I Move for No Man" ability is fairly powerful, perhaps we want to limit the number of times it can be used. Select it in the editor, enter <font class="strong">"3"</font> in the "Base Charges" edit control, and check the "Show in Tracked Resources List?" checkbox, then test it. That ability should then appear in the list of charges on the In-Play tab once you're level 2- you can now track whether you've used it for the day or not.
+
+<p class="section">Add Class Archetypes, AKA Custom Special Abilities
+<p class="body">Say that you want to create a specialization for your new class, in a similar manner to the archetypes used (for example, Warlock Invocations, or Fighter Martial Archetypes) for core classes. This is done on the Custom Ability tab of the editor. Whereas Class Specials are always specific abilities gained at specific levels, Custom Abilities are things which the user chooses among from a table of options to fill a certain number of slots.
+
+<p class="body">First we want to add slots to our class, so go to the class helper, and scroll down to the Custom Abilities. Each set of entries under that relate to a different table which can appear on the Class tab. Since we only want one set of custom abilities to choose among, we can just set up a single table. For the Custom Ability Name, enter "Knight Order". Now click on the "Custom Ability Count" button, and you should see a window pop up with many rows. This is a special kind of field called an array, and it stores the number of custom abilities we get from this table's list, at the level that row represents. For example, if we want the black knight to choose an Art when they reach 5th level, we would go to row 4 (remember that the first level is row 0), and enter 1 in that row. Save and Test now the class helper.
+
+        <table border=0 cellspacing=0 cellpadding=0>
+          <tr>
+            <td><img border="0" src="../../../docs/common/empty.gif" width="1" height="10"></td>
+          </tr>
+          <tr>
+            <td valign="center"><img class="border" src="./tut3_arrayfield.png"></td>
+            <td><img border="0" src="../../../docs/common/empty.gif" width="10" height="1"></td>
+            <td valign="center">
+
+            </td>
+          </tr>
+        </table>
+
+<p class="body">Now, as with the subrace from Tutorial 2, we need to create something to go in the table and associate it with this class. Go to the Custom Ability tab, and create a thing called "Knight of the Bulwark", and another called "Knight of the Python". For each of them, make sure to click the "Available to Class(es)" button and choose the Black Knight. Save and test each.
+
+<p class="body">These options are, like martial archetypes, intended to be packages of related abilities, so now we need to create the abilities in the package. Make two new Class specials, called "None Shall Pass" ("When using I Move for no Man, a Knight of the Bulwark can prevent any foe from moving around him."), and "Tis But a Scratch" ("When injured by an enemy attack, a Knight of the Python can instantly heal himself by spending HD without a short rest. This allows them to ignore even the most grievous of injuries.")
+
+<p class="body">Use what you've learned to bootstrap the two abilities to the the Knight of the Bulwark and Knight of the Python custom abilities respectively. Make sure you bootstrap them with the correct ClSpecWhen tag for when the Knight Order is gained (5th)!
+
+<p class="body">Finally, test your creation. When you add the Custom Abilities to the class' table, do you see their sub-abilities showing in the class list below? Delete the first choice you made and then add the other, does the class special at 5th level correctly change?
+
+        <table border=0 cellspacing=0 cellpadding=0>
+          <tr>
+            <td><img border="0" src="../../../docs/common/empty.gif" width="1" height="10"></td>
+          </tr>
+          <tr>
+            <td valign="center"><img class="border" src="./tut3_orders.png"></td>
+            <td><img border="0" src="../../../docs/common/empty.gif" width="10" height="1"></td>
+            <td valign="center">
+
+            </td>
+          </tr>
+        </table>
+
+<p class="section">Terminology Time!
+
+<p class="body"><font class="strong">Autotag</font> - Any tag which is applied as part of bootstrapping a pick is an autotag. When bootstrapping the I Move for No Man to the class helper, you applied a ClSpecWhen.1 tag as an autotag.
+
+<p class="body"><font class="strong">Assignval</font> - Similar to autotag, assignval is when you set the value of a field (or specify the text of a text field) as a part of the bootstrap.
+
+<p class="body"><font class="strong">Candidate expression</font> - Candidate expressions control what can be selected by a table or pick by testing what tags are present on the Thing or Pick considered. Classes automatically create tags of a group that says "this custom ability belongs to this class" and also generate a candidate expression looking for that tag. When you opened the "Available to Class(es)" and selected Black Knight, you were adding the tag of the Black Knight class to this Custom Special, which meant it would pass the Candidate Expression test.
+
+<p class="body"><font class="strong">Uniqueness</font> - This can be set to 3 states. "Unique" meaning the Thing can only exist in one place on the hero at any time. Use this setting with caution, because if a thing is unique and already on the hero, it can't be added again by the user, even if the user can't see it. If it's bootstrapped by another pick and on the hero, only one copy will ever exist, as long as any of the picks that bootstrap it still exist. "Add Once" means the Thing can only be added as a Pick once, but if something blocks the addition from one place it can still be added from a different instance. "No" means the Thing can be added as a pick an unlimited number of times. If you're not sure whether to use "Unique" or "Add Once", use "Add Once" as your default choice.
+
+<p class="body">Classes are actually made up of <font class="strong">two essential parts</font>. The Class Helper contains the bulk of the information about a class and has a Uniqueness of "Unique". The Thing you actually choose to add as a Pick when choosing a class is the Class Level, which is uniqueness "No". Even though you may have 20 Class Levels of a class that all bootstrap their Class Helper, the Class Helper only exists as a single Pick because of its uniqueness.
+
+<p class="section">Add your own class from scratch!
+<p class="body">Following the basic instructions above, add your own custom classes that are used in your campaign!
+
+<p class="body">If you're looking for further information and instructions for the Class tab, <a href="5thededittabs.htm#class">this file</a> will help.
+
+<p class="body">If you're interested in adding a class with spellcasting capabilities, go on to the <a href="5thededittut4.htm">next tutorial</a>!
+
+<p class="body"><a href="5ededit.htm">Go Back</a>.
+
+</body>
+
+</html>

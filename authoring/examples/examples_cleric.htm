@@ -1,0 +1,916 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<link href="../../../../docs/common/styles.css" rel="STYLESHEET">
+<title>Example Cleric Domains </title>
+</head>
+
+<body>
+
+<div align="center">
+  <table class="banner" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td>
+        <p align="center" class="banner">Example Cleric Domains 
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div align="center">
+  <table border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td><img border="0" src="../../../../docs/common/empty.gif" width="1" height="15"></td>
+    </tr>
+  </table>
+</div>
+
+<p class="section">Introduction
+
+<p class="body">This document provides examples of the mechanics for other cleric domains. 
+
+<h4>Knowledge Domain</h4><p class="body">Below are the necessary mechanics to model the Knowledge domain and associated abilities.</p><pre class="xml">
+  &lt;thing id="cClrKnowle" name="Knowledge" description="Placeholder..." compset="CustomSpec" summary="Placeholder..." uniqueness="unique"&gt;
+    &lt;tag group="SpecSource" tag="cHelpClr"/&gt;
+    &lt;tag group="abCategory" tag="ClrDomain" name="Cleric Domain"/&gt;
+    &lt;bootstrap thing="cClrBleKno"&gt;
+      &lt;autotag group="ClSpecWhen" tag="1"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cClrKnoAge"&gt;
+      &lt;autotag group="ClSpecWhen" tag="2"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cClrReaTho"&gt;
+      &lt;autotag group="ClSpecWhen" tag="6"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cClrPotSpe"&gt;
+      &lt;autotag group="ClSpecWhen" tag="8"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cClrVisPas"&gt;
+      &lt;autotag group="ClSpecWhen" tag="17"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="spCommand"&gt;
+      &lt;autotag group="SpellType" tag="cHelpClr"/&gt;
+      &lt;autotag group="BonusSplAt" tag="1"/&gt;
+      &lt;autotag group="Helper" tag="Memorized"/&gt;
+      &lt;autotag group="Helper" tag="Free"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="spIdentify"&gt;
+      &lt;autotag group="SpellType" tag="cHelpClr"/&gt;
+      &lt;autotag group="BonusSplAt" tag="1"/&gt;
+      &lt;autotag group="Helper" tag="Memorized"/&gt;
+      &lt;autotag group="Helper" tag="Free"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="spAugury"&gt;
+      &lt;autotag group="SpellType" tag="cHelpClr"/&gt;
+      &lt;autotag group="BonusSplAt" tag="3"/&gt;
+      &lt;autotag group="Helper" tag="Memorized"/&gt;
+      &lt;autotag group="Helper" tag="Free"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="spSuggesti"&gt;
+      &lt;autotag group="SpellType" tag="cHelpClr"/&gt;
+      &lt;autotag group="BonusSplAt" tag="3"/&gt;
+      &lt;autotag group="Helper" tag="Memorized"/&gt;
+      &lt;autotag group="Helper" tag="Free"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="spNondetec"&gt;
+      &lt;autotag group="SpellType" tag="cHelpClr"/&gt;
+      &lt;autotag group="BonusSplAt" tag="5"/&gt;
+      &lt;autotag group="Helper" tag="Memorized"/&gt;
+      &lt;autotag group="Helper" tag="Free"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="spSpeaDead"&gt;
+      &lt;autotag group="SpellType" tag="cHelpClr"/&gt;
+      &lt;autotag group="BonusSplAt" tag="5"/&gt;
+      &lt;autotag group="Helper" tag="Memorized"/&gt;
+      &lt;autotag group="Helper" tag="Free"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="spArcaEye"&gt;
+      &lt;autotag group="SpellType" tag="cHelpClr"/&gt;
+      &lt;autotag group="BonusSplAt" tag="7"/&gt;
+      &lt;autotag group="Helper" tag="Memorized"/&gt;
+      &lt;autotag group="Helper" tag="Free"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="spConfusio"&gt;
+      &lt;autotag group="SpellType" tag="cHelpClr"/&gt;
+      &lt;autotag group="BonusSplAt" tag="7"/&gt;
+      &lt;autotag group="Helper" tag="Memorized"/&gt;
+      &lt;autotag group="Helper" tag="Free"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="spLegeLore"&gt;
+      &lt;autotag group="SpellType" tag="cHelpClr"/&gt;
+      &lt;autotag group="BonusSplAt" tag="9"/&gt;
+      &lt;autotag group="Helper" tag="Memorized"/&gt;
+      &lt;autotag group="Helper" tag="Free"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="spScrying"&gt;
+      &lt;autotag group="SpellType" tag="cHelpClr"/&gt;
+      &lt;autotag group="BonusSplAt" tag="9"/&gt;
+      &lt;autotag group="Helper" tag="Memorized"/&gt;
+      &lt;autotag group="Helper" tag="Free"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cClrBleKno" name="Blessings of Knowledge" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;fieldval field="abValue" value="2"/&gt;
+    &lt;fieldval field="usrCandid1" value="component.BaseSkill &amp;amp; (Reference.skArcana | Reference.skHistory | Reference.skNature | Reference.skReligion)"/&gt;
+    &lt;fieldval field="usrCandid2" value="component.BaseSkill &amp;amp; (Reference.skArcana | Reference.skHistory | Reference.skNature | Reference.skReligion)"/&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="abDuration" tag="Constant"/&gt;
+    &lt;tag group="abAction" tag="None"/&gt;
+    &lt;tag group="ChooseSrc1" tag="Hero"/&gt;
+    &lt;tag group="ChooseSrc2" tag="Hero"/&gt;
+    &lt;eval phase="PostLevel" priority="10000"&gt;&lt;![CDATA[
+      doneif (tagis[Helper.ShowSpec] = 0)
+
+      doneif (tagis[Helper.Disable] &lt;&gt; 0)
+
+      if (field[usrChosen1].ischosen &lt;&gt; 0) then
+        perform field[usrChosen1].chosen.pulltags[ProfSkill.?]
+        perform field[usrChosen1].chosen.assign[Helper.ProfDouble]
+        endif
+
+      if (field[usrChosen2].ischosen &lt;&gt; 0) then
+        perform field[usrChosen2].chosen.pulltags[ProfSkill.?]
+        perform field[usrChosen2].chosen.assign[Helper.ProfDouble]
+        endif
+
+      perform forward[ProfSkill.?]
+
+      doneif (isroot = 0)
+
+      doneif (root.islinkage[table] = 0)
+
+      perform root.linkage[table].setfocus
+
+      ~ Set our bonus languages in the first empty table we find
+      if (focus.field[cLangMax].value = 0) then
+        focus.field[cLangMax].value += field[abValue].value
+        focus.field[cLaCandExp].text = "component.BaseLang"
+      elseif (focus.field[cLangMax2].value = 0) then
+        focus.field[cLangMax2].value += field[abValue].value
+        focus.field[cLaCandEx2].text = "component.BaseLang"
+      elseif (focus.field[cLangMax3].value = 0) then
+        focus.field[cLangMax3].value += field[abValue].value
+        focus.field[cLaCandEx3].text = "component.BaseLang"
+        endif
+      ]]&gt;
+      &lt;before name="Calc skProfBon"/&gt;
+      &lt;/eval&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cClrKnoAge" name="Channel Divinity: Knowledge of the Ages" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;fieldval field="usrCandid1" value="component.BaseSkill | component.Tool &amp;amp; !(Helper.Helper | Helper.Obsolete)"/&gt;
+    &lt;fieldval field="abDuration" value="10"/&gt;
+    &lt;tag group="abCategory" tag="ClrChanDiv" name="Cleric Channel Divinity Ability"/&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="abDuration" tag="Minute"/&gt;
+    &lt;tag group="User" tag="Activation"/&gt;
+    &lt;tag group="ChooseSrc1" tag="Thing"/&gt;
+    &lt;tag group="abAction" tag="Action"/&gt;
+    &lt;eval phase="PostLevel" priority="10000"&gt;&lt;![CDATA[
+      doneif (tagis[Helper.ShowSpec] = 0)
+
+      doneif (tagis[Helper.Disable] &lt;&gt; 0)
+
+      doneif (field[abilActive].value = 0)
+
+      if (field[usrChosen1].ischosen &lt;&gt; 0) then
+        perform field[usrChosen1].chosen.pulltags[ProfSkill.?]
+        perform field[usrChosen1].chosen.pulltags[ProfTool.?]
+        endif
+
+      perform forward[ProfSkill.?]
+      perform forward[ProfTool.?]
+      ]]&gt;&lt;/eval&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cClrReaTho" name="Channel Divinity: Read Thoughts" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;fieldval field="abRange" value="60"/&gt;
+    &lt;fieldval field="abDuration" value="1"/&gt;
+    &lt;tag group="abRange" tag="Feet"/&gt;
+    &lt;tag group="abCategory" tag="ClrChanDiv" name="Cleric Channel Divinity Ability"/&gt;
+    &lt;tag group="abDuration" tag="Minute"/&gt;
+    &lt;tag group="StandardDC" tag="aWIS"/&gt;
+    &lt;tag group="abSave" tag="aWIS"/&gt;
+    &lt;tag group="abAction" tag="Action"/&gt;
+    &lt;tag group="SpInfo" tag="spSuggesti"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cClrPotSpe" name="Potent Spellcasting" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;tag group="abAction" tag="None"/&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="abDuration" tag="Constant"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cClrVisPas" name="Visions of the Past" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;tag group="abRange" tag="Touch"/&gt;
+    &lt;tag group="abDuration" tag="Minute"/&gt;
+    &lt;tag group="abAction" tag="Minute"/&gt;
+    &lt;/thing&gt;
+
+
+  </pre><h4>Light Domain</h4><p class="body">Below are the necessary mechanics to model the Light domain and associated abilities.</p><pre class="xml">
+    &lt;thing id="cClrLight" name="Light" description="Placeholder..." compset="CustomSpec" summary="Placeholder..." uniqueness="unique"&gt;
+    &lt;tag group="SpecSource" tag="cHelpClr"/&gt;
+    &lt;tag group="abCategory" tag="ClrDomain"/&gt;
+    &lt;bootstrap thing="cClrBonCan"&gt;
+      &lt;autotag group="ClSpecWhen" tag="1"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cClrWarFla"&gt;
+      &lt;autotag group="ClSpecWhen" tag="1"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cClrRadDaw"&gt;
+      &lt;autotag group="ClSpecWhen" tag="2"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cClrImpFla"&gt;
+      &lt;autotag group="ClSpecWhen" tag="6"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cClrPotSpe"&gt;
+      &lt;autotag group="ClSpecWhen" tag="8"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cClrCorLig"&gt;
+      &lt;autotag group="ClSpecWhen" tag="17"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="spBurnHand"&gt;
+      &lt;autotag group="SpellType" tag="cHelpClr"/&gt;
+      &lt;autotag group="BonusSplAt" tag="1"/&gt;
+      &lt;autotag group="Helper" tag="Memorized"/&gt;
+      &lt;autotag group="Helper" tag="Free"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="spFaerFire"&gt;
+      &lt;autotag group="SpellType" tag="cHelpClr"/&gt;
+      &lt;autotag group="BonusSplAt" tag="1"/&gt;
+      &lt;autotag group="Helper" tag="Memorized"/&gt;
+      &lt;autotag group="Helper" tag="Free"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="spFlamSphe"&gt;
+      &lt;autotag group="SpellType" tag="cHelpClr"/&gt;
+      &lt;autotag group="BonusSplAt" tag="3"/&gt;
+      &lt;autotag group="Helper" tag="Memorized"/&gt;
+      &lt;autotag group="Helper" tag="Free"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="spScorRay"&gt;
+      &lt;autotag group="SpellType" tag="cHelpClr"/&gt;
+      &lt;autotag group="BonusSplAt" tag="3"/&gt;
+      &lt;autotag group="Helper" tag="Memorized"/&gt;
+      &lt;autotag group="Helper" tag="Free"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="spDaylight"&gt;
+      &lt;autotag group="SpellType" tag="cHelpClr"/&gt;
+      &lt;autotag group="BonusSplAt" tag="5"/&gt;
+      &lt;autotag group="Helper" tag="Memorized"/&gt;
+      &lt;autotag group="Helper" tag="Free"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="spFireball"&gt;
+      &lt;autotag group="SpellType" tag="cHelpClr"/&gt;
+      &lt;autotag group="BonusSplAt" tag="5"/&gt;
+      &lt;autotag group="Helper" tag="Memorized"/&gt;
+      &lt;autotag group="Helper" tag="Free"/&gt;
+      &lt;/bootstrap&gt;
+&lt;!-- Not in SRD
+    &lt;bootstrap thing="spGuarFait"&gt;
+      &lt;autotag group="SpellType" tag="cHelpClr"/&gt;
+      &lt;autotag group="BonusSplAt" tag="7"/&gt;
+      &lt;autotag group="Helper" tag="Memorized"/&gt;
+      &lt;autotag group="Helper" tag="Free"/&gt;
+      &lt;/bootstrap&gt;
+--&gt;
+    &lt;bootstrap thing="spWallFire"&gt;
+      &lt;autotag group="SpellType" tag="cHelpClr"/&gt;
+      &lt;autotag group="BonusSplAt" tag="7"/&gt;
+      &lt;autotag group="Helper" tag="Memorized"/&gt;
+      &lt;autotag group="Helper" tag="Free"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="spFlamStri"&gt;
+      &lt;autotag group="SpellType" tag="cHelpClr"/&gt;
+      &lt;autotag group="BonusSplAt" tag="9"/&gt;
+      &lt;autotag group="Helper" tag="Memorized"/&gt;
+      &lt;autotag group="Helper" tag="Free"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="spScrying"&gt;
+      &lt;autotag group="SpellType" tag="cHelpClr"/&gt;
+      &lt;autotag group="BonusSplAt" tag="9"/&gt;
+      &lt;autotag group="Helper" tag="Memorized"/&gt;
+      &lt;autotag group="Helper" tag="Free"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cClrBonCan" name="Bonus Cantrip" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;tag group="abAction" tag="None"/&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="abDuration" tag="Constant"/&gt;
+    &lt;bootstrap thing="spLight"&gt;
+      &lt;autotag group="Helper" tag="Free"/&gt;
+      &lt;autotag group="Helper" tag="Cantrip"/&gt;
+      &lt;autotag group="SpellType" tag="cHelpClr"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cClrWarFla" name="Warding Flare" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;fieldval field="abRange" value="30"/&gt;
+    &lt;tag group="abDuration" tag="Instant"/&gt;
+    &lt;tag group="abAction" tag="Reaction"/&gt;
+    &lt;tag group="abRange" tag="Feet"/&gt;
+    &lt;tag group="User" tag="Tracker"/&gt;
+    &lt;tag group="ChargeCalc" tag="AttrOnly"/&gt;
+    &lt;tag group="ChargeCalc" tag="Minimum1"/&gt;
+    &lt;tag group="Usage" tag="Day"/&gt;
+    &lt;tag group="ChargeAttr" tag="aWIS"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cClrRadDaw" name="Channel Divinity: Radiance of the Dawn" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;fieldval field="abRange" value="30"/&gt;
+    &lt;fieldval field="abValue" value="2"/&gt;
+    &lt;fieldval field="abValue2" value="10"/&gt;
+    &lt;fieldval field="abText" value="radiant damage"/&gt;
+    &lt;tag group="abAction" tag="Action"/&gt;
+    &lt;tag group="StandardDC" tag="aWIS"/&gt;
+    &lt;tag group="abSave" tag="aCON"/&gt;
+    &lt;tag group="abRange" tag="Feet"/&gt;
+    &lt;tag group="abCategory" tag="ClrChanDiv" name="Cleric Channel Divinity Ability"/&gt;
+    &lt;tag group="abDuration" tag="Instant"/&gt;
+    &lt;tag group="SbNamePar" tag="DieCntVal"/&gt;
+    &lt;tag group="SbNamePar" tag="AppText"/&gt;
+    &lt;tag group="SbNamePar" tag="AppValue3"/&gt;
+    &lt;tag group="SbNamePar" tag="SignAppVal"/&gt;
+    &lt;tag group="SbNamePar" tag="DieSizVal2"/&gt;
+    &lt;eval phase="PostLevel" priority="10000"&gt;field[abValue3].value += field[xAllLev].value&lt;/eval&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cClrImpFla" name="Improved Flare" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;fieldval field="abRange" value="30"/&gt;
+    &lt;tag group="abDuration" tag="Instant"/&gt;
+    &lt;tag group="abAction" tag="Reaction"/&gt;
+    &lt;tag group="abRange" tag="Feet"/&gt;
+    &lt;tag group="User" tag="Tracker"/&gt;
+    &lt;tag group="ChargeCalc" tag="AttrOnly"/&gt;
+    &lt;tag group="ChargeCalc" tag="Minimum1"/&gt;
+    &lt;tag group="Usage" tag="Day"/&gt;
+    &lt;tag group="ChargeAttr" tag="aWIS"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cClrCorLig" name="Corona of Light" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;fieldval field="abRange" value="60"/&gt;
+    &lt;fieldval field="abDuration" value="1"/&gt;
+    &lt;tag group="abRange" tag="Feet"/&gt;
+    &lt;tag group="User" tag="Tracker"/&gt;
+    &lt;tag group="ChargeCalc" tag="AttrOnly"/&gt;
+    &lt;tag group="ChargeCalc" tag="Minimum1"/&gt;
+    &lt;tag group="Usage" tag="Day"/&gt;
+    &lt;tag group="ChargeAttr" tag="aWIS"/&gt;
+    &lt;tag group="abAction" tag="Action"/&gt;
+    &lt;tag group="abDuration" tag="Minute"/&gt;
+    &lt;/thing&gt;
+
+  </pre><h4>Nature Domain</h4><p class="body">Below are the necessary mechanics to model the Nature domain and associated abilities.</p><pre class="xml">
+  &lt;thing id="cClrNature" name="Nature" description="Placeholder..." compset="CustomSpec" summary="Placeholder..." uniqueness="unique"&gt;
+    &lt;tag group="SpecSource" tag="cHelpClr"/&gt;
+    &lt;tag group="abCategory" tag="ClrDomain"/&gt;
+    &lt;bootstrap thing="cClrAcoNat"&gt;
+      &lt;autotag group="ClSpecWhen" tag="1"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cClrLiBoPr"&gt;
+      &lt;autotag group="ClSpecWhen" tag="1"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cClrChAnPl"&gt;
+      &lt;autotag group="ClSpecWhen" tag="2"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cClrDamEle"&gt;
+      &lt;autotag group="ClSpecWhen" tag="6"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cClrDivStr"&gt;
+      &lt;autotag group="ClSpecWhen" tag="14"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cClrDivStr"&gt;
+      &lt;autotag group="ClSpecWhen" tag="8"/&gt;
+      &lt;assignval field="abText" value="cold, fire, or lightning damage"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cClrMasNat"&gt;
+      &lt;autotag group="ClSpecWhen" tag="17"/&gt;
+      &lt;/bootstrap&gt;
+&lt;!-- Not in SRD
+    &lt;bootstrap thing="spAnimFrie"&gt;
+      &lt;autotag group="SpellType" tag="cHelpClr"/&gt;
+      &lt;autotag group="BonusSplAt" tag="1"/&gt;
+      &lt;autotag group="Helper" tag="Memorized"/&gt;
+      &lt;autotag group="Helper" tag="Free"/&gt;
+      &lt;/bootstrap&gt;
+--&gt;
+    &lt;bootstrap thing="spSpeaAnim"&gt;
+      &lt;autotag group="SpellType" tag="cHelpClr"/&gt;
+      &lt;autotag group="BonusSplAt" tag="1"/&gt;
+      &lt;autotag group="Helper" tag="Memorized"/&gt;
+      &lt;autotag group="Helper" tag="Free"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="spBarkskin"&gt;
+      &lt;autotag group="SpellType" tag="cHelpClr"/&gt;
+      &lt;autotag group="BonusSplAt" tag="3"/&gt;
+      &lt;autotag group="Helper" tag="Memorized"/&gt;
+      &lt;autotag group="Helper" tag="Free"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="spSpikGrow"&gt;
+      &lt;autotag group="SpellType" tag="cHelpClr"/&gt;
+      &lt;autotag group="BonusSplAt" tag="3"/&gt;
+      &lt;autotag group="Helper" tag="Memorized"/&gt;
+      &lt;autotag group="Helper" tag="Free"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="spPlanGrow"&gt;
+      &lt;autotag group="SpellType" tag="cHelpClr"/&gt;
+      &lt;autotag group="BonusSplAt" tag="5"/&gt;
+      &lt;autotag group="Helper" tag="Memorized"/&gt;
+      &lt;autotag group="Helper" tag="Free"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="spWindWall"&gt;
+      &lt;autotag group="SpellType" tag="cHelpClr"/&gt;
+      &lt;autotag group="BonusSplAt" tag="5"/&gt;
+      &lt;autotag group="Helper" tag="Memorized"/&gt;
+      &lt;autotag group="Helper" tag="Free"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="spDomiBeas"&gt;
+      &lt;autotag group="SpellType" tag="cHelpClr"/&gt;
+      &lt;autotag group="BonusSplAt" tag="7"/&gt;
+      &lt;autotag group="Helper" tag="Memorized"/&gt;
+      &lt;autotag group="Helper" tag="Free"/&gt;
+      &lt;/bootstrap&gt;
+&lt;!-- Not in SRD
+    &lt;bootstrap thing="spGrasVine"&gt;
+      &lt;autotag group="SpellType" tag="cHelpClr"/&gt;
+      &lt;autotag group="BonusSplAt" tag="7"/&gt;
+      &lt;autotag group="Helper" tag="Memorized"/&gt;
+      &lt;autotag group="Helper" tag="Free"/&gt;
+      &lt;/bootstrap&gt;
+--&gt;
+    &lt;bootstrap thing="spInsePlag"&gt;
+      &lt;autotag group="SpellType" tag="cHelpClr"/&gt;
+      &lt;autotag group="BonusSplAt" tag="9"/&gt;
+      &lt;autotag group="Helper" tag="Memorized"/&gt;
+      &lt;autotag group="Helper" tag="Free"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="spTreeStri"&gt;
+      &lt;autotag group="SpellType" tag="cHelpClr"/&gt;
+      &lt;autotag group="BonusSplAt" tag="9"/&gt;
+      &lt;autotag group="Helper" tag="Memorized"/&gt;
+      &lt;autotag group="Helper" tag="Free"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cClrAcoNat" name="Acolyte of Nature" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;fieldval field="usrCandid1" value="component.BaseSkill &amp;amp; (Target.skAnimHand | Target.skNature | Target.skSurvival)"/&gt;
+    &lt;fieldval field="usrCandid2" value="component.BaseSpell &amp;amp; sClass.cHelpDrd &amp;amp; sLevel.0"/&gt;
+    &lt;tag group="ChooseSrc2" tag="Thing"/&gt;
+    &lt;tag group="ChooseSrc1" tag="Hero"/&gt;
+    &lt;tag group="abAction" tag="None"/&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="abDuration" tag="Constant"/&gt;
+    &lt;eval phase="PostLevel" priority="10000"&gt;&lt;![CDATA[
+    doneif (tagis[Helper.ShowSpec] = 0)
+
+    doneif (tagis[Helper.Disable] &lt;&gt; 0)
+
+     if (field[usrChosen1].ischosen &lt;&gt; 0) then
+       perform field[usrChosen1].chosen.pulltags[ProfSkill.?]
+       endif
+
+     if (field[usrChosen2].ischosen &lt;&gt; 0) then
+       perform field[usrChosen2].chosen.pulltags[ClsAllowSp.?]
+       endif
+
+     perform root.linkage[table].pushtags[ClsAllowSp.?]
+     perform forward[ProfSkill.?]]]&gt;
+      &lt;before name="Assign Helper.Proficient based on ProfSkill tags on Hero"/&gt;
+      &lt;/eval&gt;
+    &lt;evalrule phase="PostLevel" priority="10000" message="Must add chosen cantrip to cantrips known"&gt;&lt;![CDATA[
+     validif (tagis[Helper.ShowSpec] = 0)
+
+     validif (tagis[Helper.Disable] &lt;&gt; 0)
+
+     var spellname2 as string
+     var searchexpr as string
+     var messnames as string
+     var foundone as number
+
+     @valid = 1
+
+     if (field[usrChosen2].ischosen &lt;&gt; 0) then
+       foundone = 0
+       searchexpr = "KnowSpell." & field[usrChosen2].chosen.idstring & " & SpellType.cHelpClr & Helper.Cantrip"
+
+       foreach pick in hero from BaseSpell where searchexpr
+         foundone = 1
+
+         perform eachpick.assign[Helper.Free]
+         nexteach
+
+       if (foundone = 0) then
+         spellname2 = field[usrChosen2].chosen.field[name].text
+         @valid = 0
+         endif
+       endif
+
+     if (@valid = 0) then
+       messnames = splice(messnames, spellname2, ", ")
+       @message = "You have selected the following cantrips for Acolyte of Nature but not added them to your Cleric cantrips known: " & messnames
+       endif]]&gt;&lt;/evalrule&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cClrChAnPl" name="Channel Divinity: Charm Animals and Plant" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;fieldval field="abRange" value="30"/&gt;
+    &lt;fieldval field="abDuration" value="1"/&gt;
+    &lt;tag group="abRange" tag="Feet"/&gt;
+    &lt;tag group="abCategory" tag="ClrChanDiv" name="Cleric Channel Divinity Ability"/&gt;
+    &lt;tag group="abDuration" tag="Minute"/&gt;
+    &lt;tag group="abAction" tag="Action"/&gt;
+    &lt;tag group="abSave" tag="aWIS"/&gt;
+    &lt;tag group="StandardDC" tag="aWIS"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cClrDamEle" name="Dampen Elements" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;fieldval field="abRange" value="30"/&gt;
+    &lt;tag group="abRange" tag="Feet"/&gt;
+    &lt;tag group="abAction" tag="Reaction"/&gt;
+    &lt;tag group="abDuration" tag="Attack"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cClrMasNat" name="Master of Nature" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;fieldval field="abRange" value="30"/&gt;
+    &lt;tag group="abRange" tag="Feet"/&gt;
+    &lt;tag group="abDuration" tag="Attack"/&gt;
+    &lt;tag group="abAction" tag="Bonus"/&gt;
+    &lt;/thing&gt;
+
+  </pre><h4>Tempest Domain</h4><p class="body">Below are the necessary mechanics to model the Tempest domain and associated abilities.</p><pre class="xml">
+  &lt;thing id="cClrTempes" name="Tempest" description="Placeholder..." compset="CustomSpec" summary="Placeholder..." uniqueness="unique"&gt;
+    &lt;tag group="abCategory" tag="ClrDomain"/&gt;
+    &lt;tag group="SpecSource" tag="cHelpClr"/&gt;
+    &lt;bootstrap thing="cClrTeBoPr"&gt;
+      &lt;autotag group="ClSpecWhen" tag="1"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cClrDesWra"&gt;
+      &lt;autotag group="ClSpecWhen" tag="2"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cClrThuStr"&gt;
+      &lt;autotag group="ClSpecWhen" tag="6"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cClrDivStr"&gt;
+      &lt;autotag group="ClSpecWhen" tag="14"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cClrDivStr"&gt;
+      &lt;autotag group="ClSpecWhen" tag="8"/&gt;
+      &lt;assignval field="abText" value="thunder damage"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cClrStormb"&gt;
+      &lt;autotag group="ClSpecWhen" tag="17"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="spFogClou"&gt;
+      &lt;autotag group="SpellType" tag="cHelpClr"/&gt;
+      &lt;autotag group="BonusSplAt" tag="1"/&gt;
+      &lt;autotag group="Helper" tag="Memorized"/&gt;
+      &lt;autotag group="Helper" tag="Free"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="spThunderw"&gt;
+      &lt;autotag group="SpellType" tag="cHelpClr"/&gt;
+      &lt;autotag group="BonusSplAt" tag="1"/&gt;
+      &lt;autotag group="Helper" tag="Memorized"/&gt;
+      &lt;autotag group="Helper" tag="Free"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="spGustWind"&gt;
+      &lt;autotag group="SpellType" tag="cHelpClr"/&gt;
+      &lt;autotag group="BonusSplAt" tag="3"/&gt;
+      &lt;autotag group="Helper" tag="Memorized"/&gt;
+      &lt;autotag group="Helper" tag="Free"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="spShatter"&gt;
+      &lt;autotag group="SpellType" tag="cHelpClr"/&gt;
+      &lt;autotag group="BonusSplAt" tag="3"/&gt;
+      &lt;autotag group="Helper" tag="Memorized"/&gt;
+      &lt;autotag group="Helper" tag="Free"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="spCallLigh"&gt;
+      &lt;autotag group="SpellType" tag="cHelpClr"/&gt;
+      &lt;autotag group="BonusSplAt" tag="5"/&gt;
+      &lt;autotag group="Helper" tag="Memorized"/&gt;
+      &lt;autotag group="Helper" tag="Free"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="spSleeStor"&gt;
+      &lt;autotag group="SpellType" tag="cHelpClr"/&gt;
+      &lt;autotag group="BonusSplAt" tag="5"/&gt;
+      &lt;autotag group="Helper" tag="Memorized"/&gt;
+      &lt;autotag group="Helper" tag="Free"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="spContWate"&gt;
+      &lt;autotag group="SpellType" tag="cHelpClr"/&gt;
+      &lt;autotag group="BonusSplAt" tag="7"/&gt;
+      &lt;autotag group="Helper" tag="Memorized"/&gt;
+      &lt;autotag group="Helper" tag="Free"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="spIceStor"&gt;
+      &lt;autotag group="SpellType" tag="cHelpClr"/&gt;
+      &lt;autotag group="BonusSplAt" tag="7"/&gt;
+      &lt;autotag group="Helper" tag="Memorized"/&gt;
+      &lt;autotag group="Helper" tag="Free"/&gt;
+      &lt;/bootstrap&gt;
+&lt;!-- Not in SRD
+    &lt;bootstrap thing="spDestWave"&gt;
+      &lt;autotag group="SpellType" tag="cHelpClr"/&gt;
+      &lt;autotag group="BonusSplAt" tag="9"/&gt;
+      &lt;autotag group="Helper" tag="Memorized"/&gt;
+      &lt;autotag group="Helper" tag="Free"/&gt;
+      &lt;/bootstrap&gt;
+--&gt;
+    &lt;bootstrap thing="spInsePlag"&gt;
+      &lt;autotag group="SpellType" tag="cHelpClr"/&gt;
+      &lt;autotag group="BonusSplAt" tag="9"/&gt;
+      &lt;autotag group="Helper" tag="Memorized"/&gt;
+      &lt;autotag group="Helper" tag="Free"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cClrWraSto"&gt;
+      &lt;autotag group="ClSpecWhen" tag="1"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cClrTeBoPr" name="Bonus Proficiency" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;tag group="abAction" tag="None"/&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="abDuration" tag="Constant"/&gt;
+    &lt;eval phase="PostLevel" priority="10000"&gt;&lt;![CDATA[
+      doneif (tagis[Helper.ShowSpec] = 0)
+
+      doneif (tagis[Helper.Disable] &lt;&gt; 0)
+
+      perform root.linkage[table].assign[ArmProfGrp.ArmorHeavy]
+      perform root.linkage[table].assign[ArmProfGrp.WepMartial]]]&gt;&lt;/eval&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cClrWraSto" name="Wrath of the Storm" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;fieldval field="abRange" value="5"/&gt;
+    &lt;fieldval field="abText" value="lightning or thunder damage"/&gt;
+    &lt;fieldval field="abValue" value="2"/&gt;
+    &lt;fieldval field="abValue2" value="8"/&gt;
+    &lt;tag group="ChargeCalc" tag="Minimum1"/&gt;
+    &lt;tag group="Usage" tag="Day"/&gt;
+    &lt;tag group="ChargeAttr" tag="aWIS"/&gt;
+    &lt;tag group="abDuration" tag="Instant"/&gt;
+    &lt;tag group="abAction" tag="Reaction"/&gt;
+    &lt;tag group="abSave" tag="aDEX"/&gt;
+    &lt;tag group="StandardDC" tag="aWIS"/&gt;
+    &lt;tag group="abRange" tag="Feet"/&gt;
+    &lt;tag group="User" tag="Tracker"/&gt;
+    &lt;tag group="ChargeCalc" tag="AttrOnly"/&gt;
+    &lt;tag group="LvNamePar" tag="DieCntVal"/&gt;
+    &lt;tag group="LvNamePar" tag="AppText"/&gt;
+    &lt;tag group="LvNamePar" tag="AppValue3"/&gt;
+    &lt;tag group="LvNamePar" tag="SignAppVal"/&gt;
+    &lt;tag group="LvNamePar" tag="DieSizVal2"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cClrDesWra" name="Channel Divinity: Destructive Wrath" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="abCategory" tag="ClrChanDiv" name="Cleric Channel Divinity Ability"/&gt;
+    &lt;tag group="abDuration" tag="Instant"/&gt;
+    &lt;tag group="abAction" tag="None"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cClrThuStr" name="Thunderbolt Strike" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;tag group="abAction" tag="None"/&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="abDuration" tag="Constant"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cClrStormb" name="Stormborn" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;tag group="abAction" tag="None"/&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="abDuration" tag="Constant"/&gt;
+    &lt;/thing&gt;
+
+  </pre><h4>Trickery Domain</h4><p class="body">Below are the necessary mechanics to model the Trickery domain and associated abilities.</p><pre class="xml">
+  &lt;thing id="cClrTricke" name="Trickery" description="Placeholder..." compset="CustomSpec" summary="Placeholder..." uniqueness="unique"&gt;
+    &lt;tag group="SpecSource" tag="cHelpClr"/&gt;
+    &lt;tag group="abCategory" tag="ClrDomain"/&gt;
+    &lt;bootstrap thing="cClrBleTri"&gt;
+      &lt;autotag group="ClSpecWhen" tag="1"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cClrInvDup"&gt;
+      &lt;autotag group="ClSpecWhen" tag="2"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cClrCloSha"&gt;
+      &lt;autotag group="ClSpecWhen" tag="6"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cClrDivStr"&gt;
+      &lt;autotag group="ClSpecWhen" tag="14"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cClrDivStr"&gt;
+      &lt;autotag group="ClSpecWhen" tag="8"/&gt;
+      &lt;assignval field="abText" value="poison damage"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cClrImpDup"&gt;
+      &lt;autotag group="ClSpecWhen" tag="17"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="spCharPers"&gt;
+      &lt;autotag group="SpellType" tag="cHelpClr"/&gt;
+      &lt;autotag group="BonusSplAt" tag="1"/&gt;
+      &lt;autotag group="Helper" tag="Memorized"/&gt;
+      &lt;autotag group="Helper" tag="Free"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="spDisgSelf"&gt;
+      &lt;autotag group="SpellType" tag="cHelpClr"/&gt;
+      &lt;autotag group="BonusSplAt" tag="1"/&gt;
+      &lt;autotag group="Helper" tag="Memorized"/&gt;
+      &lt;autotag group="Helper" tag="Free"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="spMirrImag"&gt;
+      &lt;autotag group="SpellType" tag="cHelpClr"/&gt;
+      &lt;autotag group="BonusSplAt" tag="3"/&gt;
+      &lt;autotag group="Helper" tag="Memorized"/&gt;
+      &lt;autotag group="Helper" tag="Free"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="spPassTrac"&gt;
+      &lt;autotag group="SpellType" tag="cHelpClr"/&gt;
+      &lt;autotag group="BonusSplAt" tag="3"/&gt;
+      &lt;autotag group="Helper" tag="Memorized"/&gt;
+      &lt;autotag group="Helper" tag="Free"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="spBlink"&gt;
+      &lt;autotag group="SpellType" tag="cHelpClr"/&gt;
+      &lt;autotag group="BonusSplAt" tag="5"/&gt;
+      &lt;autotag group="Helper" tag="Memorized"/&gt;
+      &lt;autotag group="Helper" tag="Free"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="spDispMagi"&gt;
+      &lt;autotag group="SpellType" tag="cHelpClr"/&gt;
+      &lt;autotag group="BonusSplAt" tag="5"/&gt;
+      &lt;autotag group="Helper" tag="Memorized"/&gt;
+      &lt;autotag group="Helper" tag="Free"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="spDimeDoor"&gt;
+      &lt;autotag group="SpellType" tag="cHelpClr"/&gt;
+      &lt;autotag group="BonusSplAt" tag="7"/&gt;
+      &lt;autotag group="Helper" tag="Memorized"/&gt;
+      &lt;autotag group="Helper" tag="Free"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="spPolymorp"&gt;
+      &lt;autotag group="SpellType" tag="cHelpClr"/&gt;
+      &lt;autotag group="BonusSplAt" tag="7"/&gt;
+      &lt;autotag group="Helper" tag="Memorized"/&gt;
+      &lt;autotag group="Helper" tag="Free"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="spDomiPers"&gt;
+      &lt;autotag group="SpellType" tag="cHelpClr"/&gt;
+      &lt;autotag group="BonusSplAt" tag="9"/&gt;
+      &lt;autotag group="Helper" tag="Memorized"/&gt;
+      &lt;autotag group="Helper" tag="Free"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="spModiMemo"&gt;
+      &lt;autotag group="SpellType" tag="cHelpClr"/&gt;
+      &lt;autotag group="BonusSplAt" tag="9"/&gt;
+      &lt;autotag group="Helper" tag="Memorized"/&gt;
+      &lt;autotag group="Helper" tag="Free"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cClrBleTri" name="Blessing of the Trickster" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;fieldval field="abDuration" value="1"/&gt;
+    &lt;tag group="abRange" tag="Touch"/&gt;
+    &lt;tag group="abAction" tag="Action"/&gt;
+    &lt;tag group="abDuration" tag="Hour"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cClrInvDup" name="Channel Divinity: Invoke Duplicity" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;fieldval field="abRange" value="30"/&gt;
+    &lt;fieldval field="abDuration" value="1"/&gt;
+    &lt;tag group="abRange" tag="Feet"/&gt;
+    &lt;tag group="abCategory" tag="ClrChanDiv" name="Cleric Channel Divinity Ability"/&gt;
+    &lt;tag group="abDuration" tag="Minute"/&gt;
+    &lt;tag group="abAction" tag="Action"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cClrCloSha" name="Channel Divinity: Cloak of Shadows" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;fieldval field="abDuration" value="1"/&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="abCategory" tag="ClrChanDiv" name="Cleric Channel Divinity Ability"/&gt;
+    &lt;tag group="abDuration" tag="Round"/&gt;
+    &lt;tag group="abAction" tag="Action"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cClrImpDup" name="Improved Duplicity" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;fieldval field="abRange" value="120"/&gt;
+    &lt;tag group="abRange" tag="Feet"/&gt;
+    &lt;tag group="abDuration" tag="Instant"/&gt;
+    &lt;tag group="abAction" tag="Bonus"/&gt;
+    &lt;/thing&gt;
+
+  </pre><h4>War Domain</h4><p class="body">Below are the necessary mechanics to model the War domain and associated abilities.</p><pre class="xml">
+  &lt;thing id="cClrWar" name="War" description="Placeholder..." compset="CustomSpec" summary="Placeholder..." uniqueness="unique"&gt;
+    &lt;tag group="SpecSource" tag="cHelpClr"/&gt;
+    &lt;tag group="abCategory" tag="ClrDomain"/&gt;
+    &lt;bootstrap thing="cClrTeBoPr"&gt;
+      &lt;autotag group="ClSpecWhen" tag="1"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cClrWarPri"&gt;
+      &lt;autotag group="ClSpecWhen" tag="2"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cClrGuiStr"&gt;
+      &lt;autotag group="ClSpecWhen" tag="6"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cClrWaGoBl"&gt;
+      &lt;autotag group="ClSpecWhen" tag="6"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cClrDivStr"&gt;
+      &lt;autotag group="ClSpecWhen" tag="8"/&gt;
+      &lt;assignval field="abText" value="same damage as weapon"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cClrDivStr"&gt;
+      &lt;autotag group="ClSpecWhen" tag="14"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cClrAvaBat"&gt;
+      &lt;autotag group="ClSpecWhen" tag="17"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="spDiviFavo"&gt;
+      &lt;autotag group="SpellType" tag="cHelpClr"/&gt;
+      &lt;autotag group="BonusSplAt" tag="1"/&gt;
+      &lt;autotag group="Helper" tag="Memorized"/&gt;
+      &lt;autotag group="Helper" tag="Free"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="spShieFait"&gt;
+      &lt;autotag group="SpellType" tag="cHelpClr"/&gt;
+      &lt;autotag group="BonusSplAt" tag="1"/&gt;
+      &lt;autotag group="Helper" tag="Memorized"/&gt;
+      &lt;autotag group="Helper" tag="Free"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="spMagiWeap"&gt;
+      &lt;autotag group="SpellType" tag="cHelpClr"/&gt;
+      &lt;autotag group="BonusSplAt" tag="3"/&gt;
+      &lt;autotag group="Helper" tag="Memorized"/&gt;
+      &lt;autotag group="Helper" tag="Free"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="spSpirWeap"&gt;
+      &lt;autotag group="SpellType" tag="cHelpClr"/&gt;
+      &lt;autotag group="BonusSplAt" tag="3"/&gt;
+      &lt;autotag group="Helper" tag="Memorized"/&gt;
+      &lt;autotag group="Helper" tag="Free"/&gt;
+      &lt;/bootstrap&gt;
+&lt;!-- Not in SRD
+    &lt;bootstrap thing="spCrusMant"&gt;
+      &lt;autotag group="SpellType" tag="cHelpClr"/&gt;
+      &lt;autotag group="BonusSplAt" tag="5"/&gt;
+      &lt;autotag group="Helper" tag="Memorized"/&gt;
+      &lt;autotag group="Helper" tag="Free"/&gt;
+      &lt;/bootstrap&gt;
+--&gt;
+    &lt;bootstrap thing="spSpirGuar"&gt;
+      &lt;autotag group="SpellType" tag="cHelpClr"/&gt;
+      &lt;autotag group="BonusSplAt" tag="5"/&gt;
+      &lt;autotag group="Helper" tag="Memorized"/&gt;
+      &lt;autotag group="Helper" tag="Free"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="spFreeMove"&gt;
+      &lt;autotag group="SpellType" tag="cHelpClr"/&gt;
+      &lt;autotag group="BonusSplAt" tag="7"/&gt;
+      &lt;autotag group="Helper" tag="Memorized"/&gt;
+      &lt;autotag group="Helper" tag="Free"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="spStoneski"&gt;
+      &lt;autotag group="SpellType" tag="cHelpClr"/&gt;
+      &lt;autotag group="BonusSplAt" tag="7"/&gt;
+      &lt;autotag group="Helper" tag="Memorized"/&gt;
+      &lt;autotag group="Helper" tag="Free"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="spFlamStri"&gt;
+      &lt;autotag group="SpellType" tag="cHelpClr"/&gt;
+      &lt;autotag group="BonusSplAt" tag="9"/&gt;
+      &lt;autotag group="Helper" tag="Memorized"/&gt;
+      &lt;autotag group="Helper" tag="Free"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="spHoldMons"&gt;
+      &lt;autotag group="SpellType" tag="cHelpClr"/&gt;
+      &lt;autotag group="BonusSplAt" tag="9"/&gt;
+      &lt;autotag group="Helper" tag="Memorized"/&gt;
+      &lt;autotag group="Helper" tag="Free"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cClrWarPri" name="War Priest" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;tag group="abDuration" tag="Instant"/&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="User" tag="Tracker"/&gt;
+    &lt;tag group="ChargeCalc" tag="AttrOnly"/&gt;
+    &lt;tag group="ChargeCalc" tag="Minimum1"/&gt;
+    &lt;tag group="Usage" tag="Day"/&gt;
+    &lt;tag group="ChargeAttr" tag="aWIS"/&gt;
+    &lt;tag group="abAction" tag="Bonus"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cClrWaGoBl" name="Channel Divinity: War God&apos;s Blessing" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;fieldval field="abRange" value="30"/&gt;
+    &lt;fieldval field="abValue" value="10"/&gt;
+    &lt;tag group="abCategory" tag="ClrChanDiv" name="Cleric Channel Divinity Ability"/&gt;
+    &lt;tag group="abDuration" tag="Instant"/&gt;
+    &lt;tag group="abAction" tag="Reaction"/&gt;
+    &lt;tag group="abRange" tag="Feet"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cClrAvaBat" name="Avatar of Battle" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;tag group="abAction" tag="None"/&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="abDuration" tag="Constant"/&gt;
+    &lt;tag group="DamageRes" tag="NoMagBludg" name="nonmagical bludgeoning"/&gt;
+    &lt;tag group="DamageRes" tag="NoMagSlash" name="nonmagical slashing"/&gt;
+    &lt;tag group="DamageRes" tag="NoMagPierc" name="nonmagical piercing"/&gt;
+    &lt;eval phase="PostLevel" priority="10000"&gt;&lt;![CDATA[
+      ~ If we're not shown, just get out now
+      doneif (tagis[Helper.ShowSpec] = 0)
+
+      doneif (tagis[Helper.Disable] &lt;&gt; 0)
+
+      perform forward[DamageRes.?]]]&gt;&lt;/eval&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cClrGuiStr" name="Channel Divinity: Guided Strike" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;fieldval field="abValue" value="10"/&gt;
+    &lt;tag group="abCategory" tag="ClrChanDiv" name="Cleric Channel Divinity Ability"/&gt;
+    &lt;tag group="abDuration" tag="Instant"/&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="abAction" tag="None"/&gt;
+    &lt;/thing&gt;
+
+  </pre>
+
+<p class="body"><a href="../5ededit.htm">Go Back</a>.
+
+</body>
+
+</html>

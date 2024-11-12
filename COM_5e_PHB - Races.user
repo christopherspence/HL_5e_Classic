@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document signature="Hero Lab Data">
+  <thing id="rClassicDwarf" name="Dwarf" description="Kingdoms rich in ancient grandeur, halls carved into the roots of\nmountains, the echoing of picks and hammers in deep mines and\nblazing forges, a commitment to clan and tradition, and a burning\nhatred of goblins and orcs - these common threads unite all dwarves." compset="Race" replaces="rDwarf">
+    <fieldval field="rSpeed" value="25"/>
+    <fieldval field="rCON" value="2"/>
+    <fieldval field="cSkillMax" value="1"/>
+    <tag group="RaceType" tag="Normal" name="Normal (Player) Race" abbrev="Normal (Player) Race"/>
+    <tag group="RaceSize" tag="Medium0" name="Medium" abbrev="Medium"/>
+    <tag group="AllowSkl1" tag="skCraft"/>
+    <tag group="AllowSkl1" tag="skMason"/>
+    <tag group="AllowSkl1" tag="skCraftSmith"/>
+    <bootstrap thing="raStonecun"></bootstrap>
+    <bootstrap thing="lCommon"></bootstrap>
+    <bootstrap thing="wUnarmed"></bootstrap>
+    <bootstrap thing="tpHumanoid"></bootstrap>
+    <bootstrap thing="lDwarvish"></bootstrap>
+    <bootstrap thing="raDarkVis">
+      <autotag group="Value" tag="60"/>
+      </bootstrap>
+    <bootstrap thing="raDwfResil"></bootstrap>
+    <bootstrap thing="raDwfComTr"></bootstrap>
+    <eval phase="PreLevel" priority="10000">perform hero.assign[Hero.Sturdy]</eval>
+    </thing>
+  <thing id="srClassicHillDw" name="Hill Dwarf" description="As a hill dwarf, you the most common of dwarvenkind, you are gruff and tireless laborers, with remarkable resilience. The gold dwarves of Faerun in their mighty southern kingdom are hill dwarves, as are the exiled Neidar and the debased Klar of Krynn in the Dragonlance setting.\n\nFavored Classes: Barbarian, cleric, fighter, and thief." compset="SubRace" replaces="srDwHill" uniqueness="unique">
+    <fieldval field="rHeightMin" value="44"/>
+    <fieldval field="rWeightMin" value="115"/>
+    <fieldval field="rCHA" value="-2"/>
+    <tag group="SubRace" tag="rDwarf" name="Dwarf" abbrev="Dwarf"/>
+    <tag group="WeightDice" tag="2" name="2" abbrev="2"/>
+    <tag group="WeightSize" tag="6" name="d6" abbrev="d6"/>
+    <tag group="ClVaryName" tag="Replace" name="Replace" abbrev="Replace"/>
+    <tag group="HeightDice" tag="2" name="2" abbrev="2"/>
+    <tag group="HeightSize" tag="4" name="d4" abbrev="d4"/>
+    </thing>
+  <thing id="srDwMountain" name="Mountain Dwarf" description="As a mountain dwarf, you&apos;re strong and hardy, accustomed to a difficult life in rugged terrain. You’re probably on the tall side (for a dwarf), and tend toward lighter coloration. The shield dwarves of northern Faerun, as well as the ruling Hylar clan and the noble Daewar clan of Dragonlance, are mountain dwarves.\n\nFavored Classes: Cleric, fighter, and thief." compset="SubRace" uniqueness="unique">
+    <fieldval field="rHeightMin" value="44"/>
+    <fieldval field="rWeightMin" value="115"/>
+    <fieldval field="rDEX" value="-1"/>
+    <fieldval field="rCHA" value="-1"/>
+    <tag group="WeightDice" tag="2" name="2" abbrev="2"/>
+    <tag group="WeightSize" tag="6" name="d6" abbrev="d6"/>
+    <tag group="ClVaryName" tag="Replace" name="Replace" abbrev="Replace"/>
+    <tag group="HeightDice" tag="2" name="2" abbrev="2"/>
+    <tag group="HeightSize" tag="4" name="d4" abbrev="d4"/>
+    <tag group="SubRace" tag="rDwarf" name="Dwarf" abbrev="Dwarf"/>
+    </thing>
+  <thing id="rClassicElf" name="Elf" description="Elves are a magical people of otherworldly grace, living in the world but not entirely part of it. They live in places of ethereal beauty, in the midst of ancient forests or in silvery spires glittering with faerie light, where soft music drifts through the air and gentle fragrances waft on the breeze. Elves love nature\nand magic, art and artistry, music and poetry, and the good things of the world." compset="Race" replaces="rElf">
+    <tag group="RaceSize" tag="Medium0" name="Medium" abbrev="Medium"/>
+    <tag group="RaceType" tag="Normal" name="Normal (Player) Race" abbrev="Normal (Player) Race"/>
+    <bootstrap thing="raDarkVis">
+      <autotag group="Value" tag="60"/>
+      </bootstrap>
+    <bootstrap thing="raKeenSens"></bootstrap>
+    <bootstrap thing="raFeyAnces"></bootstrap>
+    <bootstrap thing="raElfTranc"></bootstrap>
+    <bootstrap thing="lElvish"></bootstrap>
+    <bootstrap thing="lCommon"></bootstrap>
+    <bootstrap thing="raHiElfWep"></bootstrap>
+    <bootstrap thing="tpHumanoid"></bootstrap>
+    <bootstrap thing="raMaskofTheWild"></bootstrap>
+    </thing>
+  <thing id="raMaskofTheWild" name="Mask of the Wild" description="You can attempt to hide even when you are only lightly obscured by foliage, heavy rain, falling snow, mist, and other natural phenomena." compset="RaceSpec">
+    <tag group="Helper" tag="ShowSpec" name="Show Spec" abbrev="Show Spec"/>
+    </thing>
+  <thing id="srElfGrey" name="Grey Elf" description="These noble elves are the rarest and most powerful of their kind. They are thinner than high elves, with hair color of silver or gold and eyes of amber and violet. They are the longest lived of the elven people, with life spans of up to 1,500 years.\n\nThey favor white, yellow, silver, or gold garments. Their cloaks are often deep blue or purple.\n\nGrey elves (including the valley elves of Greyhawk, the Silvanesti of Dragonlance, and the sun elves of the Forgotten Realms) are haughty and reclusive, believing themselves to be superior to non-elves and even other elves.\n\nThe sun elves of Faerun (also called gold elves or sunrise elves) have\nbronze skin and hair of copper, black, or golden blond. Their eyes are\ngolden, silver, or black.\n\nFavored Classes: Bard, cleric, fighter, ranger, thief, and wizard" compset="SubRace" uniqueness="unique">
+    <fieldval field="rINT" value="1"/>
+    <fieldval field="rHeightMin" value="54"/>
+    <fieldval field="rWeightMin" value="90"/>
+    <fieldval field="rSpExLst" value="sClass.cHelpWiz &amp; sLevel.0"/>
+    <fieldval field="rSpExLstNm" value="Wizard Cantrips"/>
+    <fieldval field="rSpExAllw" value="1"/>
+    <fieldval field="rDEX" value="1"/>
+    <fieldval field="rCON" value="-2"/>
+    <tag group="HeightDice" tag="2" name="2" abbrev="2"/>
+    <tag group="HeightSize" tag="10" name="d10" abbrev="d10"/>
+    <tag group="SplAttr" tag="aINT" name="Intelligence" abbrev="Intelligence"/>
+    <tag group="SubRace" tag="rElf" name="Elf" abbrev="Elf"/>
+    <tag group="WeightDice" tag="1" name="1" abbrev="1"/>
+    <tag group="WeightSize" tag="4" name="d4" abbrev="d4"/>
+    <tag group="ClVaryName" tag="Replace" name="Replace" abbrev="Replace"/>
+    </thing>
+  <thing id="srClassicElfHigh" name="High Elf" description="High elves (including the Qualinesti of Dragonlance and the moon elves of the Forgotten Realms) are more common and more friendly, and often encountered among humans and other races.\n\nMoon elves (also called silver elves) are much paler, with alabaster skin\nsometimes tinged with blue.\n\nThey often have hair of silver-white, black, or blue, but various shades\nof blond, brown, and red are not uncommon. Their eyes are blue or\ngreen and flecked with gold.\n\nFavored Classes: Bard, cleric, fighter, ranger, thief, and wizard" compset="SubRace" replaces="srElfHigh" uniqueness="unique">
+    <fieldval field="rHeightMin" value="54"/>
+    <fieldval field="rWeightMin" value="90"/>
+    <fieldval field="rSpExLst" value="sClass.cHelpWiz &amp; sLevel.0"/>
+    <fieldval field="rSpExLstNm" value="Wizard Cantrips"/>
+    <fieldval field="rSpExAllw" value="1"/>
+    <fieldval field="rDEX" value="2"/>
+    <fieldval field="rCON" value="-2"/>
+    <tag group="HeightDice" tag="2" name="2" abbrev="2"/>
+    <tag group="HeightSize" tag="10" name="d10" abbrev="d10"/>
+    <tag group="SplAttr" tag="aINT" name="Intelligence" abbrev="Intelligence"/>
+    <tag group="SubRace" tag="rElf" name="Elf" abbrev="Elf"/>
+    <tag group="WeightDice" tag="1" name="1" abbrev="1"/>
+    <tag group="WeightSize" tag="4" name="d4" abbrev="d4"/>
+    <tag group="ClVaryName" tag="Replace" name="Replace" abbrev="Replace"/>
+    </thing>
+  <thing id="srElfWood" name="Wood Elf" description="Wood elves, also known as sylvan elves, include the wild elves of Greyhawk and the Kagonesti of Dragonlance, as well as the wood elves of Greyhawk and the Forgotten Realms. In Faerun, wood elves, also called wild elves, green elves, or forest elves, are reclusive and distrusting of non-elves. The wild elves, or grugach, of Greyhawk are similarly xenophobic.\n\nWood elves’ skin tends to be copperish in hue, sometimes with traces of green. Their hair tends toward browns and blacks, but it is occasionally blond or copper-colored. Their eyes are green, brown, or hazel.\n\nFavored Classes: Bard, druid, fighter, ranger, thief, and wizard" compset="SubRace" uniqueness="unique">
+    <fieldval field="rHeightMin" value="54"/>
+    <fieldval field="rWeightMin" value="90"/>
+    <fieldval field="rSpExLst" value="sClass.cHelpWiz &amp; sLevel.0"/>
+    <fieldval field="rSpExLstNm" value="Wizard Cantrips"/>
+    <fieldval field="rSpExAllw" value="1"/>
+    <fieldval field="rDEX" value="2"/>
+    <fieldval field="rCON" value="-2"/>
+    <tag group="ClVaryName" tag="Replace" name="Replace" abbrev="Replace"/>
+    <tag group="HeightDice" tag="2" name="2" abbrev="2"/>
+    <tag group="HeightSize" tag="10" name="d10" abbrev="d10"/>
+    <tag group="SplAttr" tag="aINT" name="Intelligence" abbrev="Intelligence"/>
+    <tag group="SubRace" tag="rElf" name="Elf" abbrev="Elf"/>
+    <tag group="WeightDice" tag="1" name="1" abbrev="1"/>
+    <tag group="WeightSize" tag="4" name="d4" abbrev="d4"/>
+    </thing>
+  <hidden id="rDragonbor"/>
+  <hidden id="rTiefling"/>
+  </document>

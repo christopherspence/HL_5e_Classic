@@ -1,0 +1,97 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<link href="../../../../docs/common/styles.css" rel="STYLESHEET">
+<title>Example Druid Circles </title>
+</head>
+
+<body>
+
+<div align="center">
+  <table class="banner" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td>
+        <p align="center" class="banner">Example Druid Circles 
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div align="center">
+  <table border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td><img border="0" src="../../../../docs/common/empty.gif" width="1" height="15"></td>
+    </tr>
+  </table>
+</div>
+
+<p class="section">Introduction
+
+<p class="body">This document provides examples of the mechanics for other druid circles. 
+
+<h4>Circle of the Moon</h4><p class="body">Below are the necessary mechanics to model the Circle of the Moon and associated abilities.</p><pre class="xml">
+  &lt;thing id="cDrdCirMoo" name="Circle of the Moon" description="Placeholder..." compset="CustomSpec" uniqueness="unique"&gt;
+    &lt;tag group="SpecSource" tag="cHelpDrd"/&gt;
+    &lt;tag group="Helper" tag="Primary"/&gt;
+    &lt;bootstrap thing="cDrdCirFor"&gt;
+      &lt;autotag group="ClSpecWhen" tag="2"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cDrdPriStr"&gt;
+      &lt;autotag group="ClSpecWhen" tag="6"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cDrdElWiSh"&gt;
+      &lt;autotag group="ClSpecWhen" tag="10"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cDrdThoFor"&gt;
+      &lt;autotag group="ClSpecWhen" tag="14"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cDrdCoWiSh"&gt;
+      &lt;autotag group="ClSpecWhen" tag="2"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cDrdCoWiSh" name="Combat Wild Shape" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;tag group="abAction" tag="Bonus"/&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="abDuration" tag="Instant"/&gt;
+    &lt;eval phase="PostLevel" priority="10000"&gt;&lt;![CDATA[
+      ~ If we're not shown, just get out now
+      doneif (tagis[Helper.ShowSpec] = 0)
+
+      doneif (tagis[Helper.Disable] &lt;&gt; 0)
+
+      perform hero.childfound[cDrdWilSha].tagreplace[abAction.?,abAction.Bonus]]]&gt;&lt;/eval&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cDrdCirFor" name="Circle Forms" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;tag group="abAction" tag="None"/&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="abDuration" tag="Constant"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cDrdPriStr" name="Primal Strike" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;tag group="abAction" tag="None"/&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="abDuration" tag="Constant"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cDrdElWiSh" name="Elemental Wild Shape" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;tag group="abAction" tag="None"/&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="abDuration" tag="Constant"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cDrdThoFor" name="Thousand Forms" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="abDuration" tag="Constant"/&gt;
+    &lt;tag group="abAction" tag="None"/&gt;
+    &lt;bootstrap thing="spAlteSelf"&gt;
+      &lt;autotag group="Helper" tag="SpellLike"/&gt;
+      &lt;autotag group="Usage" tag="AtWill"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;/thing&gt;
+
+  </pre>
+
+<p class="body"><a href="../5ededit.htm">Go Back</a>.
+
+</body>
+
+</html>

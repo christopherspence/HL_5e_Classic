@@ -1,0 +1,1180 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<link href="../../../docs/common/styles.css" rel="STYLESHEET">
+<title>5th Edition SRD data files - Where Do I Find... ?</title>
+</head>
+
+<body>
+
+<div align="center">
+  <table class="banner" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td>
+        <p align="center" class="banner">5E SRD Editor - Where Do I Find... ?
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div align="center">
+  <table border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td><img border="0" src="../../../docs/common/empty.gif" width="1" height="15"></td>
+    </tr>
+  </table>
+</div>
+
+<p class="section">Introduction
+
+<p class="body">In order to make the data files work, Hero Lab calculates and maintains a lot of data. This data can be used by you, the data file author, to do whatever you want with your own data files.
+
+<p class="body">Each item may have a timing associated with it, specifying a phase and (optionally) a priority. The script that you write must run at an appropriate time, before or after this phase - if you run the script at the wrong time, the value that you're trying to access may not have been set! If things aren't working, make sure you are using the correct timing.
+
+<p class="section">Index
+
+<ul class="bullet">
+
+<li class="bullet"><a href="#macros">Useful Macros</a>
+
+<li class="bullet"><a href="#modifiers">General Modifiers</a>
+
+</ul>
+
+<ol class="default">
+
+<li class="default"><a href="#allpicks">All Picks</a>
+
+<li class="default"><a href="#armorclass">Armor Class</a>
+
+<li class="default"><a href="#attackbonus">Attack Bonus</a>
+
+<li class="default"><a href="#attributes">Attribute Values</a>
+
+<li class="default"><a href="#damage">Damage Bonus</a>
+
+<li class="default"><a href="#initiative">Initiative</a>
+
+<li class="default"><a href="#saves">Saving Throws</a>
+
+<li class="default"><a href="#skills">Skills</a>
+
+<li class="default"><a href="#speed">Speed</a>
+
+<li class="default"><a href="#weapons">Weapons</a>
+
+<li class="default"><a href="#natweapons">Weapons, Natural</a>
+
+</ol>
+
+
+
+<p class="section"><a name="macros"/>Useful Macros
+
+<p class="body">For the convenience of data file authors, the 5th Edition system data files define a number of macros that can be used as a "shorthand". These simplify the code you have to write to make simple scripts do things.
+
+<ul class="bullet">
+
+<li class="bullet" id="macro_levelcount"><font class="strong">#levelcount[<i>class_id</i>]</font>
+
+<p class="body">Counts how many levels you have of the specified class. For example, to count how many levels you have in the Ranger class, you would use <font class="strong">#levelcount[Ranger]</font>.
+
+<pre class="xml">
+~ Check whether you have at least 5 levels of the Fighter class
+@valid = 0
+if (#levelcount[Fighter] >= 5) then
+  @valid = 1
+  endif
+</pre>
+
+<li class="bullet" id="macro_totallevelcount"><font class="strong">#totallevelcount[]</font>
+
+<p class="body">Counts how many total class levels you have.
+
+<pre class="xml">
+~ Check whether you're at least a 5th-level hero
+@valid = 0
+if (#totallevelcount[] >= 5) then
+  @valid = 1
+  endif
+</pre>
+
+<li class="bullet" id="macro_hasfeat"><font class="strong">#hasfeat[<i>feat_id</i>]</font>
+
+<p class="body">Checks whether the specified feat is present for the purpose of pre-requisites. This returns 0 if the feat is not present, and 1 if the feat is present, or if a feat which "counts as" that feat is present. For example, the Mobility feat has a pre-requisite of <font class="strong">#hasfeat[fDodge]</font>, which is satisfied if the hero has the Dodge feat, or has another feat which "counts as" Dodge.
+
+<pre class="xml">
+~ Check whether the Dodge feat, or a feat that counts as it, is present in a
+~ pre-requisite script
+@valid = #hasfeat[fDodge]
+</pre>
+
+<li class="bullet" id="macro_hasability"><font class="strong">#hasability[<i>ability_id</i>]</font>
+
+<p class="body">Checks whether the specified ability is present and active (reached the correct level and not disabled by something else) for the purpose of pre-requisites. This returns 0 if the ability is not active, and 1 if the ability is active. For example, the Extra Ki feat has a pre-requisite of <font class="strong">#hasability[cMnkKiPool]</font>, which is satisfied if the hero has an active copy of the Ki Pool ability.
+
+<pre class="xml">
+~ Check whether the Ki Pool ability is active
+@valid = #hasability[cMnkKiPool]
+</pre>
+
+<li class="bullet" id="macro_skillbonus"><font class="strong">#skillbonus[<i>skill_id</i>]</font>
+
+<p class="body">Allows you to add a generic bonus to any skill (the list of skill ids is given in the <a href="#skills">Skills</a> section, below). If you want to add a more complex bonus, such as a competence bonus or enhancement bonus, see the <a href="#modifiers">General Modifiers</a> section of this document.
+
+<pre class="xml">
+~ Add a +1 bonus to our Listen skill
+#skillbonus[skPercep] = #skillbonus[skPercep] + 1
+
+~ Apply a -4 penalty to our Hide skill two different ways
+#skillbonus[skStealth] = #skillbonus[skStealth] - 4
+OR:
+#skillbonus[skStealth] -= 4
+</pre>
+
+<!--
+<li class="bullet" id="macro_skillranks"><font class="strong">#skillranks[<i>skill_id</i>]</font>
+
+<p class="body">Allows you to retrieve the number of user ranks in any skill (the list of skill ids is given in the <a href="#skills">Skills</a> section, below). This can then be used to verify whether the hero has enough points in the skill to take a feat or prestige class.
+
+<pre class="xml">
+~ Make a prereq valid if you have 5 or more ranks in Stealth
+if (#skillranks[skStealth] >= 5) then
+  @valid = 1
+  endif
+</pre>
+
+<li class="bullet" id="macro_makeclassskill"><font class="strong">#makeclassskill[<i>skill_id</i>]</font>
+
+<p class="body">Allows you to designate a skill as a class skill for this character.  For example, the Fast-Talker trait adds +1 to the Bluff skill, and makes Bluff a class skill
+
+<pre class="xml">
+~add +1 to our bluff skill
+#skillbonus[skBluff] += 1
+
+~bluff is always a class skill
+#makeclassskill[skBluff]
+</pre>
+-->
+
+<li class="bullet" id="macro_competencebonus"><font class="strong">#competencebonus[<i>pick</i>, <i>bonus</i>]</font>
+
+<p class="body">Allows you to add a competence bonus to any pick with <a href="#modifiers">General Modifiers</a>. Competence bonuses do not stack with each other, so if you add two competence bonuses only the highest will apply.
+
+<pre class="xml">
+~ Add a +10 competence bonus to our Stealth skill
+#competencebonus[hero.child[skStealth], 10]
+</pre>
+
+<li class="bullet" id="macro_enhancementbonus"><font class="strong">#enhancementbonus[<i>pick</i>, <i>bonus</i>]</font>
+
+<p class="body">Allows you to add an enhancement bonus to any pick with <a href="#modifiers">General Modifiers</a>. Enhancement bonuses do not stack with each other, so if you add two enhancement bonuses only the highest will apply.
+
+<pre class="xml">
+~ Add a +5 enhancement bonus to our Stealth skill
+#enhancementbonus[hero.child[skStealth], 5]
+</pre>
+
+<li class="bullet"><font class="strong">#applybonus[<i>type</i>, <i>pick</i>, <i>bonus</i>]</font>
+
+<p class="body">Allows you to add a non-stacking bonus to any pick with <a href="#modifiers">General Modifiers</a>. Intended for use where modifier bonuses do not stack with each other - this is the case for Alchemical, Competence, Insight, Luck, Morale, Sacred and Profane bonuses. This means if you add two Insight bonuses only the best will apply.
+
+<pre class="xml">
+~ Add a +2 insight bonus to our Stealth skill
+#applybonus[BonInsight, hero.child[skStealth], 2]
+
+~ Add a +5 insight bonus from somewhere else
+#applybonus[BonInsight, hero.child[skStealth], 5]
+
+~ Only the highest bonus is used - the final insight bonus to the skill will be 5
+</pre>
+
+
+<li class="bullet"><font class="strong">#applypenalty[<i>type</i>, <i>pick</i>, <i>bonus</i>]</font>
+
+<p class="body">Allows you to add a non-stacking penalty to any pick with <a href="#modifiers">General Modifiers</a>. Intended for use where modifier bonuses do not stack with each other - this is the case for Alchemical, Competence, Insight, Luck, Morale, Sacred and Profane bonuses. This means if you add two Insight penalties only the worst will apply.
+
+<pre class="xml">
+~ Apply a -2 morale penalty to our Stealth skill
+#applypenalty[BonMorale, hero.child[skStealth], -2]
+
+~ Only the worst bonus is used - the final morale penalty to the skill will be -2
+</pre>
+
+<!--
+<li class="bullet"><font class="strong">#applydr[<i>type</i>, <i>bonus</i>]</font>
+
+<p class="body">Allows you to add a type of damage reduction to the hero. Using this macro makes sure that the highest DR value is used, since DR doesn't stack.
+
+<pre class="xml">
+~ We're going to add damage reduction against magic, which is of type xDamRdMag - we
+~ assume that the xDamRdMag pick has already been bootstrapped.
+
+~ Give us DR 10 vs. Magic
+#applydr[xDamRdMag, 10]
+</pre>
+
+
+<li class="bullet"><font class="strong">#applyresist[<i>type</i>, <i>bonus</i>]</font>
+
+<p class="body">Allows you to add a type of damage resistance to the hero. Using this macro makes sure that the highest resistance value is used, since resistance doesn't stack.
+
+<pre class="xml">
+~ We're going to add damage resistance against acid, which is of type xDamRsAcid - we
+~ assume that the xDamRsAcid pick has already been bootstrapped.
+
+~ Give us resistance 5 vs. acid
+#applyresist[xDamRsAcid, 5]
+</pre>
+
+
+<li class="bullet"><font class="strong">#applysr[<i>bonus</i>]</font>
+
+<p class="body">Allows you to add spell resistance to the hero. Using this macro makes sure that the highest SR value is used, since SR doesn't stack.
+
+<pre class="xml">
+~ We're going to add spell resistance - we assume that the xSplRs pick has
+~ already been bootstrapped.
+
+~ Give us SR 20
+#applysr[20]
+</pre>
+-->
+
+<li class="bullet"><font class="strong">#applyvalue[<i>type</i>, <i>bonus</i>]</font>
+
+<p class="body">Allows you to add a value to an ability. Using this macro makes sure that the highest value is used.  If this value can be stacked with other things that increase it, you should use the #value[] macro (described below) instead.
+
+<pre class="xml">
+~ We're going to set Fast Healing 5.  We assume that the Fast Healing pick has
+~ already been bootstrapped.
+
+~ Give us Fast Healing 5
+#applyvalue[xFastHeal, 5]
+</pre>
+
+
+</ul>
+
+<p class="section"><a name="ability_macros"/>Ability Macros
+
+<p class="body">Many components in the 5th Edition SRD share common behaviors.  The Ability component is included in: Racial Specials, Class Special Abilities, Custom Class Special Abilities (including Cleric Domains and Favored Enemies/Favored Terrains), Feats, Traits, Flaws, Skill Tricks, and generic Abilities.  Abilities all share certain fields that can be used to store and calculate information about that Ability.
+<p class="body">The following macros are designed to be used from outside the ability - they will find that ability and access a value.  If the ability is not present, nothing will happen.
+
+<ul class="bullet">
+
+<li class="bullet"><font class="strong">#value[<i>ability_id</i>]</font>
+
+<p class="body">The abValue field stores a value.  What this value means differs from ability to ability.  For example, the Natural Leader trait adds one to the Leadership Feat's leadership score (which is stored as abValue).
+
+<pre class="xml">
+~ Add 1 to our leadership score
+#value[fLeader] += 1
+</pre>
+
+<li class="bullet"><font class="strong">#value2[<i>ability_id</i>]</font>
+
+<p class="body">The abValue2 field stores a second value, in addition to the one stored in abValue.  What this value means differs from ability to ability.  For example, Protection Domain's Aura of Protection Ability grants a bonus to AC and resistance to all elements.  The AC bonus to be applied is stored as abValue and the resistance bonus is stored as abValue2.  So, if a feat were designed that added 10 to all the energy resistances granted by the ability (without altering the AC bonus), it would modify abValue2.
+
+<pre class="xml">
+~ Add 10 to our resistance value
+#value2[dProAura] += 10
+</pre>
+
+<li class="bullet"><font class="strong">#dc[<i>ability_id</i>]</font>
+
+<p class="body">The abDC field stores the DC of the ability.  If abDC is greater than 0, it is appended to the livename - the version of the ability's name that is displayed on the special tab and printouts.  For example, the Improved Channel feat adds 2 to the DC of the Channel Energy ability.
+
+<pre class="xml">
+~ Add 2 to the DC of our channel energy ability
+#dc[xChannel] += 2
+</pre>
+
+<li class="bullet"><font class="strong">#duration[<i>ability_id</i>]</font>
+
+<p class="body">The abDuration field stores a value that represents the duration an ability will last for.  Generally, this is only used when the duration of the ability is specific length of time, and the ability is either on or off.  If the ability can be used a few rounds at a time, the duration should be stored in <a href="#trkmax">trkMax</a>.  For example, the Infernal Bloodline Sorcerer's Corrupting Touch ability can be used 3+ CHA mod times/day, and each touch lasts for Sorcerer Level / 2 rounds.  The uses/day are stored as <a href="#trkmax">trkMax</a>, and the duration is stored as abDuration.
+</ul>
+
+<p class="section"><a name="tracker_macros"/>Tracker Macro
+
+<p class="body">Many components in the 5th Edition SRD share common behaviors.  The Tracker component is included all <a href="#ability_macros">Abilities</a>, as well as most equipment and magic items, and the generic Tracker component.
+<p class="body">The following macro is designed to be used from outside the tracker - it will find that tracker and modify the maximum value.  If the tracker is not present, nothing will happen.
+
+<ul class="bullet">
+
+<li class="bullet"><font class="strong">#trkmax[<i>tracker_id</i>]</font>
+
+<p class="body">The trkMax field is the number of charges/uses/rounds/whatever available to a thing.  For example, the Extra Ki feat adds 2 uses per day to the Monk's Ki Pool ability.
+
+<pre class="xml">
+~ Add 2 uses per day
+#trkmax[cMnkKiPool] += 2
+</pre>
+
+</ul>
+
+<p class="section"><a name="modifiers"/>General Modifiers
+
+<p class="body">The 5th Edition system has many, many modifiers that apply and stack in different ways. For example, if you want to add a bonus to something, it can be a general bonus (that stacks with all bonuses), or a competence bonus, which doesn't stack - only the highest competence bonus is applied - or one of several other bonuses and penalties. To ensure that the correct bonuses are applied, make sure to set them in the right way.
+
+<p class="body">Bonuses that stack are simple - you can simply add to them. For example, to add a +5 bonus to your Strength score, you'd do this:
+
+<p class="code">hero.child[aSTR].field[Bonus].value = hero.child[aSTR].field[Bonus].value + 5
+
+<p class="body">Note how you don't set the "Bonus" field to 5, you add 5 to it. This ensure that other bonuses applied to the field are preserved - if you simply set it to 5, you'd overwrite all the other bonuses that might have been added by races or spells.
+
+<p class="body">Unfortunately, most bonuses don't stack. Let's say you wanted to add a +5 Luck bonus to your strength. Only the best luck bonus is applied, so instead of adding, you need to use the best value of your bonus and what's already there:
+
+<p class="code">hero.child[aSTR].field[BonLuck].value = maximum(hero.child[aSTR].field[BonLuck].value, 5)
+
+<p class="body">This line of code says "Set the luck bonus to whatever is higher: the current luck bonus, or 5." This means that if your +5 bonus is higher than all other luck bonuses, it'll be applied; if not, for example if something else had applied a +10 luck bonus, the higher bonus will be applied.
+
+<p class="body">The fields available for modifiers are shown here:
+
+<ul class="bullet">
+
+<li class="bullet"><font class="strong"/>Bonus</font> - General (Untyped) Bonus. Stacks with all other bonuses.
+
+<li class="bullet"><font class="strong"/>Penalty</font> - General (Untyped) Penalty. Stacks with all other penalties.
+
+<li class="bullet"><font class="strong"/>Racial</font> - Racial Modifier (bonuses and penalties). Stacks with all other racial modifiers.
+
+<li class="bullet"><font class="strong"/>BonAlch</font> - Alchemical Bonus. Alchemical bonuses don't stack with each other (only the highest is applied).
+
+<li class="bullet"><font class="strong"/>ModCirc</font> - Circimstance Modifier. All circumstance modifiers stack.
+
+<li class="bullet"><font class="strong"/>BonComp</font> - Competence Bonus. Competence bonuses don't stack. You can apply them easily using the <a href="#macro_competencebonus">#competencebonus</a> macro.
+
+<li class="bullet"><font class="strong"/>PenComp</font> - Competence Penalty. Competence penalties don't stack (only the worst is applied).
+
+<li class="bullet"><font class="strong"/>BonEnhance</font> - Enhancement Bonus. Enhancement bonuses don't stack. You can apply them easily using the <a href="#macro_enhancementbonus">#enhancementbonus</a> macro.
+
+<li class="bullet"><font class="strong"/>BonInsight</font> - Insight Bonus. Insight bonuses don't stack.
+
+<li class="bullet"><font class="strong"/>BonLuck</font> - Luck Bonus. Luck bonuses don't stack.
+
+<li class="bullet"><font class="strong"/>PenLuck</font> - Luck Penalty. Luck penalties don't stack.
+
+<li class="bullet"><font class="strong"/>BonMorale</font> - Morale Bonus. Morale bonuses don't stack.
+
+<li class="bullet"><font class="strong"/>PenMorale</font> - Morale Penalty. Morale penalties don't stack.
+
+<li class="bullet"><font class="strong"/>BonProfane</font> - Profane Bonus. Profane bonuses don't stack.
+
+<li class="bullet"><font class="strong"/>PenProfane</font> - Profane Penalty. Profane penalties don't stack.
+
+<li class="bullet"><font class="strong"/>BonSacred</font> - Sacred Bonus. Sacred bonuses don't stack.
+
+<li class="bullet"><font class="strong"/>PenSacred</font> - Sacred Penalty. Sacred penalties don't stack.
+
+<li class="bullet"><font class="strong"/>BonTrait</font> - Trait Bonus. Trait bonuses don't stack.
+
+<li class="bullet"><font class="strong"/>PenTrait</font> - Trait Penalty. Trait penalties don't stack.
+
+</ul>
+
+<p class="body">Many of the entries below include modifiers. Where appropriate, this will be noted before their list of fields.
+
+
+
+<p class="section"><a name="allpicks"/>All Picks
+
+<ul class="bullet">
+
+<li class="bullet"><font class="strong"/>Skip pre-requisites</font> - Any pick, if assigned the <font class="strong"/>thing.skipprereq</font> tag, will ignore all pre-requisite rules. For example, if your class gives you a bonus feat without having to meet the pre-requisites of that feat, you can assign the thing.skipprereq tag to it.</li>
+
+</ul>
+
+
+
+
+<p class="section"><a name="armorclass"/>Armor Class
+
+<p class="body">Armor Class information is held in the <font class="strong"/>ArmorClass</font> pick. This pick includes <a href="#modifiers">Modifiers</a> (see above). The following fields are available:
+
+<ul class="bullet">
+
+<li class="bullet"><font class="strong"/>tAC</font> - Armor Class.
+
+<!--
+<li class="bullet"><font class="strong"/>tACTouch</font> - Armor Class against Touch attacks.
+
+<li class="bullet"><font class="strong"/>tACFlat</font> - Armor Class while flat-footed.
+-->
+
+<li class="bullet"><font class="strong"/>tACArmor</font> - Armor bonus from Armor.
+
+<li class="bullet"><font class="strong"/>tACShield</font> - Armor bonus from Shields.
+
+<li class="bullet"><font class="strong"/>tACDexMod</font> - Armor bonus from your Dexterity attribute bonus.
+
+<!--
+<li class="bullet"><font class="strong"/>tACSize</font> - Armor bonus / penalty from size. For example, this is +1 for a Halfling, because he's Small.
+-->
+
+<li class="bullet"><font class="strong"/>tACNatural</font> - Natural armor bonus.
+
+<!--
+<li class="bullet"><font class="strong"/>tACDeflect</font> - Deflection bonus. Deflection bonuses don't stack with each other.
+
+<li class="bullet"><font class="strong"/>tACDodge</font> - Dodge bonus. Dodge bonuses stack.
+-->
+
+<li class="bullet"><font class="strong"/>tACMisc</font> - Armor bonus from miscellaneous sources (see <a href="#modifiers">Modifiers</a> section for details).
+
+</ul>
+
+<p class="subsection">Timing
+
+<p class="body">For modifications to have any effect on other fields (e.g., changes to the base attack bonus affecting the melee and ranged attack bonuses), any priority before the "Final" phase should be used. The final values are available in the "UserFinal" or later phases.
+
+<p class="subsection">Examples
+
+<p class="code">&lt;eval value="1" phase="UserPreAt" priority="10000"&gt;&lt;![CDATA[<br>
+<br>
+~ Add a +2 Morale Bonus to our armor class<br>
+hero.child[ArmorClass].field[BonMorale].value = maximum(hero.child[ArmorClass].field[BonMorale].value, 2)<br>
+<br>
+~ Add a +5 dodge bonus to our armor class<br>
+hero.child[ArmorClass].field[tACDodge].value = hero.child[ArmorClass].field[tACDodge].value + 5<br>
+<br>
+]]>&lt;/eval&gt;
+
+
+
+
+<p class="section"><a name="attackbonus"/>Attack Bonus
+
+<p class="body">The attack bonus information is held in the <font class="strong"/>Attack</font> pick. This pick includes <a href="#modifiers">Modifiers</a> (see above). The following fields are available:
+
+<ul class="bullet">
+
+<li class="bullet"><font class="strong"/>tAtkBase</font> - Base Attack Bonus - attack bonus from classes.
+
+<!--<li class="bullet"><font class="strong"/>tAtkEpic</font> - Epic Attack Bonus - attack bonus from epic levels.
+
+<li class="bullet"><font class="strong"/>tAtkSize</font> - Attack bonus / penalty from size. For example, this is +1 for a Halfling, because he's Small.
+-->
+<li class="bullet"><font class="strong"/>tAtkMisc</font> - Attack bonus from miscellaneous sources (see <a href="#modifiers">Modifiers</a> section for details).
+
+<li class="bullet"><font class="strong"/>tAtk</font> - Sum of all factors affecting attack bonus.
+<!--
+<li class="bullet"><font class="strong"/>tAtkMelee</font> - Total melee attack bonus (includes strength modifier).
+
+<li class="bullet"><font class="strong"/>tAtkRanged</font> - Total ranged attack bonus (includes dexterity modifier).
+-->
+
+</ul>
+
+<p class="subsection">Timing
+
+<p class="body">For modifications to have any effect on other fields (e.g., changes to the base attack bonus affecting the melee and ranged attack bonuses), any priority before the "PostAttr" phase should be used. The final values are available in the "UserPostAt" or later phases.
+
+<p class="subsection">Examples
+
+<p class="code">&lt;eval value="1" phase="UserPreAt" priority="10000"&gt;&lt;![CDATA[<br>
+<br>
+~ Add 1 to base attack bonus, which trickles down to the other attack bonus fields<br>
+hero.child[Attack].field[tAtkBase].value = hero.child[Attack].field[tAtkBase].value + 1<br>
+<br>
+~ Add a +5 competence bonus to our attack bonus<br>
+hero.child[Attack].field[BonComp].value = maximum(hero.child[Attack].field[BonComp].value, 5)<br>
+<br>
+]]>&lt;/eval&gt;<br>
+<br>
+&lt;eval value="1" phase="UserPostAt" priority="10000"&gt;&lt;![CDATA[<br>
+<br>
+~ Add our dexterity bonus to the melee attack bonus<br>
+hero.child[Attack].field[tAtkMelee].value = hero.child[Attack].field[tAtkMelee].value + hero.child[aDEX].field[aModBonus].value<br>
+<br>
+]]>&lt;/eval&gt;
+
+
+<!--
+<p class="section"><a name="maneuver"/>Combat Maneuver Bonus / Combat Maneuver Defense
+
+<p class="body">The attack bonus information is held in the <font class="strong"/>Maneuver</font> pick. This pick includes <a href="#modifiers">Modifiers</a> (see above). The following fields are available:
+
+<ul class="bullet">
+
+<li class="bullet"><font class="strong"/>tManBase</font> - Base Maneuver Bonus - attack bonus from classes.
+
+<li class="bullet"><font class="strong"/>tManSize</font> - Maneuver bonus / penalty from size. For example, this is -1 for a Halfling, because he's Small.
+
+<li class="bullet"><font class="strong"/>tManMisc</font> - Maneuver bonus from miscellaneous sources (see <a href="#modifiers">Modifiers</a> section for details).
+
+<li class="bullet"><font class="strong"/>tMan</font> - Sum of all factors affecting maneuver bonus.
+
+<li class="bullet"><font class="strong"/>tManAC</font> - Sum of all armor class modifiers factors affecting combat maneuver defense (see <a href="#armorclass">Armor Class</a> section for those modifiers).
+
+<li class="bullet"><font class="strong"/>tCMB</font> - Total combat maneuver bonus (includes strength modifier).
+
+<li class="bullet"><font class="strong"/>tCMD</font> - Total combat maneuver defense (includes strength and dexterity modifiers and the base value of 10).
+
+</ul>
+
+<p class="subsection">Timing
+
+<p class="body">For modifications to have any effect on other fields (e.g., changes to the base attack bonus affecting the melee and ranged attack bonuses), any priority before the "PostAttr" phase should be used. The final values are available in the "UserPostAt" or later phases.
+
+<p class="subsection">Examples
+
+<p class="code">&lt;eval value="1" phase="UserPreAt" priority="10000"&gt;&lt;![CDATA[<br>
+<br>
+~ Add 1 to base maneuver bonus, which trickles down to the other attack bonus fields<br>
+hero.child[Maneuver].field[tManBase].value += 1<br>
+<br>
+~ Add a +5 competence bonus to our attack bonus<br>
+hero.child[Maneuver].field[BonComp].value = maximum(hero.child[Maneuver].field[BonComp].value, 5)<br>
+<br>
+]]>&lt;/eval&gt;<br>
+<br>
+&lt;eval value="1" phase="UserPostAt" priority="10000"&gt;&lt;![CDATA[<br>
+<br>
+~ Add our dexterity bonus to the combat maneuver bonus<br>
+hero.child[Maneuver].field[tCMB].value += hero.child[aDEX].field[aModBonus].value<br>
+<br>
+]]>&lt;/eval&gt;
+-->
+
+
+
+
+<p class="section"><a name="attributes"/>Ability Score Values
+
+<p class="body">Each hero has six ability score picks with the following unique ids:
+
+<ul class="bullet">
+
+<li class="bullet"><font class="strong"/>aSTR</font> - Strength.
+
+<li class="bullet"><font class="strong"/>aDEX</font> - Dexterity.
+
+<li class="bullet"><font class="strong"/>aCON</font> - Constitution.
+
+<li class="bullet"><font class="strong"/>aINT</font> - Intelligence.
+
+<li class="bullet"><font class="strong"/>aWIS</font> - Wisdom.
+
+<li class="bullet"><font class="strong"/>aCHA</font> - Charisma.
+
+</ul>
+
+<p class="body">Each pick includes <a href="#modifiers">Modifiers</a> (see above). The following fields are available:
+
+<ul class="bullet">
+
+<li class="bullet"><font class="strong"/>aValue</font> - User-entered (unmodified) attribute value.
+
+<li class="bullet"><font class="strong"/>aStartMod</font> - All bonuses / penalties applied to the attribute DURING character creation. For example, your racial attribute bonuses would be included in this, because they apply to your starting attribute values.
+
+<li class="bullet"><font class="strong"/>aNormMod</font> - All bonuses / penalties applied AFTER character creation. For example, attribute bonuses from increasing character levels would be included in this.
+
+<li class="bullet"><font class="strong"/>aNormal</font> - Total "normal" attribute value = aValue field + aStartMod field + aNormMod field.
+
+<li class="bullet"><font class="strong"/>aBonus</font> - Attribute bonus for normal attribute value.
+
+<li class="bullet"><font class="strong"/>aPostMod</font> - Bonuses / penalties that aren't included in the normal attribute value, for example temporary bonuses from Barbarian Rage.
+
+<li class="bullet"><font class="strong"/>aFinalVal</font> - Total modified attribute value - aNormal field + aPostMod field
+
+<li class="bullet"><font class="strong"/>aMaxValue</font> - The ability score can never be higher than this value
+
+<li class="bullet"><font class="strong"/>aModBonus</font> - Attribute bonus for final attribute value.
+
+</ul>
+
+<p class="subsection">Timing
+
+<p class="body">For modifications to have any effect on other fields (e.g., changes to the normal modifier affecting the final attribute value), any priority in the "UserPreAt" phase or earlier should be used. The final values are available in the "UserPostAt" or later phases.
+
+<p class="subsection">Examples
+
+<p class="code">&lt;eval value="1" phase="UserPreAt" priority="10000"&gt;&lt;![CDATA[<br>
+<br>
+~ Add a +2 Morale Bonus to our Charisma - will be shown as 10/12<br>
+#applybonus[BonMorale, hero.child[aCHA], 2]<br>
+<br>
+~ Add a +1 racial bonus to our Strength<br>
+hero.child[aSTR].field[aStartMod].value += 1<br>
+<br>
+]]>&lt;/eval&gt;
+
+
+
+<!-- Not sure about this?
+<p class="section"><a name="damage"/>Damage Bonus
+
+<p class="body">Damage bonus information is held in the <font class="strong"/>Damage</font> pick. It exists to allow damage modifiers to be easily applied to multiple weapons. The following fields are available:
+
+<ul class="bullet">
+
+<li class="bullet"><font class="strong"/>tDamStr</font> - Damage bonus from strength.
+
+<li class="bullet"><font class="strong"/>tDamBonus</font> - Damage bonus to be added to all weapons.
+
+<li class="bullet"><font class="strong"/>tDamLight</font> - Light weapon damage bonus.
+
+<li class="bullet"><font class="strong"/>tDamOne</font> - One-handed weapon damage bonus.
+
+<li class="bullet"><font class="strong"/>tDamTwo</font> - Two-handed weapon damage bonus.
+
+<li class="bullet"><font class="strong"/>tDamFiness</font> - Damage bonus added to weapons that are affected by "Weapon Finesse" (i.e. Light weapons and others like the Spiked Chain).
+
+</ul>
+
+<p class="subsection">Timing
+
+<p class="body">The contents of these fields should be set before the "Final" phase for them to be applied to weapons properly.
+
+<p class="subsection">Examples
+
+<p class="code">&lt;eval value="1" phase="UserPostAt" priority="10000"&gt;&lt;![CDATA[<br>
+<br>
+~ Instead of using our strength for bonus weapon damage, use Charisma instead<br>
+hero.child[Damage].field[tDamStr].value = hero.child[aCHA].field[aModBonus].value<br>
+<br>
+~ Add +5 to the damage from all One-Handed weapons<br>
+hero.child[Damage].field[tDamOne].value += 5<br>
+<br>
+]]>&lt;/eval&gt;
+-->
+
+
+
+<p class="section"><a name="initiative"/>Initiative
+
+<p class="body">Initiative information is held in the <font class="strong"/>Initiative</font> pick. This pick includes <a href="#modifiers">Modifiers</a> (see above). The following fields are available:
+
+<ul class="bullet">
+
+<li class="bullet"><font class="strong"/>tInit</font> - Total Initiative, including all modifiers.
+
+</ul>
+
+<p class="subsection">Timing
+
+<p class="body">For modifications to have any effect on other fields (e.g., changes to the modifiers affecting the total), any priority before the "Final" phase should be used. The final values are available in the "UserFinal" or later phases.
+
+<p class="subsection">Examples
+
+<p class="code">&lt;eval value="1" phase="UserPreLv" priority="10000"&gt;&lt;![CDATA[<br>
+<br>
+~ Add a +2 Sacred Bonus to our initiative<br>
+hero.child[Initiative].field[BonSacred].value = maximum(hero.child[Initiative].field[BonSacred].value, 2)<br>
+<br>
+]]>&lt;/eval&gt;
+
+
+
+
+<p class="section"><a name="saves"/>Saving Throws
+
+<p class="body">Each hero has six saving throw picks with the following unique ids:
+
+<ul class="bullet">
+
+<li class="bullet"><font class="strong"/>svSTR</font> - Strength save.
+
+<li class="bullet"><font class="strong"/>svDEX</font> - Dexterity save.
+
+<li class="bullet"><font class="strong"/>svCON</font> - Constitution save.
+
+<li class="bullet"><font class="strong"/>svINT</font> - Intelligence save.
+
+<li class="bullet"><font class="strong"/>svWIS</font> - Wisdom save.
+
+<li class="bullet"><font class="strong"/>svCHA</font> - Charisma save.
+
+</ul>
+
+<p class="body">Each pick includes <a href="#modifiers">Modifiers</a> (see above). The following fields are also available:
+
+<ul class="bullet">
+
+<li class="bullet"><font class="strong"/>svBase</font> - Base save bonus, added by class levels.
+
+<li class="bullet"><font class="strong"/>svAttr</font> - Attribute bonus, added by the saving throw's linked attribute (CON, DEX or WIS).
+
+<!--
+<li class="bullet"><font class="strong"/>svResist</font> - Resistance bonus. Resistance bonuses don't stack with each other.
+-->
+
+<li class="bullet"><font class="strong"/>svMisc</font> - Total of miscellaneous bonuses and modifiers.
+
+<li class="bullet"><font class="strong"/>svTotal</font> - Total saving throw bonuses, after all bonuses and modifiers have been added.
+
+</ul>
+
+<p class="subsection">Timing
+
+<p class="body">For modifications to have any effect on other fields (e.g., changes to the modifiers affecting the total), any priority before the "Final" phase should be used. The final values are available in the "UserFinal" or later phases.
+
+<p class="subsection">Examples
+
+<p class="code">&lt;eval value="1" phase="UserPreAt" priority="10000"&gt;&lt;![CDATA[<br>
+<br>
+~ Add a +2 Resistance Bonus to our Fortitude save<br>
+hero.child[svFort].field[svResist].value = maximum(hero.child[svFort].field[svResist].value, 2)<br>
+<br>
+~ Add a +1 racial bonus to our Reflex save<br>
+hero.child[svRef].field[Bonus].value += 1<br>
+<br>
+]]>&lt;/eval&gt;
+
+
+
+
+<p class="section"><a name="skills"/>Skills
+
+<p class="body">Each hero starts with all skills automatically added.
+
+<!--, and more skills can be added with the "Add Additional Skill" button at the bottom of the skills tab. When adding a new skill, if you <b>don't</b> want it to be added by default, give it the <font class="strong">Helper.ExtraSkill</font> tag.
+
+<p class="body">A list of all skill picks can be found here:
+
+<ul class="bullet">
+
+<li class="bullet"><font class="strong"/>skAcrobat</font> - Acrobatics.
+
+<li class="bullet"><font class="strong"/>skAppraise</font> - Appraise.
+
+<li class="bullet"><font class="strong"/>skBluff</font> - Bluff.
+
+<li class="bullet"><font class="strong"/>skClimb</font> - Climb.
+
+<li class="bullet"><font class="strong"/>kCrafOther</font> - Craft: Other.
+
+<li class="bullet"><font class="strong"/>skDiplo</font> - Diplomacy.
+
+<li class="bullet"><font class="strong"/>skDisable</font> - Disable Device.
+
+<li class="bullet"><font class="strong"/>skDisguise</font> - Disguise.
+
+<li class="bullet"><font class="strong"/>skEscape</font> - Escape Artist.
+
+<li class="bullet"><font class="strong"/>skFly</font> - Fly.
+
+<li class="bullet"><font class="strong"/>skHandleAn</font> - Handle Animal.
+
+<li class="bullet"><font class="strong"/>skHeal</font> - Heal.
+
+<li class="bullet"><font class="strong"/>kIntim</font> - Intimidate.
+
+<li class="bullet"><font class="strong"/>skKnowArca</font> - Knowledge: Arcana.
+
+<li class="bullet"><font class="strong"/>skKnowDun</font> - Knowledge: Dungeoneering.
+
+<li class="bullet"><font class="strong"/>skKnowEng</font> - Knowledge: Engineering.
+
+<li class="bullet"><font class="strong"/>skKnowGeog</font> - Knowledge: Geography.
+
+<li class="bullet"><font class="strong"/>skKnowLoc</font> - Knowledge: Local.
+
+<li class="bullet"><font class="strong"/>skKnowHist</font> - Knowledge: History.
+
+<li class="bullet"><font class="strong"/>skKnowNat</font> - Knowledge: Nature.
+
+<li class="bullet"><font class="strong"/>skKnowNobl</font> - Knowledge: Nobility.
+
+<li class="bullet"><font class="strong"/>skKnowRel</font> - Knowledge: Religion.
+
+<li class="bullet"><font class="strong"/>skKnowPlan</font> - Knowledge: The Planes.
+
+<li class="bullet"><font class="strong"/>skKnowOth</font> - Knowledge: Other.
+
+<li class="bullet"><font class="strong"/>skLinguist</font> - Linguistics.
+
+<li class="bullet"><font class="strong"/>skPercep</font> - Perception.
+
+<li class="bullet"><font class="strong"/>skPerfAct</font> - Perform: Act.
+
+<li class="bullet"><font class="strong"/>skPerfCom</font> - Perform: Comedy.
+
+<li class="bullet"><font class="strong"/>skPerfDanc</font> - Perform: Dance.
+
+<li class="bullet"><font class="strong"/>skPerfKey</font> - Perform: Keyboard.
+
+<li class="bullet"><font class="strong"/>skPerfOrat</font> - Perform: Oratory.
+
+<li class="bullet"><font class="strong"/>skPerfPerc</font> - Perform: Percussion.
+
+<li class="bullet"><font class="strong"/>skPerfStr</font> - Perform: Strings.
+
+<li class="bullet"><font class="strong"/>skPerfWind</font> - Perform: Wind Instrument.
+
+<li class="bullet"><font class="strong"/>skPerfSing</font> - Perform: Sing.
+
+<li class="bullet"><font class="strong"/>skPerfOth</font> - Perform: Other.
+
+<li class="bullet"><font class="strong"/>skProfOth</font> - Profession: Other.
+
+<li class="bullet"><font class="strong"/>skRide</font> - Ride.
+
+<li class="bullet"><font class="strong"/>skSenseMot</font> - Sense Motive.
+
+<li class="bullet"><font class="strong"/>skSleight</font> - Sleight of Hand.
+
+<li class="bullet"><font class="strong"/>skSpellcr</font> - Spellcraft.
+
+<li class="bullet"><font class="strong"/>skStealth</font> - Stealth.
+
+<li class="bullet"><font class="strong"/>skSurvival</font> - Survival.
+
+<li class="bullet"><font class="strong"/>skSwim</font> - Swim.
+
+<li class="bullet"><font class="strong"/>skUseMagic</font> - Use Magic Device.
+
+</ul>
+-->
+
+<p class="body">Each skill pick includes <a href="#modifiers">Modifiers</a> (see above). The following other fields are available:
+
+<ul class="bullet">
+
+<!--
+<li class="bullet"><font class="strong"/>skUser</font> - Number of points spent in the skill.
+-->
+
+<li class="bullet"><font class="strong"/>skAttrBon</font> - Skill bonus from attribute value.
+
+<li class="bullet"><font class="strong"/>skTotal</font> - Final skill value after all bonuses and penalties are accounted for.
+
+</ul>
+
+<p class="subsection">Timing
+
+<p class="body">For modifications to have any effect on other fields (e.g., changes to the bonuses affecting the final skill value), any priority before the "PostAttr" phase should be used. The final values are available in the "UserPostAt" or later phases.
+
+<p class="subsection">Examples
+
+<p class="code">&lt;eval value="1" phase="UserPreAt" priority="10000"&gt;&lt;![CDATA[<br>
+<br>
+~ Add a +2 Sacred Bonus to our Stealth skill<br>
+hero.child[skStealth].field[BonSacred].value = maximum(hero.child[skStealth].field[BonSacred].value, 2)<br>
+<br>
+~ Add a +1 racial bonus to our Perception skill using the "skillbonus" macro<br>
+#skillbonus[skPercep] += 1<br>
+<br>
+]]>&lt;/eval&gt;
+
+
+
+
+<p class="section"><a name="speed"/>Speed
+
+<p class="body">Speed information is held in the <font class="strong"/>Speed</font> pick. This pick includes <a href="#modifiers">Modifiers</a> (see above). The following fields are available:
+
+<ul class="bullet">
+
+<li class="bullet"><font class="strong"/>tSpeed</font> - Base speed for the hero, including racial modifiers.
+
+<li class="bullet"><font class="strong"/>tSpeedMod</font> - Modified speed for the hero, including all other modifiers.
+
+</ul>
+
+<p class="subsection">Timing
+
+<p class="body">For modifications to have any effect on other fields (e.g., changes to the modifiers affecting the total), any priority before the "Final" phase should be used. The final values are available in the "UserFinal" or later phases.
+
+<p class="subsection">Examples
+
+<p class="code">&lt;eval value="1" phase="UserPreLv" priority="10000"&gt;&lt;![CDATA[<br>
+<br>
+~ Add a +10 foot Enhancement Bonus to our speed<br>
+hero.child[Speed].field[BonEnhance].value = maximum(hero.child[Speed].field[BonEnhance].value, 10)<br>
+<br>
+]]>&lt;/eval&gt;
+
+
+
+
+<p class="section" id="weapons"/>Weapons
+
+<p class="body">A variety of weapons are available and can be added to the hero. Each includes <a href="#modifiers">Modifiers</a> (see above) representing bonuses to attack and damage. The following fields are available:
+
+<ul class="bullet">
+
+<li class="bullet"><font class="strong"/>gIsEquip</font> - 1 if the weapon is equipped in the primary hand, 0 otherwise.
+
+<li class="bullet"><font class="strong"/>wIs2nd</font> - 1 if the weapon is equipped in the off-hand, 0 otherwise.
+
+<!--
+<li class="bullet"><font class="strong"/>wIsDouble</font> - 1 if the weapon is equipped as a double weapon, 0 otherwise.
+-->
+
+<li class="bullet"><font class="strong"/>gSizeCost</font> - Cost of the weapon in gold pieces.
+
+<li class="bullet"><font class="strong"/>gWeight</font> - Weight of the weapon in pounds.
+
+<li class="bullet"><font class="strong"/>wShortName</font> - Shortened name of the weapon, to be displayed in the weapons list if its regular name is very long.
+
+<li class="bullet"><font class="strong"/>wAttBonus</font> - Attack bonus for the weapon (for example, the +1 applied by a Masterwork weapon). NOTE: This currently doesn't stack correctly with bonuses applied using Modifiers.
+
+<li class="bullet"><font class="strong"/>wDamBonus</font> - Damage bonus for the weapon (for example, the -2 applied by a Alchemical Silver weapon). NOTE: This currently doesn't stack correctly with bonuses applied using Modifiers.
+
+<li class="bullet"><font class="strong"/>wRangeNorm</font> - Normal range for the weapon. Only available after PostLevel/1000 scripts run.
+
+<li class="bullet"><font class="strong"/>wRangeLong</font> - Long range for the weapon. Only available after PostLevel/1000 scripts run.
+
+<li class="bullet"><font class="strong"/>wAttack</font> - Total attack bonus for the weapon, including the Hero's attack bonus and all other bonuses.
+
+<!--
+<li class="bullet"><font class="strong"/>wAttackOff</font> - Total off-hand attack bonus for the weapon, including the Hero's attack bonus and all other bonuses.
+
+<li class="bullet"><font class="strong"/>wMaxStr</font> - Maximum strength bonus allowed by the weapon (for example, by Composite Longbow). Only used if a wBuyStr tag is present.
+-->
+
+</ul>
+
+<p class="body">The following tags are also present on weapons:
+
+<ul class="bullet">
+
+<li class="bullet">wProfReq - Proficiency class of this weapon. Selecting a class sets the proficiency required to use the weapon.
+
+<ul class="bullet">
+<li class="bullet"><font class="strong"/>wProfReq.Simple</font> - this is a Simple weapon. A hero is proficient in this weapon if he has the individual weapon proficiency, or if his class makes him proficient with all Simple weapons.
+<li class="bullet"><font class="strong"/>wProfReq.Martial</font> - this is a Martial weapon. A hero is proficient in this weapon if he has the individual weapon proficiency, or if his class makes him proficient with all Martial weapons.
+<!--
+<li class="bullet"><font class="strong"/>wProfReq.Exotic</font> - this is an Exotic weapon. A hero is proficient in this weapon if he has the individual weapon proficiency.
+-->
+</ul>
+
+<br>
+
+<!--
+<li class="bullet">wFtrGroup - Grouping of the weapon.  This is primarily used for the fighter's weapon training ability, but also serves to identify all crossbows for the rapid reload feat.  Any number of these may be present.
+
+<ul class="bullet">
+<li class="bullet"><font class="strong"/>wFtrGroup.Axes</font> - Axes
+<li class="bullet"><font class="strong"/>wClass.BladeHeavy</font> - Blades, Heavy
+<li class="bullet"><font class="strong"/>wClass.BladeLight</font> - Blades, Light
+<li class="bullet"><font class="strong"/>wFtrGroup.Bows</font> - Bows
+<li class="bullet"><font class="strong"/>wClass.Close</font> - Close
+<li class="bullet"><font class="strong"/>wClass.Crossbows</font> - Crossbows
+<li class="bullet"><font class="strong"/>wFtrGroup.Double</font> - Double
+<li class="bullet"><font class="strong"/>wClass.Flails</font> - Flails
+<li class="bullet"><font class="strong"/>wClass.Hammers</font> - Hammers
+<li class="bullet"><font class="strong"/>wFtrGroup.Monk</font> - Monk
+<li class="bullet"><font class="strong"/>wClass.Natural</font> - Natural
+<li class="bullet"><font class="strong"/>wClass.PoleArms</font> - Pole Arms
+<li class="bullet"><font class="strong"/>wFtrGroup.Spears</font> - Spears
+<li class="bullet"><font class="strong"/>wClass.Thrown</font> - Thrown
+</ul>
+-->
+
+<br>
+
+<li class="bullet">wClass - Size class of this weapon. Sets the number of hands required for a medium-size creature to use a medium-size weapon.
+
+<ul class="bullet">
+<li class="bullet"><font class="strong"/>wClass.Light</font> - this is a Light weapon.
+<li class="bullet"><font class="strong"/>wClass.OneHanded</font> - this is a One-Handed weapon.
+<li class="bullet"><font class="strong"/>wClass.TwoHanded</font> - this is a Two-Handed weapon.
+</ul>
+
+<br>
+
+<li class="bullet">wCategory - Categories that the weapon belongs to. One or more categories may be present.
+
+<ul class="bullet">
+<li class="bullet"><font class="strong"/>wCategory.Melee</font> - this is a melee weapon (for example, a Longsword or Club).
+<li class="bullet"><font class="strong"/>wCategory.RangeProj</font> - this is a ranged projectile weapon (for example, a Shortbow or Light Crossbow).
+<li class="bullet"><font class="strong"/>wCategory.RangeThrow</font> - this weapon can be thrown (for example, a Dagger or Javelin).
+<li class="bullet"><font class="strong"/>wCategory.Reach</font> - this is a Reach weapon (for example, a Longspear).
+<!--
+<li class="bullet"><font class="strong"/>wCategory.Ammunition</font> - this is ammunition for another weapon (for example, arrows or bolts).
+<li class="bullet"><font class="strong"/>wCategory.Double</font> - this is a double weapon (for example, a Two-Bladed Sword).
+-->
+<li class="bullet"><font class="strong"/>wCategory.Unarmed</font> - this weapon uses your Unarmed attack (for example, a Gauntlet).
+</ul>
+
+<br>
+
+<li class="bullet"><font class="strong"/>wGroup.<i>&lt;race id or class id&gt;</i></font> - Groups that the weapon belongs to. One or more groups may be present. If a certain race or class is always proficient with this weapon, add the tag for that race / class to the weapon. Examples: <font class="strong"/>wGroup.rElf</font> (Elves), <font class="strong"/>wGroup.cHelpBrd</font> (Bards).<br><br>
+
+<!--
+<li class="bullet">wType - Damage type of this weapon. One or more types may be present.
+
+<ul class="bullet">
+<li class="bullet"><font class="strong"/>wType.B</font> - this is a Bludgeoning weapon.
+<li class="bullet"><font class="strong"/>wType.S</font> - this is a Slashing weapon.
+<li class="bullet"><font class="strong"/>wType.P</font> - this is a Piercing weapon.
+</ul>
+
+<br>
+
+<li class="bullet">wTypeOff - Damage type for the off-hand end of this weapon (for double weapons). Zero or more types may be present.
+
+<ul class="bullet">
+<li class="bullet"><font class="strong"/>wTypeOff.B</font> - this is a Bludgeoning weapon.
+<li class="bullet"><font class="strong"/>wTypeOff.S</font> - this is a Slashing weapon.
+<li class="bullet"><font class="strong"/>wTypeOff.P</font> - this is a Piercing weapon.
+</ul>
+-->
+
+<br>
+
+<li class="bullet">EquipType - material types used in the weapon. Zero or more types may be present. This may affect the type of material that magical versions of this weapon may be made from.
+
+<ul class="bullet">
+<li class="bullet"><font class="strong"/>EquipType.Metal</font> - this weapon includes significant amounts of metal.
+<li class="bullet"><font class="strong"/>EquipType.Wood</font> - this weapon includes significant amounts of wood.
+</ul>
+
+<br>
+<!--
+<li class="bullet">wMain - Damage done by this weapon. Exactly one tag should be present - if the weapon is a double weapon, use the "wOff" tag group to add a tag for the off-hand weapon damage.<br>
+Possible values: <font class="strong"/>wMain.1d2_2, wMain.1d3_3, wMain.1d4_4, wMain.1d6_5, wMain.1d8_6, wMain.2d4_6, wMain.1d12_104, wMain.2d6_104, wMain.2d8_204, wMain.2d10_205, wMain.1d10_304</font><br>
+The number after the damage die indicates the damage progression of the weapon. For example, a weapon that does 1d4 damage will do 1d6 when increased by one size category. You can ignore it and just test for the tag "wMain.1d4?" if you like.<br><br>
+
+
+<li class="bullet">wOff - Damage done by the off-hand end of this weapon. This tag should only be present if the weapon is a double weapon.<br>
+Possible values: <font class="strong"/>wOff.1d2_2, wOff.1d3_3, wOff.1d4_4, wOff.1d6_5, wOff.1d8_6, wOff.2d4_6, wOff.1d12_104, wOff.2d6_104, wOff.2d8_204, wOff.2d10_205, wOff.1d10_304</font><br><br>
+
+
+<li class="bullet"><font class="strong"/>wCritMin.<i>&lt;value&gt;</i></font> - Critical hit target for the weapon. For example, a Longsword causes a critical threat on a 19 or 20, so it would have a <font class="strong"/>wCritMin.19</font> tag.<br><br>
+
+
+<li class="bullet"><font class="strong"/>wCritMult.<i>&lt;value&gt;</i></font> - Critical damage multiplier for the weapon. For example, a Longsword causes double damage on a critical hit, so it would have a <font class="strong"/>wCritMult.2</font> tag.<br><br>
+
+
+<li class="bullet"><font class="strong"/>wCritMOff.<i>&lt;value&gt;</i></font> - Critical damage multiplier for the off-hand end of the weapon, if different from the primary critical damage multiplier. For example, a Gnome Hooker Hammer has a critical multiplier of x3/x4, so it would have <font class="strong"/>wCritMult.3</font> and <font class="strong"/>wCritMOff.4</font> tags.<br><br>
+
+
+<li class="bullet"><font class="strong"/>wRangeInc.<i>&lt;value&gt;</i></font> - Range increment for the weapon. For example, a Dagger has a 10-foot range increment, so it would have a <font class="strong"/>wRangeInc.10</font> tag. Note: If you want to retrieve the range increment after modifiers, use the wRangeInc field instead.<br><br>
+
+
+<li class="bullet">wEasyRace - Races for which this weapon is one proficiency class easier to use. Zero or more easy races may be present. For example, a Dwarven Waraxe is an Exotic weapon, but Dwarves treat it as a Martial weapon, so it would have the wEasyRace.Dwarf tag.
+
+<ul class="bullet">
+<li class="bullet"><font class="strong"/>wEasyRace.rElf</font> - this weapon is easier to use by Elves.
+<li class="bullet"><font class="strong"/>wEasyRace.rDwarf</font> - this weapon is easier to use by Dwarves.
+<li class="bullet"><font class="strong"/>wEasyRace.rHuman</font> - this weapon is easier to use by Humans.
+<li class="bullet"><font class="strong"/>wEasyRace.rOrc</font> - this weapon is easier to use by Orcs.
+<li class="bullet"><font class="strong"/>wEasyRace.rHalfOrc</font> - this weapon is easier to use by Half-Orcs.
+<li class="bullet"><font class="strong"/>wEasyRace.rHalfling</font> - this weapon is easier to use by Halflings.
+<li class="bullet"><font class="strong"/>wEasyRace.rGnome</font> - this weapon is easier to use by Gnomes.
+<li class="bullet"><font class="strong"/>wEasyRace.rHalfElf</font> - this weapon is easier to use by Half-Elves.
+</ul>
+
+<br>
+
+<li class="bullet"><font class="strong"/>w1HandPen.<i>&lt;value&gt;</i></font> - Attack penalty when using the weapon one-handed. For example, a Heavy Crossbow has a -4 attack penalty when used one handed, so it would have a <font class="strong"/>w1HandPen.4</font> tag.<br><br>
+
+
+<li class="bullet"><font class="strong"/>wMaxStrBon.<i>&lt;value&gt;</i></font> - Maximum strength bonus when using this weapon. For example, a Heavy Crossbow never uses an of your strength bonus, so it would have a <font class="strong"/>wMaxStrBon.0</font> tag.<br><br>
+
+
+<li class="bullet"><font class="strong"/>wMaxStrPen.<i>&lt;value&gt;</i></font> - Maximum strength penalty when using this weapon. For example, a Heavy Crossbow never uses an of your strength penalty, so it would have a <font class="strong"/>wMaxStrPen.0</font> tag.<br><br>
+
+<li class="bullet"><font class="strong"/>Helper.Finesse</font> - This weapon is one of those affected by Weapon Finesse (for example, a Spiked Chain).<br><br>
+
+<li class="bullet"><font class="strong"/>Helper.NoDblStr</font> - This weapon never doubles its strength when wielded in two hands (for example, Rapiers and Composite Longbows).<br><br>
+
+<li class="bullet"><font class="strong"/>Helper.Always2H</font> - This weapon must always be wielded in 2 hands (for example, a Longbow).<br><br>
+
+
+<li class="bullet"><font class="strong"/>Helper.Easy2H</font> - This weapon is proficiency class easier to use when wielded in 2 hands (for example, a Bastard Sword).<br><br>
+
+
+<li class="bullet"><font class="strong"/>Helper.Easy1HSm</font> - This weapon is one proficiency class easier to use when wielded in 1 hand and one size smaller than the creature wielding it (for example, a Dwarven Waraxe).<br><br>
+
+
+<li class="bullet"><font class="strong"/>Helper.GearNoSize</font> - This weapon is always the size of the hero (for example, Unarmed Strike).<br><br>
+
+
+<li class="bullet"><font class="strong"/>Helper.NoOUtGear</font> - This weapon is never included in the list of "Gear" on printed character sheets (for example, Unarmed Strike).<br><br>
+
+
+<li class="bullet"><font class="strong"/>Helper.NoSelect</font> - This weapon can never be selected by the user, but is instead added by other things (for example, Flurry of Blows).<br><br>
+
+
+<li class="bullet"><font class="strong"/>Helper.BracArcBow</font> - This weapon counts as a Bow for the purposes of Bracers of Archery.<br><br>
+
+
+<li class="bullet"><font class="strong"/>Helper.BucklerOK</font> - This weapon can be used with a buckler without penalty (normal weapons are at -1 if they're held in your off-hand with a buckler).<br><br>
+
+
+<li class="bullet"><font class="strong"/>Helper.NoPrereq</font> - This weapon doesn't have automatically generated pre-requisites, requiring you to write them yourself. Useful for odd weapons like the Composite Longbow.<br><br>
+
+
+<li class="bullet"><font class="strong"/>Helper.NormalOnly</font> - This weapon can only be selected as a non-magical weapon. For example, normal arrows are bought in sets of 20, but magical arrows are bought in sets of 50; normal arrows would have this tag.<br><br>
+
+
+<li class="bullet"><font class="strong"/>Helper.MagicOnly</font> - This weapon can only be selected as a magical weapon. For example, normal arrows are bought in sets of 20, but magical arrows are bought in sets of 50; magical arrows would have this tag.<br><br>
+
+
+<li class="bullet"><font class="strong"/>Helper.MagicAmmo</font> - This weapon is magical ammunition, bought in quantities of 50.<br><br>
+
+
+<li class="bullet"><font class="strong"/>wBuyStr.<i>&lt;value&gt;</i></font> - Gold cost to buy points of "strength bonus" for this weapon. For example, a Composite Longbow pays 100 gold for each point of strength bonus you can use, so it would have a <font class="strong"/>wBuyStr.100</font> tag.<br><br>
+
+
+<li class="bullet"><font class="strong"/>StrReq, DexReq, ConReq, IntReq, WisReq, ChaReq</font> - ability score required to take Exotic Weapon Proficiency in this weapon. For example, a Bastard Sword requires Strength 13 to take Exotic Weapon Proficiency in, so it would have a <font class="strong"/>StrReq.13</font> tag.<br><br>
+
+
+<li class="bullet"><font class="strong"/>Broadcast.WepFocus</font> - To give the Weapon Focus feat with a specific weapon, assign the <font class="strong"/>Broadcast.WepFocus</font> tag to it. (If a weapon has Weapon Focus, it gets +1 to hit.)</li>
+-->
+
+</ul>
+
+
+
+<p class="section"><a name="natweapons"/>Weapons, Natural
+
+<p class="body">Many things give a hero natural attacks, such as claw or bite. It's common for races, templates and sometimes even classes to "bootstrap" a natural attack onto the hero. The list of natural attacks that can be bootstrapped is here:
+
+<ul class="bullet">
+
+<li class="bullet"><font class="strong"/>wBite</font> - Bite attack</li>
+<li class="bullet"><font class="strong"/>wClaw</font> - Claw attack</li>
+<li class="bullet"><font class="strong"/>wSlam</font> - Slam attack</li>
+<li class="bullet"><font class="strong"/>wHooves</font> - Hooves attack</li>
+<li class="bullet"><font class="strong"/>wStamp</font> - Stamp attack</li>
+<li class="bullet"><font class="strong"/>wTentacle</font> - Tentacle attack</li>
+<li class="bullet"><font class="strong"/>wHeadButt</font> - Headbutt attack</li>
+<li class="bullet"><font class="strong"/>wKick</font> - Kick attack</li>
+<li class="bullet"><font class="strong"/>wRake</font> - Rake attack</li>
+
+</ul>
+
+<!--
+        <table border=0 cellspacing=0 cellpadding=0>
+          <tr>
+            <td><img border="0" src="../../../docs/common/empty.gif" width="1" height="10"></td>
+          </tr>
+          <tr>
+            <td valign="center"><img class="border" src="./bootstrap_tags.png"></td>
+            <td><img border="0" src="../../../docs/common/empty.gif" width="10" height="1"></td>
+            <td valign="center">
+
+<p class="body">As well as bootstrapping the natural attack, you should add tags to it to set its damage and other attributes.
+
+<The tags which should be assigned follow:
+
+<ul class="bullet">
+
+<li class="bullet"><font class="strong"/>wMain.?</font> - You must assign a damage range to the natural weapon. Possible values: <font class="strong"/>wMain.1d2_2, wMain.1d3_3, wMain.1d4_4, wMain.1d6_5, wMain.1d8_6, wMain.2d4_6, wMain.1d12_104, wMain.2d6_104, wMain.2d8_204, wMain.2d10_205, wMain.1d10_304</font>. (The number after the _ indicates how the damage changes when the hero changes in size, and can be ignored.)</li>
+
+<li class="bullet"><font class="strong"/>Helper.NatPrimary</font> - This tag should be assigned if the attack is a primary weapon. If not, the weapon has a -5 attack penalty.</li>
+
+<li class="bullet"><font class="strong"/>Helper.NatTwoHand</font> - This tag should be assigned if the attack is treated as a two-handed weapon for the purposes of applying strength bonus. If assigned, the weapon receives 1.5x the normal strength bonus to its damage rolls.</li>
+
+<li class="bullet"><font class="strong"/>Value.&lt;number&gt;</font> - If the creature posesses this attack multiple times, add a Value tag to indicate this. For example, if the hero has two Claw attacks, the wClaw bootstrap would be assigned the <font class="strong"/>Value.2</font> tag.</li>
+
+</ul>
+
+            </td>
+          </tr>
+        </table>
+-->
+
+<p class="body"><a href="5ededit.htm">Go Back</a>.
+
+</body>
+
+</html>

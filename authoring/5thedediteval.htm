@@ -1,0 +1,884 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv=Content-Type content="text/html; charset=utf-8">
+<link href="../../../docs/common/styles.css" rel="STYLESHEET">
+<title>Eval Scripts Reference</title>
+</head>
+
+<body>
+
+<div align="center">
+  <table class="banner" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td>
+        <p align="center" class="banner">Eval Scripts Reference
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div align="center">
+  <table border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td><img border="0" src="../../../docs/common/empty.gif" width="1" height="15"></td>
+    </tr>
+  </table>
+</div>
+<p class="section">Introduction
+
+<p class="body">This reference document introduces the core concepts of Hero Lab's scripting language, and arms you with the most common tools used within it. The details in this document should help you write scripts to use with your own feats, classes, and other options.
+
+<p class="body">This document is a good companion to the editor tutorials provided for this game system. We recommend you read it before, after, or as you go through these tutorials, to gain additional understanding on how scripts work.
+
+<p class="section">Table of Contents
+
+<ul class="bullet">
+
+<li class="bullet"><a href="#evalscripts">Eval Scripts</a>
+<li class="bullet"><a href="#timing">Timing</a>
+<li class="bullet"><a href="#context">Context and Transitions</a>
+<li class="bullet"><a href="#focus">Setting the Focus</a>
+<li class="bullet"><a href="#conditionals">Conditional Statements</a>
+<li class="bullet"><a href="#linkages">Linkages</a>
+<li class="bullet"><a href="#tags">Tags</a>
+<li class="bullet"><a href="#wildcards">Wildcards</a>
+<li class="bullet"><a href="#debugtags">Debugging Tags</a>
+<li class="bullet"><a href="#fields">Fields</a>
+<li class="bullet"><a href="#fieldsvalue">Value fields</a>
+<li class="bullet"><a href="#fieldstext">Text fields</a>
+<li class="bullet"><a href="#tagsexpr">Tag Expressions</a>
+<li class="bullet"><a href="#candidateexpr">Candidate Expressions</a>
+<li class="bullet"><a href="#menu">Menus</a>
+<li class="bullet"><a href="#foreach">Foreaches</a>
+<li class="bullet"><a href="#findchild">Findchild</a>
+<li class="bullet"><a href="#tagexpr">tagexpr[]</a>
+<li class="bullet"><a href="#bootstrapconditions">Bootstrap Conditions</a>
+<li class="bullet"><a href="#macros">Reusable Code (Macros)</a>
+<li class="bullet"><a href="#procedures">Reusable Code (Procedures)</a>
+</ul>
+
+
+<p id="evalscripts" class="section">What Are Eval Scripts?
+
+<p class="body">Eval scripts are how one pick makes changes to itself or another facet of the hero. Most of the logic that controls how the game system works is carried out by eval scripts, either specific to an individual pick, or running behind the scenes for all picks of that type (these behind-the-scenes scripts are called "component scripts" and are invisible and unmodifiable by users). Eval scripts only run for <a href="5thededittut1.htm#thingspicks">picks</a>, never for <a href="5thededittut1.htm#thingspicks">things</a>, so you'll never see their effects until you add the thing containing the script to your hero.
+
+<p class="section">What Can Eval Scripts Do?
+
+<p class="body">Eval scripts can change <a href="5thededittut2.htm#tags">tags</a> and <a href="5thededittut2.htm#fields">fields</a> on themselves, or another pick, in response to changing conditions of the hero. They can define variables (numbers and text), perform simple math and rounding, manipulate text in certain limited ways, and make certain changes to other content on the hero.
+
+
+<p class="section">What Can't Eval Scripts Do?
+
+<p class="body">Generall, eval scripts can't affect things which haven't been added to the hero (with the exception of the name and description fields on things - see the section on <a href="#macros">Macros</a> for an example of how to change those). Eval scripts cannot add new picks to the hero (although they can alter conditions such that a <a href="#bootstrapconditions">bootstrap condition</a> is satisfied, and a previously bootstrapped pick is then added to the hero).
+
+
+<p id="timing" class="section">Important Eval Script Concept: Timing
+
+<p class="body">Every time something is changed on the hero, every pick on that hero runs all its scripts, and the <b>Timing</b> for each script controls the order those scripts happen in. It's very important that you choose the right timing for your eval scripts. Too early, and information you need may not have been set yet. Too late, and any changes you make may happen after the relevant field or tag has been read by the next step in whatever process it is involved in.
+
+<p class="body">For example, if you were to add some value to the Proficiency Bonus in an eval script "too late", that bonus would not get passed down to the save picks which are proficient.
+
+<p class="body">Timing is divided into several Phases in each game system, which happen in order. Within each phase, priority controls the relative order of eval scripts, with a higher priority occuring later in the process. For the 5th Edition SRD, the Phases (in order) are:
+
+<ul class="bullet">
+<li class="bullet"><font class="strong">Testing Global Tags (GlobalTest)</font> - This phase is too early for anything you may need to do with an eval script, and can generally be ignored. Certain special things run scripts very early, and have to use tests in this phase to determine if they should execute those scripts or not.
+<li class="bullet"><font class="strong">First</font> - Think carefully about setting an eval script here. Very little has been set about the character at this point, so the most common reason to be doing things here is to satisfy a bootstrap condition (see the section on tag expressions for details on bootstrap conditions).
+<li class="bullet"><font class="strong">Pre-Levels (PreLevel)</font> - If you need to intervene in some of the processes which will happen in Levels, put your eval script here. Classes add some portion of their level towards gaining spell slots (as discussed in <a href="5thededittut6.htm">Tutorial 6</a>), so setting or changing the tags related to that should happen in Pre-Levels.
+<li class="bullet"><font class="strong">Levels (Level)</font> - Ignore this phase for the most part. Most of what you will need to do will rely on what is set in the Levels phase, or will need to manipulate those processes before they execute. The Proficiency bonus is calculated by component scripts during this phase.
+<li class="bullet"><font class="strong">Post-Levels (PostLevel)</font> - Anything which relies on the character's level being known should go in this phase. This is probably a safe "default" phase for most things that don't rely on knowing ability score modifiers (which have not yet been calculated). Many class special abilities which calculate a value based on the character's level do so in Post-Levels eval scripts.
+<li class="bullet"><font class="strong">Pre-Attributes (PreAttr)</font> - Rarely used, most things which can go in this phase will work just as well in Post-Levels. You might add something here if it depends on an earlier script of yours in PostLevel but need to alter something about how ability score modifiers are calculated.
+<li class="bullet"><font class="strong">Attributes</font> - As with Levels, you can ignore this phase and for the same reasons. The character's final ability score modifiers are calculated by component scripts during this phase.
+<li class="bullet"><font class="strong">Post-Attributes (PostAttr)</font> - Anything which relies on a character's ability score values or modifiers goes in this phase. The component scripts which set the bonus for saving throws happen in this phase.
+<li class="bullet"><font class="strong">Final</font> - This is the phase when many things from various places get pulled together and combined to make their final value. The final bonus to damage rolls for a weapon is computed during this phase.
+<li class="bullet"><font class="strong">Render</font> - This phase is for defining the presentation of picks (chiefly designing the name and summary they display when viewed in various parts of Hero Lab) and the application of situational modifiers.
+</ul>
+
+
+<p id="context" class="section">Important Eval Script Concept: Context
+
+<p class="body">Every script starts somewhere, and if you give a command without specifying otherwise, the command is carried out in that default Context for the script (usually affecting the pick the script is running on). If that's not what you want, you must tell the script to "transition" to another context before executing the command.
+
+<p class="body">This idea of “where the script is” when it carries out an action is called the script’s “context”. Where the script starts is called the “default context” and it varies based on the type of scripts (for evals the default is the pick running the script). The process of moving the script away from the default context to somewhere else is called “transitioning”, and each transition is represented in the code as a dot / period / full stop character.
+
+<p class="body">For example, in an eval script, if we wanted to access the value of the “abilActive” field on the current pick, we can do this:
+
+<pre class="xml">
+    field[abilActive].value
+  </pre>
+
+<p class="body">Only one transition was necessary, from the field to its value.
+
+<p class="body">To access the proficiency bonus, we must first establish a context of the hero, and then transition to the ProfBonus child pick on that hero, then to the “tProfBonus” field on that pick, and finally to the value of that field, like so:
+
+<pre class="xml">
+    hero.childfound[ProfBonus].field[tProfBonus].value
+  </pre>
+
+<p class="body">For more information on <a href="http://hlkitwiki.wolflair.com/index.php5?title=Context_Transitions">contexts</a>, check out our Authoring Kit Wiki.
+
+
+<p id="focus" class="section">Setting the Focus
+
+<p class="body">You can use the "setfocus" command to effectively "bookmark" a certain context, from which you can then begin any transition by using the command "focus". This can be quite a timesaver over repeatedly transitioning to the same place many times in the same script, as seen in our example code in <a href="5thededittut6.htm">Tutorial 6</a>, and can make scripts easier to read if you need to make the same change to one of many possible choices.
+
+<p class="body">The focus is local to each eval script, and does not "carry over" to later eval scripts. You can tell if a focus has been set using the "state.isfocus" target, which evaluates to 1 if a focus has already been established, and 0 otherwise. (A focus might fail to be set, for example, if the pick you transitioned to is not present on the hero.) Here's an example of the focus in use:
+
+<pre class="xml">
+    ~set the focus to a different ability score based on a tag
+    if (tagis[Affects.Strength] <> 0) then
+      perform hero.childfound[aSTR].setfocus
+    elseif (tagis[Affects.Dexterity] <> 0) then
+      perform hero.childfound[aDEX].setfocus
+    elseif (tagis[Affects.Constitution] <> 0) then
+      perform hero.childfound[aCON].setfocus
+      endif
+
+    ~if we didn't choose an ability score, we can't go any further
+    doneif (state.isfocus = 0)
+
+    ~add a bonus to whatever ability score we picked
+    focus.field[Bonus].value += 2
+  </pre>
+
+<p class="body">You can also "perform state.clearfocus" to remove an existing focus, but this is usually not necessary, as establishing a new focus while one exists merely overwrites the previous focus.
+
+
+<p id="conditionals" class="section">Important Eval Script Concept: Conditionals (if/then Statements)
+
+<p class="body">Conditional statements control which "section" of code runs under certain circumstances, like a requirement that you be at least level 3 before you gain some benefit. If the expression within the parentheses is true, then that branch of the conditional statement is entered and the code within the branch is carried out. The general format of an "if" statement is:
+
+<pre class="xml">
+    if (left side <font class="strong">relationship</font> right side) then
+      ~do stuff
+      endif
+  </pre>
+
+<p class="body">Common relationships are:
+
+<ul class="bullet">
+
+<li class="bullet"> <font class="strong">>=</font> means "is the left side greater than or equal to the right side?"
+<li class="bullet"> <font class="strong">></font> means "is the left side greater than the right side?"
+<li class="bullet"> <font class="strong"><=</font> means "is the left side less than or equal to the right side?"
+<li class="bullet"> <font class="strong"><</font> means "is the left side less than the right side?"
+<li class="bullet"> <font class="strong">=</font> means "are both sides equal?"
+<li class="bullet"> <font class="strong"><></font> means "are both sides NOT equal>"
+</ul>
+
+<p class="body">Conditional statements can have multiple branches (those after the first are preceded by "elseif"), and once one of the branches is found to be true, all subsequent branches are ignored. This allows you to set up hierarchies based on the order you place the statements. For example:
+
+<pre class="xml">
+    if (field[xAllLev].value >= 10) then
+      ~do stuff A
+    elseif (field[xAllLev].value >= 5) then
+      ~do stuff B
+      endif
+  </pre>
+
+<p class="body">As stated above, ">=" means the left side is greater than or equal to the right side, so if the xAllLev field value is 10 or higher, "stuff A" will run, if it is between 5 and 9 "stuff B" will run, and if it meets neither condition then no code is run at all!
+
+<p class="body">Finally, as the last branch in a conditional statement, you can add a default set of code to run if all other branches fail. This default branch is preceded by "else", like so:
+
+<pre class="xml">
+    if (field[xAllLev].value >= 10) then
+      ~do stuff A
+    elseif (field[xAllLev].value >= 5) then
+      ~do stuff B
+    else
+      ~do stuff C
+      endif
+  </pre>
+
+<p class="body">For more information on <a href="http://hlkitwiki.wolflair.com/index.php5?title=Flow_Control">if statements</a>, check out our Authoring Kit Wiki.
+
+
+<p id="linkages" class="section">Linkages And Eval Scripts
+
+<p class="body">Linkages are pre-set transitions between two picks, usually established to make common transitions easier and more generalized. Linkages are defined when creating a thing and aren't generally changed in eval scripts (although they can be - see the use of the setlinkage command in our example code from <a href="5thededittut6.htm">Tutorial 6</a>).
+
+<p class="body">Table linkages, which are automatically defined by Hero Lab, connect a pick added to a table with the "reference" pick for that table (for example, the class that added a spell), and are probably the most common linkage you will use. There are several other linkages, such as the "save" linkage between ability score and saving throw picks, which you can use if you want to explore those relationships in your scripts.
+
+
+<p id="tags" class="section">Tags And Eval Scripts
+
+<p class="body">Tags a big part of what makes hero lab tick. As discussed in earlier tutorials, tags are made up of two parts, the Tag Group and the Tag ID. When referring to tags in scripting, both must be used, seperated by a ".".
+
+<p class="body">For more information on <a href="http://http://hlkitwiki.wolflair.com/index.php5?title=Tags_and_Tag_Groups">tags</a>, check out our Authoring Kit Wiki.
+
+<p class="section">What Can I Do With Tags?
+
+<p class="body">Here are some common things which can be done with tags:
+
+<pre class="xml">
+    ~ add a tag (Helper is the Tag Group, Proficient is the Tag ID)
+    perform assign[Helper.Proficient]
+
+    ~ delete a tag (Helper is the Tag Group, Activated is the Tag ID)
+    perform delete[Helper.Activated]
+
+    ~ replace tag #1 with tag #2
+    perform tagreplace[abAction.Action,abAction.Reaction]
+
+    ~ pull a tag from the current context to the initial context for the script.
+    ~ Note that this does not delete the tag in the place you pulled it from -
+    ~ it effectively copies it to the new place.
+    ~ In other words, pull the tag from cFtrBatMas to the pick which is running this eval script.
+    perform hero.childfound[cFtrBatMas].pulltags[StandardDC.?]
+
+    ~ push a tag from the initial context to the current context.
+    ~ Note that this does not delete the tag in the place you pushed it from -
+    ~ It effectively copies it to the new place.
+    ~ In other words, push it from the pick running this eval script to the RaceHelper pick.
+    perform hero.child[RaceHelper].pushtags[SplAttr.?]
+
+    ~ similar to pushtags, but copies any tags in the current context to the
+    ~ container (which is usually the hero)
+    perform forward[HeightSize.?]
+  </pre>
+
+<p class="body">Example in Context:
+<pre class="xml">
+    ~ If we’re active, forward any Hero tags to the hero
+    doneif (field[abilActive].value <> 0)
+    perform forward[Hero.?]
+
+    ~ Now pull the DC calculation from one special we chose and push it to another.
+    perform field[usrChosen1].chosen.pulltags[StandardDC.?]
+    perform hero.childfound[cFtrSplRay].pushtags[StandardDC.?]
+
+    ~ Replace whatever duration tag exists on that same class special with Minutes
+    perform hero.childfound[cFtrSplRay].tagreplace[abDuration.?,abDuration.Minute]
+  </pre>
+
+<p class="section">What Can I Learn About Tags?
+
+<p class="body">Here are some common things which can be learned about tags in scripts. Note that these operations are not manipulations and do not require you to place "perform" before them, unlike the ones above. Typically you'd save their results in a variable, or use them as part of an "if" statement.
+
+<pre class="xml">
+    ~ Is this tag present?
+    tagis[Helper.CustomSpec]
+
+    ~ How many of this tag are present?
+    tagcount[Helper.ExtraSlot]
+
+    ~ What are the TagIDs of all tags from a tag group, output as a string of text?
+    ~ Note that this uses wildcards (see below)
+    tagids[HasType.?]
+
+    ~ What are the TagIDs of all tags from a tag group, output as a string of text,
+    ~ including a separator between each tag? Note that this uses wildcards (see below)
+    tagids[AllowSkl1.?, " | "]
+
+    ~ What are the names of all tags from a tag group, output as a string of text?
+    ~ Note that this uses wildcards (see below)
+    tagnames[BackCat.?]
+
+    ~ What are the names of all tags from a tag group, output as a string of text,
+    ~ including a separator between each tag? Note that this uses wildcards (see below)
+    tagnames[abAction.?," or "]
+  </pre>
+
+<p class="body">Example in Context:
+<pre class="xml">
+    ~ If we are raging
+    if (hero.tagis[Hero.Raging] <> 0) then
+
+      ~ and we have at least 2 domains
+      if (hero.tagcount[Domain.?] >= 2) then
+
+        ~ Build a list of tag names to append to our name
+        field[abText].text = tagnames[BackCat.?, “, “]
+
+        ~ And use those same tags to set up the candidate expression field
+        field[usrCandid1].text = tagids[BackCat.?, " | "]
+        endif
+      endif
+  </pre>
+
+
+<p id="wildcards" class="section">Important Tag Concept: Wildcards
+
+<p class="body">When dealing with tags, a wildcard allows you to alter several tags that match the TagID up to a certain point marked by a ?. For example, say that your pick has 3 tags on it "Helper.SetCastNon", "Helper.SetCastBoo", and "Helper.BookRead". Here are some examples of how wildcards would react to that set of tags.
+
+<pre class="xml">
+    ~ This wildcard is at the start, so it catches every tag of the Helper group,
+    ~ deleting all 3 Helper tags.
+    perform delete[Helper.?]
+
+    ~ Helper.SetCastNon and Helper.SetCastBoo both match what is defined before the Wildcard,
+    ~ so they are deleted. Helper.BookRead does not match, so it is not deleted.
+    perform delete[Helper.Set?]
+
+    ~ Only Helper.SetCastNon matches what is defined before the Wildcard,
+    ~ so it is deleted and the other two remain
+    perform delete[Helper.SetCastN?]
+  </pre>
+
+<p class="body">Wildcards can only be used with tag IDs, not tag groups, and they work for most tag functions except "assign". There is no equivalent when working with fields.
+
+<p class="body">For more information on <a href="http://hlkitwiki.wolflair.com/index.php5?title=Tag_Templates#Wildcards">wildcards</a>, check out our Authoring Kit Wiki.
+
+
+<p id="debugtags" class="section">How Do I Learn Which Fields/tags are Present On A Pick Or On The Hero?
+
+<p class="body">To look at the field values and tags present, use the Develop menu in hero lab and check "Enable Data File Debugging". Once that's enabled, you can right click on a pick (usually displayed as items within tables in the Hero Lab user interface) and select whether you want to copy the unique ID of that pick, see the fields and their values for it, or view the tags present on that pick.
+
+<p class="body">For anything not immediately visible in the UI, like Class Helpers or other background picks, you can go to "Develop -> Floating Info Windows -> Show Selection Tags/Fields" to see the tags or fields for a pick.
+
+
+<p class="section">How Do I Know Which Tags to Manipulate?
+
+<p class="body">The best way to learn what tags do is to look at something already doing what you want to do with a tag, and see the names of the tags present there. In many cases the name/unique ID of the tag will give you a good idea of its function, so start looking there and experiment by assigning those tags. You may also want to see how the tags on a pick react to changes on the hero.
+
+<p class="body">For example, if you want to set up an ability that triggers only when you wear heavy armor, you might look at tags on the hero and see what new tags are added when they equip a set of Heavy Armor.
+
+
+<p id="fields" class="section">Fields and eval scripts
+
+<p class="body">When first introducing the concept of fields in <a href="5thededittut1.htm">Tutorial 1</a>, we noted that there are two main kinds of fields. Text fields store a string of letters and/or numbers, and value fields store a number.
+
+<p class="body">Within those broad categories, there are three different types of field. Normal fields only store one piece of information, so it is simple to change or read the information contained within them. Array fields store multiple pieces of information in a series of "rows", so when manipulating them you must specify which row in the array you wish to alter. Matrix fields are the most complex, storing information in cells that exist in a grid or "matrix", so you must specify both a row and a column.
+
+<pre class="xml">
+    ~ Normal field
+    field[abilActive].value
+    field[livename].text
+
+    ~ Array field (the number in the last set of brackets is the row of the array you want to manipulate)
+    field[cCustTeTot].arrayvalue[2]
+    field[usrArray].arraytext[0]
+
+    ~ Matrix field (in the last set of brackets, the first number is the row of the matrix, and the second is the column. Together they define the cell in the matrix you want to manipulate)
+    field[cMemTot].matrixvalue[2,4]
+    field[NSBSitList].matrixtext[5,0]
+  </pre>
+
+<p class="body">Examples in context:
+<pre class="xml">
+    ~ Stop if we are not active
+    doneif (field[abilActive].value = 0)
+
+    ~ Set our name to the text in the first row of the array field
+    field[livename].text = field[usrArray].arraytext[0]
+
+    ~ If the array value of the 3rd row is not 0, add 2 to cell 4, 3 of the memorization matrix
+    if (field[cCustTeTot].arrayvalue[2] <> 0) then
+      field[cMemTot].matrixvalue[4,3] += 2
+      endif
+  </pre>
+
+<p id="fieldsvalue" class="section">How can Value Fields and Numeric Variables be Manipulated?
+
+<p class="body">Here are the most common mathematical operations you can carry out with numeric fields and variables.
+
+<ul class="bullet">
+
+<li class="bullet"> x + y means "add x to y"
+<li class="bullet"> x - y means "subtract y from x"
+<li class="bullet"> x * y means "multiply x by y"
+<li class="bullet"> x / y means "divide x by y"
+<li class="bullet"> x = y means "overwrite x with y"
+</ul>
+
+<p class="body">These are simple calculations, but you can use the same symbols to carry out more complex math operations, using parenthesis to control order of operations. For example
+<pre class="xml">
+    7 * (2 + 5)
+  </pre>
+
+<p class="body">Would first handle the addition, resulting in 7 * 7, for 49.
+
+<p class="body">Example in context
+<pre class="xml">
+    field[abValue].value = field[abValue].value + 2
+  </pre>
+
+<p class="body">As a shorthand, any of those common operations can be combined with an “=” following it. For example, the example in context above could also be written as:
+<pre class="xml">
+    field[abValue].value += 2
+  </pre>
+
+<p class="body">Here are some less common but still useful manipulations of numeric fields.
+
+<ul class="bullet">
+
+<li class="bullet">field[abValue].value = maximum(field[abValue].value, number)
+
+<p class="body">increase the field value to a number, if it is less than that number.
+
+<li class="bullet">field[abValue].value = minimum(field[abValue].value, number)
+<p class="body">decrease the field value to a number, if it is greater than that number.
+
+<li class="bullet">field[abValue].value = round(field[abValue].value, number of decimals, round behavior)
+
+<p class="body">rounds the value of the field to some number of digits (defined by the second aspect in the parenthesis, 0 meaning to whole numbers). Round behavior of 0 means "round up if .5 or greater", 1 means "always round up", and -1 means "always round down". The first aspect can include some manipulation of its own.
+
+</ul>
+
+<p class="body">Example in context:
+<pre class="xml">
+    ~ Set our value equal to half our level field's value, rounded to the nearest whole number, and always rounded down.
+    field[abValue].value = round(field[xAllLev].value/2, 0, -1)
+
+    ~ If that number is less than 5, raise it to 5
+    field[abValue].value = maximum(field[abValue].value, number)
+
+    ~ Then multiply it by 2
+    field[abValue].value *= 2
+  </pre>
+
+<p id="fieldstext" class="section">How can Text Fields and String Variables be Manipulated?
+
+<p class="body">The & operator appends the text to the right to the end of the text on the left. Like the arithmetic operators above, you can shorten expressions by combining it with =.
+
+<p class="body">Example 1:
+<pre class="xml">
+    ~ field[abText].text begins with the text "George Washington"
+    field[abText].text &= " and Honest Abe"
+
+    ~ Result is "George Washington and Honest Abe"
+  </pre>
+
+<p class="body">This splices some new text into a field, with a separator if there is already text present (but no separator if the field was empty before the splice).
+<pre class="xml">
+    field[FieldID].text = splice(field[FieldID].text, "newtext", "separator")
+  </pre>
+
+<p class="body">Example 1:
+<pre class="xml">
+    ~ field[abText].text begins empty
+    field[abText].text = splice(field[abText].text, "dance", " or ")
+
+    ~ Result is "dance"
+  </pre>
+
+<p class="body">Example 2:
+<pre class="xml">
+    ~ field[abText].text begins with the text "sing"
+    field[abText].text = splice(field[abText].text, "dance", " or ")
+
+    ~ Because the field already has text, the separator is inserted, so the result is "sing or dance"
+  </pre>
+
+<p class="body">The order can be flipped to splice new text at the start rather than the end.
+
+<p class="body">Example 3:
+<pre class="xml">
+    ~ field[abText].text begins with the text "sing"
+    field[abText].text = splice("dance", field[abText].text, " or ")
+
+    ~ Because the field already has text, the separator is inserted, so the result is "dance or sing"
+  </pre>
+
+<p class="body">This replaces some text in a field, with replacetext if the searchtext is found. A number of replacements of 0 means replace all instances found, any positive number X means replace the first X instances found.
+
+<ul class="bullet">
+
+<li class="bullet">field[FieldID].text = replace(field[FieldID].text, "searchtext", "replacetext", number of replacements)
+
+<p class="body">Example 1:
+<pre class="xml">
+    ~ abText begins with "The brown dog is jumping on the brown boat."
+    field[abText].text = replace(field[abText].text, "brown", "red", 1)
+
+    ~ Result is "The red dog is jumping on the brown boat."
+  </pre>
+
+<p class="body">Example 2:
+<pre class="xml">
+    ~ abText begins with "The brown dog is jumping on the brown boat."
+    field[abText].text = replace(field[abText].text, "brown", "red", 0)
+
+    ~ Result is "The red dog is jumping on the red boat."
+  </pre>
+
+<li class="bullet">lowercase(field[FieldID].text)
+<pre class="xml">
+    ~ abText begins with "The brown dog Cassius punched Ghengis Khan."
+    field[abText].text = lowercase(field[abText].text)
+
+    ~ Result is "the brown dog cassius punched ghengis khan."
+  </pre>
+
+<li class="bullet">uppercase(field[FieldID].text)
+<pre class="xml">
+    ~ abText begins with "The brown dog Cassius punched Ghengis Khan."
+    field[abText].text = uppercase(field[abText].text)
+
+    ~ Result is "THE BROWN DOG CASSIUS PUNCHED GHENGIS KHAN."
+  </pre>
+
+<li class="bullet">sentencase(field[FieldID].text)
+<pre class="xml">
+    ~ abText begins with "The brown dog Cassius punched Ghengis Khan."
+    field[abText].text = sentencase(field[abText].text)
+
+    ~ Result is "The brown dog cassius punched ghengis khan."
+  </pre>
+
+<li class="bullet">titlecase(field[FieldID].text)
+<pre class="xml">
+    ~ abText begins with "The brown dog Cassius punched Ghengis Khan."
+    field[abText].text = titlecase(field[abText].text)
+
+    ~ Result is "The Brown Dog Cassius Punched Ghengis Khan."
+  </pre>
+
+</ul>
+
+<p class="body">If you're interested in more ways to alter text, check out the <a href="http://hlkitwiki.wolflair.com/index.php5?title=Language_Intrinsics">intrinsics</a> section of our Authoring Kit wiki!
+
+
+<p class="section">Conversion of Numbers to Text
+
+<p class="body">The intrinsic "ordinal(number)" converts the number in the parenthesis to an appropriate 3 letter string. For example, 1 becomes "1st", 3 becomes "3rd", 9 becomes "9th".
+
+<p class="body">The intrinsic "signed(number)" converts the number in the parenthesis by prepending a + or - depending on whether the number is positive or negative. For example, 4 becomes "+4", -8 remains "-8"
+
+
+<p id="tagsexpr" class="section">Being Choosy: Filtering with Tag Expressions
+
+<p class="body">Tag expressions are a way to limit a wide possibility of candidates to a narrower list. They are used in a variety of places in hero lab (we’ll cover each place individually below), and have their own syntax. Any pick or thing which meets the criteria of the tag expression is considered to be a valid candidate for whatever purpose we filter for.
+
+<p class="body">Tag expressions use the same relationships as in the <a href="#conditionals">Conditionals</a> section above (“>”, “<>”, etc), but can string many such comparisons together in a variety of ways. They also have their own unique relationships, as below:
+
+<ul class="bullet">
+
+<li class="bullet">“&” means “and”
+
+<p class="body">Example:
+<pre class="xml">
+    ~ Must be two handed AND a reach weapon
+    wProperty.TwoHanded & wProperty.Reach
+  </pre>
+
+<li class="bullet"> “|” means “or”
+
+<p class="body">Example:
+<pre class="xml">
+    ~ Must be two handed OR a heavy weapon
+    wProperty.TwoHanded | wProperty.Heavy
+  </pre>
+
+<p class="body">Parentheses can be used to group things together and change the order of evaluation
+
+<p class="body">Example:
+<pre class="xml">
+    ~ Must be two handed AND reach OR must be a heavy weapon. The parenthesis mean Handedness and Reach are evaluated first, before that result is applied with the “or” heavy.
+    (wProperty.TwoHanded & wProperty.Reach) | wProperty.Heavy
+
+    ~ Must be two handed AND either reach OR a heavy weapon. The parenthesis mean Heavy and Reach are evaluated first, before that result is applied with the “and” two handed.
+    wProperty.TwoHanded & (wProperty.Reach | wProperty.Heavy)
+  </pre>
+
+<li class="bullet"> “!” means “not”, and can precede individual tags or entire clauses.
+
+<p class="body">Example:
+<pre class="xml">
+    ~ Must be two handed AND reach OR must NOT be a light weapon. The parenthesis mean Handedness and Reach are evaluated first, before that result is applied with the “or” not light.
+    (wProperty.TwoHanded & wProperty.Reach) | !wProperty.Light
+
+    ~ Must NOT be two handed AND reach OR must be a light weapon. The parenthesis mean Handedness and Reach are evaluated first, that result is then compared with the “!”, and finally apply the “or” heavy.
+    !(wProperty.TwoHanded & wProperty.Reach) | wProperty.Light
+  </pre>
+
+<p class="body">Although named for tags, these expressions can check for more than just the presence/abscence of tags. These commands are followed by a “:” and then the target.
+
+<li class="bullet"> “count:” counts the number of tags, in case you require more than one.
+<p class="body">Example:
+ <pre class="xml">
+    ~ Need at least 3 Ranger class tags
+    count:Classes.Ranger >= 3
+  </pre>
+
+<li class="bullet"> Wildcards (explained above) also work when writing tag expressions.
+
+<p class="body">Example:
+ <pre class="xml">
+    ~ Need at least 3 Ranger class tags and NOT any Hero tag whose TagID starts with “Rag”
+    count:Classes.Ranger >= 3 & !Hero.Rag?
+  </pre>
+
+<li class="bullet"> “fieldval:” is how you check the values of fields.
+
+<p class="body">Example:
+<pre class="xml">
+    ~ The activation field must be non-zero (meaning it must be activated)
+    fieldval:abilActive <> 0
+  </pre>
+
+<li class="bullet"> “hasbootstrap:” checks for the presence or absence of a particular thing bootstrap
+
+<p class="body">Example:
+<pre class="xml">
+    ~ NOT Anything which bootstraps the Incorporeal racial special
+    !hasbootstrap:raIncorpor
+  </pre>
+
+<li class="bullet"> “fieldisempty” checks that there is no text in a text field
+
+<p class="body">Example:
+<pre class="xml">
+    ~ Find a weapon which is a Bite AND has an empty sbName field
+    IsWeapon.wBite & fieldisempty:sbName
+  </pre>
+
+</ul>
+
+
+<p id="candidateexpr" class="section">Candidate Expressions
+<p class="body">Candidate expressions are used by tables to determine what things can be added to that table as a pick. They are usually stored in a text field on the pick which displays that table, such as a Class Helper or Configurable.
+
+<p class="body">For example, here is the Spells Known Candidate Expression (stored in the cSpellExpr field) for an unmodified Sorcerer.
+
+<pre class="xml">
+    sClass.cHelpSor & !(sClassNot.cHelpSor) & !Hide.Spell & !Helper.Obsolete & !Helper.Helper
+  </pre>
+
+<p class="body">Explanation: This translates to “Give us spells with the sClass tag for our class, and are not marked with a tag specifically forbidding them from our class, are not Hidden, not Obsolete, and not Helper spells for something else.”
+
+<p class="body">If you wanted to add an archetype which allowed sorcerers to cast their normal spells and any Enchantment spell, regardless of the class that spell was normally available to, you’d want to modify the tag expression so either criteria was satisfied, as follows:
+
+<pre class="xml">
+    (<font class="strong">[previous tag expression]</font>) | (<font class="strong">[additions to tag expression]</font>)
+  </pre>
+
+<p class="body">Or, expanded out:
+
+<pre class="xml">
+    (sClass.cHelpSor & !(sClassNot.cHelpSor) & !Hide.Spell & !Helper.Obsolete & !Helper.Helper) | (sSchool.Enchant & !Hide.Spell & !Helper.Obsolete & !Helper.Helper)
+  </pre>
+
+<p class="body">The application of parentheses means the first clause reads exactly as specified above, but then the “|” means we have a second clause which could evaluate as true and qualify this spell. That second clause reads “Give us spells with the Enchantment school tag, and are not Hidden, not Obsolete, and not Helper spells for something else.” The net result is all our normal spell list’s enchantment spells will qualify based on both clauses, and any enchantment spell that fails the first clause should qualify based on the second.
+
+<p id="menu" class="section">Menus
+
+<p class="body">Menus are dropdown lists presented by Hero Lab that allow a pick to select another pick or thing. That selection is saved in a field, which can be transitioned through to the chosen pick/thing, and alter or pull information. What can be selected by a menu is controlled by a candidate expression in a text field, though the field used to transition is different.
+
+<p class="body">For example, if you wanted to add a racial ability which chooses STR/DEX/CON and adds +1 to the chosen ability score, and checking the tags on the various attributes you see that those three share the AttribCat.Physical tag, you could enter the following tag expression into the usrCandid1 field:
+
+<pre class="xml">
+    component.BaseAttr & AttribCat.Physical
+  </pre>
+
+<p class="body">The transition goes through the usrChosen1 field, so in the eval script you would have the following
+
+<pre class="xml">
+    ~ First, confirm that we have made a selection
+    doneif (field[usrChosen1].ischosen = 0)
+
+    ~ Then add the +1 to the selected ability
+    field[usrChosen1].chosen.field[aStartMod].value += 1
+  </pre>
+
+
+<p id="foreach" class="section">Foreaches
+
+<p class="body">Foreach statements are a way to cycle through a subset of picks on the hero or all things in the game system, and either change something or retrieve information (remember that you cannot alter things with eval scripts). Foreaches have the general format of:
+
+<p class="body">foreach pick in <font class="strong">container</font> from <font class="strong">component</font> where “<font class="strong">tag expression</font>” sortas <font class="strong">sortset</font>
+
+<p class="body">or
+
+<p class="body">foreach thing from <font class="strong">component</font> where “<font class="strong">tag expression</font>” sortas <font class="strong">sortset</font>
+
+<p class="body">“container” is the container the picks are within. Most commonly this will be the hero, and it is omitted when foreaching through things (as they exist outside the set of heroes).
+
+<p class="body">“component” is the first level of filtering, limiting the foreach to only picks/things of that component. Some examples of components include “BaseWep” for weapons, “Ability” for most kinds of abilities, or “BaseSpell” for spells. You can see what components make up a pick by looking at the component tags on it.
+
+<p class="body">“tag expression” is what we discussed earlier, an expression to further filter what we are iterating through. This can be omitted if you want to foreach through all the picks on a component, but typically you want to restrict it in some way.
+
+<p class="body">“sortset” controls the order the foreach considers each thing/pick in. Sortset is rarely important, and you can omit it if it is unnecessary, but some existing ones are ValHitoLow (order by the value of the “abValue” field), and Deity (sort by the deity category tag, and within those sort alphabetically by name). If one of the existing sort orders doesn’t do what you need, you’ll need to define a new one separately, but that is beyond the scope of this tutorial.
+
+<p class="body">Within a foreach, the currently iterated pick/thing is accessed with the eachpick/eachthing transition, and you can transition further from there. Once you are done with a particular object, “nexteach” triggers the script to move to the next pick/thing which passes the tag expression.
+
+<p class="body">Example 1:
+<pre class="xml">
+    ~ Find all heavy weapon picks on the hero and add +1 to their melee damage
+    foreach pick in hero from BaseWep where “wProperty.Heavy”
+      eachpick.field[dmmBonus].value += 1
+      nexteach
+  </pre>
+
+<p class="body">Example 2:
+<pre class="xml">
+    ~ Find all races which have bootstrapped the incorporeal ability and
+    ~ pull the Race tag from each
+    foreach thing from BaseRace where “hasbootstrap:raIncorpor”
+      perform eachthing.pulltags[Race.?]
+      nexteach
+  </pre>
+
+<p id="findchild" class="section">Findchild
+<p class="body">Findchild is a way to transition to exactly one pick on the hero, where you don't know the unique id of the pick beforehand. The tag expression needs to only match a single pick, or else you will end up going to a random pick among all those who qualify. This is most often used when you need to get to a specific non-unique pick which you have marked with a tag, but can’t rule out other copies of that pick being present, or if you need to get to a type of thing for which there is NEVER more than one present on the hero.
+
+<p class="body">The general format is:
+<pre class="xml">
+    hero.findchild[component,“tag expression”]
+  </pre>
+
+<p class="body">When there is exactly one instance of a particular component on the hero, the tag expression can be omitted, and findchild will automatically end up there.
+<pre class="xml">
+    hero.findchild[component]
+  </pre>
+
+<p class="body">Example 1:
+<pre class="xml">
+    ~ This race bootstraps Charm Person as a spell twice. One version is usable at will, but only affects humans. The other version can be used with any humanoid, but has a limited number of uses based on character level, which we calculate in this eval script. We marked the limited one with a Custom tag called “Custom.WideCharm” so we can find our way there.
+    var chargenum as number
+    chargenum += (#totallevelcount[])/2
+    chargenum = round(chargenum,0,-1)
+
+    hero.findchild[BaseSpell, “thingid.spCharPers & Custom.WideCharm”].field[trkMax].value += chargenum
+  </pre>
+
+<p class="body">Example 2:
+<pre class="xml">
+    ~ This class special needs to get to the race of the hero to change their racial bonus to armor class. It could be on a character of any race, but fortunately there is never more than one race pick (because a hero can only have one race), so we can use findchild.
+    hero.findchild[BaseRace].field[rAC].value += 1
+  </pre>
+
+<p id="tagexpr" class="section">Tagexpr[]
+<p class="body">Tag expressions can also be used in conditional statements using the “tagexpr” target. the general format for this is:
+
+<pre class="xml">
+    tagexpr[tag expression]
+  </pre>
+
+<p class="body">This can cut down several nested ifs into a single one. For example instead of:
+
+<pre class="xml">
+    ~ If we are active
+    if (field[abilActive].value <> 0) then
+      ~ and if we are equipped
+      if (field[gIsEquip].value <> 0) then
+        ~ and if we are proficient
+        if (tagis[Helper.Proficient] <> 0) then
+          ~ Do some stuff
+          endif
+        endif
+      endif
+  </pre>
+
+<p class="body">You could use tagexpr to make that a single conditional, which is much simpler to read:
+
+<pre class="xml">
+    ~ If we’re active, equipped, and proficient...
+    if (tagexpr[fieldval:abilActive <> 0 & fieldval:gIsEquip <> 0 & Helper.Proficient] <> 0) then
+      ~ Do some stuff
+      endif
+  </pre>
+
+<p id="bootstrapconditions" class="section">Bootstrap conditions
+
+<p class="body">Bootstrap conditions are a way for users to cause a bootstrap to be added only if some conditions on the hero are satisfied. For example, if a class ability adds a special ability at 10th level, you want to bootstrap that ability, but you need it to not be added until you are high enough to qualify.
+
+<p class="body">Note that, unlike other scripts, bootstrap conditions CANNOT transition to establish any context you desire. As far as the bootstrap condition is concerned, the default context for tags examined is the container (which is usually the hero), and for fields it is the root (the pick which is doing the bootstrapping). In the odd instance where the container is not the hero, you can force the tag context to the hero by employing a hero# before the tag in the expression.
+
+<p class="body">Example 1:
+<p class="body">A class ability, cBbnFirHea, wants to bootstrap the xImmFire thing, but only when the hero is 10th level:
+
+<pre class="xml">
+    count:Classes.Barbarian >= 10
+  </pre>
+
+<p class="body">(If the hero context has 10 or more Barbarian Class tags, the bootstrap is "live" and xImmFire is bootstrapped.)
+
+
+<p class="body">Example 2:
+<p class="body">A racial ability, raDancMaca, wants to bootstrap the xRegen thing, but only when raDancMaca has been activated:
+
+<pre class="xml">
+    fieldval:abilActive <> 0
+  </pre>
+
+<p class="body">(If the abilActive field on raDancMaca is not 0 (the ability is active), xRegen is bootstrapped.)
+
+<p class="body">Example 3:
+<p class="body">An item power ability inside the custom weapon container, ipManeater, wants to bootstrap the abHPDrain thing, but only when ipManeater has been activated and the hero is raging. Since the container here is not the hero, we need to force the tag check to the hero:
+
+<pre class="xml">
+    fieldval:abilActive <> 0 & hero#Hero.Raging <> 0
+  </pre>
+
+<p class="body">(if the abilActive field on ipManeater is not 0 (the ability is active), and the hero is raging, abHPDrain is bootstrapped.)
+
+
+<p id="macros" class="section">Reusable Code (Macros)
+
+<p class="body">Some instances of code are very commonly used, so finding a way to shorthand refer to them will save a lot of redundancy and reduce the chances an errant typo creeps in. In Hero Lab, a macro is a shorthand bit of code explicitly for these commonly seen references.
+
+<p class="body">Macros start with a “#” sign, followed by their name, and then 0 or more “parameters” contained in order within a set of brackets.
+
+<p class="body">Example:
+<pre class="xml">
+    #macroname[parameter1, parameter2, ...]
+  </pre>
+
+<p class="body">Macros are very diverse in form and function, here are a few examples.
+
+<p class="body">Example: #profbonus (0 parameters)
+<pre class="xml">
+    ~ This macro pulls the value of the hero’s proficiency bonus, and does not
+    ~ need to specify any parameters because that is always located in the same place.
+    field[wAttProf].value += #profbonus[]
+  </pre>
+
+<p class="body">Example: #trkmax (1 parameter)
+<pre class="xml">
+    ~ This macro increases the maximum allowed for some resource.
+    ~ The field affected is assumed in the definition of the macro, so the
+    ~ only parameter needed is the Unique ID of the resource pick targetted.
+    #trkmax[trkSorPoin] += 1
+  </pre>
+
+<p class="body">Example: #appenddesc (2 parameters)
+<pre class="xml">
+    ~ This macro alters the description of a thing by appending some additional text to it.
+    ~ Note that this is one of the only commands which can actually alter a thing rather
+    ~ than a pick. The first parameter is just the unique ID of the thing we target
+    ~ (there is no need to transition to it, since we affect the definition in Hero Lab
+    ~ rather than any instance of it added as a pick). The second parameter is the text
+    ~ to be appended to the target’s description.
+    #appenddesc[fTorchbear,"{b}Addition from Graduation{/b}: You get to wear a square hat, whoopee."]
+  </pre>
+
+<p class="body">Example: #situational (3 parameters)
+<pre class="xml">
+    ~ This macro applies some text to certain picks like ArmorClass or a skill,
+    ~ that is displayed in the mouseover and on the printout. The first parameter
+    ~ transitions to the pick targetted, the second is the situational bonus text,
+    ~ and the third is the source of the bonus (whatever the name of the pick
+    ~ running this eval script, in this case).
+    #situational[hero.child[Attack],signed(field[abValue].value) & " vs. Goblinoids and Reptilian Humanoids",field[thingname].text]
+  </pre>
+
+
+<p id="procedures" class="section">Reusable Code (Procedures)
+<p class="body">There can also be a benefit when widely-used code is stored in a single place, which can then be modified if new circumstances arise. Procedures are another way of storing repeated code, and unlike macros, they can be as complex and free form as you need them to be.
+
+<p class="body">Imagine, for example, you have a whole class of Custom Abilities that react to a Barbarian's rage by increasing their bonuses (whatever they may be) by 2. There may be 2 dozen of these abilities, all with the following lines of code
+
+<pre class="xml">
+    ~ If we are raging
+    if (hero.tagis[Hero.Raging] <> 0) then
+
+      ~ increase our value by 2
+      field[abValue].value += 2
+      endif
+  </pre>
+
+<p class="body">Procedures are created on their own tab in the editor. You could place that code within a procedure with the name “RageBonUp”, and instead in the eval script “call” the procedure like so:
+
+<pre class="xml">
+    call RageBonUp
+  </pre>
+
+<p class="body">Now imagine that some new class comes out that doesn’t rage but instead gets an ability called Trance (which applies it’s own Hero tag), but nonetheless can make use of these kinds of abilities when trancing. Because you already have this commonly used code in a procedure, you only would need to to change it in one place to accommodate the new ability, instead of the 2 dozen places it is used if you were not using a procedure. That could be quite a time saver!
+
+<p class="body"><a href="5ededit.htm">Go Back</a>.
+
+</body>
+
+</html>

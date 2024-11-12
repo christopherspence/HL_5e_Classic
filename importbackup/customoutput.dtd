@@ -1,0 +1,643 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- DTD for Hero Lab custom output for 5th Edition -->
+<!ELEMENT document ((public))>
+
+<!ELEMENT public ((program, localization, character+))>
+
+<!ELEMENT program ((programinfo, version))>
+<!ATTLIST program
+	name CDATA #REQUIRED
+	url CDATA #REQUIRED
+>
+
+<!ELEMENT programinfo (#PCDATA)>
+
+<!ELEMENT version EMPTY>
+<!ATTLIST version
+	version CDATA #REQUIRED
+	build CDATA #IMPLIED
+	primary CDATA #IMPLIED
+	secondary CDATA #IMPLIED
+	tertiary CDATA #IMPLIED
+>
+
+<!ELEMENT localization EMPTY>
+<!ATTLIST localization
+	language CDATA #REQUIRED
+	units CDATA #REQUIRED
+>
+
+<!ELEMENT character ((bookinfo?, adventurersleague?, race, subrace, alignment, templates, size, deity, challengerating?, xpaward?, classes, factions, types, typetags, background, senses, auras, health, xp, money, personal, languages, toolproficiencies, weaponproficiencies, armorproficiencies, abilityscores, allsaves, defensive, damageresistances, damageimmunities, damagevulnerabilities, conditionimmunities, armorclass, initiative, proficiencybonus, movement, encumbrance, skills, skillabilities, feats, attack, melee, ranged, defenses, magicitems, gear, spelllike, racespells, itemspells, trackedresources, otherspecials, cantrips, spellsknown, spellsmemorized, spellbook, spellclasses, spellslots, journals, images?, validation, settings, npc?, minions))>
+<!ATTLIST character
+	active (yes | no) "no"
+	name CDATA #REQUIRED
+	playername CDATA #REQUIRED
+	nature CDATA #FIXED "normal"
+	role (pc | npc) "pc"
+	relationship (ally | enemy) "ally"
+	type CDATA "Hero"
+>
+
+<!ELEMENT bookinfo EMPTY>
+<!ATTLIST bookinfo
+	name CDATA #IMPLIED
+	id CDATA #IMPLIED
+>
+
+<!ELEMENT adventurersleague EMPTY>
+<!ATTLIST adventurersleague
+	playernum CDATA #REQUIRED
+	characternum CDATA #REQUIRED
+>
+
+<!ELEMENT race EMPTY>
+<!ATTLIST race
+	displayname CDATA #REQUIRED
+	name CDATA #REQUIRED
+	ethnicity CDATA #REQUIRED
+>
+
+<!ELEMENT subrace EMPTY>
+<!ATTLIST subrace
+	name CDATA #REQUIRED
+>
+
+<!ELEMENT alignment EMPTY>
+<!ATTLIST alignment
+	name CDATA #REQUIRED
+	abbreviation CDATA #REQUIRED
+>
+
+<!ELEMENT templates EMPTY>
+<!ATTLIST templates
+	summary CDATA #REQUIRED
+>
+
+<!ELEMENT size ((space, reach))>
+<!ATTLIST size
+	name CDATA #REQUIRED
+>
+
+<!ELEMENT space EMPTY>
+<!ATTLIST space
+	text CDATA #REQUIRED
+	value CDATA #REQUIRED
+>
+
+<!ELEMENT reach EMPTY>
+<!ATTLIST reach
+	text CDATA #REQUIRED
+	value CDATA #REQUIRED
+>
+
+<!ELEMENT deity EMPTY>
+<!ATTLIST deity
+	name CDATA #IMPLIED
+>
+
+<!ELEMENT challengerating EMPTY>
+<!ATTLIST challengerating
+	text CDATA #REQUIRED
+	value CDATA #REQUIRED
+>
+
+<!ELEMENT xpaward EMPTY>
+<!ATTLIST xpaward
+	text CDATA #REQUIRED
+	value CDATA #REQUIRED
+>
+<!ELEMENT classes ((class*))>
+<!ATTLIST classes
+	level CDATA #REQUIRED
+	summary CDATA #REQUIRED
+	summaryabbr CDATA #REQUIRED
+>
+<!ELEMENT class ((classhitdice))>
+<!ATTLIST class
+	level CDATA #REQUIRED
+	name CDATA #REQUIRED
+	spells CDATA #IMPLIED
+	casterlevel CDATA #IMPLIED
+	spellattack CDATA #IMPLIED
+	spellsavedc CDATA #IMPLIED
+	castersource CDATA #IMPLIED
+	spellability CDATA #IMPLIED
+	casterlevelprogression (normal | half | third) "normal"
+>
+
+<!ELEMENT classhitdice EMPTY>
+<!ATTLIST classhitdice
+	text CDATA #REQUIRED
+	count CDATA #REQUIRED
+	sides CDATA #REQUIRED
+>
+
+<!ELEMENT factions ((faction*))>
+<!ELEMENT faction EMPTY>
+<!ATTLIST faction
+	name CDATA #REQUIRED
+	tpa CDATA #REQUIRED
+	cpa CDATA #REQUIRED
+  retired (yes | no) "no"
+>
+
+<!ELEMENT types ((type*))>
+<!ELEMENT type EMPTY>
+<!ATTLIST type
+	name CDATA #REQUIRED
+	active (yes | no) "no"
+>
+
+<!ELEMENT typetags ((typetag*))>
+<!ELEMENT typetag EMPTY>
+<!ATTLIST typetag
+	name CDATA #REQUIRED
+>
+
+<!ELEMENT background ((backgroundtrait*))>
+<!ATTLIST background
+	name CDATA #REQUIRED
+>
+
+<!ELEMENT backgroundtrait (#PCDATA)>
+<!ATTLIST backgroundtrait
+	type CDATA #REQUIRED
+>
+
+<!ELEMENT senses ((special*))>
+<!ELEMENT special ((description, specsource*))>
+<!ATTLIST special
+	name CDATA #REQUIRED
+	shortname CDATA #REQUIRED
+	sourcetext CDATA #IMPLIED
+	type CDATA #IMPLIED
+>
+
+<!ELEMENT description (#PCDATA)>
+
+<!ELEMENT specsource (#PCDATA)>
+
+<!ELEMENT auras ((special*))>
+
+<!ELEMENT health ((special*, hitdice*))>
+<!ATTLIST health
+	currenthp CDATA #REQUIRED
+	damage CDATA #REQUIRED
+	hitdice CDATA #REQUIRED
+	hitpoints CDATA #REQUIRED
+	nonlethal CDATA #REQUIRED
+>
+
+<!ELEMENT hitdice EMPTY>
+<!ATTLIST hitdice
+	text CDATA #REQUIRED
+	count CDATA #REQUIRED
+	dietype CDATA #REQUIRED
+>
+
+<!ELEMENT xp EMPTY>
+<!ATTLIST xp
+	total CDATA #REQUIRED
+>
+
+<!ELEMENT money ((coins*))>
+<!ATTLIST money
+	total CDATA #REQUIRED
+	valuables CDATA #REQUIRED
+>
+
+<!ELEMENT coins EMPTY>
+<!ATTLIST coins
+	name CDATA #REQUIRED
+	abbreviation CDATA #REQUIRED
+	count CDATA #REQUIRED
+>
+
+<!ELEMENT personal ((description, charheight, charweight))>
+<!ATTLIST personal
+	age CDATA #IMPLIED
+	eyes CDATA #IMPLIED
+	gender CDATA #IMPLIED
+	hair CDATA #IMPLIED
+	skin CDATA #IMPLIED
+>
+
+<!ELEMENT charheight EMPTY>
+<!ATTLIST charheight
+	text CDATA #REQUIRED
+	value CDATA #REQUIRED
+>
+
+<!ELEMENT charweight EMPTY>
+<!ATTLIST charweight
+	text CDATA #REQUIRED
+	value CDATA #REQUIRED
+>
+
+<!ELEMENT languages ((language*))>
+<!ELEMENT language EMPTY>
+<!ATTLIST language
+	name CDATA #REQUIRED
+	useradded (yes | no) "yes"
+>
+
+<!ELEMENT toolproficiencies EMPTY>
+<!ATTLIST toolproficiencies
+	text CDATA #REQUIRED
+>
+
+<!ELEMENT weaponproficiencies EMPTY>
+<!ATTLIST weaponproficiencies
+	text CDATA #REQUIRED
+>
+
+<!ELEMENT armorproficiencies EMPTY>
+<!ATTLIST armorproficiencies
+	text CDATA #REQUIRED
+>
+
+<!ELEMENT abilityscores ((abilityscore+))>
+<!ELEMENT abilityscore ((abilvalue, abilbonus, savingthrow, situationalmodifiers))>
+<!ATTLIST abilityscore
+	name CDATA #REQUIRED
+>
+
+<!ELEMENT abilvalue EMPTY>
+<!ATTLIST abilvalue
+	text CDATA #REQUIRED
+	base CDATA #REQUIRED
+	modified CDATA #REQUIRED
+>
+
+<!ELEMENT abilbonus EMPTY>
+<!ATTLIST abilbonus
+	text CDATA #REQUIRED
+	base CDATA #REQUIRED
+	modified CDATA #REQUIRED
+>
+
+<!ELEMENT savingthrow ((situationalmodifiers))>
+<!ATTLIST savingthrow
+	text CDATA #REQUIRED
+	isproficient (yes | no) "no"
+>
+
+<!ELEMENT allsaves ((situationalmodifiers))>
+
+<!ELEMENT situationalmodifiers ((situationalmodifier*))>
+<!ATTLIST situationalmodifiers
+	text CDATA #REQUIRED
+>
+
+<!ELEMENT situationalmodifier EMPTY>
+<!ATTLIST situationalmodifier
+	text CDATA #REQUIRED
+	source CDATA #REQUIRED
+>
+
+<!ELEMENT defensive ((special*))>
+
+<!ELEMENT damageresistances EMPTY>
+<!ATTLIST damageresistances
+	text CDATA #REQUIRED
+>
+
+<!ELEMENT damageimmunities EMPTY>
+<!ATTLIST damageimmunities
+	text CDATA #REQUIRED
+>
+
+<!ELEMENT damagevulnerabilities EMPTY>
+<!ATTLIST damagevulnerabilities
+	text CDATA #REQUIRED
+>
+
+<!ELEMENT conditionimmunities EMPTY>
+<!ATTLIST conditionimmunities
+	text CDATA #REQUIRED
+>
+
+<!ELEMENT armorclass ((situationalmodifiers))>
+<!ATTLIST armorclass
+	ac CDATA #REQUIRED
+	unarmored CDATA #IMPLIED
+	fromarmor CDATA #IMPLIED
+	fromdexterity CDATA #IMPLIED
+	frommisc CDATA #IMPLIED
+	fromnatural CDATA #IMPLIED
+	fromshield CDATA #IMPLIED
+	fromsize CDATA #IMPLIED
+	maxdexbonus CDATA #IMPLIED
+>
+
+<!ELEMENT initiative ((situationalmodifiers))>
+<!ATTLIST initiative
+	total CDATA #REQUIRED
+	abiltext CDATA #REQUIRED
+	misctext CDATA #REQUIRED
+	abilname CDATA #REQUIRED
+>
+
+<!ELEMENT proficiencybonus EMPTY>
+<!ATTLIST proficiencybonus
+	total CDATA #REQUIRED
+>
+
+<!ELEMENT movement ((speed, basespeed, special*))>
+
+<!ELEMENT speed EMPTY>
+<!ATTLIST speed
+	text CDATA #REQUIRED
+	value CDATA #REQUIRED
+>
+
+<!ELEMENT basespeed EMPTY>
+<!ATTLIST basespeed
+	text CDATA #REQUIRED
+	value CDATA #REQUIRED
+>
+
+<!ELEMENT encumbrance EMPTY>
+<!ATTLIST encumbrance
+	carried CDATA #REQUIRED
+	level CDATA #REQUIRED
+	light CDATA #IMPLIED
+	medium CDATA #IMPLIED
+	max CDATA #REQUIRED
+>
+
+<!ELEMENT skills ((skill*))>
+<!ELEMENT skill ((description, situationalmodifiers))>
+<!ATTLIST skill
+	name CDATA #REQUIRED
+	value CDATA #REQUIRED
+	abilbonus CDATA #IMPLIED
+	abilabbreviation CDATA #IMPLIED
+	passive CDATA #IMPLIED
+	isproficient (yes | no) "no"
+	isprofdoubled (yes | no) "no"
+	isprofhalved (yes | no) "no"
+	showpassive (yes | no) "no"
+>
+
+<!ELEMENT skillabilities ((special*))>
+
+<!ELEMENT feats ((feat*))>
+<!ELEMENT feat ((description))>
+<!ATTLIST feat
+	name CDATA #REQUIRED
+	useradded (yes | no) "yes"
+>
+
+<!ELEMENT attack ((special*))>
+<!ATTLIST attack
+	attackbonus CDATA #REQUIRED
+	baseattack CDATA #REQUIRED
+	meleeattack CDATA #REQUIRED
+	rangedattack CDATA #REQUIRED
+>
+
+<!ELEMENT melee ((weapon*))>
+<!ELEMENT weapon ((rangedattack?, magicbonus?, weight?, cost?, geartype?, rarity?, description, itempower*, wepcategory*, weptype*, wepproperty*, wepproficiency*, situationalmodifiers))>
+<!ATTLIST weapon
+	name CDATA #REQUIRED
+	attack CDATA #REQUIRED
+	damage CDATA #REQUIRED
+	categorytext CDATA #IMPLIED
+	typetext CDATA #IMPLIED
+	size CDATA #IMPLIED
+	flurryattack CDATA #IMPLIED
+	equipped (double | bothhands | mainhand | offhand | no) "no"
+	useradded (yes | no) "yes"
+	isproficient (yes | no) "no"
+	quantity CDATA "1"
+>
+
+<!ELEMENT magicbonus EMPTY>
+<!ATTLIST magicbonus
+	text CDATA #REQUIRED
+	value CDATA #REQUIRED
+>
+
+<!ELEMENT weight EMPTY>
+<!ATTLIST weight
+	text CDATA #REQUIRED
+	value CDATA #REQUIRED
+>
+
+<!ELEMENT cost EMPTY>
+<!ATTLIST cost
+	text CDATA #REQUIRED
+	value CDATA #REQUIRED
+>
+
+<!ELEMENT geartype EMPTY>
+<!ATTLIST geartype
+	text CDATA #REQUIRED
+>
+
+<!ELEMENT rarity EMPTY>
+<!ATTLIST rarity
+	text CDATA #REQUIRED
+>
+
+<!ELEMENT rangedattack EMPTY>
+<!ATTLIST rangedattack
+	attack CDATA #REQUIRED
+	flurryattack CDATA #IMPLIED
+	range CDATA #REQUIRED
+>
+
+<!ELEMENT itempower ((description))>
+<!ATTLIST itempower
+	name CDATA #REQUIRED
+	pricebonusvalue CDATA #REQUIRED
+	pricebonustext CDATA #REQUIRED
+	pricecashvalue CDATA #REQUIRED
+	pricecashtext CDATA #REQUIRED
+>
+
+<!ELEMENT wepcategory (#PCDATA)>
+
+<!ELEMENT weptype (#PCDATA)>
+
+<!ELEMENT wepproperty (#PCDATA)>
+
+<!ELEMENT wepproficiency (#PCDATA)>
+
+<!ELEMENT ranged ((weapon*))>
+
+<!ELEMENT defenses ((armor*))>
+<!ELEMENT armor ((magicbonus?, weight?, cost?, geartype?, rarity?, description, itempower*, armorcategory*))>
+<!ATTLIST armor
+	name CDATA #REQUIRED
+	ac CDATA #REQUIRED
+	equipped (yes | no) "no"
+	natural (yes | no) "no"
+	stealth CDATA #IMPLIED
+	maxdex CDATA #IMPLIED
+	strengthrequired CDATA #IMPLIED
+	useradded (yes | no) "yes"
+	isproficient (yes | no) "no"
+	quantity CDATA "1"
+>
+
+<!ELEMENT armorcategory (#PCDATA)>
+
+<!ELEMENT magicitems ((item*))>
+<!ELEMENT item ((magicbonus?, weight?, cost?, heldin?, geartype?, rarity?, description, itempower*))>
+<!ATTLIST item
+	name CDATA #REQUIRED
+	useradded (yes | no) "yes"
+	isproficient (yes | no) "no"
+	isattuned (yes | no) "no"
+	quantity CDATA "1"
+>
+
+<!ELEMENT heldin EMPTY>
+<!ATTLIST heldin
+	name CDATA #REQUIRED
+>
+
+<!ELEMENT gear ((item*))>
+
+<!ELEMENT spelllike ((spellability*))>
+<!ELEMENT spellability ((description, usage?, spellcomp*, spellschool*, spellsubschool*, spelldescript*))>
+<!ATTLIST spellability
+	name CDATA #REQUIRED
+	level CDATA #IMPLIED
+	casterlevel CDATA #REQUIRED
+	casttime CDATA #IMPLIED
+	source CDATA #IMPLIED
+	componenttext CDATA #IMPLIED
+	dc CDATA #IMPLIED
+	descriptor CDATA #IMPLIED
+	duration CDATA #IMPLIED
+	range CDATA #IMPLIED
+	schooltext CDATA #IMPLIED
+	useradded (yes | no) "yes"
+>
+
+<!ELEMENT usage EMPTY>
+<!ATTLIST usage
+	text CDATA #REQUIRED
+	total CDATA #IMPLIED
+	period CDATA #REQUIRED
+>
+
+<!ELEMENT racespells ((spellability*))>
+
+<!ELEMENT itemspells ((spellability*))>
+
+<!ELEMENT trackedresources ((trackedresource*))>
+<!ELEMENT trackedresource EMPTY>
+<!ATTLIST trackedresource
+	name CDATA #REQUIRED
+	text CDATA #REQUIRED
+	used CDATA #REQUIRED
+	left CDATA #REQUIRED
+	min CDATA #REQUIRED
+	max CDATA #REQUIRED
+>
+
+<!ELEMENT otherspecials ((special*))>
+
+<!ELEMENT spellsknown ((spell*))>
+<!ELEMENT spell ((description, spellcomp*, spellschool*, spellsubschool*, spelldescript*))>
+<!ATTLIST spell
+	name CDATA #REQUIRED
+	level CDATA #IMPLIED
+	casterlevel CDATA #REQUIRED
+	castsleft CDATA #IMPLIED
+	casttime CDATA #IMPLIED
+	class CDATA #IMPLIED
+	componenttext CDATA #IMPLIED
+	dc CDATA #IMPLIED
+	descriptor CDATA #IMPLIED
+	duration CDATA #IMPLIED
+	range CDATA #IMPLIED
+	schooltext CDATA #IMPLIED
+	useradded (yes | no) "yes"
+	spontaneous (yes | no) "no"
+	unlimited (yes | no) "no"
+>
+
+<!ELEMENT spellcomp (#PCDATA)>
+
+<!ELEMENT spellschool (#PCDATA)>
+
+<!ELEMENT spellsubschool (#PCDATA)>
+
+<!ELEMENT spelldescript (#PCDATA)>
+
+<!ELEMENT spellsmemorized ((spell*))>
+
+<!ELEMENT spellbook ((spell*))>
+
+<!ELEMENT cantrips ((spell*))>
+
+<!ELEMENT spellclasses ((spellclass*))>
+<!ELEMENT spellclass ((spelllevel*))>
+<!ATTLIST spellclass
+	name CDATA #REQUIRED
+	spells CDATA #REQUIRED
+	maxspelllevel CDATA #REQUIRED
+	cantripcount CDATA #REQUIRED
+	spellcount CDATA #REQUIRED
+>
+
+<!ELEMENT spellslots ((spellslot*))>
+<!ELEMENT spellslot EMPTY>
+<!ATTLIST spellslot
+	name CDATA #REQUIRED
+	count CDATA #REQUIRED
+	used CDATA #REQUIRED
+>
+
+<!ELEMENT spelllevel EMPTY>
+<!ATTLIST spelllevel
+	level CDATA #REQUIRED
+	maxcasts CDATA "0"
+	used CDATA "0"
+	unlimited (yes | no) "no"
+>
+
+<!ELEMENT journals ((journal*))>
+<!ELEMENT journal ((coins*, description))>
+<!ATTLIST journal
+	name CDATA #IMPLIED
+	gamedate CDATA #IMPLIED
+	xp CDATA #IMPLIED
+	prestigeaward CDATA #IMPLIED
+	prestigespend CDATA #IMPLIED
+	realdate CDATA #IMPLIED
+>
+
+<!ELEMENT images ((image*))>
+<!ELEMENT image EMPTY>
+<!ATTLIST image
+	filename CDATA #REQUIRED
+>
+
+<!ELEMENT validation ((report, validmessage*))>
+
+<!ELEMENT report (#PCDATA)>
+
+<!ELEMENT validmessage (#PCDATA)>
+
+<!ELEMENT settings EMPTY>
+<!ATTLIST settings
+	summary CDATA #REQUIRED
+>
+
+<!ELEMENT npc ((description, basics, tactics, ecology, additional))>
+<!ELEMENT basics ((npcinfo*))>
+<!ELEMENT tactics ((npcinfo*))>
+<!ELEMENT ecology ((npcinfo*))>
+<!ELEMENT additional ((npcinfo*))>
+<!ELEMENT npcinfo (#PCDATA)>
+<!ATTLIST npcinfo
+	name CDATA #REQUIRED
+>
+
+<!ELEMENT minions ((character*))>

@@ -1,0 +1,103 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<link href="../../../../docs/common/styles.css" rel="STYLESHEET">
+<title>Example Ranger Archetypes </title>
+</head>
+
+<body>
+
+<div align="center">
+  <table class="banner" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td>
+        <p align="center" class="banner">Example Ranger Archetypes 
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div align="center">
+  <table border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td><img border="0" src="../../../../docs/common/empty.gif" width="1" height="15"></td>
+    </tr>
+  </table>
+</div>
+
+<p class="section">Introduction
+
+<p class="body">This document provides examples of the mechanics for other ranger archetypes. 
+
+<h4>Beast Master</h4><p class="body">Below are the necessary mechanics to model the Beast Master archetype and associated abilities.</p><pre class="xml">
+  &lt;thing id="cRgrBeaMas" name="Beast Master" description="Placeholder..." compset="CustomSpec" uniqueness="unique"&gt;
+    &lt;tag group="SpecSource" tag="cHelpRgr"/&gt;
+    &lt;tag group="Helper" tag="Secondary"/&gt;
+    &lt;tag group="abCategory" tag="RgrArchety" name="Ranger Archetype"/&gt;
+    &lt;bootstrap thing="cRgrRanCom"&gt;
+      &lt;autotag group="ClSpecWhen" tag="3"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cRgrExcTra"&gt;
+      &lt;autotag group="ClSpecWhen" tag="7"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cRgrBesFur"&gt;
+      &lt;autotag group="ClSpecWhen" tag="11"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cRgrShaSpe"&gt;
+      &lt;autotag group="ClSpecWhen" tag="15"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;eval phase="PostLevel" priority="10000"&gt;&lt;![CDATA[
+     doneif (tagis[Helper.Disable] &lt;&gt; 0)
+
+     if (field[xTotalLev].value &gt;= 15) then
+       hero.childfound[cfgRgrHunt].field[cfgMax4].value += 1
+       endif
+     if (field[xTotalLev].value &gt;= 11) then
+       hero.childfound[cfgRgrHunt].field[cfgMax3].value += 1
+       endif
+     if (field[xTotalLev].value &gt;= 7) then
+       hero.childfound[cfgRgrHunt].field[cfgMax2].value += 1
+       endif
+     if (field[xTotalLev].value &gt;= 3) then
+       hero.childfound[cfgRgrHunt].field[cfgMax1].value += 1
+       endif]]&gt;&lt;/eval&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cRgrRanCom" name="Ranger&apos;s Companion" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;tag group="abAction" tag="None"/&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="abDuration" tag="Constant"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cRgrExcTra" name="Exceptional Training" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;tag group="abRange" tag="Hearing"/&gt;
+    &lt;tag group="abDuration" tag="Instant"/&gt;
+    &lt;tag group="abAction" tag="Bonus"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cRgrBesFur" name="Bestial Fury" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="abDuration" tag="Constant"/&gt;
+    &lt;tag group="abAction" tag="None"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cRgrShaSpe" name="Share Spells" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;fieldval field="abRange" value="30"/&gt;
+    &lt;tag group="abDuration" tag="Instant"/&gt;
+    &lt;tag group="abAction" tag="None"/&gt;
+    &lt;tag group="abRange" tag="Feet"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cRgrUnderd" name="Underdark" description="Placeholder..." compset="CustomSpec" summary="Placeholder..." uniqueness="unique"&gt;
+    &lt;tag group="SpecSource" tag="cHelpRgr"/&gt;
+    &lt;tag group="Helper" tag="Quaternary"/&gt;
+    &lt;tag group="abAction" tag="None"/&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="abDuration" tag="Constant"/&gt;
+    &lt;tag group="abCategory" tag="RgrNatExpl" name="Ranger Natural Explorer Terrain"/&gt;
+    &lt;/thing&gt;
+
+  </pre>
+
+<p class="body"><a href="../5ededit.htm">Go Back</a>.
+
+</body>
+
+</html>

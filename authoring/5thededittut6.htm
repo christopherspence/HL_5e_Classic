@@ -1,0 +1,198 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<link href="../../../docs/common/styles.css" rel="STYLESHEET">
+<title>Tutorial 6 - Adding Spellcasting to a Non-Spellcasting Class</title>
+</head>
+
+<body>
+
+<div align="center">
+  <table class="banner" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td>
+        <p align="center" class="banner">Tutorial 6 - Adding Spellcasting
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div align="center">
+  <table border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td><img border="0" src="../../../docs/common/empty.gif" width="1" height="15"></td>
+    </tr>
+  </table>
+</div>
+
+<p class="section">Introduction
+
+<p class="body">In previous tutorials up until now you've been creating things and assigning them tags and field values, and Hero Lab has been smart enough to interpret those signals and carry out whatever other processes were necessary to make them work. Here is where you'll get your first taste of actual coding - by making a script that will add spellcasting to a class which does not have it, like the Eldritch Knight class from the PHB.
+
+<p class="body">To keep things simple, we'll start with just giving you the script to use, and then talk about what each section is doing.
+
+<p class="body"><font class="strong">This tutorial assumes you're familiar with the contents of all previous tutorials. The instructions below gloss over a lot of the scripting details - if you find yourself wanting to know more about how things work, check out <a href="5thedediteval.htm">the eval scripts reference</a>, which will give you more context on what's happening below.</font>
+
+<p class="section">Loading the Editor
+
+<p class="body">Launch the Editor from Hero Lab's "Tools" menu. Load the "tutorial" file that you created for the previous tutorials, then switch to the "Custom Ability" tab.
+
+<p class="section">Create the Custom Ability
+
+<p class="body">You should be familiar with creating Custom Abilities and associating them with an existing class. If you need a refresher, refer back to <a href="5thededittut3.htm">Tutorial 3</a>, where you created the Black Knight class. In this tutorial, we're going to create a new Martial Archetype for the Fighter class that gives them a little bit of spellcasting, just like the Eldritch Knight archetype. Perhaps they dabble in the magical arts in between sword drills, push ups, and smashing watermelons with their bare hands, so we'll call them "Arcane Dabblers".
+
+<p><img border="0" src="tut6_arcdabble.png"/>
+
+<p class="body">Create the "Arcane Dabbler" custom ability, and set the following options on it:
+
+<p class="body">Available To Class(es): <font class="strong">Fighter</font> - this allows it to be selected by the Fighter class<br>
+Ability Table: <font class="strong">Secondary</font> - this shows it in the second table on the Fighter tab, which is the Martial Archetypes table (the first table shows fighting styles)<br>
+Special Ability Category: <font class="strong">Fighter Martial Archetype</font> - this correctly identifies it as a martial archetype
+
+<p class="body">Test the ability and make sure you can add it on the Fighter tab. If you can't, make sure you selected the above three options.
+
+<p class="body">Now that you've successfully tested the ability, add any associated class abilities (<a href="5thededittut3.htm">as demonstrated in Tutorial 3</a>) that go along with it. Now you've got the basics in place, it's time to add your first <font class="strong">eval script</font>.
+
+<p class="body">Select your new Custom Ability and find the blue "Eval Scripts" button in the upper right. Click it to open the <font class="strong">Eval Scripts</font> window, and add an Eval script.
+
+<p class="body">You should see a large empty grey box, which will hold the code for the script, and above it a dropdown for Phase and a field for Priority. The phase and priority of the script are very important - choose "Pre-Levels" for the Phase, and "10000" for the Priority. You can learn more about why you'd choose these values in <a href="5thedediteval.htm">the eval scripts reference</a>.
+
+<p class="body">Copy and paste the following script, shown in yellow, into the main body of the eval script. For now, don't worry about how it works - we'll go into more details below.
+
+<pre class="xml"><font class="strong">perform linkage[table].setfocus
+doneif (state.isfocus = 0)
+
+doneif (tagis[Helper.Disable] <> 0)
+
+~ Spellcasting attribute
+perform focus.setlinkage[castattr,BaseAttr,"IsAttr.aINT"]
+
+~ Spellcasting type
+perform focus.assign[CasterType.SpontKnow]
+perform focus.assign[CasterSrc.Arcane]
+perform focus.assign[Helper.3rdCaster]
+perform focus.assign[sClass.cHelpWiz]
+
+~ Cantrip Array
+focus.field[cArrKnCan].arrayvalue[2] += 2
+focus.field[cArrKnCan].arrayvalue[9] += 3
+
+~ Spells Known Array
+focus.field[cArrKnSpl].arrayvalue[2] += 3
+focus.field[cArrKnSpl].arrayvalue[3] += 4
+focus.field[cArrKnSpl].arrayvalue[6] += 5
+focus.field[cArrKnSpl].arrayvalue[7] += 6
+focus.field[cArrKnSpl].arrayvalue[9] += 7
+focus.field[cArrKnSpl].arrayvalue[10] += 8
+focus.field[cArrKnSpl].arrayvalue[12] += 9
+focus.field[cArrKnSpl].arrayvalue[13] += 10
+focus.field[cArrKnSpl].arrayvalue[15] += 11
+focus.field[cArrKnSpl].arrayvalue[18] += 12
+focus.field[cArrKnSpl].arrayvalue[19] += 13
+
+~ Max Spell Levels Array
+focus.field[cArrKnLev].arrayvalue[2] += 1
+focus.field[cArrKnLev].arrayvalue[6] += 2
+focus.field[cArrKnLev].arrayvalue[12] += 3
+focus.field[cArrKnLev].arrayvalue[18] += 4
+</font></pre>
+
+<p><img border="0" src="tut6_script.png"/>
+
+<p class="body">Once you've pasted the script into the edit control, verify that the Phase and Priority are set correctly (see above), hit OK, and save the Arcane Dabbler ability. You'll notice a little "x1" beside the Eval Scripts button - that indicates a single eval script is present.
+
+<p class="section">Try it!
+
+<p class="body">Test the new Arcane Dabbler in Hero Lab, and select it for a third-level fighter. You should see a new "Fighter Spells" tab appear for the character, where you can select cantrip and first-level spells, and the number of spells gained should increase as you add fighter levels. If you see that, it worked! If you don't, make sure you copied and pasted the entire script above, and make sure that you specified the phase and priority correctly on the eval script (you can edit it by clicking the Eval Scripts button again.)
+
+<p><img border="0" src="tut6_showspells.png"/>
+
+<p class="body">OK, so you've added the new Martial Archetype with a script, but how does the script work? What's it doing? Let's walk through it, step by step.
+
+
+<pre class="xml"><font class="strong">perform linkage[table].setfocus
+doneif (state.isfocus = 0)
+
+doneif (tagis[Helper.Disable] <> 0)
+</font></pre>
+
+<p class="body">All the changes we're making in this script are changes to the class helper object, so the first thing we need to do is find that object, and start modifying it.
+
+<p class="body">The first line transitions from where this eval script starts (on the custom ability itself), through the table linkage to the class helper of the class which added it, and then "perform"s a "setfocus" action. This establishes a reference context, which we can start at in future lines of code by beginning them with "focus".  This is a convenience so that we do not need to transition to the class helper over and over again in future lines, and also makes our code generalized in case this custom special is added to a class other than the fighter. To learn more about linkages, contexts, and transitions, check out <a href="5thedediteval.htm">the eval scripts reference</a>.
+
+<p class="body">The next two lines are called "Stops". "doneif" is a special conditional statement which stops the eval script from progressing further if the relationship within the parenthesis evaluates as true. The first checks to make sure we have established a focus, which is important because if a script attempts to go to a focus but none exist, then the user would see an error. We wouldn't want that! The second is a check for the presence of a generic "Disable" tag - if that's there, something has disabled this ability, so we shouldn't do anything.
+
+<p class="body">Not sure what I mean by "conditional statement", "relationship" and "evaluates"? Check out <a href="5thedediteval.htm">the eval scripts reference</a> for more information.
+
+
+<pre class="xml"><font class="strong">~ Spellcasting attribute
+perform focus.setlinkage[castattr,BaseAttr,"IsAttr.aINT"]
+</font></pre>
+
+<p class="body">The fighter class was defined with a default "castattr" linkage, but we want to make sure this points at the right attribute, since this linkage specifies which attribute to base spell DCs and attacks on. Line 4 uses "focus" to start at the class helper, and then makes sure to set the linkage to the Intelligence attribute. The first thing listed in the brackets is the linkage to be set at that context, the 2nd and 3rd are the component of the target, and a tag expression to define what in that component should be targetted.
+
+
+<pre class="xml"><font class="strong">~ Spellcasting type
+perform focus.assign[CasterType.SpontKnow]
+perform focus.assign[CasterSrc.Arcane]
+perform focus.assign[Helper.3rdCaster]
+perform focus.assign[sClass.cHelpWiz]
+</font></pre>
+
+<p class="body">The next block of code assigns (adds to a Pick) a set of tags which will control some behaviors on the class helper (which is our focus). The class helper uses these tags to set several behaviours during a later phase, which is why we set the eval script phase to Pre-Levels when we created it.
+
+<p class="body">"CasterType.SpontKnow" marks this as a class which, like the sorcerer, must choose a limited number of known spells, rather than keeping a spellbook. If you wanted to mimic other classes with different casting (like the Cleric or Wizard), then you should apply a different CasterType tag.
+
+<p class="body">"CasterSrc.Arcane" defines whether we cast arcane spells or divine spells. This could be important for some things which require one or the other magic types as a pre-requisite.
+
+<p class="body">All spellcasting classes (save the warlock) advance along the same progression for spell slots, and "Helper.3rdCaster" means we add 1/3 our levels towards that. The other options for this are "Helper.HalfCaster" (half levels like the ranger) and "Helper.FullCaster" (full levels like the cleric).
+
+<p class="body">"sClass" tags are used to determine what list of spells the class draws from. In this case we want to use an existing spell list, that of the wizard.
+
+
+<pre class="xml"><font class="strong">~ Cantrip Array
+focus.field[cArrKnCan].arrayvalue[2] += 2
+focus.field[cArrKnCan].arrayvalue[9] += 3
+
+~ Spells Known Array
+focus.field[cArrKnSpl].arrayvalue[2] += 3
+focus.field[cArrKnSpl].arrayvalue[3] += 4
+focus.field[cArrKnSpl].arrayvalue[6] += 5
+focus.field[cArrKnSpl].arrayvalue[7] += 6
+focus.field[cArrKnSpl].arrayvalue[9] += 7
+focus.field[cArrKnSpl].arrayvalue[10] += 8
+focus.field[cArrKnSpl].arrayvalue[12] += 9
+focus.field[cArrKnSpl].arrayvalue[13] += 10
+focus.field[cArrKnSpl].arrayvalue[15] += 11
+focus.field[cArrKnSpl].arrayvalue[18] += 12
+focus.field[cArrKnSpl].arrayvalue[19] += 13
+
+~ Max Spell Levels Array
+focus.field[cArrKnLev].arrayvalue[2] += 1
+focus.field[cArrKnLev].arrayvalue[6] += 2
+focus.field[cArrKnLev].arrayvalue[12] += 3
+focus.field[cArrKnLev].arrayvalue[18] += 4
+</font></pre>
+
+<p class="body">The remainder of the eval script is setting the values of several different array fields. We discussed arrays a bit in <a href="5thededittut3.htm">Tutorial 3</a>; recall that these fields have not only a unique ID, but also some number of rows. When navigating to an array field you must specify which row you will affect by placing it in the final set of brackets.
+
+<p class="body">"cArrKnCan" is an array field which stores the number of known cantrips at certain levels, and "cArrKnSpl" does the same for known spells. cArrKnLev maintains the levels at which the highest spell level that can be known changes. Remember that arrays start off at 0, so when setting their values remember that row 0 is for level 1 and so on.
+
+<p class="body">This final chunk of the script adds to the appropriate arrays to set up the Arcane Dabbler's spellcasting abilities. You can look at the code to see how the number of spells increases as the character levels up.
+
+
+<p class="section">Finished!
+
+<p class="body">That's all you need to add spellcasting to your fighter through a Martial Archetype! You can extend this process to any class, or even use it to change the spellcasting behaviour of a class that already casts spells.
+
+<p class="section">What next?
+
+<p class="body">If you want to know how eval scripts function and are written, or you want more context on what we did above, continue on to <a href="5thedediteval.htm">the eval scripts reference</a>!
+
+<p class="body"><a href="5ededit.htm">Go Back</a>.
+
+</body>
+
+</html>

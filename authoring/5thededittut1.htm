@@ -1,0 +1,205 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<link href="../../../docs/common/styles.css" rel="STYLESHEET">
+<title>Tutorial 1 - The Editor</title>
+</head>
+
+<body>
+
+<div align="center">
+  <table class="banner" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td>
+        <p align="center" class="banner">Tutorial 1 - The Editor
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div align="center">
+  <table border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td><img border="0" src="../../../docs/common/empty.gif" width="1" height="15"></td>
+    </tr>
+  </table>
+</div>
+
+<p class="section">Introduction
+
+<p class="body">In this tutorial, we'll introduce you to the Hero Lab Editor, and how it can be used for the 5th Edition SRD game system. We'll end by having you add a simple Feat that you can then use with your own characters.
+
+<p class="section">The Editor
+
+        <table border=0 cellspacing=0 cellpadding=0>
+          <tr>
+            <td><img border="0" src="../../../docs/common/empty.gif" width="1" height="10"></td>
+          </tr>
+          <tr>
+            <td valign="center"><img class="border" src="./blank_editor.png"></td>
+            <td><img border="0" src="../../../docs/common/empty.gif" width="10" height="1"></td>
+            <td valign="center">
+              <p class="body">The first step is to load the 5th Edition SRD data files into Hero Lab, just as you normally would to start a new character. Create a new hero, then go to the "Tools" menu and select "Launch Editor". The blank Editor form should appear, as displayed to the left.
+            </td>
+          </tr>
+        </table>
+
+<p class="section">Creating a new file
+<p class="body">Every piece of data used by Hero Lab is held in a file, just like a word processing document or an image. To start adding our own content, we need to create a new file to put it in. You can do this by going to the File menu and selecting "New Data File". A blank file will then be created - it doesn't have anything useful yet, but we're going to change that.
+
+<p class="section">Guide to the Editor
+<p class="body">The editor has a tab for each kind of thing which can be added to a character, organized into groups of similar purpose. The top row of tabs are the groups (General, Class, Equipment, etc) and the tabs on the second row are for each specific thing and arranged in alphabetical order. We're going to create a couple feats in this tutorial, which are part of the General group, so click on the appropriate tab to start.
+
+        <table border=0 cellspacing=0 cellpadding=0>
+          <tr>
+            <td><img border="0" src="../../../docs/common/empty.gif" width="1" height="10"></td>
+          </tr>
+          <tr>
+            <td valign="center"><img class="border" src="./tut1_editor.png"></td>
+            <td><img border="0" src="../../../docs/common/empty.gif" width="10" height="1"></td>
+            <td valign="center">
+              <p class="body">First, let's look at the list of things (labelled "1" on the diagram) and the buttons below it (labelled "2"). Right now we have no feats defined, so our list is empty (we'll soon change that). The buttons below it allow you to perform various operations on the things in the list.
+
+<p class="body">Only two of the buttons, labelled "New (Blank)" and "New (Copy)", are enabled right now. If you press the "New (Blank)" button, it creates a new, empty feat for you to edit. Pressing "New (Copy)" creates a copy of an existing feat that you can modify - we'll go into the use of that in a future tutorial, so ignore it for now.
+
+            </td>
+          </tr>
+        </table>
+
+<p class="section">Creating the Two Hand Smash feat (Text Only)
+
+<p class="body">Say that you want to create a feat which makes large weapons outright wrecking balls, able to knock down inanimate objects in a few well placed swings. You come up with a feat called Two Hand Smash, that gives the character advantage on strength checks to break through obstacles, as long as they are wielding a heavy weapon. Granting advantage on certain rolls isn't something which requires any scripting in Hero Lab, so this feat will be text only, and thus very simple to create in the editor.
+
+<p class="body">The "New (Blank)" button will serve our purpose nicely, since we don't need to base this feat off of something else. As soon as we click it, some changes occur - the "Delete" and "Duplicate" buttons light up. Clicking "Delete", as you might guess, deletes the current feat (useful if you decide you don't want to include Two Hand Smash in the file any more). Clicking "Duplicate" makes a copy of the current feat, allowing you to work on the copy while preserving the original.
+
+<p class="body">Now that we've created a new feat, take a look at the list. An entry has appeared at the top, with a name of "????". Let's replace that with what we originally decided.
+
+<p class="section">Naming your Feat
+
+        <table border=0 cellspacing=0 cellpadding=0>
+          <tr>
+            <td><img border="0" src="../../../docs/common/empty.gif" width="1" height="10"></td>
+          </tr>
+          <tr>
+            <td valign="center"><img class="border" src="./tut1_name.png"></td>
+            <td><img border="0" src="../../../docs/common/empty.gif" width="10" height="1"></td>
+            <td valign="center">
+              <p class="body">Find the "Name" edit control (labelled "3" on the screenshot, above). Click on it and enter the name of our example feat - <font class="strong">"Two Hand Smash"</font>, instead of the default ????.
+            </td>
+          </tr>
+        </table>
+
+<p class="body">Once you start changing the name, two new buttons will light up below the "New" buttons (location "2" on the screenshot). The "Save" button saves changes to the current feat; the "Revert" button discards any changes you made since the last time you saved it. This can be useful if you make some changes and then, before saving, realise you didn't want them.
+
+<p class="body">Now seems like a good time to save the changes we made, so click on the "Save" button. Uh oh! The editor pops up an error message reading "Please choose a valid unique id before you save the record." and prevents you from proceeding. Usually the error message will be clear and easy to correct, but if you have questions about an error message, you can right click on the pop up and copy the text, to ask about on <a href="http://forums.wolflair.com/forumdisplay.php?f=89">our 5th Edition SRD forums</a>.
+
+<p class="body">This is one of the easier issues to correct - let's pick a unique id for the feat.
+
+<p class="section">Changing the Unique Id
+
+<p class="body">First, let's go into some details you need to know for editing data files. Every feat, class, spell, weapon, and everything else in Hero Lab has a "Unique Id". This is a sequence of up to 10 characters, which can include letters (upper and lower case), digits, and the _ character. No two things can have the same Unique Id. (See <a href=http://hlkitwiki.wolflair.com/index.php5/Unique_Ids>this guide</a> for more information on Unique Ids.) This allows scripts to easily access different things - for example, the "Strength" attribute has the unique id "aSTR", while the Elvish language has the unique id "lElvish".
+
+<p class="body">(Advanced Note: Why does Hero Lab use unique ids? Scripts can use these identifiers to quickly apply bonuses and penalties at a much higher speed than if it was searching for them by name.)
+
+<p class="body">Depending on the tab we are on, creating a thing will start the unique ID off with a prefix that is the default for that type of thing. In the above examples, the "a" in "aSTR" is the prefix for an Attribute thing, and "l" in "lElvish" is the same for Languages. Since this is a feat, the prefix is "f".
+
+<p class="body">When you're creating your own content, Hero Lab also adds a "user identifier" to the unique id - for example, if your name is John Smith, your user identifier could be JS; if you go by the handle "Monster Man" online, it could be "MM". You'll notice that the screenshot above shows "JS" in the feat name - that's the user identifier we took the screenshot with. Hero Lab will have picked a user identifier for you, but you can change it from the Tools menu in the editor. Choosing a user identifier means that if you and a friend both make feats named "Two Hand Smash", you're less likely to pick the same unique id, because your user identifiers should be different.
+
+<p class="body">After the user identifier, comes '?' (the invalid character which caused us to error when we tried to save earlier). It is that question mark we need to replace before we can proceed.
+        <table border=0 cellspacing=0 cellpadding=0>
+          <tr>
+            <td><img border="0" src="../../../docs/common/empty.gif" width="1" height="10"></td>
+          </tr>
+          <tr>
+            <td valign="center"><img class="border" src="./tut1_id.png"></td>
+            <td><img border="0" src="../../../docs/common/empty.gif" width="10" height="1"></td>
+            <td valign="center">
+<p class="section">Choosing a Good Unique Id
+
+<p class="body">It's recommended that you develop a standard pattern for setting unique IDs, and relate the body of the unique ID to the name of the thing in question. This helps you link the unique ID and the Name in your mind, which will help you quickly create scripts later. You'll recognize what the unique ID references when reading older scripts you wrote, and when writing new ones you'll be able to make a fair guess at what the unique ID will be so long as you know the name of what you're dealing with in the script.
+
+<p class="body">I like to include the first few letters of each word in the name (excluding words like "of" or "the"), so let's go with "fJSTwoHaSm". Type <font class="strong">"fJSTwoHaSm"</font> into the "Unique Id" edit control (labelled "4" on the screenshot), with 'JS' replaced by your user identifer.
+
+<p class="body">That should resolve the error, so let's try hitting that "Save" button again! This time it should work. Notice that once the feat is saved, the "Save" and "Revert" buttons grey out again and looking up at the list of feats ("1") - your feat name and ID will now appear there instead of "????" and "fJS?" respectively. We're almost done!
+
+<p class="body">(Note: For the rest of this tutorial, when we say "Save the feat", you should click on the "Save" button at the bottom-left to save your changes. Saving regularly is a good idea, because if you make a big mistake with what you do, you can use the "Revert" button to restore the previous state without losing much.)
+            </td>
+          </tr>
+        </table>
+
+<p class="section">Adding a description
+
+        <table border=0 cellspacing=0 cellpadding=0>
+          <tr>
+            <td><img border="0" src="../../../docs/common/empty.gif" width="1" height="10"></td>
+          </tr>
+          <tr>
+            <td valign="center"><img class="border" src="./tut1_desc.png"></td>
+            <td><img border="0" src="../../../docs/common/empty.gif" width="10" height="1"></td>
+            <td valign="center">
+              <p class="body">Our feat isn't much use without rules describing its mechanical effects, and it's no fun without a little bit of flavor text! Click in the large "Description Text" control (labelled "5" on the screenshot) and type a description - something like <font class="strong">"With a heavy weapon in hand, no barrier can stand before your expert swings. When making Strength checks to break through obstacles, your character has advantage as long as they are currently wielding a heavy weapon."</font>. Once again, save the feat.
+            </td>
+          </tr>
+        </table>
+
+<p class="section">Adding a summary
+
+<p class="body">While the description of our example feat is very short, oftentimes the text will be very long. In that case, it's useful to have a sentance or two which boils the mechanical function of this thing down to it's "at a glance" essentials. The summary is located to the right of the unique ID in the editor, and it is what is displayed by things which appear on the specials tab. Because of the limited space on that tab, cutting things down to fit can be difficult, but try to think of the questions that might come up in play (What limits this? How is it resisted?) and don't be afraid to use abbreviations.
+
+<p class="body">In the case of our example feat, the essential elements are the effect ("advantage on strength checks") and two limitations ("only to break obstacles" and "must equip a heavy weapon). So an appropriate summary might be <font class="strong">"If using heavy wep, gain adv on Str checks to break obstacles."</font>. Enter that summary, save the feat one final time, and we're done! That's right, all you need to do to enter a feat is to type in 3 or 4 simple pieces of information.
+
+<p class="body">Now we need to get Hero Lab to recognise that information, so read on.
+        </table>
+
+<p class="section">Save the file
+
+<p class="body">First, let's save the file. Saving files in the editor works like any other Windows application - go to the "File" menu and select "Save Data File...". For the filename, enter something like "tutorial" (since this is the tutorial stuff you're doing - it'll be better if you keep all the tutorial items together in one file), then click the "Save" button.
+
+<p class="body">Note that there's an important difference between saving the current feat and saving the whole file. New feats need to be saved after you change them, and then the entire file needs to be saved by clicking the "Save File" button. If you try to save the file without saving the feats, Hero Lab will ask you if you want to save them - it's usually a good idea to accept, or things might not behave the way you expect.
+
+<p class="section">Test the feat
+
+<p class="body">Now let's test the feet by adding it into Hero Lab. Doing so is easy - just hit the "Test Now!" button at the top-left of the  window (labelled "6" on the screenshot). Click the button - Hero Lab should tell you that the feat can now be used. When you make changes to something in the editor, to have those changes reflected in Hero Lab you must press the "Test Now!" button (or choose "Test Thing" from the Tools menu).
+
+<p class="body">(Advanced Note: If you create many things in a single session, you can avoid having to hit the "Test Now!" button for each of them by reloading the game system. This can be done by going to the Develop menu in the main program, enabling data file debugging, and choosing "Quick Reload" from the menu.)
+
+<p class="section">Use the feat!
+
+        <table border=0 cellspacing=0 cellpadding=0>
+          <tr>
+            <td><img border="0" src="../../../docs/common/empty.gif" width="1" height="10"></td>
+          </tr>
+          <tr>
+            <td valign="center"><img class="border" src="./tut1_done.png"></td>
+            <td><img border="0" src="../../../docs/common/empty.gif" width="10" height="1"></td>
+            <td valign="center">
+              <p class="body">Switch back to the main Hero Lab window, and make a character who can pick a feat (4 levels of any class should do it). Go to the class tab, click to add a new feat, and "Two Handed Smash" should appear in the list. Congratulations! You've done it!
+            </td>
+          </tr>
+        </table>
+
+<p class="section">Terminology Time!
+
+<p class="body">At the end of each tutorial, this section will provide you with some key terms and put them in context for the preceding content. Understanding these terms is important; they may be used in subsequent tutorials in this series. Furthermore, once you grow beyond the tutorials you'll inevitably encounter situations you need to ask help with and the best place to ask such questions is on our forums. However, without knowing the common terms Hero Lab uses you may struggle to accurately describe what you are attempting and how you are trying to make it work. The answers you recieve may also be difficult for you to interpret, if the poster uses terms you are unfamiliar with.
+
+<p class="body"><font class="strong">.user file</font> - .user is the extension for hero lab's XML editor files. The file you saved in this tutorial should end in this extension (for example "tutorial.user"). While the editor automatically interprets these files into a visual interface, you can also open them in a text editor to view the "raw" XML. Some advanced users enjoy doing certain work in the raw XML, but you should leave that until you are a bit more experienced!
+
+<p id="thingspicks" class="body"><font class="strong">Things & Picks</font> - Everything defined in the program, whether it is a feat, race, class, piece of gear, or whatever else, is called a "Thing" in Hero Lab. Once added to the hero, a Pick is created based on that Thing. This is important because in most cases, only Picks can effect change to the hero, or can themselves be changed - Things can only ever be changed in the editor. After you hit the "Test Now" button above, the Two Hand Smash feat was integrated into Hero Lab as a Thing. Once you added it to your hero to test it, the Two Hand Smash feat became a Pick on that character.
+
+<p class="body"><font class="strong">Unique ID</font> - As stated above, the unique ID is 10 letters long and must be different from the unique ids of all other Things in the program. If two Things have the same Unique ID, it will cause a compile error and Hero Lab will load in safe mode, meaning no content from .user files will be available for use in the program. Resolving the compile error, such as by changing the Unique ID of one of the conflicting Things, and reloading the game system should restore access to the content in your .user files. The unique ID you gave the feat we created above is "fJSTwoHaSm" or something similar (perhaps you changed the user identifier from the default).
+
+<p class="section">What next?
+
+<p class="body">If you're interested in learning more about the Editor, check out <a href="5ededit.htm">this guide</a>.
+
+<p class="body">If you're looking for other information and instructions for the Feats tab, <a href="5thededittabs.htm#feat">this file</a> will help.
+
+<p class="body">If you're interested in editing some more complex things, go on to the <a href="5thededittut2.htm">next tutorial</a>!
+
+<p class="body"><a href="5ededit.htm">Go Back</a>.
+
+</body>
+
+</html>

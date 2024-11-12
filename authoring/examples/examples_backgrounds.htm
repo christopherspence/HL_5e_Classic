@@ -1,0 +1,591 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<link href="../../../../docs/common/styles.css" rel="STYLESHEET">
+<title>Example Backgrounds </title>
+</head>
+
+<body>
+
+<div align="center">
+  <table class="banner" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td>
+        <p align="center" class="banner">Example Backgrounds 
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div align="center">
+  <table border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td><img border="0" src="../../../../docs/common/empty.gif" width="1" height="15"></td>
+    </tr>
+  </table>
+</div>
+
+<p class="section">Introduction
+
+<p class="body">This document provides examples of the mechanics for other backgrounds. 
+
+<h4>Soldier Background</h4><p class="body">Below are the necessary mechanics to model the Soldier background.</p><pre class="xml">
+  &lt;thing id="bckSoldier" name="Soldier" description="Placeholder..." compset="Background" uniqueness="unique"&gt;
+    &lt;fieldval field="StartGear" value="Placeholder..."/&gt;
+    &lt;fieldval field="cToolMax" value="1"/&gt;
+    &lt;fieldval field="AbilName" value="Specialty"/&gt;
+    &lt;fieldval field="AbilPlur" value="Specialties"/&gt;
+    &lt;fieldval field="AbilMax" value="1"/&gt;
+    &lt;tag group="AllowTool1" tag="Gaming"/&gt;
+    &lt;tag group="ProfTool" tag="gVehLand"/&gt;
+    &lt;tag group="ProfSkill" tag="skAthletic"/&gt;
+    &lt;tag group="ProfSkill" tag="skIntim"/&gt;
+    &lt;bootstrap thing="bSoldRank"&gt;&lt;/bootstrap&gt;
+    &lt;/thing&gt;
+  &lt;thing id="bSoldRank" name="Military Rank" description="Placeholder..." compset="Ability"&gt;
+    &lt;tag group="Helper" tag="ShowSpec"/&gt;
+    &lt;/thing&gt;
+
+  </pre><h4>Soldier Specialties</h4><p class="body">Below are the necessary mechanics to model the Soldier background specialties.</p><pre class="xml">
+  &lt;thing id="bSolSpeCus" name="- Custom specialty -" description="Placeholder..." compset="BckCstAbil" uniqueness="unique"&gt;
+    &lt;tag group="Roll" tag="0"/&gt;
+    &lt;tag group="Helper" tag="Custom"/&gt;
+    &lt;tag group="Background" tag="bckSoldier"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="bSolSpe01" name="Officer" description="Placeholder..." compset="BckCstAbil" uniqueness="unique"&gt;
+    &lt;tag group="Roll" tag="1"/&gt;
+    &lt;tag group="Background" tag="bckSoldier"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="bSolSpe02" name="Scout" description="Placeholder..." compset="BckCstAbil" uniqueness="unique"&gt;
+    &lt;tag group="Roll" tag="2"/&gt;
+    &lt;tag group="Background" tag="bckSoldier"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="bSolSpe03" name="Infantry" description="Placeholder..." compset="BckCstAbil" uniqueness="unique"&gt;
+    &lt;tag group="Roll" tag="3"/&gt;
+    &lt;tag group="Background" tag="bckSoldier"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="bSolSpe04" name="Cavalry" description="Placeholder..." compset="BckCstAbil" uniqueness="unique"&gt;
+    &lt;tag group="Roll" tag="4"/&gt;
+    &lt;tag group="Background" tag="bckSoldier"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="bSolSpe05" name="Healer" description="Placeholder..." compset="BckCstAbil" uniqueness="unique"&gt;
+    &lt;tag group="Roll" tag="5"/&gt;
+    &lt;tag group="Background" tag="bckSoldier"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="bSolSpe06" name="Quartermaster" description="Placeholder..." compset="BckCstAbil" uniqueness="unique"&gt;
+    &lt;tag group="Roll" tag="6"/&gt;
+    &lt;tag group="Background" tag="bckSoldier"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="bSolSpe07" name="Standard bearer" description="Placeholder..." compset="BckCstAbil" uniqueness="unique"&gt;
+    &lt;tag group="Roll" tag="7"/&gt;
+    &lt;tag group="Background" tag="bckSoldier"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="bSolSpe08" name="Support staff (cook, blacksmith, etc)" description="Placeholder..." compset="BckCstAbil" uniqueness="unique"&gt;
+    &lt;tag group="Roll" tag="8"/&gt;
+    &lt;tag group="Background" tag="bckSoldier"/&gt;
+    &lt;/thing&gt;
+
+  </pre><h4>Soldier Background Traits</h4><p class="body">Below are the necessary mechanics to model the Soldier background traits.</p><pre class="xml">
+  &lt;thing id="btSoldP01" name="Polite" description="Placeholder..." compset="BackPerTrt" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckSoldier"/&gt;
+    &lt;tag group="Roll" tag="1"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="btSoldP02" name="Haunted by Memories" description="Placeholder..." compset="BackPerTrt" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckSoldier"/&gt;
+    &lt;tag group="Roll" tag="2"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="btSoldP03" name="Lost Friends" description="Placeholder..." compset="BackPerTrt" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckSoldier"/&gt;
+    &lt;tag group="Roll" tag="3"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="btSoldP04" name="Full of Tales" description="Placeholder..." compset="BackPerTrt" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckSoldier"/&gt;
+    &lt;tag group="Roll" tag="4"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="btSoldP05" name="Unflinching" description="Placeholder..." compset="BackPerTrt" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckSoldier"/&gt;
+    &lt;tag group="Roll" tag="5"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="btSoldP06" name="Enjoy Being Strong" description="Placeholder..." compset="BackPerTrt" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckSoldier"/&gt;
+    &lt;tag group="Roll" tag="6"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="btSoldP07" name="Cruse Sense of Humor" description="Placeholder..." compset="BackPerTrt" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckSoldier"/&gt;
+    &lt;tag group="Roll" tag="7"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="btSoldP08" name="Face Problems Head-On" description="Placeholder..." compset="BackPerTrt" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckSoldier"/&gt;
+    &lt;tag group="Roll" tag="8"/&gt;
+    &lt;/thing&gt;
+
+  </pre><h4>Soldier Ideals</h4><p class="body">Below are the necessary mechanics to model the Soldier background ideals.</p><pre class="xml">
+  &lt;thing id="btSoldId01" name="Greater Good" description="Placeholder..." compset="BackIdeal" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckSoldier"/&gt;
+    &lt;tag group="Roll" tag="1"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="btSoldId02" name="Responsibility" description="Placeholder..." compset="BackIdeal" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckSoldier"/&gt;
+    &lt;tag group="Roll" tag="2"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="btSoldId03" name="Independence" description="Placeholder..." compset="BackIdeal" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckSoldier"/&gt;
+    &lt;tag group="Roll" tag="3"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="btSoldId04" name="Might" description="Placeholder..." compset="BackIdeal" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckSoldier"/&gt;
+    &lt;tag group="Roll" tag="4"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="btSoldId05" name="Live and Let Live" description="Placeholder..." compset="BackIdeal" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckSoldier"/&gt;
+    &lt;tag group="Roll" tag="5"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="btSoldId06" name="Nation" description="Placeholder..." compset="BackIdeal" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckSoldier"/&gt;
+    &lt;tag group="Roll" tag="6"/&gt;
+    &lt;/thing&gt;
+
+  </pre><h4>Soldier Bonds</h4><p class="body">Below are the necessary mechanics to model the Soldier background bonds.</p><pre class="xml">
+  &lt;thing id="btSoldB01" name="Those I Served With" description="Placeholder..." compset="BackBond" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckSoldier"/&gt;
+    &lt;tag group="Roll" tag="1"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="btSoldB02" name="Someone Saved My Life" description="Placeholder..." compset="BackBond" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckSoldier"/&gt;
+    &lt;tag group="Roll" tag="2"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="btSoldB03" name="Honor" description="Placeholder..." compset="BackBond" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckSoldier"/&gt;
+    &lt;tag group="Roll" tag="3"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="btSoldB04" name="Crushing Defeat" description="Placeholder..." compset="BackBond" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckSoldier"/&gt;
+    &lt;tag group="Roll" tag="4"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="btSoldB05" name="Those Who Fight Beside Me" description="Placeholder..." compset="BackBond" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckSoldier"/&gt;
+    &lt;tag group="Roll" tag="5"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="btSoldB06" name="Those Who Cannot Fight For Themselves" description="Placeholder..." compset="BackBond" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckSoldier"/&gt;
+    &lt;tag group="Roll" tag="6"/&gt;
+    &lt;/thing&gt;
+
+  </pre><h4>Soldier Flaws</h4><p class="body">Below are the necessary mechanics to model the Soldier background flaws.</p><pre class="xml">
+  &lt;thing id="btSoldF01" name="Monstrous Enemy" description="Placeholder..." compset="BackFlaw" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckSoldier"/&gt;
+    &lt;tag group="Roll" tag="1"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="btSoldF02" name="Proven Warrior" description="Placeholder..." compset="BackFlaw" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckSoldier"/&gt;
+    &lt;tag group="Roll" tag="2"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="btSoldF03" name="Terrible Mistake" description="Placeholder..." compset="BackFlaw" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckSoldier"/&gt;
+    &lt;tag group="Roll" tag="3"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="btSoldF04" name="Blind Hatred" description="Placeholder..." compset="BackFlaw" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckSoldier"/&gt;
+    &lt;tag group="Roll" tag="4"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="btSoldF05" name="Always Obey the Law" description="Placeholder..." compset="BackFlaw" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckSoldier"/&gt;
+    &lt;tag group="Roll" tag="5"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="btSoldF06" name="Never Admit I&apos;m Wrong" description="Placeholder..." compset="BackFlaw" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckSoldier"/&gt;
+    &lt;tag group="Roll" tag="6"/&gt;
+    &lt;/thing&gt;
+
+
+  </pre><h4>Sage Background</h4><p class="body">Below are the necessary mechanics to model the Sage background.</p><pre class="xml">
+  &lt;thing id="bckSage" name="Sage" description="Placeholder..." compset="Background" uniqueness="unique"&gt;
+    &lt;fieldval field="StartLang" value="2"/&gt;
+    &lt;fieldval field="AbilName" value="Specialty"/&gt;
+    &lt;fieldval field="AbilPlur" value="Specialties"/&gt;
+    &lt;fieldval field="AbilMax" value="1"/&gt;
+    &lt;tag group="ProfSkill" tag="skArcana"/&gt;
+    &lt;tag group="ProfSkill" tag="skHistory"/&gt;
+    &lt;bootstrap thing="bSagRease"&gt;&lt;/bootstrap&gt;
+    &lt;/thing&gt;
+  &lt;thing id="bSagRease" name="Researcher" description="Placeholder..." compset="Ability"&gt;
+    &lt;tag group="Helper" tag="ShowSpec"/&gt;
+    &lt;/thing&gt;
+
+  </pre><h4>Sage Specialties</h4><p class="body">Below are the necessary mechanics to model the Sage background specialties.</p><pre class="xml">
+  &lt;thing id="bSagSpeCus" name="- Custom specialty -" description="Placeholder..." compset="BckCstAbil" uniqueness="unique"&gt;
+    &lt;tag group="Roll" tag="0"/&gt;
+    &lt;tag group="Helper" tag="Custom"/&gt;
+    &lt;tag group="Background" tag="bckSage"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="bSagSpe01" name="Alchemist" description="Placeholder..." compset="BckCstAbil" uniqueness="unique"&gt;
+    &lt;tag group="Roll" tag="1"/&gt;
+    &lt;tag group="Background" tag="bckSage"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="bSagSpe02" name="Astronomer" description="Placeholder..." compset="BckCstAbil" uniqueness="unique"&gt;
+    &lt;tag group="Roll" tag="2"/&gt;
+    &lt;tag group="Background" tag="bckSage"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="bSagSpe03" name="Discredited academic" description="Placeholder..." compset="BckCstAbil" uniqueness="unique"&gt;
+    &lt;tag group="Roll" tag="3"/&gt;
+    &lt;tag group="Background" tag="bckSage"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="bSagSpe04" name="Librarian" description="Placeholder..." compset="BckCstAbil" uniqueness="unique"&gt;
+    &lt;tag group="Roll" tag="4"/&gt;
+    &lt;tag group="Background" tag="bckSage"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="bSagSpe05" name="Professor" description="Placeholder..." compset="BckCstAbil" uniqueness="unique"&gt;
+    &lt;tag group="Roll" tag="5"/&gt;
+    &lt;tag group="Background" tag="bckSage"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="bSagSpe06" name="Researcher" description="Placeholder..." compset="BckCstAbil" uniqueness="unique"&gt;
+    &lt;tag group="Roll" tag="6"/&gt;
+    &lt;tag group="Background" tag="bckSage"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="bSagSpe07" name="Wizard's apprentice" description="Placeholder..." compset="BckCstAbil" uniqueness="unique"&gt;
+    &lt;tag group="Roll" tag="7"/&gt;
+    &lt;tag group="Background" tag="bckSage"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="bSagSpe08" name="Scribe" description="Placeholder..." compset="BckCstAbil" uniqueness="unique"&gt;
+    &lt;tag group="Roll" tag="8"/&gt;
+    &lt;tag group="Background" tag="bckSage"/&gt;
+    &lt;/thing&gt;
+
+
+  </pre><h4>Sage Background Traits</h4><p class="body">Below are the necessary mechanics to model the Sage background traits.</p><pre class="xml">
+  &lt;thing id="btSageP01" name="Great Erudition" description="Placeholder..." compset="BackPerTrt" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckSage"/&gt;
+    &lt;tag group="Roll" tag="1"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="btSageP02" name="Widely Read" description="Placeholder..." compset="BackPerTrt" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckSage"/&gt;
+    &lt;tag group="Roll" tag="2"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="btSageP03" name="Used to Helping" description="Placeholder..." compset="BackPerTrt" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckSage"/&gt;
+    &lt;tag group="Roll" tag="3"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="btSageP04" name="Like Mysteries" description="Placeholder..." compset="BackPerTrt" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckSage"/&gt;
+    &lt;tag group="Roll" tag="4"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="btSageP05" name="Listen to All Sides" description="Placeholder..." compset="BackPerTrt" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckSage"/&gt;
+    &lt;tag group="Roll" tag="5"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="btSageP06" name="Speak Slowly" description="Placeholder..." compset="BackPerTrt" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckSage"/&gt;
+    &lt;tag group="Roll" tag="6"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="btSageP07" name="Socially Awkward" description="Placeholder..." compset="BackPerTrt" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckSage"/&gt;
+    &lt;tag group="Roll" tag="7"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="btSageP08" name="Secrets" description="Placeholder..." compset="BackPerTrt" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckSage"/&gt;
+    &lt;tag group="Roll" tag="8"/&gt;
+    &lt;/thing&gt;
+
+  </pre><h4>Sage Ideals</h4><p class="body">Below are the necessary mechanics to model the Sage background ideals.</p><pre class="xml">
+  &lt;thing id="btSageId01" name="Knowledge" description="Placeholder..." compset="BackIdeal" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckSage"/&gt;
+    &lt;tag group="Roll" tag="1"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="btSageId02" name="Beauty" description="Placeholder..." compset="BackIdeal" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckSage"/&gt;
+    &lt;tag group="Roll" tag="2"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="btSageId03" name="Logic" description="Placeholder..." compset="BackIdeal" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckSage"/&gt;
+    &lt;tag group="Roll" tag="3"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="btSageId04" name="No Limits" description="Placeholder..." compset="BackIdeal" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckSage"/&gt;
+    &lt;tag group="Roll" tag="4"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="btSageId05" name="Power" description="Placeholder..." compset="BackIdeal" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckSage"/&gt;
+    &lt;tag group="Roll" tag="5"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="btSageId06" name="Self-Improvement" description="Placeholder..." compset="BackIdeal" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckSage"/&gt;
+    &lt;tag group="Roll" tag="6"/&gt;
+    &lt;/thing&gt;
+
+  </pre><h4>Sage Bonds</h4><p class="body">Below are the necessary mechanics to model the Sage background bonds.</p><pre class="xml">
+  &lt;thing id="btSageB01" name="Students" description="Placeholder..." compset="BackBond" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckSage"/&gt;
+    &lt;tag group="Roll" tag="1"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="btSageB02" name="Ancient Text" description="Placeholder..." compset="BackBond" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckSage"/&gt;
+    &lt;tag group="Roll" tag="2"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="btSageB03" name="Library" description="Placeholder..." compset="BackBond" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckSage"/&gt;
+    &lt;tag group="Roll" tag="3"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="btSageB04" name="Life&apos;s Work" description="Placeholder..." compset="BackBond" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckSage"/&gt;
+    &lt;tag group="Roll" tag="4"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="btSageB05" name="Answer" description="Placeholder..." compset="BackBond" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckSage"/&gt;
+    &lt;tag group="Roll" tag="5"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="btSageB06" name="Sold My Soul" description="Placeholder..." compset="BackBond" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckSage"/&gt;
+    &lt;tag group="Roll" tag="6"/&gt;
+    &lt;/thing&gt;
+
+  </pre><h4>Sage Flaws</h4><p class="body">Below are the necessary mechanics to model the Sage background flaws.</p><pre class="xml">
+  &lt;thing id="btSageF01" name="Easily Distracted" description="Placeholder..." compset="BackFlaw" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckSage"/&gt;
+    &lt;tag group="Roll" tag="1"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="btSageF02" name="Stop and Take Notes" description="Placeholder..." compset="BackFlaw" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckSage"/&gt;
+    &lt;tag group="Roll" tag="2"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="btSageF03" name="Unlocking Ancient Mysteries" description="Placeholder..." compset="BackFlaw" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckSage"/&gt;
+    &lt;tag group="Roll" tag="3"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="btSageF04" name="Overlook Obvious Solutions" description="Placeholder..." compset="BackFlaw" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckSage"/&gt;
+    &lt;tag group="Roll" tag="4"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="btSageF05" name="Speak Without Thinking" description="Placeholder..." compset="BackFlaw" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckSage"/&gt;
+    &lt;tag group="Roll" tag="5"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="btSageF06" name="Can&apos;t Keep Secrets" description="Placeholder..." compset="BackFlaw" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckSage"/&gt;
+    &lt;tag group="Roll" tag="6"/&gt;
+    &lt;/thing&gt;
+
+
+  </pre><h4>Guild Artisan Background</h4><p class="body">Below are the necessary mechanics to model the Guild Artisan background.</p><pre class="xml">
+  &lt;thing id="bckArtisan" name="Guild Artisan" description="Placeholder..." compset="Background" uniqueness="unique"&gt;
+    &lt;fieldval field="cToolMax" value="1"/&gt;
+    &lt;fieldval field="StartLang" value="1"/&gt;
+    &lt;fieldval field="AbilName" value="Guild Business"/&gt;
+    &lt;fieldval field="AbilPlur" value="Guild Businesses"/&gt;
+    &lt;fieldval field="AbilMax" value="1"/&gt;
+    &lt;tag group="ProfSkill" tag="skInsight"/&gt;
+    &lt;tag group="ProfSkill" tag="skPersuas"/&gt;
+    &lt;tag group="AllowTool1" tag="Artisan"/&gt;
+    &lt;bootstrap thing="bGldMembe"&gt;&lt;/bootstrap&gt;
+    &lt;/thing&gt;
+  &lt;thing id="bGldMembe" name="Guild Membership" description="Placeholder..." compset="Ability"&gt;
+    &lt;tag group="Helper" tag="ShowSpec"/&gt;
+    &lt;/thing&gt;
+
+
+  </pre><h4>Guild Artisan Businesses</h4><p class="body">Below are the necessary mechanics to model the Guild Artisan businesses.</p><pre class="xml">
+  &lt;thing id="bGldBusCus" name="- Custom Business -" description="Placeholder..." compset="BckCstAbil" uniqueness="unique"&gt;
+    &lt;tag group="Roll" tag="0"/&gt;
+    &lt;tag group="Background" tag="bckArtisan"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="bGldBus01" name="Alchemists and apothecaries" description="Placeholder..." compset="BckCstAbil" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckArtisan"/&gt;
+    &lt;tag group="Roll" tag="1"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="bGldBus02" name="Armorers, locksmiths, and finesmiths" description="Placeholder..." compset="BckCstAbil" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckArtisan"/&gt;
+    &lt;tag group="Roll" tag="2"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="bGldBus03" name="Brewers, distillers, and vintners" description="Placeholder..." compset="BckCstAbil" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckArtisan"/&gt;
+    &lt;tag group="Roll" tag="3"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="bGldBus04" name="Calligraphers, scribes, and scriveners" description="Placeholder..." compset="BckCstAbil" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckArtisan"/&gt;
+    &lt;tag group="Roll" tag="4"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="bGldBus05" name="Carpenters, roofers, and plasterers" description="Placeholder..." compset="BckCstAbil" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckArtisan"/&gt;
+    &lt;tag group="Roll" tag="5"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="bGldBus06" name="Cartographers, surveyors, and chart-makers" description="Placeholder..." compset="BckCstAbil" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckArtisan"/&gt;
+    &lt;tag group="Roll" tag="6"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="bGldBus07" name="Cobblers and shoemakers" description="Placeholder..." compset="BckCstAbil" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckArtisan"/&gt;
+    &lt;tag group="Roll" tag="7"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="bGldBus08" name="Cooks and bakers" description="Placeholder..." compset="BckCstAbil" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckArtisan"/&gt;
+    &lt;tag group="Roll" tag="8"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="bGldBus09" name="Glassblowers and glaziers" description="Placeholder..." compset="BckCstAbil" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckArtisan"/&gt;
+    &lt;tag group="Roll" tag="9"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="bGldBus10" name="Jewelers and gemcutters" description="Placeholder..." compset="BckCstAbil" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckArtisan"/&gt;
+    &lt;tag group="Roll" tag="10"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="bGldBus11" name="Leatherworkers, skinners, and tanners" description="Placeholder..." compset="BckCstAbil" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckArtisan"/&gt;
+    &lt;tag group="Roll" tag="11"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="bGldBus12" name="Masons and stonecutters" description="Placeholder..." compset="BckCstAbil" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckArtisan"/&gt;
+    &lt;tag group="Roll" tag="11"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="bGldBus13" name="Painters, limners, and sign-makers" description="Placeholder..." compset="BckCstAbil" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckArtisan"/&gt;
+    &lt;tag group="Roll" tag="13"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="bGldBus14" name="Potters and tile-makers" description="Placeholder..." compset="BckCstAbil" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckArtisan"/&gt;
+    &lt;tag group="Roll" tag="14"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="bGldBus15" name="Shipwrights and sailmakers" description="Placeholder..." compset="BckCstAbil" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckArtisan"/&gt;
+    &lt;tag group="Roll" tag="15"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="bGldBus16" name="Smiths and metal-forgers" description="Placeholder..." compset="BckCstAbil" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckArtisan"/&gt;
+    &lt;tag group="Roll" tag="16"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="bGldBus17" name="Tinkers, pewterers, and casters" description="Placeholder..." compset="BckCstAbil" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckArtisan"/&gt;
+    &lt;tag group="Roll" tag="17"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="bGldBus18" name="Wagon-makers and wheelwrights" description="Placeholder..." compset="BckCstAbil" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckArtisan"/&gt;
+    &lt;tag group="Roll" tag="18"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="bGldBus19" name="Weavers and dyers" description="Placeholder..." compset="BckCstAbil" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckArtisan"/&gt;
+    &lt;tag group="Roll" tag="19"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="bGldBus20" name="Woodcarvers, coopers, and bowyers" description="Placeholder..." compset="BckCstAbil" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckArtisan"/&gt;
+    &lt;tag group="Roll" tag="20"/&gt;
+    &lt;/thing&gt;
+
+  </pre><h4>Guild Artisan Background Traits</h4><p class="body">Below are the necessary mechanics to model the Guild Artisan background traits.</p><pre class="xml">
+  &lt;thing id="btArtsP01" name="Perfectionist" description="Placeholder..." compset="BackPerTrt" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckArtisan"/&gt;
+    &lt;tag group="Roll" tag="1"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="btArtsP02" name="Snob" description="Placeholder..." compset="BackPerTrt" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckArtisan"/&gt;
+    &lt;tag group="Roll" tag="2"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="btArtsP03" name="Want to Know How Things Work" description="Placeholder..." compset="BackPerTrt" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckArtisan"/&gt;
+    &lt;tag group="Roll" tag="3"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="btArtsP04" name="Witty Aphorisms" description="Placeholder..." compset="BackPerTrt" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckArtisan"/&gt;
+    &lt;tag group="Roll" tag="4"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="btArtsP05" name="Rude" description="Placeholder..." compset="BackPerTrt" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckArtisan"/&gt;
+    &lt;tag group="Roll" tag="5"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="btArtsP06" name="Talk at Length" description="Placeholder..." compset="BackPerTrt" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckArtisan"/&gt;
+    &lt;tag group="Roll" tag="6"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="btArtsP07" name="Haggle Tirelessly" description="Placeholder..." compset="BackPerTrt" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckArtisan"/&gt;
+    &lt;tag group="Roll" tag="7"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="btArtsP08" name="Known For My Work" description="Placeholder..." compset="BackPerTrt" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckArtisan"/&gt;
+    &lt;tag group="Roll" tag="8"/&gt;
+    &lt;/thing&gt;
+
+  </pre><h4>Guild Artisan Ideals</h4><p class="body">Below are the necessary mechanics to model the Guild Artisan background ideals.</p><pre class="xml">
+  &lt;thing id="btArtsId01" name="Community" description="Placeholder..." compset="BackIdeal" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckArtisan"/&gt;
+    &lt;tag group="Roll" tag="1"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="btArtsId02" name="Generosity" description="Placeholder..." compset="BackIdeal" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckArtisan"/&gt;
+    &lt;tag group="Roll" tag="2"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="btArtsId03" name="Freedom" description="Placeholder..." compset="BackIdeal" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckArtisan"/&gt;
+    &lt;tag group="Roll" tag="3"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="btArtsId04" name="Greed" description="Placeholder..." compset="BackIdeal" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckArtisan"/&gt;
+    &lt;tag group="Roll" tag="4"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="btArtsId05" name="People" description="Placeholder..." compset="BackIdeal" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckArtisan"/&gt;
+    &lt;tag group="Roll" tag="5"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="btArtsId06" name="Aspiration" description="Placeholder..." compset="BackIdeal" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckArtisan"/&gt;
+    &lt;tag group="Roll" tag="6"/&gt;
+    &lt;/thing&gt;
+
+  </pre><h4>Guild Artisan Bonds</h4><p class="body">Below are the necessary mechanics to model the Guild Artisan background bonds.</p><pre class="xml">
+  &lt;thing id="btArtsB01" name="Workshop" description="Placeholder..." compset="BackBond" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckArtisan"/&gt;
+    &lt;tag group="Roll" tag="1"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="btArtsB02" name="Great Work" description="Placeholder..." compset="BackBond" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckArtisan"/&gt;
+    &lt;tag group="Roll" tag="2"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="btArtsB03" name="Guild" description="Placeholder..." compset="BackBond" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckArtisan"/&gt;
+    &lt;tag group="Roll" tag="3"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="btArtsB04" name="Love" description="Placeholder..." compset="BackBond" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckArtisan"/&gt;
+    &lt;tag group="Roll" tag="4"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="btArtsB05" name="Greatest of All" description="Placeholder..." compset="BackBond" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckArtisan"/&gt;
+    &lt;tag group="Roll" tag="5"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="btArtsB06" name="Revenge" description="Placeholder..." compset="BackBond" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckArtisan"/&gt;
+    &lt;tag group="Roll" tag="6"/&gt;
+    &lt;/thing&gt;
+
+  </pre><h4>Guild Artisan Flaws</h4><p class="body">Below are the necessary mechanics to model the Guild Artisan background flaws.</p><pre class="xml">
+  &lt;thing id="btArtsF01" name="Something Rare" description="Placeholder..." compset="BackFlaw" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckArtisan"/&gt;
+    &lt;tag group="Roll" tag="1"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="btArtsF02" name="Quick to Assume" description="Placeholder..." compset="BackFlaw" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckArtisan"/&gt;
+    &lt;tag group="Roll" tag="2"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="btArtsF03" name="Stole From Guild" description="Placeholder..." compset="BackFlaw" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckArtisan"/&gt;
+    &lt;tag group="Roll" tag="3"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="btArtsF04" name="Never Satisfied" description="Placeholder..." compset="BackFlaw" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckArtisan"/&gt;
+    &lt;tag group="Roll" tag="4"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="btArtsF05" name="Noble Title" description="Placeholder..." compset="BackFlaw" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckArtisan"/&gt;
+    &lt;tag group="Roll" tag="5"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="btArtsF06" name="Jealous" description="Placeholder..." compset="BackFlaw" uniqueness="unique"&gt;
+    &lt;tag group="Background" tag="bckArtisan"/&gt;
+    &lt;tag group="Roll" tag="6"/&gt;
+    &lt;/thing&gt;
+
+  </pre>
+
+<p class="body"><a href="../5ededit.htm">Go Back</a>.
+
+</body>
+
+</html>

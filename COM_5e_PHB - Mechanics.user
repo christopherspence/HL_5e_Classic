@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document signature="Hero Lab Data">
+  <thing id="mClassicXP" name="Classic XP Mechanics" compset="Mechanics" replaces="XPStandard">
+    <arrayval field="mechXP" index="2" value="750"/>
+    <arrayval field="mechXP" index="3" value="2000"/>
+    <arrayval field="mechXP" index="4" value="4000"/>
+    <arrayval field="mechXP" index="5" value="7500"/>
+    <arrayval field="mechXP" index="6" value="15000"/>
+    <arrayval field="mechXP" index="7" value="25000"/>
+    <arrayval field="mechXP" index="8" value="40000"/>
+    <arrayval field="mechXP" index="9" value="60000"/>
+    <arrayval field="mechXP" index="10" value="80000"/>
+    <arrayval field="mechXP" index="11" value="100000"/>
+    <arrayval field="mechXP" index="12" value="125000"/>
+    <arrayval field="mechXP" index="13" value="150000"/>
+    <arrayval field="mechXP" index="14" value="180000"/>
+    <arrayval field="mechXP" index="15" value="210000"/>
+    <arrayval field="mechXP" index="16" value="250000"/>
+    <arrayval field="mechXP" index="17" value="300000"/>
+    <arrayval field="mechXP" index="18" value="350000"/>
+    <arrayval field="mechXP" index="19" value="400000"/>
+    <arrayval field="mechXP" index="20" value="450000"/>
+    <usesource source="XPStandard" parent="XPTrack" name="Standard Advancement"/>
+    <tag group="Mechanics" tag="XP" name="XP" abbrev="XP"/>
+    <containerreq phase="First" priority="500">
+      !hero#Dependant.Milestone</containerreq>
+    </thing>
+  </document>

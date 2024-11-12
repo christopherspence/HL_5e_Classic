@@ -1,0 +1,182 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<link href="../../../../docs/common/styles.css" rel="STYLESHEET">
+<title>Example Races </title>
+</head>
+
+<body>
+
+<div align="center">
+  <table class="banner" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td>
+        <p align="center" class="banner">Example Races 
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div align="center">
+  <table border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td><img border="0" src="../../../../docs/common/empty.gif" width="1" height="15"></td>
+    </tr>
+  </table>
+</div>
+
+<p class="section">Introduction
+
+<p class="body">This document provides examples of the mechanics for other subraces. 
+
+<h4>Dwarf Subraces</h4><p class="body">Below are the necessary mechanics to model the Mountain Dwarf subrace.</p><pre class="xml">
+  &lt;thing id="srDwMount" name="Mountain Dwarf" description="Placeholder..." compset="SubRace" uniqueness="unique"&gt;
+    &lt;fieldval field="rSTR" value="1"/&gt;
+    &lt;fieldval field="rHeightMin" value="48"/&gt;
+    &lt;fieldval field="rWeightMin" value="130"/&gt;
+    &lt;tag group="SubRace" tag="rDwarf"/&gt;
+    &lt;tag group="ClVaryName" tag="Replace"/&gt;
+    &lt;tag group="HeightDice" tag="2"/&gt;
+    &lt;tag group="HeightSize" tag="4"/&gt;
+    &lt;tag group="WeightDice" tag="2"/&gt;
+    &lt;tag group="WeightSize" tag="6"/&gt;
+    &lt;bootstrap thing="raDwfArmTr"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="raDwfArmTr" name="Dwarven Armor Training" description="Placeholder..." compset="RaceSpec"&gt;
+    &lt;tag group="ArmProfGrp" tag="ArmorLight"/&gt;
+    &lt;tag group="ArmProfGrp" tag="ArmorMed"/&gt;
+    &lt;eval phase="First" priority="11000"&gt;&lt;![CDATA[
+      ~if we've been disabled, get out now
+      doneif (tagis[Helper.Disable] &lt;&gt; 0)
+
+      ~assign our weapon proficiencies to the hero
+      perform hero.pushtags[ArmProfGrp.Armor?]]]&gt;&lt;/eval&gt;
+    &lt;/thing&gt;
+
+  </pre><h4>Elf Subraces</h4><p class="body">Below are the necessary mechanics to model the Wood Elf and Dark Elf subraces.</p><pre class="xml">
+  &lt;thing id="srElfWood" name="Wood Elf" description="Placeholder..." compset="SubRace" uniqueness="unique"&gt;
+    &lt;fieldval field="rWIS" value="1"/&gt;
+    &lt;fieldval field="rHeightMin" value="54"/&gt;
+    &lt;fieldval field="rWeightMin" value="100"/&gt;
+    &lt;tag group="SubRace" tag="rElf"/&gt;
+    &lt;tag group="ClVaryName" tag="Replace"/&gt;
+    &lt;tag group="HeightDice" tag="2"/&gt;
+    &lt;tag group="HeightSize" tag="10"/&gt;
+    &lt;tag group="WeightDice" tag="1"/&gt;
+    &lt;tag group="WeightSize" tag="4"/&gt;
+    &lt;bootstrap thing="raHiElfWep"/&gt;
+    &lt;bootstrap thing="raWdElfFlt"/&gt;
+    &lt;bootstrap thing="raWdElfMsk"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="raWdElfFlt" name="Fleet of Foot" description="Placeholder..." compset="RaceSpec"&gt;
+    &lt;eval phase="First" priority="750"&gt;
+      &lt;after name="Base Race Racial Stats"/&gt;&lt;![CDATA[
+      hero.child[Speed].field[tSpeed].value += 5]]&gt;&lt;/eval&gt;
+    &lt;/thing&gt;
+  &lt;thing id="raWdElfMsk" name="Mask of the Wild" description="Placeholder..." compset="RaceSpec"&gt;
+    &lt;tag group="Helper" tag="ShowSpec"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="srElfDrow" name="Dark Elf (Drow)" description="Placeholder..." compset="SubRace" uniqueness="unique"&gt;
+    &lt;fieldval field="rCHA" value="1"/&gt;
+    &lt;fieldval field="rHeightMin" value="53"/&gt;
+    &lt;fieldval field="rWeightMin" value="75"/&gt;
+    &lt;tag group="SubRace" tag="rElf"/&gt;
+    &lt;tag group="ClVaryName" tag="Replace"/&gt;
+    &lt;tag group="SplAttr" tag="aCHA"/&gt;
+    &lt;tag group="HeightDice" tag="2"/&gt;
+    &lt;tag group="HeightSize" tag="6"/&gt;
+    &lt;tag group="WeightDice" tag="1"/&gt;
+    &lt;tag group="WeightSize" tag="6"/&gt;
+    &lt;bootstrap thing="raDarkVis"&gt;
+      &lt;autotag group="Value" tag="120"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="raDrElfWep"/&gt;
+    &lt;bootstrap thing="raDrwSunSe"/&gt;
+    &lt;bootstrap thing="spDancLigh"&gt;
+      &lt;autotag group="Usage" tag="AtWill"/&gt;
+      &lt;autotag group="Helper" tag="RaceSpell"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="spFaerFire"&gt;
+      &lt;containerreq phase="First" priority="500"&gt;&lt;![CDATA[count:Classes.? &gt;=3]]&gt;&lt;/containerreq&gt;
+      &lt;autotag group="Usage" tag="Day"/&gt;
+      &lt;autotag group="Helper" tag="RaceSpell"/&gt;
+      &lt;assignval field="trkMax" value="1"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="spDarkness"&gt;
+      &lt;containerreq phase="First" priority="500"&gt;&lt;![CDATA[count:Classes.? &gt;= 5]]&gt;&lt;/containerreq&gt;
+      &lt;autotag group="Usage" tag="Day"/&gt;
+      &lt;autotag group="Helper" tag="RaceSpell"/&gt;
+      &lt;assignval field="trkMax" value="1"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;/thing&gt;
+  &lt;thing id="raDrElfWep" name="Drow Weapon Training" description="Placeholder..." compset="RaceSpec"&gt;
+    &lt;tag group="WepProf" tag="wRapier"/&gt;
+    &lt;tag group="WepProf" tag="wShortswor"/&gt;
+    &lt;tag group="WepProf" tag="wCrssbwHan"/&gt;
+    &lt;eval phase="First" priority="11000"&gt;&lt;![CDATA[
+      ~if we've been disabled, get out now
+      doneif (tagis[Helper.Disable] &lt;&gt; 0)
+
+      ~assign our weapon proficiencies to the hero
+      perform hero.pushtags[WepProf.?]
+
+      perform hero.pushtags[EasyWeapon.?]]]&gt;&lt;/eval&gt;
+    &lt;/thing&gt;
+  &lt;thing id="raDrwSunSe" name="Sunlight Sensitivity" description="Placeholder..." compset="RaceSpec"&gt;
+    &lt;tag group="Helper" tag="ShowSpec"/&gt;
+    &lt;eval phase="Final" priority="10000"&gt;&lt;![CDATA[
+      ~if we've been replaced, get out now
+      doneif (tagis[Helper.Disable] &lt;&gt; 0)
+
+      #situational[hero.child[Attack],"Disadvantage when you or target are in bright sunlight",field[thingname].text]
+      #situational[hero.child[skPercep],"Disadvantage when you or what you are trying to percieve are in bright sunlight",field[thingname].text]]]&gt;&lt;/eval&gt;
+    &lt;/thing&gt;
+
+
+  </pre><h4>Halfling Subraces</h4><p class="body">Below are the necessary mechanics to model the Stout subrace.</p><pre class="xml">
+  &lt;thing id="srHlnStout" name="Stout" description="Placeholder..." compset="SubRace" uniqueness="unique"&gt;
+    &lt;fieldval field="rCON" value="1"/&gt;
+    &lt;tag group="SubRace" tag="rHalfling"/&gt;
+    &lt;tag group="ClVaryName" tag="Prepend"/&gt;
+    &lt;bootstrap thing="raStoResil"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="raStoResil" name="Stout Resilience" description="Placeholder..." compset="RaceSpec"&gt;
+    &lt;tag group="Helper" tag="ShowSpec"/&gt;
+    &lt;tag group="DamageRes" tag="dtPoison"/&gt;
+    &lt;eval phase="PreLevel" priority="10000"&gt;&lt;![CDATA[
+      ~if we've been replaced, get out now
+      doneif (tagis[Helper.Disable] &lt;&gt; 0)
+      perform hero.pushtags[DamageRes.?]
+      #situational[hero.child[svAll],"Advantage vs. poison",field[thingname].text]]]&gt;&lt;/eval&gt;
+    &lt;/thing&gt;
+
+
+  </pre><h4>Gnome Subraces</h4><p class="body">Below are the necessary mechanics to model the Forest Gnome subrace.</p><pre class="xml">
+  &lt;thing id="srGnForest" name="Forest Gnome" description="Placeholder..." compset="SubRace" uniqueness="unique"&gt;
+    &lt;fieldval field="rDEX" value="1"/&gt;
+    &lt;tag group="SubRace" tag="rGnome"/&gt;
+    &lt;tag group="ClVaryName" tag="Replace"/&gt;
+    &lt;tag group="SplAttr" tag="aINT"/&gt;
+    &lt;bootstrap thing="raGnIllus"&gt;&lt;/bootstrap&gt;
+    &lt;bootstrap thing="raGnSpkBea"&gt;&lt;/bootstrap&gt;
+    &lt;/thing&gt;
+  &lt;thing id="raGnIllus" name="Natural Illusionist" description="Placeholder..." compset="RaceSpec"&gt;
+    &lt;bootstrap thing="spMinoIllu"&gt;
+      &lt;autotag group="Usage" tag="AtWill"/&gt;
+      &lt;autotag group="Helper" tag="RaceSpell"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;/thing&gt;
+  &lt;thing id="raGnSpkBea" name="Speak With Small Beasts" description="Placeholder..." compset="RaceSpec"&gt;
+    &lt;tag group="Helper" tag="ShowSpec"/&gt;
+    &lt;/thing&gt;
+
+
+  </pre>
+
+<p class="body"><a href="../5ededit.htm">Go Back</a>.
+
+</body>
+
+</html>

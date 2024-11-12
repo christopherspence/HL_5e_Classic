@@ -1,0 +1,534 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<link href="../../../docs/common/styles.css" rel="STYLESHEET">
+<title>5th Edition SRD data files - How To</title>
+</head>
+
+<body>
+
+<div align="center">
+  <table class="banner" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td>
+        <p align="center" class="banner">5E SRD Editor - How To
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div align="center">
+  <table border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td><img border="0" src="../../../docs/common/empty.gif" width="1" height="15"></td>
+    </tr>
+  </table>
+</div>
+
+<p class="section">Introduction
+
+<p class="body">As a data file author, you need to make a lot of things happen within your data files. You need a feat that does <i>this</i> and a special ability that does <i>that</i> and a class that does <i>the other</i>, but how do you make them do those things? This document outlines solutions to common situations you may find yourself in.
+
+<p class="body">Each solution will have a timing associated with it, specifying a phase and (optionally) a priority. The script that you write must run at an appropriate time, before or after this phase - if you run the script at the wrong time, the solution may have undesired side effects! If things aren't working, make sure you have the correct timing set.
+
+
+
+<p class="section">Skills: How to...
+
+<ul class="bullet">
+
+<li class="bullet"><a href="#macro_skillbonus">Add a bonus to a skill value</a>
+<!--
+<li class="bullet"><a href="#macro_skillranks">Find out how many ranks the hero has put into a skill</a>
+-->
+<li class="bullet"><a href="#allskills">Add a bonus to ALL skills at once</a>
+<!--
+<li class="bullet"><a href="#classskill">Make a skill a Class Skill</a>
+-->
+
+</ul>
+
+<p class="section">Feats: How to...
+
+<ul class="bullet">
+
+<li class="bullet"><a href="#macro_hasfeat">Check whether a hero has a specific feat as a pre-requisite for another</a>
+<!--
+<li class="bullet"><a href="#featcount">Count how many Feats a hero has in one category</a>
+-->
+
+</ul>
+
+<p class="section">Classes: How to...
+
+<ul class="bullet">
+
+<li class="bullet"><a href="#macro_levelcount">Count how many levels you have in a class</a>
+<li class="bullet"><a href="#macro_totallevelcount">Count how many total class levels you have</a>
+<!--
+<li class="bullet"><a href="#classskill">Make a skill a Class Skill</a>
+<li class="bullet"><a href="#classspec">Make a Class Special Ability count as X levels higher</a>-->
+<li class="bullet"><a href="#classcharge">Add to the total number of uses for a class ability (e.g. Barbarian Rage, Bardic Music)</a>
+<!--
+<li class="bullet"><a href="#armorfail">Make a class have no chance of Arcane Spell Failure from certain armor</a>
+-->
+
+</ul>
+
+<p class="section">Miscellaneous: How to...
+
+<ul class="bullet">
+
+<!--
+<li class="bullet"><a href="#poison">Universal Poison Abilities - tag and field settings</a>
+-->
+<li class="bullet"><a href="#macro_competencebonus">Add a competence bonus to a skill, weapon, or other pick</a>
+<li class="bullet"><a href="#macro_enhancementbonus">Add an enhancement bonus to a skill, weapon, or other pick</a>
+<!--
+<li class="bullet"><a href="#actionpoints">Add to your total action points</a>
+-->
+<li class="bullet"><a href="#size">Get the size of the Hero</a>
+
+</ul>
+
+
+
+
+<p class="section" id="macro_skillbonus"/>Add a bonus to a skill value
+
+<p class="body">See the <a href="5thededitwhere.htm#macro_skillbonus">#skillbonus macro in the "Useful Macros"</a> section.
+
+
+
+
+
+<!--
+<p class="section" id="macro_skillranks"/>Find out how many ranks the hero has put into a skill
+
+<p class="body">See the <a href="5thededitwhere.htm#macro_skillranks">#skillranks macro in the "Useful Macros"</a> section.
+-->
+
+
+
+
+
+<p class="section"><a name="allskills"/>Apply a bonus to ALL skills at once
+
+<p class="body">Instead of individually assigning bonuses to all skills, you can use the special <font class="strong">AllSkills</font> pick. This pick has all standard <a href="5thededitwhere.htm#modifiers">Modifier</a> fields, so you can (for example) apply a Competence Bonus to AllSkills and have it properly be counted on all other skills - skills that have a larger competence bonus will ignore it, and skills that have a smaller competence bonus will have it applied.
+
+<p class="subsection">Timing
+
+<p class="body">Any priority before the "PostAttr" or phase.
+
+<p class="subsection">Examples
+
+<pre class="xml">
+
+&lt;eval value="1" phase="UserPreLv" priority="10000"&gt;&lt;![CDATA[
+
+~ Apply a +5 Luck bonus to all skills
+<font class="strong">hero.child[AllSkills].field[BonLuck].value = maximum(hero.child[AllSkills].field[BonLuck].value, 5)</font>
+
+]]>&lt;/eval&gt;
+
+</pre>
+
+
+
+
+<!--
+<p class="section"><a name="classskill"/>Make a skill a Class Skill
+
+<p class="body">See the <a href="5thededitwhere.htm#macro_makeclassskill">#classskill macro in the "Useful Macros"</a> section.<br><br>
+To make all Craft, Knowledge, Perform and Profession skills class skills for a class, use <font class="strong">Craft</font>, <font class="strong">Knowledge</font>, <font class="strong">Perform</font> or <font class="strong">Profession</font> in the macro.
+
+<p class="subsection">Timing
+
+<p class="body">Any priority in the "UserPreLv" or "UserFirst" phases.
+-->
+
+
+<p class="section" id="macro_levelcount"/>Count how many levels you have in a class
+
+<p class="body">See the <a href="5thededitwhere.htm#macro_levelcount">#levelcount macro in the "Useful Macros"</a> section.
+
+
+
+
+<p class="section" id="macro_totallevelcount"/>Count how many total levels you have
+
+<p class="body">See the <a href="5thededitwhere.htm#macro_totallevelcount">#totallevelcount macro in the "Useful Macros"</a> section.
+
+
+<!-- Commented out until I have time to differentiate between count-based abilities and level-based abilities -->
+<!--<p class="section" id="classspec"/>Make a Class Special Ability count as X levels higher
+
+<p class="body">Sometimes, a class has an ability that another class adds to. For example, if you're a monk, the Monk's Belt magical item makes you count as 5 levels higher for your "Improved Armor Class" and "Improved Unarmed Strike" abilities. To do this, you need to add to the "Extra Levels" field of the special ability.
+
+<p class="body">To do this, you first need to find out how many levels you want to add, then find the ability you want to add them to, then actually add them up. Here is a list of many class abilities you might want to add levels to:
+
+<ul class="bullet">
+
+<li class="bullet"><font class="strong"/>Channel Energy</font> - xChannel
+
+<li class="bullet"><font class="strong"/>Sneak Attack</font> - cSneakAtt
+<li class="bullet"><font class="strong"/>Trap Sense</font> - cTrapSense
+
+<li class="bullet"><font class="strong"/>Barbarian Rage</font> - cBbnRage
+<li class="bullet"><font class="strong"/>Barbarian Damage Reduction</font> - cBbnDR
+<li class="bullet"><font class="strong"/>Bardic Performance</font> - cBrdPerfor
+<li class="bullet"><font class="strong"/>Bardic Performance - Inspire Courage</font> - cBrdPInsC
+<li class="bullet"><font class="strong"/>Druid Wild Shape</font> - cDrdWild
+<li class="bullet"><font class="strong"/>Druid Animal Wild Shape</font> - cDrdWildAn
+<li class="bullet"><font class="strong"/>Druid Elemental Wild Shape</font> - cDrdWildEl
+<li class="bullet"><font class="strong"/>Druid Plant Wild Shape</font> - cDrdWildPl
+<li class="bullet"><font class="strong"/>Fighter Armor Training</font> - cFtrArmor
+<li class="bullet"><font class="strong"/>Monk Empty Body</font> - cMnkEmpty
+<li class="bullet"><font class="strong"/>Monk Improved Unarmed Damage</font> - cMnkUnarm
+<li class="bullet"><font class="strong"/>Monk Improved Armor Class</font> - cMnkAC
+<li class="bullet"><font class="strong"/>Monk Improved Speed</font> - cMnkSpeed
+<li class="bullet"><font class="strong"/>Monk Ki Pool</font> - cMnkKiPool
+<li class="bullet"><font class="strong"/>Monk Flurry of Blows</font> - cMnkFlurr
+<li class="bullet"><font class="strong"/>Monk Slow Fall</font> - cMnkSlow
+<li class="bullet"><font class="strong"/>Monk Wholeness of Body</font> - cMnkWhole
+<li class="bullet"><font class="strong"/>Paladin Smite Evil</font> - cPalSmite1
+<li class="bullet"><font class="strong"/>Paladin Lay On Hands</font> - cPalLayHnd
+<li class="bullet"><font class="strong"/>Paladin Turn Undead</font> - cPalTurnUn
+<li class="bullet"><font class="strong"/>Paladin Remove Disease</font> - cPalRemDs1
+
+<li class="bullet"><font class="strong"/>Arcane Archer Enhance Arrow</font> - cAArArrow1
+<li class="bullet"><font class="strong"/>Arcane Trickster Ranged Legerdemain</font> - cATrLeger1
+<li class="bullet"><font class="strong"/>Arcane Trickster Impromptu Sneak Attack</font> - cATrImp1
+<li class="bullet"><font class="strong"/>Arcane Trickster Sneak Attack</font> - cATrSneak1
+<li class="bullet"><font class="strong"/>Assassin Sneak Attack</font> - cAsnSneak1
+<li class="bullet"><font class="strong"/>Assassin Poison Resistance</font> - cAsnPois1
+<li class="bullet"><font class="strong"/>Blackguard Command Undead</font> - cBlkCommUn
+<li class="bullet"><font class="strong"/>Blackguard Smite Good</font> - cBlkSmite1
+<li class="bullet"><font class="strong"/>Blackguard Sneak Attack</font> - cBlkSneak1
+<li class="bullet"><font class="strong"/>Dragon Disciple Breath Weapon</font> - cDDiBrth1
+<li class="bullet"><font class="strong"/>Dragon Disciple Natural Armor</font> - cDDiArmor1
+<li class="bullet"><font class="strong"/>Duellist Improved Reaction</font> - cDueReact1
+<li class="bullet"><font class="strong"/>Duellist Precise Strike</font> - cDuePrec1
+<li class="bullet"><font class="strong"/>Duellist Canny Defense</font> - cDueCanny
+<li class="bullet"><font class="strong"/>Dwarven Defender Defensive Stance</font> - cDwDDef1
+<li class="bullet"><font class="strong"/>Dwarven Defender Trap Sense</font> - cDwDTrap1
+<li class="bullet"><font class="strong"/>Dwarven Defender AC Bonus</font> - cDwDAC1
+<li class="bullet"><font class="strong"/>Dwarven Defender Damage Reduction</font> - cDwDDR1
+<li class="bullet"><font class="strong"/>Shadowdancer Shadow Jump</font> - cShnJump1
+<li class="bullet"><font class="strong"/>Shadowdancer Summon Shadow</font> - cShnSumm1
+
+</ul>
+
+<p class="subsection">Timing
+
+<p class="body">You must add extra levels any time before the "PostLevel" phase.
+
+<p class="subsection">Example - adding 5 levels to the rogue's "Sneak Attack" ability with a feat
+
+<p class="body">(To find the unique id of the Rogue's "Sneak Attack" special ability, we looked through "srd_class_rogue.dat" until we found it.)
+
+<pre class="xml">
+
+&lt;thing id="fSneaky"
+  name="Super Sneaky"
+  compset="Feat"&gt;
+  &lt;tag group="fCategory" tag="General"/&gt;
+  &lt;eval phase="First" priority="500"&gt;
+    <font class="strong"/>hero.child[cRogSneak1].field[xExtraLev].value += 5</font>
+    &lt;/eval&gt;
+  &lt;/thing&gt;
+
+</pre>
+
+<p class="subsection">Example - adding the levels of another class to the Rogue's "Sneak Attack" special ability
+
+<pre class="xml">
+
+&lt;thing
+id="cXXXAddSnk"
+name="Very Sneaky Attack (Ex)"
+compset="ClSpecial"
+description="This class counts toward your Rogue levels for the Sneak Attack ability."
+sortorder="1"&gt;
+  &lt;tag group="ClSpecWhen" tag="1"/&gt;
+  &lt;tag group="SpecSource" tag="YourClass"/&gt;
+  &lt;eval phase="Level" priority="999999"&gt;&lt;![CDATA[
+    <font class="strong"/>~ Make sure this is done as one of the last things in the "Level" phase, before the
+    ~ "PostLevel" scripts run - we need to set the "xExtraLev" field before then.
+
+    ~ Get our total number of levels from the parent class and add it to our rogue
+    ~ levels for the Sneak Attack ability
+    var levels as number
+    levels = root.field[cTotalLev].value
+    hero.child[cRogSneak1].field[xExtraLev].value += levels</font>
+    ]]&gt;&lt;/eval&gt;
+  &lt;/thing&gt;
+
+</pre>-->
+
+
+
+
+<p class="section"><a name="classcharge"/>Add to the total number of uses for a class ability (e.g. Barbarian Rage, Bardic Performance)
+
+<p class="body">Many abilities allow you to use your class abilities (Barbarian Rage, Bardic Performance, Wild Shape, etc) more times than normal. Changing the number of times you can use them is simple - you need to modify the "trkMax" field, which holds the total number of uses.  The <a href="5thededitwhere.htm#trkmax">#trkmax macro in the "Useful Macros"</a> simplifies this process.
+
+<!--  Here is a list of many class abilities and their unique ids:
+
+<ul class="bullet">
+<li class="bullet"><font class="strong"/>Channel Energy</font> - xChannel
+
+<li class="bullet"><font class="strong"/>Barbarian Rage</font> - cBbnRage
+<li class="bullet"><font class="strong"/>Bardic Performance</font> - cBrdPerfor
+<li class="bullet"><font class="strong"/>Druid Wild Shape</font> - cDrdWild
+<li class="bullet"><font class="strong"/>Monk Ki Pool</font> - cMnkKiPool
+<li class="bullet"><font class="strong"/>Monk Empty Body</font> - cMnkEmpty
+<li class="bullet"><font class="strong"/>Paladin Smite Evil</font> - cPalSmite
+<li class="bullet"><font class="strong"/>Paladin Lay On Hands</font> - cPalLayHnd
+
+</ul>
+-->
+
+<p class="subsection">Timing
+
+<p class="body">Any priority in the "UserPostAt" phase or earlier.
+
+<p class="subsection">Examples
+
+<pre class="xml">
+
+&lt;eval value="1" phase="UserPostLv" priority="10000"&gt;&lt;![CDATA[
+<font class="strong">
+~ Add an extra use to our Barbarian Rage per day
+#trkmax[cBbnRage] += 1
+</font>
+]]>&lt;/eval&gt;
+
+</pre>
+
+
+
+<!--
+<p class="section"><a name="armorfail"/>Make a class have no chance of Arcane Spell Failure from certain armor
+
+<p class="body">Assign the <b>CastArmor.Light</b>, <b>CastArmor.Medium</b>, <b>CastArmor.Heavy</b> and/or <b>CastArmor.Shield</b> tags to the class helper object. Each tag removes Arcane Spell Failure chance from that type of armor - for example,  CastArmor.Medium means you get no chance of spell failure from Medium armor.<br><br>
+Note that CastArmor.Medium does not imply CastArmor.Light - if you want to give your class no chance of spell failure from Light or Medium armor, assign it both the CastArmor.Light and CastArmor.Medium tags.
+
+<p class="subsection">Timing
+
+<p class="body">Any priority in the "UserFinal" phase or earlier.
+
+<p class="subsection">Examples
+
+<pre class="xml">
+
+&lt;eval value="1" phase="UserPreLv" priority="10000"&gt;&lt;![CDATA[
+<font class="strong">
+~ The Sorcerer should have no chance of arcane spell failure from Light armor
+~ NOTE: We can't assume that the hero is actually a Sorcerer, so we use
+~ "childfound" instead of "child".
+perform hero.childfound[cHelpSor].assign[CastArmor.Light]
+
+~ The Wizard should have no chance of arcane spell failure from Light armor,
+~ Medium armor or Shields
+~ NOTE: We can't assume that the hero is actually a Wizard, so we use
+~ "childfound" instead of "child".
+perform hero.childfound[cHelpWiz].assign[CastArmor.Light]
+perform hero.childfound[cHelpWiz].assign[CastArmor.Medium]
+perform hero.childfound[cHelpWiz].assign[CastArmor.Shield]
+</font>
+]]>&lt;/eval&gt;
+
+</pre>
+-->
+
+
+<p class="section" id="macro_hasfeat"/>Check whether a hero has a specific feat as a pre-requisite for another
+
+<p class="body">See the <a href="5thededitwhere.htm#macro_hasfeat">#hasfeat macro in the "Useful Macros"</a> section.
+
+
+
+<!--
+<p class="section" id="featcount"/>Count how many Feats a hero has in one category
+
+<p class="body">Many classes and some special abilities require the count of Metamagic, Item Creation or other feats. A tag for each feat is present on the hero, which may be counted.
+
+<p class="subsection">Example - pre-requisite requiring at least 3 Metamagic or Item Creation feats:
+
+<pre class="xml">
+
+&lt;prereq onlyonce="yes" message="3 Metamagic or Item Creation feats required."&gt;
+  &lt;valid&gt;&lt;![CDATA[
+
+    ~ Start out invalid
+    @valid = 0
+
+    ~ Count our metamagic and itemcreation feats - do we have at least 3?
+    if (<font class="strong">tagcount[fCategory.Metamagic] + tagcount[fCategory.ItemCreate] &gt;= 3</font>) then
+
+      ~ If so, we're valid.
+      @valid = 1
+      endif
+    ]]&gt;&lt;/valid&gt;
+  &lt;/prereq&gt;
+
+</pre>
+-->
+
+
+<!--
+<p class="section"><a name="poison"/>Universal Poison Abilities - tag and field settings
+
+<p class="body">Because poison abilities in 5th Edition tend to follow a pattern, Hero Lab is able to handle 90% or so of the poison abilities that various monsters have by setting up a few universal abiliites, that can then be modified to set the correct dice of damage, number of saves that are required, or other details.  The following field values and tags can be set/assigned to a poison ability by clicking the tags and fields buttons when choosing that racial special for your race.
+
+<p class="body">
+       abValue: die type of damage (1dX)<br>
+      abValue2: number of saves<br>
+      abValue3: number of dice of damage (Xd4)<br>
+    abDuration: number of rounds<br><br>
+     ==Poison Damage Type Settings==<br>
+     PoisDamMod.HP  - poison applies to hit points<br>
+     PoisDamTyp.Sleep  - poison causes sleep<br>
+     PoisDamTyp.paralysis  - poison causes paralysis<br>
+     PoisDamTyp.Damage - Sets the damage type as attribute damage.<br>
+     PoisDamTyp.Drain  - Sets the damage type as attribute drain.<br><br>
+     ==Poison Damage Modifier Settings==<br>
+     PoisDamMod.All - Has the damage/drain apply to all attributes<br><br>
+     ==Attribute This Poison Affects==<br>
+     PoisonAttr.aSTR - Has the damage apply to Strength<br>
+     PoisonAttr.aDEX - Has the damage apply to Dexterity<br>
+     PoisonAttr.aCON - Has the damage apply to Constitution<br>
+     PoisonAttr.aINT - Has the damage apply to Intelligence<br>
+     PoisonAttr.aWIS - Has the damage apply to Wisdom<br>
+     PoisonAttr.aCHA - Has the damage apply to Charisma<br><br>
+     ==Poison Vectors==<br>
+     PoisonCat.Contact<br>
+     PoisonCat.Ingested<br>
+     PoisonCat.Inhaled<br>
+     PoisonCat.Injury (this is the default if no PoisonCat tag is present)<br><br>
+     ==Poison Onset Time==<br>
+     PoisOnset.Rounds - Onset/Frequency in rounds (this is the default if no PoisOnset tag is present)<br>
+     PoisOnset.Minutes - Onset/Frequency in minutes<br>
+     PoisOnset.Hours - Onset/Frequency in hours<br>
+     PoisOnset.Days - Onset/Frequency in days<br><br>
+     ==Poison Duration Time - only used for sleep and paralysis poisons==<br>
+     PoisLasts.Rounds - Onset/Frequency in rounds (this is the default if no PoisLasts tag is present)<br>
+     PoisLasts.Minutes - Onset/Frequency in minutes<br>
+     PoisLasts.Hours - Onset/Frequency in hours<br>
+     PoisLasts.Days - Onset/Frequency in days<br><br>
+       ==Target tag==<br>
+       Target.? - When bootstrapping this to a race you can set the Target.? tag to which attack this poison applies to. In example Target.wBite would set the text " plus poison" to the Bite natural attack on the race.<br>
+
+<p class="section" id="macro_competencebonus"/>Add a competence bonus to a skill, weapon, or other pick
+
+<p class="body">See the <a href="5thededitwhere.htm#macro_competencebonus">#competencebonus macro in the "Useful Macros"</a> section.
+-->
+
+
+
+
+
+<p class="section" id="macro_enhancementbonus"/>Add an enhancement bonus to a skill, weapon, or other pick
+
+<p class="body">See the <a href="5thededitwhere.htm#macro_enhancementbonus">#enhancementbonus macro in the "Useful Macros"</a> section.
+
+
+
+
+
+<!--
+<p class="section"><a name="actionpoints"/>Add to Action Points
+
+<p class="body">To add to your total number of action points, you need to modify the "trkMax" field of the "hActionPts" pick.
+
+<p class="subsection">Timing
+
+<p class="body">Any priority in the "UserPostAt" phase or earlier.
+
+<p class="subsection">Example
+
+<pre class="xml">
+
+&lt;eval value="1" phase="UserPreLv" priority="10000"&gt;&lt;![CDATA[
+<font class="strong">
+~ Add 2 to our total action points
+#trkmax[hActionPts] += 2
+</font>
+]]>&lt;/eval&gt;
+
+</pre>
+-->
+
+
+<p class="section"><a name="size"/>Get the size of the Hero
+
+<p class="body">There are two ways to check the size - you can either check the tSize field of the Totals pick, or you can check the Size tag on the hero. The 9 Size tags and values are:
+
+<ul class="bullet">
+
+<li class="bullet">Tag: <font class="strong"/>Size.Fine</font>; field[tSize].value = <font class="strong"/>-4</font>
+
+<li class="bullet">Tag: <font class="strong"/>Size.Diminutive</font>; field[tSize].value = <font class="strong"/>-3</font>
+
+<li class="bullet">Tag: <font class="strong"/>Size.Tiny</font>; field[tSize].value = <font class="strong"/>-2</font>
+
+<li class="bullet">Tag: <font class="strong"/>Size.Small</font>; field[tSize].value = <font class="strong"/>-1</font>
+
+<li class="bullet">Tag: <font class="strong"/>Size.Medium</font>; field[tSize].value = <font class="strong"/>0</font>
+
+<li class="bullet">Tag: <font class="strong"/>Size.Large</font>; field[tSize].value = <font class="strong"/>1</font>
+
+<li class="bullet">Tag: <font class="strong"/>Size.Huge</font>; field[tSize].value = <font class="strong"/>2</font>
+
+<li class="bullet">Tag: <font class="strong"/>Size.Gargantuan</font>; field[tSize].value = <font class="strong"/>3</font>
+
+<li class="bullet">Tag: <font class="strong"/>Size.Colossal</font>; field[tSize].value = <font class="strong"/>4</font>
+
+</ul>
+
+<p class="subsection">Timing
+
+<p class="body">Any priority in the "UserPreLv" phase or later.
+
+<p class="subsection">Example - checking for a specific size
+
+<pre class="xml">
+
+&lt;prereq message="Large size required"&gt;
+&lt;valid&gt;&lt;![CDATA[
+
+@valid = 0
+~ Check to see if we're the right size
+validif (hero.tagis[Size.Large] <> 0)
+
+]]>&lt;/valid&gt;
+&lt;/prereq&gt;
+
+</pre>
+
+<p class="subsection">Example - checking for a size or smaller / larger
+
+<pre class="xml">
+
+&lt;prereq message="Small (or smaller) size required"&gt;
+&lt;valid&gt;&lt;![CDATA[
+
+@valid = 0
+<font class="strong">~ Check to see if we're the right size
+validif (herofield[tSize].value <= -1)
+</font>
+]]>&lt;/valid&gt;
+&lt;/prereq&gt;
+
+</pre>
+
+
+
+<p class="body"><a href="5ededit.htm">Go Back</a>.
+
+</body>
+
+</html>

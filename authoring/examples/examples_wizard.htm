@@ -1,0 +1,520 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<link href="../../../../docs/common/styles.css" rel="STYLESHEET">
+<title>Example Wizard Traditions </title>
+</head>
+
+<body>
+
+<div align="center">
+  <table class="banner" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td>
+        <p align="center" class="banner">Example Wizard Traditions 
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div align="center">
+  <table border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td><img border="0" src="../../../../docs/common/empty.gif" width="1" height="15"></td>
+    </tr>
+  </table>
+</div>
+
+<p class="section">Introduction
+
+<p class="body">This document provides examples of the mechanics for other wizard arcane traditions. 
+
+<h4>School of Abjuration</h4><p class="body">Below are the necessary mechanics to model the School of Abjuration and associated abilities.</p><pre class="xml">
+  &lt;thing id="cWizAbjura" name="School of Abjuration" description="Placeholder..." compset="CustomSpec" summary="Placeholder..." uniqueness="unique"&gt;
+    &lt;tag group="SpecSource" tag="cHelpWiz"/&gt;
+    &lt;tag group="Helper" tag="Primary"/&gt;
+    &lt;tag group="abCategory" tag="WizArcTrad" name="Wizard Arcane Tradition"/&gt;
+    &lt;tag group="Helper" tag="SpecUp"/&gt;
+    &lt;bootstrap thing="cWizArcWar"&gt;
+      &lt;autotag group="ClSpecWhen" tag="2"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cWizProWar"&gt;
+      &lt;autotag group="ClSpecWhen" tag="6"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cWizImpAbj"&gt;
+      &lt;autotag group="ClSpecWhen" tag="10"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cWizSpeRes"&gt;
+      &lt;autotag group="ClSpecWhen" tag="14"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cWizAbjSav"&gt;
+      &lt;autotag group="ClSpecWhen" tag="2"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cWizAbjSav" name="Abjuration Savant" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="abDuration" tag="Constant"/&gt;
+    &lt;tag group="abAction" tag="None"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cWizArcWar" name="Arcane Ward" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;fieldval field="trkMax" value="1"/&gt;
+    &lt;tag group="abDuration" tag="Permanent"/&gt;
+    &lt;tag group="abAction" tag="Free"/&gt;
+    &lt;tag group="User" tag="Tracker"/&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="Usage" tag="Day"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cWizProWar" name="Projected Ward" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;fieldval field="trkMax" value="1"/&gt;
+    &lt;fieldval field="abRange" value="30"/&gt;
+    &lt;tag group="User" tag="Tracker"/&gt;
+    &lt;tag group="abRange" tag="Feet"/&gt;
+    &lt;tag group="Usage" tag="Day"/&gt;
+    &lt;tag group="abAction" tag="Reaction"/&gt;
+    &lt;tag group="abDuration" tag="Instant"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cWizImpAbj" name="Improved Abjuration" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="abDuration" tag="Constant"/&gt;
+    &lt;tag group="abAction" tag="None"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cWizSpeRes" name="Spell Resistance" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;tag group="abDuration" tag="Constant"/&gt;
+    &lt;tag group="abAction" tag="None"/&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;eval phase="PostLevel" priority="10000"&gt;&lt;![CDATA[
+      doneif (tagis[Helper.ShowSpec] = 0)
+
+      doneif (tagis[Helper.Disable] &lt;&gt; 0)
+
+      perform hero.assign[DamageRes.dtSpells]]]&gt;&lt;/eval&gt;
+    &lt;eval phase="Render" priority="10000" index="2"&gt;&lt;![CDATA[
+      doneif (tagis[Helper.ShowSpec] = 0)
+
+      doneif (tagis[Helper.Disable] &lt;&gt; 0)
+
+      #situational[hero.child[svAll], "Advantage vs. spells", field[thingname].text]]]&gt;&lt;/eval&gt;
+    &lt;/thing&gt;
+
+  </pre><h4>School of Conjuration</h4><p class="body">Below are the necessary mechanics to model the School of Conjuration and associated abilities.</p><pre class="xml">
+  &lt;thing id="cWizConjur" name="School of Conjuration" description="Placeholder..." compset="CustomSpec" summary="Placeholder..." uniqueness="unique"&gt;
+    &lt;tag group="SpecSource" tag="cHelpWiz"/&gt;
+    &lt;tag group="Helper" tag="Primary"/&gt;
+    &lt;tag group="abCategory" tag="WizArcTrad" name="Wizard Arcane Tradition"/&gt;
+    &lt;tag group="Helper" tag="SpecUp"/&gt;
+    &lt;bootstrap thing="cWizMinCon"&gt;
+      &lt;autotag group="ClSpecWhen" tag="2"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cWizBenTra"&gt;
+      &lt;autotag group="ClSpecWhen" tag="6"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cWizFocCon"&gt;
+      &lt;autotag group="ClSpecWhen" tag="10"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cWizDurSum"&gt;
+      &lt;autotag group="ClSpecWhen" tag="14"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cWizConSav"&gt;
+      &lt;autotag group="ClSpecWhen" tag="2"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cWizMinCon" name="Minor Conjuration" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;fieldval field="abRange" value="10"/&gt;
+    &lt;fieldval field="abDuration" value="1"/&gt;
+    &lt;tag group="abRange" tag="Feet"/&gt;
+    &lt;tag group="abDuration" tag="Hour"/&gt;
+    &lt;tag group="abAction" tag="Action"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cWizBenTra" name="Benign Transposition" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;fieldval field="abRange" value="30"/&gt;
+    &lt;fieldval field="abDuration" value="1"/&gt;
+    &lt;fieldval field="trkMax" value="1"/&gt;
+    &lt;tag group="abDuration" tag="Hour"/&gt;
+    &lt;tag group="abAction" tag="Action"/&gt;
+    &lt;tag group="User" tag="Tracker"/&gt;
+    &lt;tag group="abRange" tag="Feet"/&gt;
+    &lt;tag group="Usage" tag="Day"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cWizFocCon" name="Focused Conjuration" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="abDuration" tag="Constant"/&gt;
+    &lt;tag group="abAction" tag="None"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cWizDurSum" name="Durable Summons" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="abDuration" tag="Constant"/&gt;
+    &lt;tag group="abAction" tag="None"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cWizConSav" name="Conjuration Savant" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="abDuration" tag="Constant"/&gt;
+    &lt;tag group="abAction" tag="None"/&gt;
+    &lt;/thing&gt;
+
+  </pre><h4>School of Divination</h4><p class="body">Below are the necessary mechanics to model the School of Divination and associated abilities.</p><pre class="xml">
+  &lt;thing id="cWizDivina" name="School of Divination" description="Placeholder..." compset="CustomSpec" summary="Placeholder..." uniqueness="unique"&gt;
+    &lt;tag group="SpecSource" tag="cHelpWiz"/&gt;
+    &lt;tag group="Helper" tag="Primary"/&gt;
+    &lt;tag group="abCategory" tag="WizArcTrad" name="Wizard Arcane Tradition"/&gt;
+    &lt;tag group="Helper" tag="SpecUp"/&gt;
+    &lt;bootstrap thing="cWizPorten"&gt;
+      &lt;autotag group="ClSpecWhen" tag="2"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cWizExpDiv"&gt;
+      &lt;autotag group="ClSpecWhen" tag="6"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cWizThiEye"&gt;
+      &lt;autotag group="ClSpecWhen" tag="10"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cWizGrePor"&gt;
+      &lt;autotag group="ClSpecWhen" tag="14"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cWizDivSav"&gt;
+      &lt;autotag group="ClSpecWhen" tag="2"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cWizPorten" name="Portent" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;fieldval field="trkMax" value="2"/&gt;
+    &lt;tag group="abDuration" tag="Instant"/&gt;
+    &lt;tag group="abAction" tag="Free"/&gt;
+    &lt;tag group="User" tag="Tracker"/&gt;
+    &lt;tag group="abRange" tag="Sight"/&gt;
+    &lt;tag group="Usage" tag="Day"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cWizExpDiv" name="Expert Divination" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="abDuration" tag="Constant"/&gt;
+    &lt;tag group="abAction" tag="None"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cWizThiEye" name="The Third Eye" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;fieldval field="trkMax" value="1"/&gt;
+    &lt;arrayval field="usrArray" index="0" value="Darkvision"/&gt;
+    &lt;arrayval field="usrArray" index="1" value="Ethereal Sight"/&gt;
+    &lt;arrayval field="usrArray" index="2" value="Greater Comprehension"/&gt;
+    &lt;arrayval field="usrArray" index="3" value="See Invisibility"/&gt;
+    &lt;tag group="Usage" tag="Day"/&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="abAction" tag="Action"/&gt;
+    &lt;tag group="User" tag="Tracker"/&gt;
+    &lt;tag group="abDuration" tag="Permanent"/&gt;
+    &lt;bootstrap thing="raDarkVis"&gt;
+      &lt;containerreq phase="First" priority="500"&gt;fieldval:usrIndex = 0&lt;/containerreq&gt;
+      &lt;assignval field="abValue" value="60"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cWizGrePor" name="Greater Portent" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="abDuration" tag="Constant"/&gt;
+    &lt;tag group="abAction" tag="None"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cWizDivSav" name="Divination Savant" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="abDuration" tag="Constant"/&gt;
+    &lt;tag group="abAction" tag="None"/&gt;
+    &lt;/thing&gt;
+
+  </pre><h4>School of Enchantment</h4><p class="body">Below are the necessary mechanics to model the School of Enchantment and associated abilities.</p><pre class="xml">
+  &lt;thing id="cWizEnchan" name="School of Enchantment" description="Placeholder..." compset="CustomSpec" summary="Placeholder..." uniqueness="unique"&gt;
+    &lt;tag group="SpecSource" tag="cHelpWiz"/&gt;
+    &lt;tag group="Helper" tag="Primary"/&gt;
+    &lt;tag group="abCategory" tag="WizArcTrad" name="Wizard Arcane Tradition"/&gt;
+    &lt;tag group="Helper" tag="SpecUp"/&gt;
+    &lt;bootstrap thing="cWizHypGaz"&gt;
+      &lt;autotag group="ClSpecWhen" tag="2"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cWizInsCha"&gt;
+      &lt;autotag group="ClSpecWhen" tag="6"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cWizSplEnc"&gt;
+      &lt;autotag group="ClSpecWhen" tag="10"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cWizAltMem"&gt;
+      &lt;autotag group="ClSpecWhen" tag="14"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cWizEncSav"&gt;
+      &lt;autotag group="ClSpecWhen" tag="2"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cWizHypGaz" name="Hypnotic Gaze" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;fieldval field="abRange" value="5"/&gt;
+    &lt;fieldval field="abDuration" value="1"/&gt;
+    &lt;tag group="abRange" tag="Feet"/&gt;
+    &lt;tag group="abAction" tag="Action"/&gt;
+    &lt;tag group="abDuration" tag="Round"/&gt;
+    &lt;tag group="abSave" tag="aWIS"/&gt;
+    &lt;tag group="StandardDC" tag="aINT"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cWizInsCha" name="Instinctive Charm" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;fieldval field="abDuration" value="1"/&gt;
+    &lt;fieldval field="abRange" value="30"/&gt;
+    &lt;tag group="abRange" tag="Feet"/&gt;
+    &lt;tag group="abDuration" tag="Round"/&gt;
+    &lt;tag group="abAction" tag="Reaction"/&gt;
+    &lt;tag group="abSave" tag="aWIS"/&gt;
+    &lt;tag group="StandardDC" tag="aWIS"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cWizSplEnc" name="Split Enchantment" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="abDuration" tag="Constant"/&gt;
+    &lt;tag group="abAction" tag="None"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cWizAltMem" name="Alter Memories" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;tag group="abRange" tag="Sight"/&gt;
+    &lt;tag group="abDuration" tag="Instant"/&gt;
+    &lt;tag group="abAction" tag="Free"/&gt;
+    &lt;tag group="abSave" tag="aINT"/&gt;
+    &lt;tag group="StandardDC" tag="aINT"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cWizEncSav" name="Enchantment Savant" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="abDuration" tag="Constant"/&gt;
+    &lt;tag group="abAction" tag="None"/&gt;
+    &lt;/thing&gt;
+
+  </pre><h4>School of Illusion</h4><p class="body">Below are the necessary mechanics to model the School of Illusion and associated abilities.</p><pre class="xml">
+  &lt;thing id="cWizIllusi" name="School of Illusion" description="Placeholder..." compset="CustomSpec" summary="Placeholder..." uniqueness="unique"&gt;
+    &lt;tag group="SpecSource" tag="cHelpWiz"/&gt;
+    &lt;tag group="Helper" tag="Primary"/&gt;
+    &lt;tag group="abCategory" tag="WizArcTrad" name="Wizard Arcane Tradition"/&gt;
+    &lt;tag group="Helper" tag="SpecUp"/&gt;
+    &lt;bootstrap thing="cWizImMiIl"&gt;
+      &lt;autotag group="ClSpecWhen" tag="2"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cWizMalIll"&gt;
+      &lt;autotag group="ClSpecWhen" tag="6"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cWizIllSel"&gt;
+      &lt;autotag group="ClSpecWhen" tag="10"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cWizIllRel"&gt;
+      &lt;autotag group="ClSpecWhen" tag="14"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cWizIllSav"&gt;
+      &lt;autotag group="ClSpecWhen" tag="2"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cWizImMiIl" name="Improved Minor Illusion" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;tag group="abDuration" tag="Constant"/&gt;
+    &lt;tag group="abAction" tag="None"/&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;bootstrap thing="spMinoIllu"&gt;
+      &lt;autotag group="Helper" tag="SpellLike"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cWizMalIll" name="Malleable Illusions" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;tag group="abRange" tag="Sight"/&gt;
+    &lt;tag group="abDuration" tag="Instant"/&gt;
+    &lt;tag group="abAction" tag="Action"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cWizIllSel" name="Illusory Self" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;fieldval field="trkMax" value="1"/&gt;
+    &lt;tag group="abDuration" tag="Instant"/&gt;
+    &lt;tag group="abAction" tag="Reaction"/&gt;
+    &lt;tag group="User" tag="Tracker"/&gt;
+    &lt;tag group="Usage" tag="Battle"/&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cWizIllRel" name="Illusory Reality" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;fieldval field="abDuration" value="1"/&gt;
+    &lt;tag group="abDuration" tag="Minute"/&gt;
+    &lt;tag group="abAction" tag="Bonus"/&gt;
+    &lt;tag group="abRange" tag="Sight"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cWizIllSav" name="Illusion Savant" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="abDuration" tag="Constant"/&gt;
+    &lt;tag group="abAction" tag="None"/&gt;
+    &lt;/thing&gt;
+
+  </pre><h4>School of Necromancy</h4><p class="body">Below are the necessary mechanics to model the School of Necromancy and associated abilities.</p><pre class="xml">
+  &lt;thing id="cWizNecrom" name="School of Necromancy" description="Placeholder..." compset="CustomSpec" summary="Placeholder..." uniqueness="unique"&gt;
+    &lt;tag group="SpecSource" tag="cHelpWiz"/&gt;
+    &lt;tag group="Helper" tag="Primary"/&gt;
+    &lt;tag group="abCategory" tag="WizArcTrad" name="Wizard Arcane Tradition"/&gt;
+    &lt;tag group="Helper" tag="SpecUp"/&gt;
+    &lt;bootstrap thing="cWizGriHar"&gt;
+      &lt;autotag group="ClSpecWhen" tag="2"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cWizUndThr"&gt;
+      &lt;autotag group="ClSpecWhen" tag="6"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cWizInuUnd"&gt;
+      &lt;autotag group="ClSpecWhen" tag="10"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cWizComUnd"&gt;
+      &lt;autotag group="ClSpecWhen" tag="14"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cWizNecSav"&gt;
+      &lt;autotag group="ClSpecWhen" tag="2"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cWizGriHar" name="Grim Harvest" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;fieldval field="trkMax" value="1"/&gt;
+    &lt;tag group="abDuration" tag="Instant"/&gt;
+    &lt;tag group="abAction" tag="Free"/&gt;
+    &lt;tag group="User" tag="Tracker"/&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="Usage" tag="Round"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cWizUndThr" name="Undead Thralls" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;tag group="abDuration" tag="Constant"/&gt;
+    &lt;tag group="abAction" tag="None"/&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;bootstrap thing="spAnimDead"&gt;
+      &lt;autotag group="BonusSplAt" tag="6"/&gt;
+      &lt;autotag group="Spellbook" tag="cHelpWiz"/&gt;
+      &lt;autotag group="sClass" tag="cHelpWiz"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cWizInuUnd" name="Inured to Undeath" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;tag group="abDuration" tag="Constant"/&gt;
+    &lt;tag group="abAction" tag="None"/&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;eval phase="PostLevel" priority="10000"&gt;&lt;![CDATA[
+    doneif (tagis[Helper.ShowSpec] = 0)
+
+    doneif (tagis[Helper.Disable] &lt;&gt; 0)
+
+    doneif (field[abilActive].value = 0)
+
+     perform hero.assign[DamageRes.dtNecrotic]]]&gt;&lt;/eval&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cWizComUnd" name="Command Undead" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;fieldval field="abRange" value="60"/&gt;
+    &lt;tag group="abDuration" tag="Permanent"/&gt;
+    &lt;tag group="abRange" tag="Feet"/&gt;
+    &lt;tag group="abAction" tag="Action"/&gt;
+    &lt;tag group="abSave" tag="aCHA"/&gt;
+    &lt;tag group="StandardDC" tag="aINT"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cWizNecSav" name="Necromancy Savant" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="abDuration" tag="Constant"/&gt;
+    &lt;tag group="abAction" tag="None"/&gt;
+    &lt;/thing&gt;
+
+  </pre><h4>School of Transmutation</h4><p class="body">Below are the necessary mechanics to model the School of Transmutation and associated abilities.</p><pre class="xml">
+  &lt;thing id="cWizTransm" name="School of Transmutation" description="Placeholder..." compset="CustomSpec" summary="Placeholder..." uniqueness="unique"&gt;
+    &lt;tag group="SpecSource" tag="cHelpWiz"/&gt;
+    &lt;tag group="Helper" tag="Primary"/&gt;
+    &lt;tag group="abCategory" tag="WizArcTrad" name="Wizard Arcane Tradition"/&gt;
+    &lt;tag group="Helper" tag="SpecUp"/&gt;
+    &lt;bootstrap thing="cWizMinAlc"&gt;
+      &lt;autotag group="ClSpecWhen" tag="2"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cWizTraSto"&gt;
+      &lt;autotag group="ClSpecWhen" tag="6"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cWizShapec"&gt;
+      &lt;autotag group="ClSpecWhen" tag="10"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cWizMasTra"&gt;
+      &lt;autotag group="ClSpecWhen" tag="14"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cWizTraSav"&gt;
+      &lt;autotag group="ClSpecWhen" tag="2"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cWizMinAlc" name="Minor Alchemy" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;fieldval field="abDuration" value="1"/&gt;
+    &lt;tag group="abDuration" tag="Hour"/&gt;
+    &lt;tag group="abRange" tag="Touch"/&gt;
+    &lt;tag group="abAction" tag="Minute"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cWizTraSto" name="Transmuter’s Stone" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;fieldval field="actName" value="In Own Possession"/&gt;
+    &lt;arrayval field="usrArray" index="0" value="Darkvision"/&gt;
+    &lt;arrayval field="usrArray" index="1" value="Increase speed"/&gt;
+    &lt;arrayval field="usrArray" index="2" value="Proficiency with Con saves"/&gt;
+    &lt;arrayval field="usrArray" index="3" value="Resist acid"/&gt;
+    &lt;arrayval field="usrArray" index="4" value="Resist cold"/&gt;
+    &lt;arrayval field="usrArray" index="5" value="Resist fire"/&gt;
+    &lt;arrayval field="usrArray" index="6" value="Resist lightning"/&gt;
+    &lt;arrayval field="usrArray" index="7" value="Resist thunder"/&gt;
+    &lt;tag group="abDuration" tag="Permanent"/&gt;
+    &lt;tag group="abRange" tag="Touch"/&gt;
+    &lt;tag group="User" tag="Activation"/&gt;
+    &lt;tag group="abAction" tag="Hour"/&gt;
+    &lt;tag group="Helper" tag="ActivMenu"/&gt;
+    &lt;bootstrap thing="raDarkVis"&gt;
+      &lt;containerreq phase="First" priority="500"&gt;&lt;![CDATA[fieldval:usrIndex = 0 & fieldval:abilActive &lt;&gt; 0]]&gt;&lt;/containerreq&gt;
+      &lt;assignval field="abValue" value="60"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;eval phase="PostLevel" priority="10000"&gt;&lt;![CDATA[field[abValue].value += #attrmod[aCHA]
+
+    doneif (tagis[Helper.ShowSpec] = 0)
+
+    doneif (tagis[Helper.Disable] &lt;&gt; 0)
+
+    doneif (field[abilActive].value = 0)
+
+    ~ Darkvision
+    if (field[usrIndex].value = 0) then
+      ~handled by a bootstrap condition
+
+    ~ Speed
+    elseif (field[usrIndex].value = 1) then
+      hero.child[Speed].field[tSpeed].value += 10
+
+    ~ Con proficiency
+    elseif (field[usrIndex].value = 2) then
+      perform hero.assign[ProfSave.svCON]
+
+    ~ Resisitance (acid)
+    elseif (field[usrIndex].value = 3) then
+      perform hero.assign[DamageRes.dtAcid]
+
+    ~ Resisitance (cold)
+    elseif (field[usrIndex].value = 4) then
+      perform hero.assign[DamageRes.dtCold]
+
+    ~ Resisitance (fire)
+    elseif (field[usrIndex].value = 5) then
+      perform hero.assign[DamageRes.dtFire]
+
+    ~ Resisitance (lightning)
+    elseif (field[usrIndex].value = 6) then
+      perform hero.assign[DamageRes.dtLightnin]
+
+    ~ Resisitance (thunder)
+    elseif (field[usrIndex].value = 7) then
+      perform hero.assign[DamageRes.dtThunder]
+      endif]]&gt;&lt;/eval&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cWizShapec" name="Shapechanger" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;fieldval field="trkMax" value="1"/&gt;
+    &lt;tag group="abAction" tag="None"/&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="SpInfo" tag="spPolymorp"/&gt;
+    &lt;tag group="User" tag="Tracker"/&gt;
+    &lt;tag group="abDuration" tag="Constant"/&gt;
+    &lt;tag group="Usage" tag="Battle"/&gt;
+    &lt;bootstrap thing="spPolymorp"&gt;
+      &lt;autotag group="BonusSplAt" tag="10"/&gt;
+      &lt;autotag group="Spellbook" tag="cHelpWiz"/&gt;
+      &lt;autotag group="sClass" tag="cHelpWiz"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cWizMasTra" name="Master Transmuter" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;fieldval field="trkMax" value="1"/&gt;
+    &lt;tag group="abDuration" tag="Instant"/&gt;
+    &lt;tag group="abAction" tag="Action"/&gt;
+    &lt;tag group="User" tag="Tracker"/&gt;
+    &lt;tag group="abRange" tag="Touch"/&gt;
+    &lt;tag group="Usage" tag="Day"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cWizTraSav" name="Transmutation Savant" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="abDuration" tag="Constant"/&gt;
+    &lt;tag group="abAction" tag="None"/&gt;
+    &lt;/thing&gt;
+
+  </pre>
+
+<p class="body"><a href="../5ededit.htm">Go Back</a>.
+
+</body>
+
+</html>

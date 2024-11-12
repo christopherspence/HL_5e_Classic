@@ -1,0 +1,213 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<link href="../../../../docs/common/styles.css" rel="STYLESHEET">
+<title>Example Barbarian Paths </title>
+</head>
+
+<body>
+
+<div align="center">
+  <table class="banner" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td>
+        <p align="center" class="banner">Example Barbarian Paths 
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div align="center">
+  <table border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td><img border="0" src="../../../../docs/common/empty.gif" width="1" height="15"></td>
+    </tr>
+  </table>
+</div>
+
+<p class="section">Introduction
+
+<p class="body">This document provides examples of the mechanics for other barbarian paths. 
+
+<h4>Path of the Totem Warrior</h4><p class="body">Below are the necessary mechanics to model the Path of the Totem Warrior.</p><pre class="xml">
+  &lt;thing id="cBbnTotWar" name="Path of the Totem Warrior" description="Placeholder..." compset="CustomSpec" summary="Placeholder..." uniqueness="unique"&gt;
+    &lt;tag group="SpecSource" tag="cHelpBbn"/&gt;
+    &lt;tag group="SpecType" tag="Attack"/&gt;
+    &lt;tag group="AbilType" tag="Extra"/&gt;
+    &lt;tag group="Custom" tag="cAnimFury" name="Animal Fury" abbrev="Animal Fury"/&gt;
+    &lt;tag group="abAction" tag="None"/&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="abDuration" tag="ConstRage"/&gt;
+    &lt;tag group="abCategory" tag="BbnPriPath" name="Barbarian Primal Path"/&gt;
+    &lt;bootstrap thing="cBbnSpiSee"&gt;
+      &lt;autotag group="ClSpecWhen" tag="3"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cBbnSpiWal"&gt;
+      &lt;autotag group="ClSpecWhen" tag="10"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cfgTotWarr"&gt;&lt;/bootstrap&gt;
+    &lt;eval phase="PostLevel" priority="10000"&gt;&lt;![CDATA[
+       doneif (tagis[Helper.Disable] &lt;&gt; 0)
+
+     if (field[xTotalLev].value &gt;= 14) then
+       hero.childfound[cfgTotWarr].field[cfgMax3].value += 1
+       endif
+     if (field[xTotalLev].value &gt;= 6) then
+       hero.childfound[cfgTotWarr].field[cfgMax2].value += 1
+       endif
+     if (field[xTotalLev].value &gt;= 3) then
+       hero.childfound[cfgTotWarr].field[cfgMax1].value += 1
+       endif]]&gt;&lt;/eval&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cBbnSpiSee" name="Spirit Seeker" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;tag group="abAction" tag="None"/&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="abDuration" tag="Constant"/&gt;
+    &lt;bootstrap thing="spSpeaAnim"&gt;
+      &lt;assignval field="livename" value="Speak with Animals (Ritual only)"/&gt;
+      &lt;/bootstrap&gt;
+&lt;!-- Not in SRD
+    &lt;bootstrap thing="spBeasSens"&gt;
+      &lt;assignval field="livename" value="Beast Sense (Ritual only)"/&gt;
+      &lt;/bootstrap&gt;
+--&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cBbnSpiWal" name="Spirit Walker" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;tag group="abAction" tag="None"/&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="abDuration" tag="Constant"/&gt;
+    &lt;bootstrap thing="spCommNatu"&gt;
+      &lt;assignval field="livename" value="Commune with Nature (Ritual only)"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cfgTotWarr" name="Totem Warrior Abilities" compset="Configure" uniqueness="unique"&gt;
+    &lt;fieldval field="cfgObject1" value="Totem Spirits"/&gt;
+    &lt;fieldval field="cfgObject2" value="Aspects of the Beast"/&gt;
+    &lt;fieldval field="cfgObject3" value="Totemic Attunements"/&gt;
+    &lt;/thing&gt;
+
+  </pre><h4>Totem Warrior Totem Spirits</h4><p class="body">Below are the necessary mechanics to model the Totem Warrior totem spirits.</p><pre class="xml">
+  &lt;thing id="cBbnTSBear" name="Bear" description="Placeholder..." compset="CustomSpec" summary="Placeholder..." uniqueness="unique"&gt;
+    &lt;tag group="SpecType" tag="Attack"/&gt;
+    &lt;tag group="AbilType" tag="Extra"/&gt;
+    &lt;tag group="abAction" tag="None"/&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="abDuration" tag="ConstRage"/&gt;
+    &lt;tag group="Helper" tag="Primary"/&gt;
+    &lt;tag group="AllowRCust" tag="cfgTotWarr"/&gt;
+    &lt;tag group="abCategory" tag="BbnTotSpi" name="Barbarian Totem Spirit"/&gt;
+    &lt;eval phase="PostLevel" priority="10000"&gt;&lt;![CDATA[
+       doneif (hero.tagis[Hero.Raging] = 0)
+
+       doneif (tagis[Helper.Disable] &lt;&gt; 0)
+
+       ~ Foreach through all types of damage and pull the Resistance tags from them.
+       foreach thing in DamageType where "!thingid.dtPsychic"
+         perform eachthing.pulltags[DamageRes.?]
+         nexteach
+
+       perform forward[DamageRes.?]]]&gt;&lt;/eval&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cBbnTSEagl" name="Eagle" description="Placeholder..." compset="CustomSpec" summary="Placeholder..." uniqueness="unique"&gt;
+    &lt;tag group="AllowRCust" tag="cfgTotWarr"/&gt;
+    &lt;tag group="SpecType" tag="Attack"/&gt;
+    &lt;tag group="AbilType" tag="Extra"/&gt;
+    &lt;tag group="abAction" tag="None"/&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="abDuration" tag="ConstRage"/&gt;
+    &lt;tag group="Helper" tag="Primary"/&gt;
+    &lt;tag group="abCategory" tag="BbnTotSpi" name="Barbarian Totem Spirit"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cBbnTSWolf" name="Wolf" description="Placeholder..." compset="CustomSpec" summary="Placeholder..." uniqueness="unique"&gt;
+    &lt;tag group="AllowRCust" tag="cfgTotWarr"/&gt;
+    &lt;tag group="SpecType" tag="Attack"/&gt;
+    &lt;tag group="AbilType" tag="Extra"/&gt;
+    &lt;tag group="abAction" tag="None"/&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="abDuration" tag="ConstRage"/&gt;
+    &lt;tag group="Helper" tag="Primary"/&gt;
+    &lt;tag group="abCategory" tag="BbnTotSpi" name="Barbarian Totem Spirit"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cBbnABBear" name="Bear" description="Placeholder..." compset="CustomSpec" summary="Placeholder..." uniqueness="unique"&gt;
+    &lt;tag group="SpecType" tag="Attack"/&gt;
+    &lt;tag group="AbilType" tag="Extra"/&gt;
+    &lt;tag group="abAction" tag="None"/&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="abDuration" tag="ConstRage"/&gt;
+    &lt;tag group="Helper" tag="Secondary"/&gt;
+    &lt;tag group="AllowRCust" tag="cfgTotWarr"/&gt;
+    &lt;tag group="abCategory" tag="BbnAspBeas" name="Barbarian Aspect of the Beast"/&gt;
+    &lt;eval phase="PostLevel" priority="10000"&gt;&lt;![CDATA[
+      doneif (tagis[Helper.Disable] &lt;&gt; 0)
+
+      ~ double our encumbrance
+      herofield[tEncum].value *= 2]]&gt;&lt;/eval&gt;
+    &lt;eval phase="Render" priority="10000" index="2"&gt;&lt;![CDATA[
+      doneif (tagis[Helper.Disable] &lt;&gt; 0)
+
+      #situational[hero.child[aSTR], "Advantage on checks made to push, pull, lift, or break objects", field[thingname].text]]]&gt;&lt;/eval&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cBbnABEagl" name="Eagle" description="Placeholder..." compset="CustomSpec" summary="Placeholder..." uniqueness="unique"&gt;
+    &lt;tag group="SpecType" tag="Attack"/&gt;
+    &lt;tag group="AbilType" tag="Extra"/&gt;
+    &lt;tag group="abAction" tag="None"/&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="abDuration" tag="ConstRage"/&gt;
+    &lt;tag group="Helper" tag="Secondary"/&gt;
+    &lt;tag group="AllowRCust" tag="cfgTotWarr"/&gt;
+    &lt;tag group="abCategory" tag="BbnAspBeas" name="Barbarian Aspect of the Beast"/&gt;
+    &lt;eval phase="Render" priority="10000"&gt;
+      doneif (tagis[Helper.Disable] &lt;&gt; 0)
+
+      #situational[hero.childfound[skPercep], &quot;Dim light doesn’t impose disadvantage&quot;, field[thingname].text]&lt;/eval&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cBbnABWolf" name="Wolf" description="Placeholder..." compset="CustomSpec" summary="Placeholder..." uniqueness="unique"&gt;
+    &lt;tag group="SpecType" tag="Attack"/&gt;
+    &lt;tag group="AbilType" tag="Extra"/&gt;
+    &lt;tag group="abAction" tag="None"/&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="abDuration" tag="ConstRage"/&gt;
+    &lt;tag group="Helper" tag="Secondary"/&gt;
+    &lt;tag group="AllowRCust" tag="cfgTotWarr"/&gt;
+    &lt;tag group="abCategory" tag="BbnAspBeas" name="Barbarian Aspect of the Beast"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cBbnTAWolf" name="Wolf" description="Placeholder..." compset="CustomSpec" summary="Placeholder..." uniqueness="unique"&gt;
+    &lt;tag group="SpecType" tag="Attack"/&gt;
+    &lt;tag group="AbilType" tag="Extra"/&gt;
+    &lt;tag group="abAction" tag="None"/&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="abDuration" tag="ConstRage"/&gt;
+    &lt;tag group="Helper" tag="Tertiary"/&gt;
+    &lt;tag group="AllowRCust" tag="cfgTotWarr"/&gt;
+    &lt;tag group="abCategory" tag="BbnTotAttn" name="Barbarian Totemic Attunement"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cBbnTABear" name="Bear" description="Placeholder..." compset="CustomSpec" summary="Placeholder..." uniqueness="unique"&gt;
+    &lt;tag group="SpecType" tag="Attack"/&gt;
+    &lt;tag group="AbilType" tag="Extra"/&gt;
+    &lt;tag group="abAction" tag="None"/&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="abDuration" tag="ConstRage"/&gt;
+    &lt;tag group="Helper" tag="Tertiary"/&gt;
+    &lt;tag group="AllowRCust" tag="cfgTotWarr"/&gt;
+    &lt;tag group="abCategory" tag="BbnTotAttn" name="Barbarian Totemic Attunement"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cBbnTAEagl" name="Eagle" description="Placeholder..." compset="CustomSpec" summary="Placeholder..." uniqueness="unique"&gt;
+    &lt;tag group="SpecType" tag="Attack"/&gt;
+    &lt;tag group="AbilType" tag="Extra"/&gt;
+    &lt;tag group="abAction" tag="None"/&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="abDuration" tag="ConstRage"/&gt;
+    &lt;tag group="Helper" tag="Tertiary"/&gt;
+    &lt;tag group="AllowRCust" tag="cfgTotWarr"/&gt;
+    &lt;tag group="abCategory" tag="BbnTotAttn" name="Barbarian Totemic Attunement"/&gt;
+    &lt;/thing&gt;
+
+  </pre>
+
+<p class="body"><a href="../5ededit.htm">Go Back</a>.
+
+</body>
+
+</html>

@@ -1,0 +1,82 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<link href="../../../../docs/common/styles.css" rel="STYLESHEET">
+<title>Example Bard Colleges </title>
+</head>
+
+<body>
+
+<div align="center">
+  <table class="banner" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td>
+        <p align="center" class="banner">Example Bard Colleges 
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div align="center">
+  <table border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td><img border="0" src="../../../../docs/common/empty.gif" width="1" height="15"></td>
+    </tr>
+  </table>
+</div>
+
+<p class="section">Introduction
+
+<p class="body">This document provides examples of the mechanics for other bard colleges. 
+
+<h4>College of Valor</h4><p class="body">Below are the necessary mechanics to model the College of Valor.</p><pre class="xml">
+  &lt;thing id="cBrdColVal" name="College of Valor" description="Placeholder..." compset="CustomSpec" uniqueness="unique"&gt;
+    &lt;tag group="SpecSource" tag="cHelpBrd"/&gt;
+    &lt;tag group="abCategory" tag="BrdCollege" name="Bardic College"/&gt;
+    &lt;tag group="Helper" tag="Primary"/&gt;
+    &lt;bootstrap thing="cBrdBoPrVa"&gt;
+      &lt;autotag group="ClSpecWhen" tag="3"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cBrdComIns"&gt;
+      &lt;autotag group="ClSpecWhen" tag="3"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cExtraAtt"&gt;
+      &lt;autotag group="ClSpecWhen" tag="6"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cBrdBatMag"&gt;
+      &lt;autotag group="ClSpecWhen" tag="14"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cBrdBoPrVa" name="Bonus Proficiencies" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;tag group="abAction" tag="None"/&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="abDuration" tag="Constant"/&gt;
+    &lt;eval phase="PostLevel" priority="10000"&gt;&lt;![CDATA[
+      doneif (tagis[Helper.ShowSpec] = 0)
+
+      doneif (tagis[Helper.Disable] &lt;&gt; 0)
+
+      perform root.linkage[table].assign[ArmProfGrp.ArmorMed]
+      perform root.linkage[table].assign[ArmProfGrp.Shields]
+      perform root.linkage[table].assign[ArmProfGrp.WepMartial]]]&gt;&lt;/eval&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cBrdComIns" name="Combat Inspiration" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;tag group="abAction" tag="None"/&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="abDuration" tag="Constant"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cBrdBatMag" name="Battle Magic" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;tag group="abAction" tag="Bonus"/&gt;
+    &lt;tag group="abRange" tag="Attack"/&gt;
+    &lt;tag group="abDuration" tag="Instant"/&gt;
+    &lt;/thing&gt;
+
+  </pre>
+
+<p class="body"><a href="../5ededit.htm">Go Back</a>.
+
+</body>
+
+</html>

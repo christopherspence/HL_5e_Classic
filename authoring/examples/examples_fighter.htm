@@ -1,0 +1,382 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<link href="../../../../docs/common/styles.css" rel="STYLESHEET">
+<title>Example Fighter Martial Archetypes </title>
+</head>
+
+<body>
+
+<div align="center">
+  <table class="banner" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td>
+        <p align="center" class="banner">Example Fighter Martial Archetypes 
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div align="center">
+  <table border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td><img border="0" src="../../../../docs/common/empty.gif" width="1" height="15"></td>
+    </tr>
+  </table>
+</div>
+
+<p class="section">Introduction
+
+<p class="body">This document provides examples of the mechanics for other martial archetypes. 
+
+<h4>Battle Master</h4><p class="body">Below are the necessary mechanics to model the Battle Master and associated abilities.</p><pre class="xml">
+  &lt;thing id="cFtrBatMas" name="Battle Master" description="Placeholder..." compset="CustomSpec" summary="Placeholder..." uniqueness="unique"&gt;
+    &lt;fieldval field="usrCandid1" value="component.BaseAttr &amp;amp; (IsAttr.aSTR | IsAttr.aDEX)"/&gt;
+    &lt;tag group="abCategory" tag="FtrMarArch" name="Fighter Martial Archetype"/&gt;
+    &lt;tag group="SpecSource" tag="cHelpFtr"/&gt;
+    &lt;tag group="ChooseSrc1" tag="Hero"/&gt;
+    &lt;tag group="Helper" tag="Secondary"/&gt;
+    &lt;bootstrap thing="cFtrStuWar"&gt;
+      &lt;autotag group="ClSpecWhen" tag="3"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cFtrKnYoEn"&gt;
+      &lt;autotag group="ClSpecWhen" tag="7"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cFtrRelent"&gt;
+      &lt;autotag group="ClSpecWhen" tag="15"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cFtrImCoSu"&gt;
+      &lt;autotag group="ClSpecWhen" tag="10"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cFtrImCoSu"&gt;
+      &lt;autotag group="ClSpecWhen" tag="18"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cFtrSupDie"&gt;
+      &lt;autotag group="ClSpecWhen" tag="3"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;eval phase="PostLevel" priority="9000"&gt;&lt;![CDATA[
+       if (field[usrChosen1].ischosen &lt;&gt; 0) then
+         perform field[usrChosen1].chosen.pulltags[StandardDC.?]
+         endif
+
+       doneif (tagis[Helper.Disable] &lt;&gt; 0)
+
+       linkage[table].field[cSpec3rdNm].text = "Maneuvers"
+       linkage[table].field[cSpec3rdSi].text = "Maneuver"
+
+       linkage[table].field[cCustTeTot].arrayvalue[2] += 3
+       linkage[table].field[cCustTeTot].arrayvalue[6] += 5
+       linkage[table].field[cCustTeTot].arrayvalue[9] += 7
+       linkage[table].field[cCustTeTot].arrayvalue[14] += 9]]&gt;
+      &lt;before name="Calc cGiveSp3rd"/&gt;
+      &lt;/eval&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cFtrSupDie" name="Superiority Dice" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;fieldval field="trkMax" value="4"/&gt;
+    &lt;fieldval field="abValue" value="1"/&gt;
+    &lt;fieldval field="abValue2" value="8"/&gt;
+    &lt;tag group="User" tag="Tracker"/&gt;
+    &lt;tag group="Usage" tag="Battle"/&gt;
+    &lt;tag group="abAction" tag="None"/&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="abDuration" tag="Constant"/&gt;
+    &lt;tag group="LvNamePar" tag="DieCntVal"/&gt;
+    &lt;tag group="LvNamePar" tag="AppValue3"/&gt;
+    &lt;tag group="LvNamePar" tag="SignAppVal"/&gt;
+    &lt;tag group="LvNamePar" tag="DieSizVal2"/&gt;
+    &lt;eval phase="PostLevel" priority="10000"&gt;&lt;![CDATA[
+
+         if (field[xAllLev].value &gt;= 15) then
+           field[trkMax].value += 2
+         elseif (field[xAllLev].value &gt;= 7) then
+           field[trkMax].value += 1
+           endif]]&gt;&lt;/eval&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cFtrStuWar" name="Student of War" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;fieldval field="usrCandid1" value="component.Tool &amp;amp; ToolCat.Artisan"/&gt;
+    &lt;tag group="abAction" tag="None"/&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="abDuration" tag="Constant"/&gt;
+    &lt;tag group="ChooseSrc1" tag="Thing"/&gt;
+    &lt;eval phase="PostLevel" priority="10000"&gt;&lt;![CDATA[
+
+       doneif (tagis[Helper.ShowSpec] = 0)
+
+       doneif (tagis[Helper.Disable] &lt;&gt; 0)
+
+       doneif (field[usrChosen1].ischosen = 0)
+
+       perform field[usrChosen1].chosen.pulltags[ProfTool.?]
+       perform forward[ProfTool.?]]]&gt;&lt;/eval&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cFtrKnYoEn" name="Know Your Enemy" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;tag group="abRange" tag="Sight"/&gt;
+    &lt;tag group="abDuration" tag="Instant"/&gt;
+    &lt;tag group="abAction" tag="Minute"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cFtrImCoSu" name="Improved Combat Superiority" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="abDuration" tag="Constant"/&gt;
+    &lt;tag group="abAction" tag="None"/&gt;
+    &lt;eval phase="PostLevel" priority="10000"&gt;&lt;![CDATA[
+
+         if (field[xAllLev].value &gt;= 18) then
+           field[abValue].value += 4
+         elseif (field[xAllLev].value &gt;= 10) then
+           field[abValue].value += 2
+           endif]]&gt;&lt;/eval&gt;
+    &lt;eval phase="PostAttr" priority="10000" index="2"&gt;&lt;![CDATA[
+        doneif (tagis[Helper.ShowSpec] = 0)
+
+        doneif (tagis[Helper.Disable] &lt;&gt; 0)
+
+        hero.childfound[cFtrSupDie].field[abValue2].value += field[abValue].value]]&gt;&lt;/eval&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cFtrRelent" name="Relentless" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="abDuration" tag="Constant"/&gt;
+    &lt;tag group="abAction" tag="None"/&gt;
+    &lt;/thing&gt;
+
+  </pre><h4>Battle Master Maneuvers</h4><p class="body">Below are the necessary mechanics to model the Battle Master maneuvers.</p><pre class="xml">
+  &lt;thing id="cFtrComStr" name="Commander&apos;s Strike" description="Placeholder..." compset="CustomSpec" summary="Placeholder..." uniqueness="unique"&gt;
+    &lt;tag group="Helper" tag="Tertiary"/&gt;
+    &lt;tag group="abRange" tag="Hearing"/&gt;
+    &lt;tag group="abDuration" tag="Instant"/&gt;
+    &lt;tag group="SpecSource" tag="cHelpFtr"/&gt;
+    &lt;tag group="abCategory" tag="FtrBMasMan" name="Fighter Battle Master Maneuver"/&gt;
+    &lt;tag group="abAction" tag="Bonus"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cFtrDisAtt" name="Disarming Attack" description="Placeholder..." compset="CustomSpec" summary="Placeholder..." uniqueness="unique"&gt;
+    &lt;tag group="Helper" tag="Tertiary"/&gt;
+    &lt;tag group="abRange" tag="Attack"/&gt;
+    &lt;tag group="abDuration" tag="Instant"/&gt;
+    &lt;tag group="SpecSource" tag="cHelpFtr"/&gt;
+    &lt;tag group="abCategory" tag="FtrBMasMan" name="Fighter Battle Master Maneuver"/&gt;
+    &lt;tag group="abSave" tag="aSTR"/&gt;
+    &lt;tag group="abAction" tag="Free"/&gt;
+    &lt;eval phase="PreAttr" priority="10000"&gt;perform hero.childfound[cFtrBatMas].pulltags[StandardDC.?]&lt;/eval&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cFtrDisStr" name="Distracting Strike" description="Placeholder..." compset="CustomSpec" summary="Placeholder..." uniqueness="unique"&gt;
+    &lt;fieldval field="abDuration" value="1"/&gt;
+    &lt;tag group="abRange" tag="Attack"/&gt;
+    &lt;tag group="abDuration" tag="Round"/&gt;
+    &lt;tag group="SpecSource" tag="cHelpFtr"/&gt;
+    &lt;tag group="abCategory" tag="FtrBMasMan" name="Fighter Battle Master Maneuver"/&gt;
+    &lt;tag group="abAction" tag="Free"/&gt;
+    &lt;tag group="Helper" tag="Tertiary"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cFtrEvaFoo" name="Evasive Footwork" description="Placeholder..." compset="CustomSpec" summary="Placeholder..." uniqueness="unique"&gt;
+    &lt;fieldval field="abDuration" value="1"/&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="abDuration" tag="Round"/&gt;
+    &lt;tag group="SpecSource" tag="cHelpFtr"/&gt;
+    &lt;tag group="abCategory" tag="FtrBMasMan" name="Fighter Battle Master Maneuver"/&gt;
+    &lt;tag group="abAction" tag="Free"/&gt;
+    &lt;tag group="Helper" tag="Tertiary"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cFtrFeiAtt" name="Feinting Attack" description="Placeholder..." compset="CustomSpec" summary="Placeholder..." uniqueness="unique"&gt;
+    &lt;fieldval field="abDuration" value="1"/&gt;
+    &lt;fieldval field="abRange" value="5"/&gt;
+    &lt;tag group="abDuration" tag="Attack"/&gt;
+    &lt;tag group="SpecSource" tag="cHelpFtr"/&gt;
+    &lt;tag group="abCategory" tag="FtrBMasMan" name="Fighter Battle Master Maneuver"/&gt;
+    &lt;tag group="Helper" tag="Tertiary"/&gt;
+    &lt;tag group="abAction" tag="Bonus"/&gt;
+    &lt;tag group="abRange" tag="Feet"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cFtrLunAtt" name="Lunging Attack" description="Placeholder..." compset="CustomSpec" summary="Placeholder..." uniqueness="unique"&gt;
+    &lt;fieldval field="abDuration" value="1"/&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="abDuration" tag="Attack"/&gt;
+    &lt;tag group="SpecSource" tag="cHelpFtr"/&gt;
+    &lt;tag group="abCategory" tag="FtrBMasMan" name="Fighter Battle Master Maneuver"/&gt;
+    &lt;tag group="Helper" tag="Tertiary"/&gt;
+    &lt;tag group="abAction" tag="Free"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cFtrGoaAtt" name="Goading Attack" description="Placeholder..." compset="CustomSpec" summary="Placeholder..." uniqueness="unique"&gt;
+    &lt;fieldval field="abDuration" value="1"/&gt;
+    &lt;tag group="abRange" tag="Attack"/&gt;
+    &lt;tag group="abDuration" tag="Round"/&gt;
+    &lt;tag group="SpecSource" tag="cHelpFtr"/&gt;
+    &lt;tag group="abCategory" tag="FtrBMasMan" name="Fighter Battle Master Maneuver"/&gt;
+    &lt;tag group="abAction" tag="Free"/&gt;
+    &lt;tag group="abSave" tag="aWIS"/&gt;
+    &lt;tag group="Helper" tag="Tertiary"/&gt;
+    &lt;eval phase="PreAttr" priority="10000"&gt;perform hero.childfound[cFtrBatMas].pulltags[StandardDC.?]&lt;/eval&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cFtrManAtt" name="Maneuvering Attack" description="Placeholder..." compset="CustomSpec" summary="Placeholder..." uniqueness="unique"&gt;
+    &lt;tag group="Helper" tag="Tertiary"/&gt;
+    &lt;tag group="abRange" tag="Hearing"/&gt;
+    &lt;tag group="abDuration" tag="Instant"/&gt;
+    &lt;tag group="SpecSource" tag="cHelpFtr"/&gt;
+    &lt;tag group="abCategory" tag="FtrBMasMan" name="Fighter Battle Master Maneuver"/&gt;
+    &lt;tag group="abAction" tag="Free"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cFtrMenAtt" name="Menacing Attack" description="Placeholder..." compset="CustomSpec" summary="Placeholder..." uniqueness="unique"&gt;
+    &lt;fieldval field="abDuration" value="1"/&gt;
+    &lt;tag group="abRange" tag="Attack"/&gt;
+    &lt;tag group="abDuration" tag="Round"/&gt;
+    &lt;tag group="SpecSource" tag="cHelpFtr"/&gt;
+    &lt;tag group="abCategory" tag="FtrBMasMan" name="Fighter Battle Master Maneuver"/&gt;
+    &lt;tag group="abAction" tag="Free"/&gt;
+    &lt;tag group="abSave" tag="aWIS"/&gt;
+    &lt;tag group="Helper" tag="Tertiary"/&gt;
+    &lt;eval phase="PreAttr" priority="10000"&gt;perform hero.childfound[cFtrBatMas].pulltags[StandardDC.?]&lt;/eval&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cFtrParry" name="Parry" description="Placeholder..." compset="CustomSpec" summary="Placeholder..." uniqueness="unique"&gt;
+    &lt;tag group="Helper" tag="Tertiary"/&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="abDuration" tag="Instant"/&gt;
+    &lt;tag group="SpecSource" tag="cHelpFtr"/&gt;
+    &lt;tag group="abCategory" tag="FtrBMasMan" name="Fighter Battle Master Maneuver"/&gt;
+    &lt;tag group="abAction" tag="Reaction"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cFtrPreAtt" name="Precision Attack" description="Placeholder..." compset="CustomSpec" summary="Placeholder..." uniqueness="unique"&gt;
+    &lt;fieldval field="abDuration" value="1"/&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="abDuration" tag="Attack"/&gt;
+    &lt;tag group="SpecSource" tag="cHelpFtr"/&gt;
+    &lt;tag group="abCategory" tag="FtrBMasMan" name="Fighter Battle Master Maneuver"/&gt;
+    &lt;tag group="abAction" tag="Free"/&gt;
+    &lt;tag group="Helper" tag="Tertiary"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cPusAtt" name="Pushing Attack" description="Placeholder..." compset="CustomSpec" summary="Placeholder..." uniqueness="unique"&gt;
+    &lt;tag group="Helper" tag="Tertiary"/&gt;
+    &lt;tag group="abRange" tag="Attack"/&gt;
+    &lt;tag group="abDuration" tag="Instant"/&gt;
+    &lt;tag group="SpecSource" tag="cHelpFtr"/&gt;
+    &lt;tag group="abCategory" tag="FtrBMasMan" name="Fighter Battle Master Maneuver"/&gt;
+    &lt;tag group="abAction" tag="Free"/&gt;
+    &lt;tag group="abSave" tag="aSTR"/&gt;
+    &lt;eval phase="PreAttr" priority="10000"&gt;perform hero.childfound[cFtrBatMas].pulltags[StandardDC.?]&lt;/eval&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cFtrRally" name="Rally" description="Placeholder..." compset="CustomSpec" summary="Placeholder..." uniqueness="unique"&gt;
+    &lt;tag group="Helper" tag="Tertiary"/&gt;
+    &lt;tag group="abRange" tag="Hearing"/&gt;
+    &lt;tag group="abDuration" tag="Instant"/&gt;
+    &lt;tag group="SpecSource" tag="cHelpFtr"/&gt;
+    &lt;tag group="abCategory" tag="FtrBMasMan" name="Fighter Battle Master Maneuver"/&gt;
+    &lt;tag group="abAction" tag="Bonus"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cFtrRipost" name="Riposte" description="Placeholder..." compset="CustomSpec" summary="Placeholder..." uniqueness="unique"&gt;
+    &lt;tag group="Helper" tag="Tertiary"/&gt;
+    &lt;tag group="abRange" tag="Touch"/&gt;
+    &lt;tag group="abDuration" tag="Instant"/&gt;
+    &lt;tag group="SpecSource" tag="cHelpFtr"/&gt;
+    &lt;tag group="abCategory" tag="FtrBMasMan" name="Fighter Battle Master Maneuver"/&gt;
+    &lt;tag group="abAction" tag="Reaction"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cFtrSweAtt" name="Sweeping Attack" description="Placeholder..." compset="CustomSpec" summary="Placeholder..." uniqueness="unique"&gt;
+    &lt;tag group="Helper" tag="Tertiary"/&gt;
+    &lt;tag group="abRange" tag="Touch"/&gt;
+    &lt;tag group="abDuration" tag="Instant"/&gt;
+    &lt;tag group="SpecSource" tag="cHelpFtr"/&gt;
+    &lt;tag group="abCategory" tag="FtrBMasMan" name="Fighter Battle Master Maneuver"/&gt;
+    &lt;tag group="abAction" tag="Free"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cFtrTriAtt" name="Trip Attack" description="Placeholder..." compset="CustomSpec" summary="Placeholder..." uniqueness="unique"&gt;
+    &lt;tag group="abRange" tag="Attack"/&gt;
+    &lt;tag group="abDuration" tag="Instant"/&gt;
+    &lt;tag group="SpecSource" tag="cHelpFtr"/&gt;
+    &lt;tag group="abCategory" tag="FtrBMasMan" name="Fighter Battle Master Maneuver"/&gt;
+    &lt;tag group="abAction" tag="Free"/&gt;
+    &lt;tag group="abSave" tag="aSTR"/&gt;
+    &lt;tag group="Helper" tag="Tertiary"/&gt;
+    &lt;eval phase="PreAttr" priority="10000"&gt;perform hero.childfound[cFtrBatMas].pulltags[StandardDC.?]&lt;/eval&gt;
+    &lt;/thing&gt;
+
+  </pre><h4>Eldritch Knight</h4><p class="body">Below are the necessary mechanics to model the Eldritch Knight and associated abilities.</p><pre class="xml">
+  &lt;thing id="cFtrEldKni" name="Eldritch Knight" description="Placeholder..." compset="CustomSpec" summary="Placeholder..." uniqueness="unique"&gt;
+    &lt;tag group="abCategory" tag="FtrMarArch" name="Fighter Martial Archetype"/&gt;
+    &lt;tag group="SpecSource" tag="cHelpFtr"/&gt;
+    &lt;tag group="Helper" tag="Secondary"/&gt;
+    &lt;bootstrap thing="cFtrWarMag"&gt;
+      &lt;autotag group="ClSpecWhen" tag="7"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cFtrEldStr"&gt;
+      &lt;autotag group="ClSpecWhen" tag="10"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cFtrArcCha"&gt;
+      &lt;autotag group="ClSpecWhen" tag="15"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cFtrImWaMa"&gt;
+      &lt;autotag group="ClSpecWhen" tag="18"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cFtrWeaBon"&gt;
+      &lt;autotag group="ClSpecWhen" tag="3"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;eval phase="First" priority="10000"&gt;&lt;![CDATA[
+        perform linkage[table].setfocus
+
+        doneif (state.isfocus = 0)
+
+        ~ Spellcasting attribute
+        perform focus.setlinkage[castattr,BaseAttr,"IsAttr.aINT"]
+
+        ~ Spellcasting type
+        perform focus.assign[CasterType.SpontKnow]
+        perform focus.assign[CasterSrc.Arcane]
+        perform focus.assign[Helper.3rdCaster]
+        perform focus.assign[sClass.cHelpWiz]
+
+        ~ Cantrip Array
+        focus.field[cArrKnCan].arrayvalue[2] += 2
+        focus.field[cArrKnCan].arrayvalue[9] += 3
+
+        ~ Spells Known Array
+        focus.field[cArrKnSpl].arrayvalue[2] += 3
+        focus.field[cArrKnSpl].arrayvalue[3] += 4
+        focus.field[cArrKnSpl].arrayvalue[6] += 5
+        focus.field[cArrKnSpl].arrayvalue[7] += 6
+        focus.field[cArrKnSpl].arrayvalue[9] += 7
+        focus.field[cArrKnSpl].arrayvalue[10] += 8
+        focus.field[cArrKnSpl].arrayvalue[12] += 9
+        focus.field[cArrKnSpl].arrayvalue[13] += 10
+        focus.field[cArrKnSpl].arrayvalue[15] += 11
+        focus.field[cArrKnSpl].arrayvalue[18] += 12
+        focus.field[cArrKnSpl].arrayvalue[19] += 13
+
+        ~ Max Spell Levels Array
+        focus.field[cArrKnLev].arrayvalue[2] += 1
+        focus.field[cArrKnLev].arrayvalue[6] += 2
+        focus.field[cArrKnLev].arrayvalue[12] += 3
+        focus.field[cArrKnLev].arrayvalue[18] += 4]]&gt;&lt;/eval&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cFtrWeaBon" name="Weapon Bond" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;tag group="abRange" tag="Plane"/&gt;
+    &lt;tag group="abDuration" tag="Instant"/&gt;
+    &lt;tag group="abAction" tag="Bonus"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cFtrWarMag" name="War Magic" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="abDuration" tag="Instant"/&gt;
+    &lt;tag group="abAction" tag="Bonus"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cFtrEldStr" name="Eldritch Strike" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;fieldval field="abDuration" value="1"/&gt;
+    &lt;tag group="abDuration" tag="Round"/&gt;
+    &lt;tag group="abAction" tag="Free"/&gt;
+    &lt;tag group="abRange" tag="Attack"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cFtrImWaMa" name="Improved War Magic" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="abDuration" tag="Instant"/&gt;
+    &lt;tag group="abAction" tag="Bonus"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cFtrArcCha" name="Arcane Charge" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;fieldval field="abRange" value="30"/&gt;
+    &lt;tag group="abDuration" tag="Instant"/&gt;
+    &lt;tag group="abAction" tag="Free"/&gt;
+    &lt;tag group="abRange" tag="Feet"/&gt;
+    &lt;/thing&gt;
+
+  </pre>
+
+<p class="body"><a href="../5ededit.htm">Go Back</a>.
+
+</body>
+
+</html>

@@ -1,0 +1,57 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<link href="../../../docs/common/styles.css" rel="STYLESHEET">
+<title>5th Edition SRD data files - Choosing a Phase</title>
+</head>
+
+<body>
+
+<div align="center">
+  <table class="banner" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td>
+        <p align="center" class="banner">5E SRD Editor - Choosing a Phase
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div align="center">
+  <table border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td><img border="0" src="../../../docs/common/empty.gif" width="1" height="15"></td>
+    </tr>
+  </table>
+</div>
+
+<p class="section">Choosing a Phase and Priority
+
+<p class="body">When you're writing a script, the most important choice you can make is the phase and priority that the script runs at. Certain things need to be done before or after certain times, or they simply won't work. (You can find out when things need to be run by looking at the <a href="5thededithowto.htm">"How To" Section</a>.)
+
+<p class="body">This document has a list of the existing phases and priorities, giving you an overview of which phases to use for which scripts. Phase ids are specified <i>in italics</i>.
+
+<p class="body">The order in which the phases appear here is the order in which they are executed by Hero Lab.
+
+<ol class="basic">
+
+<li class="basic"><i>GlobalTest</i> - <font class="strong">Global Testing Phase</font> - This phase can be used for anything that relies on global tags (for example, tags set by rulesets) or controls (for example, checkboxes). It shouldn't be used for anything that depends on anything else.
+<li class="basic"><i>First</i> - <font class="strong">First Phase</font> - This phase can be used for anything that doesn't rely on levels or final attribute values to run. It's basically a catch-all phase for things that don't need to go anywhere else.
+<li class="basic"><i>PreLevel</i> - <font class="strong">Pre-Levels Phase</font> - Can be used by anything that needs to be evaluated before levels are counted and added to the hero.<br>For example, you can calculate values in this phase that are then used in later phases, or assign tags that are used in later phases.
+<li class="basic"><i>Level</i> - <font class="strong">Levels Phase</font> - Used internally, typically not used by data file authors.
+<li class="basic"><i>PostLevel</i> - <font class="strong">Post-Levels Phase</font> - Should be used by anything that depends on levels having been counted.<br>For example, if your script or tag expression requires checking that the hero is a level 7 Barbarian, you should use this phase.
+<li class="basic"><i>PreAttr</i> - <font class="strong">Pre-Attributes Phase</font> - Should be used by anything that needs to be evaluated before attribute values are totalled up.<br>For example, if you want to add 1 to the hero's Strength score, you should do it in this phase or earlier.
+<li class="basic"><i>Attr</i> - <font class="strong">Attributes Phase</font> - Used internally, typically not used by data file authors.
+<li class="basic"><i>PostAttr</i> - <font class="strong">Post-Attributes Phase</font> - Should be used by anything that requires having finalized attributes available.<br>For example, if your script needs to know the final value of the hero's Dexterity score, you should run it in this phase.
+<li class="basic"><i>Final</i> - <font class="strong">Final Phase</font> - Should be used by anything that can be run after all other scripts.<br>For example, if you want to calculate a field based on the final results of a number of other scripts, that isn't used by anything else, you should use this phase.
+<li class="basic"><i>Validation</i> - <font class="strong">Validation Phase</font> - Used for eval rules that can run after everything is calculated in the previous phases.
+<li class="basic"><i>Render</i> - <font class="strong">Render Phase</font> - This phase should only be used when generating information for display, not for calculating any values.
+</ol>
+
+<p class="body"><a href="5ededit.htm">Go Back</a>.
+
+</body>
+
+</html>

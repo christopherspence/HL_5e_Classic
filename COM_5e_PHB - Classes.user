@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document signature="Hero Lab Data">
+  <thing id="cHelpBBn" name="Barbarian" compset="Class" replaces="cHelpBbn" uniqueness="unique">
+    <fieldval field="cSkillMax" value="2"/>
+    <fieldval field="cSpecSing" value="Primal Path"/>
+    <fieldval field="cSCRNumDce" value="2"/>
+    <fieldval field="cAbbr" value="BBn"/>
+    <fieldval field="cHDSides" value="12"/>
+    <fieldval field="StartAll" value="• ({i}a{/i}) a greataxe or ({i}b{/i}) any martial melee weapon{br}• ({i}a{/i}) two handaxes or ({i}b{/i}) any simple weapon{br}• An explorer&apos;s pack and four javelins"/>
+    <fieldval field="StartWeap" value="• ({i}a{/i}) a greataxe or ({i}b{/i}) any martial melee weapon{br}• ({i}a{/i}) two handaxes or ({i}b{/i}) any simple weapon{br}• Four javelins"/>
+    <fieldval field="StartGear" value="An explorer&apos;s pack"/>
+    <arrayval field="cAttrArray" index="3" value="2"/>
+    <arrayval field="cAttrArray" index="7" value="4"/>
+    <arrayval field="cAttrArray" index="11" value="6"/>
+    <arrayval field="cAttrArray" index="15" value="8"/>
+    <arrayval field="cAttrArray" index="18" value="10"/>
+    <arrayval field="cCustTot" index="2" value="1"/>
+    <tag group="ProfSave" tag="svSTR" name="Strength" abbrev="Strength"/>
+    <tag group="AllowSkl1" tag="skAnimHand" name="Animal Handling" abbrev="Animal Handling"/>
+    <tag group="AllowSkl1" tag="skAthletic" name="Athletics" abbrev="Athletics"/>
+    <tag group="AllowSkl1" tag="skIntim" name="Intimidation" abbrev="Intimidation"/>
+    <tag group="AllowSkl1" tag="skNature" name="Nature" abbrev="Nature"/>
+    <tag group="AllowSkl1" tag="skPercep" name="Perception" abbrev="Perception"/>
+    <tag group="AllowSkl1" tag="skSurvival" name="Survival" abbrev="Survival"/>
+    <tag group="ArmProfGrp" tag="ArmorLight" name="Light armor" abbrev="Light armor"/>
+    <tag group="ArmProfGrp" tag="ArmorMed" name="Medium armor" abbrev="Medium armor"/>
+    <tag group="ArmProfGrp" tag="Shields" name="Shields" abbrev="Shields"/>
+    <tag group="ArmProfGrp" tag="WepMartial" name="Martial weapons" abbrev="Martial weapons"/>
+    <tag group="ArmProfGrp" tag="WepSimple" name="Simple weapons" abbrev="Simple weapons"/>
+    <tag group="Classes" tag="cClassBbn" name="Barbarian" abbrev="Barbarian"/>
+    <tag group="PrimeAbil" tag="aSTR" name="Strength" abbrev="Strength"/>
+    <tag group="ProfSave" tag="svCON" name="Constitution" abbrev="Constitution"/>
+    <bootstrap thing="cBbnFast">
+      <autotag group="AddReq" tag="ArmorMed"/>
+      <autotag group="ClSpecWhen" tag="5"/>
+      </bootstrap>
+    <bootstrap thing="cBbnRage">
+      <autotag group="ClSpecWhen" tag="1"/>
+      </bootstrap>
+    <bootstrap thing="cBbnUnaDef">
+      <autotag group="ClSpecWhen" tag="1"/>
+      </bootstrap>
+    <bootstrap thing="cExtraAtt">
+      <autotag group="ClSpecWhen" tag="5"/>
+      </bootstrap>
+    <bootstrap thing="cBbnFerIns">
+      <autotag group="ClSpecWhen" tag="7"/>
+      </bootstrap>
+    <bootstrap thing="cBbnBruCri">
+      <autotag group="ClSpecWhen" tag="9"/>
+      </bootstrap>
+    <bootstrap thing="cBbnBruCri">
+      <autotag group="ClSpecWhen" tag="13"/>
+      </bootstrap>
+    <bootstrap thing="cBbnBruCri">
+      <autotag group="ClSpecWhen" tag="17"/>
+      </bootstrap>
+    <bootstrap thing="cBbnDanSen">
+      <autotag group="ClSpecWhen" tag="2"/>
+      </bootstrap>
+    <bootstrap thing="cBbnRecAtt">
+      <autotag group="ClSpecWhen" tag="2"/>
+      </bootstrap>
+    <bootstrap thing="cBbnPriCha">
+      <autotag group="ClSpecWhen" tag="20"/>
+      </bootstrap>
+    <bootstrap thing="cBbnRelRag">
+      <autotag group="ClSpecWhen" tag="11"/>
+      </bootstrap>
+    <bootstrap thing="cBbnPerRag">
+      <autotag group="ClSpecWhen" tag="15"/>
+      </bootstrap>
+    <bootstrap thing="cBbnIndMig">
+      <autotag group="ClSpecWhen" tag="18"/>
+      </bootstrap>
+    <eval phase="Level" priority="6000"><![CDATA[
+      ~ Don't reduce our capabilities for multiclassing if this is the first
+      ~ class we have taken.
+      doneif (tagis[Helper.FirstLevel] <> 0)
+
+      ~ Multiclass barbarians lose light/medium, skill and save proficiencies
+      perform delete[ArmProfGrp.ArmorLight]
+      perform delete[ArmProfGrp.ArmorMed]
+      perform delete[ProfSave.?]
+      field[cSkillMax].value -= 2]]>
+      <before name="Class Helper forwards Proficiency Tags"/>
+      <before name="Weapon and Armor group proficiencies forwarded to hero"/>
+      <after name="Declare First Level"/>
+      </eval>
+    </thing>
+  <thing id="ccClassBbn" name="Barbarian" compset="ClassLevel" maxlimit="20">
+    <tag group="ClassType" tag="Normal"/>
+    <bootstrap thing="cHelpBBn"></bootstrap>
+    <link linkage="helper" thing="cHelpBBn"/>
+    </thing>
+  </document>

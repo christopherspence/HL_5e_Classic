@@ -1,0 +1,145 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<link href="../../../docs/common/styles.css" rel="STYLESHEET">
+<title>Tutorial 4 - Adding a Complex Class</title>
+</head>
+
+<body>
+
+<div align="center">
+  <table class="banner" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td>
+        <p align="center" class="banner">Tutorial 4 - Adding a Complex Class
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div align="center">
+  <table border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td><img border="0" src="../../../docs/common/empty.gif" width="1" height="15"></td>
+    </tr>
+  </table>
+</div>
+
+<p class="section">Introduction
+
+<p class="body">In the last tutorial, we added a simple class with a simple special ability. This time we're going to add a new class, the Battlemage, that can cast spells but also has reasonable fighting skills. Instead of creating it from scratch, we'll be starting from a different template - the Sorcerer.
+
+<p class="body"><font class="strong">This tutorial assumes you're familiar with the contents of the <a href="5thededittut1.htm">first</a>, <a href="5thededittut2.htm">second</a> and <a href="5thededittut3.htm">third</a> tutorials, in which you added a feat, a race and a simple class. If you haven't made yourself familiar with these, you might want to check them out first.</font>
+
+<p class="section">Loading the Editor
+<p class="body">As usual, load the editor from the Hero Lab "Tools" menu and re-open the "tutorial" file that we've been working on so far.
+
+<p class="section">Create the Class
+
+        <table border=0 cellspacing=0 cellpadding=0>
+          <tr>
+            <td><img border="0" src="../../../docs/common/empty.gif" width="1" height="10"></td>
+          </tr>
+          <tr>
+            <td valign="center"><img class="border" src="./tut4_classwizard.png"></td>
+            <td><img border="0" src="../../../docs/common/empty.gif" width="10" height="1"></td>
+            <td valign="center">
+              <p class="body">We're going to avoid as much work as we possibly can with this class by copying the Sorcerer instead of starting from scratch. Make sure you're on the Class tab (one of the first tabs in the list), then click the "New (Copy)" button and select <font class="strong">"Sorcerer"</font> from the list. Hit OK, then fill in the class wizard form. Specify the name as "Battlemage", the abbreviation as "Bat" and the identifier as "Battlemg" (since "Battlemage" is too long to use as an identifier - it's 10 characters). Then choose a d8 for hit dice, and we're done - hit "Create" and let the editor reload the game.
+
+              <p class="body">Switch to the new "Battlemage" tab and check it out - we have a full tab with spell selection already included. Let's make some more changes now.
+            </td>
+          </tr>
+        </table>
+
+        <table border=0 cellspacing=0 cellpadding=0>
+          <tr>
+            <td><img border="0" src="../../../docs/common/empty.gif" width="1" height="10"></td>
+          </tr>
+          <tr>
+            <td valign="center"><img class="border" src="./tut4_helperspecific.png"></td>
+            <td><img border="0" src="../../../docs/common/empty.gif" width="10" height="1"></td>
+            <td valign="center">
+              <p class="body">Look down the list of items until you see a row for "Class Weapons", and add some odditional options, including "Martial melee weapons" and "Simple melee weapons" - Battlemages are better at fighting than Sorcerers! Also, add Dexterity to the list of Class Save Proficiencies, since Battlemages are pretty nimble too.
+
+               <p class="body">Save the class and test it - once you add a level of the new class, you should see your new weapon proficiencies and improved Dexterity save. However, we can't add any spells yet - that's because the Battlemage class doesn't have any spells of its own.
+
+               <p class="body">The solution is to have the Battlemage use the same spell list as Sorcerers, so scroll down to the "Spellcasting Details" section, and find the "Other Class' Spells" selector.  Select <font class="strong">"Sorcerer"</font> from this list, and test the class again - you should now be able to add Battlemage spells.
+            </td>
+          </tr>
+        </table>
+
+
+<p class="body">Note how everything is very similar to the Sorcerer (in fact, it looks almost exactly the same as the sorcerer, because we just copied everything).  If we wanted, we could copy the spell list of another class, or add our own... or even change how we cast spells. We'll cover that in the next tutorial.
+
+<p class="section">Adding Custom Abilities
+
+        <table border=0 cellspacing=0 cellpadding=0>
+          <tr>
+            <td><img border="0" src="../../../docs/common/empty.gif" width="1" height="10"></td>
+          </tr>
+          <tr>
+            <td valign="center"><img class="border" src="./tut4_customabilities.png"></td>
+            <td><img border="0" src="../../../docs/common/empty.gif" width="10" height="1"></td>
+            <td valign="center">
+              <p class="body">Back in the editor, select the "Battlemage" on the Class tab, and scroll a little bit up the list to find "Class Special Abilities". Battlemages aren't going to get the Sorcerous Restoration ability that sorcerers do, so click on "Class Special Abilities", and then delete that special ability. Save and test the class again, and that ability will no longer appear.
+
+              <p class="body">Now, scroll down past spells. The next section is "Custom Abilities" - these are abilities, chosen by the user, which the class can select. As a Battlemage, we're going to name our custom abilities "Battlepower", so enter that in the "Custom Ability Name" section.  (Since our the name of our ability becomes a plural if "s" is added on to the end, we don't need to enter anything into the "Custom Ability Plural" - Hero Lab assumes that if nothing is entered there, we want to create the plural by adding an "s").
+
+               <p class="body">Now edit the "Custom Ability Count", and give the battlemage 1 ability every other level, as shown in the screenshot. Save the record and hit the "Test Now!" button, and we now have a Battlepowers table on our tab in Hero Lab - but no powers to add.
+            </td>
+          </tr>
+        </table>
+
+        <table border=0 cellspacing=0 cellpadding=0>
+          <tr>
+            <td><img border="0" src="../../../docs/common/empty.gif" width="1" height="10"></td>
+          </tr>
+          <tr>
+            <td valign="center"><img class="border" src="./tut4_newcustom.png"></td>
+            <td><img border="0" src="../../../docs/common/empty.gif" width="10" height="1"></td>
+            <td valign="center">
+              <p class="body">Switch to the Custom Abilities tab in the editor, and create a new (blank) ability. Call it <font class="strong">Inferno Strike</font>, and give it a unique id of <font class="strong">cBatJSInfS</font>, and in the "Uniqueness" menu, select unique so that it can only be selected once. In the "Available to Class" list, select the new "Battlemage" entry. You can also configure it to appear in the list of special abilities or charges, just like the Craftsman's ability that we added in tutorial 3 - the only difference is that the user has to select this ability from a list, instead of it being added automatically.
+
+               <p class="body">Save the ability and hit the Test button, then click the "Add more Battlepowers" button on the Battlemage tab. The new "Inferno Strike" ability should now be visible. For your own class, you could go ahead and add as many custom abilities as you want.
+            </td>
+          </tr>
+        </table>
+
+
+        <table border=0 cellspacing=0 cellpadding=0>
+          <tr>
+            <td><img border="0" src="../../../docs/common/empty.gif" width="1" height="10"></td>
+          </tr>
+          <tr>
+            <td valign="center"><img class="border" src="./tut4_othercustom.png"></td>
+            <td><img border="0" src="../../../docs/common/empty.gif" width="10" height="1"></td>
+            <td valign="center">
+
+<p class="section">Secondary and Tertiary Abilities
+
+<p class="body">If your class has more than one type of custom ability, you can specify how many secondary and tertiary abilities it gets on the Class tab, and then select either <font class="strong">Secondary</font> or <font class="strong">Tertiary</font> in the "Secondary or Tertiary Custom" selection on the appropriate abilities for it. This allows you to have three separate tracks of custom abilities, with different names and different ability lists.
+
+
+<p class="section">Inheriting Abilities from Another Class
+
+<p class="body">Sometimes you want a class to have access to exactly the same abilities as another. For example, you might be defining a "Priest" class that could pick domains, just like the cleric, but could select 2 instead of 1. Instead of having to re-enter the domains, you can simply allow the Priest class to take Cleric abilities.
+
+<p class="body">Once you've created the new Priest class, scroll down its list until you find the "Custom Abilities" section. Click the "Allow Class Abilities..." button and choose "Cleric" from the list, then click OK. Now you just have to make sure the class is allowed to take custom abilities, and voila - your priest class can now pick from cleric domains as well as any custom 'priest' abilities.
+
+            </td>
+          </tr>
+        </table>
+
+<p class="section">What next?
+
+<p class="body">If you're looking for further information and instructions for the Class tab, <a href="5thededittabs.htm#class">this file</a> will help.
+
+<p class="body">If you're interested in learning how to add a deity, go on to the <a href="5thededittut5.htm">next tutorial</a>!
+
+<p class="body"><a href="5ededit.htm">Go Back</a>.
+
+</body>
+
+</html>

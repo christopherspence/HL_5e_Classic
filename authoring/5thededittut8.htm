@@ -1,0 +1,98 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<link href="../../../docs/common/styles.css" rel="STYLESHEET">
+<title>Tutorial 8 - Adding Custom Tabs</title>
+</head>
+
+<body>
+
+<div align="center">
+  <table class="banner" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td>
+        <p align="center" class="banner">Tutorial 8 - Adding Custom Tabs
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div align="center">
+  <table border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td><img border="0" src="../../../docs/common/empty.gif" width="1" height="15"></td>
+    </tr>
+  </table>
+</div>
+
+<p class="section">Introduction
+
+<p class="body">Before attempting to complete this tutorial, it is highly reccommended that you familiarize yourself with tag expressions, as discussed in the Eval Scripts Resource page.
+
+<p class="body">So lets now talk a little about the User Interface of Hero Lab. Just like most modern browsers it is set up as a series of tabs which, when selected, display a variety of information to the user in the view below. In Hero lab, each of those subsets displayed below is called a table, and there are two main kinds of table you'll be interested in Fixed tables, and Dynamic tables.
+
+<p class="body">Fixed tables are for display only, the user cannot add nor delete picks displayed in these tables. An example of a Fixed table is the Class Special table on the various class tabs, or the only table on the Specials tab.
+
+<p class="body">Dynamic tables allow the user to add picks and delete any pick displayed in them so long as that pick was added to that table originally. It is possible for picks added to a table to display in other tables as well. For example, any languages added to the Racial Languages table on the Race tab also display on the Skills tab in the Languages table, but you can only delete them on the Race tab. Most of the tables in hero lab are Dynamic, but examples include the Class Level table on the Classes tab, the Personality Traits/Ideals/Bonds/Etc tables on the Background tab, and the Spells Known tables on the Sorcerer Spells tab.
+
+<p class="body">What is displayed in any table (fixed or dynamic) is controlled by the List Expression of that table, which is a kind of Tag Expression (see the eval scripts resource). Any picks which meet the list expression are displayed in the table. List expressions are typically set in stone, and unavailable for manipulation by eval scripts, although if you want to display a pick in a non-standard table you may be able to alter the pick to suit the table.
+
+<p class="body">What can be added to any Dynamic table is controlled by the Candidate Expression of the table, another kind of Tag expression. Any Thing which meets the Candidate Expression is eligible to be added as a Pick to that table. Unlike list expressions, Candidate Expressions are usually stored in text fields on the Class or Configurable Pick, and thus are freely modifiable. You could, for example, use an eval script to alter the Candidate Expression for the sorcerer class' spell table to limit spells known to only those of the Evocation school.
+
+<p class="section">Example in Use: Fair Folk Subrace (Skinwalker)
+<p class="body">In tutorial 2, we created a new race, the Fair Folk, which is meant to be stronger than the default PHB races. We'll add a subrace for Fair Folk which will further enhance the power of this race. Skinwalkers, we decide, get some abilities automatically, and furthermore get to choose from a menu of 30 different abilities, but what choices are valid depend on what Environment (Desert/Forest/Plains/City/Ocean) and what Animal Type (Mammal, Reptile, Insect, Avian, Aquatic) they are attuned to.
+
+<p class="body">When setting up a system this complex, it helps immensely to go into it with a plan, so let's take stock of what we want to do and what tables a configurable has on offer.
+
+<p class="body">Configurables have the following tables:
+
+<ul class="bullet">
+
+<li class="bullet">1 Fixed table for Class Specials
+
+<li class="bullet">3 dynamic tables for feats
+<p class="body">Candidate Expression Fields: cfgAllowF1/cfgAllowF2/cfgAllowF3
+<p class="body">Number of Feat Slots for this Table: cfgMaxF1/cfgMaxF2/cfgMaxF3
+
+<li class="bullet">5 dynamic tables for Custom Abilities
+<p class="body">Candidate Expression Fields: cfgAllow1/cfgAllow2/cfgAllow3/cfgAllow4/cfgAllow5
+<p class="body">Table Name Fields (What Objects are you adding?): cfgObject1/cfgObject2/cfgObject3/cfgObject4/cfgObject5
+<p class="body">Number of Ability Slots for this Table: cfgMax1/cfgMax2/cfgMax3/cfgMax4/cfgMax5
+
+<li class="bullet">1 dynamic table for Languages
+<p class="body">Candidate Expression Field: cfgLaAllo1
+<p class="body">Table Name Field (What Objects are you adding?): cfgLaObj1
+<p class="body">Number of Language Slots for this Table: cfgLaMax1
+
+<li class="bullet">2 dynamic tables for Spells
+<p class="body">Candidate Expression Fields: cfgAllwSp1/cfgAllwSp2
+<p class="body">Table Name Fields (What Objects are you adding?): cfgSpell1/cfgSpell2
+<p class="body">Number of Spell Slots for this Table: cfgMaxSp1/cfgMaxSp2
+</ul>
+
+<p class="body">We can create the abilities that everyone gets as class specials which will be shown on the Fixed table, and the Environment choices and Animal Type choices can each have the first two Custom Ability tables. Depending on which of those are chosen, we'll have an eval script set the candidate expression for Custom Ability Table 3.
+
+<p class="body">First go to the General group of tabs in the editor, and then the Configurable tab, and create a New (blank) configurable. The name of the Configurable is what is used for the tab name, so we shouldn't pick something super-long. Let's go with "Skins".
+
+<p class="body">Scroll down to the Custom Abilities section. For "Custom Ability Total" enter "1", and for "Custom Ability Name" enter "Environment". For the Secondary Abilities, give them 1 and "Animal Type". For the Tertiary abilities, just fill in the name with "Natural Enhancments", as we'll set the number of slots based on character level in an eval script. Save and integrate the configurable, then create the Skinwalker Subrace to bootstrap the configurable (if you need a refresher on creating subraces, return to Tutorial 2).
+
+Now let's create some Class specials to go in the Fixed Table. This is very similar to the process of adding class specials to a class helper from Tutorial 3, except you'll be bootstrapping them to the Configurable instead. Create "Skinshifting" and bootstrap it at 1st level (you can use the description of this special to explain anything you need to about how the Custom abilities work), "Song of the Earth" at 3rd level, and "Dance of Nature's Children" at 8th level.
+
+Configurables, like classes, have a field which stores their effective level "cfgLevel". Unlike class helpers though, this field does not have any default progression, you will have to set its value in an eval script. Select the configurable and add an eval script
+
+    field[c
+
+
+
+<p class="section">What if Configurables don't handle what I need? Can I add a new Custom tab without using Configurables?
+<p class="body">Yes, you can, but such a process is beyond the scope of the editor and these tutorials. Creating tabs, forms, tables, and manipulating how the UI is laid out on such is very complex. Configurables are a compromise designed to make those processes simple enough for the average user to handle the most common tasks that need new tables, and have the layout automate itself. If you are truly interested in the amount of customization beyond what Configurables provide, I would direct you to the Authoring Kit forums and the Authoring Kit wiki.
+
+<!--<p class="body">If you're looking for further information and instructions for the Class tab, <a href="5thededittabs.htm#class">this file</a> will help.-->
+
+<p class="body"><a href="5ededit.htm">Go Back</a>.
+
+</body>
+
+</html>

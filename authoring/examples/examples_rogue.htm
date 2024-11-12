@@ -1,0 +1,182 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<link href="../../../../docs/common/styles.css" rel="STYLESHEET">
+<title>Example Rogue Archetypes </title>
+</head>
+
+<body>
+
+<div align="center">
+  <table class="banner" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td>
+        <p align="center" class="banner">Example Rogue Archetypes 
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div align="center">
+  <table border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td><img border="0" src="../../../../docs/common/empty.gif" width="1" height="15"></td>
+    </tr>
+  </table>
+</div>
+
+<p class="section">Introduction
+
+<p class="body">This document provides examples of the mechanics for other rogue archetypes. 
+
+<h4>Assassin</h4><p class="body">Below are the necessary mechanics to model the Assassin archetype and associated abilities.</p><pre class="xml">
+  &lt;thing id="cRogAssass" name="Assassin" description="Placeholder..." compset="CustomSpec" summary="Placeholder..." uniqueness="unique"&gt;
+    &lt;tag group="SpecSource" tag="cHelpRog"/&gt;
+    &lt;tag group="abCategory" tag="RogArchety" name="Rogue Archetype"/&gt;
+    &lt;tag group="Helper" tag="Primary"/&gt;
+    &lt;bootstrap thing="cRogAssas2"&gt;
+      &lt;autotag group="ClSpecWhen" tag="3"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cRogInfExp"&gt;
+      &lt;autotag group="ClSpecWhen" tag="9"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cRogImpost"&gt;
+      &lt;autotag group="ClSpecWhen" tag="13"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cRogDeaStr"&gt;
+      &lt;autotag group="ClSpecWhen" tag="17"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cRogBonPro"&gt;
+      &lt;autotag group="ClSpecWhen" tag="3"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cRogBonPro" name="Bonus Proficiencies" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;tag group="abDuration" tag="Constant"/&gt;
+    &lt;tag group="abAction" tag="None"/&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;eval phase="PostLevel" priority="10000"&gt;&lt;![CDATA[
+
+       doneif (tagis[Helper.ShowSpec] = 0)
+
+       doneif (tagis[Helper.Disable] &lt;&gt; 0)
+
+       perform hero.assign[ProfTool.gKitDisgui]
+       perform hero.assign[ProfTool.gKitPoison]]]&gt;&lt;/eval&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cRogAssas2" name="Assassinate" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="abDuration" tag="Constant"/&gt;
+    &lt;tag group="abAction" tag="None"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cRogInfExp" name="Infiltration Expertise" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="abDuration" tag="Permanent"/&gt;
+    &lt;tag group="abAction" tag="Day"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cRogImpost" name="Imposter" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="abDuration" tag="Permanent"/&gt;
+    &lt;tag group="abAction" tag="Hour"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cRogDeaStr" name="Death Strike" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;tag group="abRange" tag="Attack"/&gt;
+    &lt;tag group="abDuration" tag="Instant"/&gt;
+    &lt;tag group="abAction" tag="Free"/&gt;
+    &lt;tag group="abSave" tag="aCON"/&gt;
+    &lt;tag group="StandardDC" tag="aDEX"/&gt;
+    &lt;/thing&gt;
+
+  </pre><h4>Arcane Trickster</h4><p class="body">Below are the necessary mechanics to model the Arcane Trickster archetype and associated abilities.</p><pre class="xml">
+  &lt;thing id="cRogArcTri" name="Arcane Trickster" description="Placeholder..." compset="CustomSpec" uniqueness="unique"&gt;
+    &lt;tag group="Helper" tag="Primary"/&gt;
+    &lt;tag group="SpecSource" tag="cHelpRog"/&gt;
+    &lt;tag group="abCategory" tag="RogArchety"/&gt;
+    &lt;bootstrap thing="cRogMagAmb"&gt;
+      &lt;autotag group="ClSpecWhen" tag="9"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cRogVerTri"&gt;
+      &lt;autotag group="ClSpecWhen" tag="13"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cRogSpeThi"&gt;
+      &lt;autotag group="ClSpecWhen" tag="17"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cRogMaHaLe"&gt;
+      &lt;autotag group="ClSpecWhen" tag="3"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="spMageHand"&gt;&lt;/bootstrap&gt;
+    &lt;eval phase="First" priority="10000"&gt;&lt;![CDATA[
+        perform linkage[table].setfocus
+
+        doneif (state.isfocus = 0)
+
+        ~ Spellcasting attribute
+        perform focus.setlinkage[castattr,BaseAttr,"IsAttr.aINT"]
+
+        ~ Spellcasting type
+        perform focus.assign[CasterType.SpontKnow]
+        perform focus.assign[CasterSrc.Arcane]
+        perform focus.assign[Helper.3rdCaster]
+        perform focus.assign[sClass.cHelpWiz]
+
+        ~ Cantrip Array
+        focus.field[cArrKnCan].arrayvalue[2] += 3
+        focus.field[cArrKnCan].arrayvalue[9] += 4
+
+        ~ Spells Known Array
+        focus.field[cArrKnSpl].arrayvalue[2] += 3
+        focus.field[cArrKnSpl].arrayvalue[3] += 4
+        focus.field[cArrKnSpl].arrayvalue[6] += 5
+        focus.field[cArrKnSpl].arrayvalue[7] += 6
+        focus.field[cArrKnSpl].arrayvalue[9] += 7
+        focus.field[cArrKnSpl].arrayvalue[10] += 8
+        focus.field[cArrKnSpl].arrayvalue[12] += 9
+        focus.field[cArrKnSpl].arrayvalue[13] += 10
+        focus.field[cArrKnSpl].arrayvalue[15] += 11
+        focus.field[cArrKnSpl].arrayvalue[18] += 12
+        focus.field[cArrKnSpl].arrayvalue[19] += 13
+
+        ~ Max Spell Levels Array
+        focus.field[cArrKnLev].arrayvalue[2] += 1
+        focus.field[cArrKnLev].arrayvalue[6] += 2
+        focus.field[cArrKnLev].arrayvalue[12] += 3
+        focus.field[cArrKnLev].arrayvalue[18] += 4]]&gt;&lt;/eval&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cRogMaHaLe" name="Mage Hand Legerdemain" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="abDuration" tag="Constant"/&gt;
+    &lt;tag group="abAction" tag="None"/&gt;
+    &lt;tag group="SpInfo" tag="spMageHand"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cRogMagAmb" name="Magical Ambush" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="abDuration" tag="Constant"/&gt;
+    &lt;tag group="abAction" tag="None"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cRogVerTri" name="Versatile Trickster" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;fieldval field="abRange" value="5"/&gt;
+    &lt;fieldval field="abDuration" value="1"/&gt;
+    &lt;tag group="abAction" tag="Bonus"/&gt;
+    &lt;tag group="abRange" tag="Feet"/&gt;
+    &lt;tag group="abDuration" tag="Round"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cRogSpeThi" name="Spell Thief" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;fieldval field="abDuration" value="8"/&gt;
+    &lt;fieldval field="trkMax" value="1"/&gt;
+    &lt;tag group="StandardDC" tag="aINT"/&gt;
+    &lt;tag group="abAction" tag="Reaction"/&gt;
+    &lt;tag group="abRange" tag="HearSight"/&gt;
+    &lt;tag group="abSave" tag="Varies"/&gt;
+    &lt;tag group="User" tag="Tracker"/&gt;
+    &lt;tag group="abDuration" tag="Hour"/&gt;
+    &lt;tag group="Usage" tag="Day"/&gt;
+    &lt;/thing&gt;
+
+  </pre>
+
+<p class="body"><a href="../5ededit.htm">Go Back</a>.
+
+</body>
+
+</html>

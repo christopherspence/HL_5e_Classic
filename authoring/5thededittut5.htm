@@ -1,0 +1,102 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<link href="../../../docs/common/styles.css" rel="STYLESHEET">
+<title>Tutorial 5 - Deities</title>
+</head>
+
+<body>
+
+<div align="center">
+  <table class="banner" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td>
+        <p align="center" class="banner">Tutorial 5 - Deities
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div align="center">
+  <table border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td><img border="0" src="../../../docs/common/empty.gif" width="1" height="15"></td>
+    </tr>
+  </table>
+</div>
+
+<p class="section">Introduction
+
+<p class="body">In the last tutorial, we added a new class that could cast spells. This time we're going back to something simpler - adding new deities for your game world.
+
+<p class="body"><font class="strong">This tutorial assumes you're familiar with the contents of the <a href="5thededittut1.htm">first</a> and <a href="5thededittut2.htm">second</a> tutorials, in which you added a feat and a race.</font>
+
+<p class="section">Loading the Editor
+<p class="body">As usual, load the editor from the Hero Lab "Tools" menu and re-open the "tutorial" file that we've been working on so far.
+
+<p class="section">Create the deity
+
+<p class="body">Find the "Deity" tab under the "General" category. We're going to add one of the gods of our home campaign, Mystika - the God of Magic - with similar information as found in the Player's Handbook for deities.
+
+<p class="body">Create a new, blank deity named Mystika, and give it an appropriate unique id. While there are many facets of deity information you can fill in, we're interested in Mystika's Alignment, domains, and symbol. Selecting the alignment is easy - just pick it from a menu.
+
+<p><img border="0" src="tut5_alignment.png"/>
+
+<p class="body">Mystika is the god of magic, so his suggested domain is the Knowledge domain. Click the "Edit" button beside "Suggested Domains" and select it from the list. This adds the domain tag to the hero - if you don't see the domain you want here, choose "- New Tag -" instead, and you can create a new domain.
+
+<p><img border="0" src="tut5_domain.png"/>
+
+<p class="body">Next, type Mystika's portfolio, the "God of magic", into the "Portfolio" text box. If you want to enter more text than will fit, you can click the "Edit" button to get a bigger window to type into. You can also enter the appropriate symbol text in the "Minor Details" section below, along with anything else you want to specify.
+
+<p><img border="0" src="tut5_portfolio.png"/>
+
+<p class="body">We're half-way done - Mystika now appears at the bottom of our list of deities.
+
+<p><img border="0" src="tut5_halfway.png"/>
+
+<p class="body">Let's add a couple of new things - a setting restriction for Mystika, so he only appears for games in our "Forgotten Worlds" setting, and make him appear at the top of the list.
+
+<p class="body">To add a setting restriction, we want to set an appropriate <b>Source</b> on Mystika. Scroll to the bottom of the list of facets of the deity, and you'll see a button for <b>Sources</b>. Click "Edit" and you'll be able to see a list of all the sources defined for the game so far. Initially, this will just be the list of built-in sources.
+
+<p><img border="0" src="tut5_sources.png"/>
+
+<p class="body">We need to create a new one for our game, so check the <b>- New Source -</b> option at the top, and hit "OK". Now we get to enter the information about our game - enter a name for the source, which will appear in Hero Lab, and a unique id. (The unique id should be a shortened form of the name, and should include your user identifier, just like the unique id of the things you've been creating.)
+
+<p class="body">Leave the parent source specified as "UserParent" - this will display it at the top of the list of sources on the Configure Hero form in Hero Lab.
+
+
+<p><img border="0" src="tut5_newsource.png"/>
+
+<p class="body">Hit OK, and you've created a new source! Now you've created it here, you'll be able to re-use it on other deities and content you create for your world - it will be selectable in the list of sources for any new thing you create.
+
+<p class="body">Test the updated thing, and you'll notice that Mystika no longer appears in the list of deities on the Background tab. Don't worry, that's expected! We haven't told Hero Lab to allow content from our Forgotten Worlds setting yet - let's fix that.
+
+<p class="body">Go to the Hero menu within Hero Lab, and choose <b>Configure Hero</b>. You'll see a new option in the list of settings on the right - our new <b>Forgotten Worlds</b> setting.
+
+<p><img border="0" src="tut5_configurehero.png"/>
+
+<p class="body">Turn the Forgotten Worlds setting on, and Mystika returns to list of deities! Now we just have to move him to a more appropriate place. Go back to the editor, and find the "Deity Category Order Group" setting - change that to an early number, like <b>5</b>. (This sets a tag that Hero Lab uses to decide which order the list of deities should appear in.)
+
+<p><img border="0" src="tut5_order.png"/>
+
+<p class="body">Now test the thing again, and you'll see Mystika appearing proudly at the top of the list of deities! If you want to arrange different groups of deities separately from each other, you can set their "Deity Category Order Group" values differently - the lower the number, the earlier the deity will appear in the list.
+
+<p><img border="0" src="tut5_done.png"/>
+
+<p class="section">What next?
+
+<p class="body">If you're interested in learning more about the Editor, check out <a href="5ededit.htm">this guide</a>.
+
+<p class="body">If you're looking for other information and instructions for the Deity tab, <a href="5thededittabs.htm#deity">this file</a> will help.
+
+<!--
+<p class="body">If you're interested in learning how to add a class archetype, go on to the <a href="5thededittut6.htm">next tutorial</a>!
+-->
+
+<p class="body"><a href="5ededit.htm">Go Back</a>.
+
+</body>
+
+</html>

@@ -1,0 +1,306 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<link href="../../../../docs/common/styles.css" rel="STYLESHEET">
+<title>Example Paladin Oaths </title>
+</head>
+
+<body>
+
+<div align="center">
+  <table class="banner" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td>
+        <p align="center" class="banner">Example Paladin Oaths 
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div align="center">
+  <table border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td><img border="0" src="../../../../docs/common/empty.gif" width="1" height="15"></td>
+    </tr>
+  </table>
+</div>
+
+<p class="section">Introduction
+
+<p class="body">This document provides examples of the mechanics for other paladin oaths. 
+
+<h4>Oath of the Ancients</h4><p class="body">Below are the necessary mechanics to model the Oath of the Ancients and associated abilities.</p><pre class="xml">
+  &lt;thing id="cPalOatAnc" name="Oath of the Ancients" description="Placeholder..." compset="CustomSpec" summary="Placeholder..." uniqueness="unique"&gt;
+    &lt;tag group="Helper" tag="Secondary"/&gt;
+    &lt;tag group="abCategory" tag="PalSacOath" name="Paladin Sacred Oath"/&gt;
+    &lt;tag group="SpecSource" tag="cHelpPal"/&gt;
+    &lt;bootstrap thing="cPalNatWra"&gt;
+      &lt;autotag group="ClSpecWhen" tag="3"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cPalTurFai"&gt;
+      &lt;autotag group="ClSpecWhen" tag="3"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cPalAurWar"&gt;
+      &lt;autotag group="ClSpecWhen" tag="7"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cPalUndSen"&gt;
+      &lt;autotag group="ClSpecWhen" tag="15"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cPalEldCha"&gt;
+      &lt;autotag group="ClSpecWhen" tag="20"/&gt;
+      &lt;/bootstrap&gt;
+&lt;!-- Not in SRD
+    &lt;bootstrap thing="spEnsnStri"&gt;
+      &lt;autotag group="Helper" tag="Memorized"/&gt;
+      &lt;autotag group="Helper" tag="Free"/&gt;
+      &lt;autotag group="SpellType" tag="cHelpPal"/&gt;
+      &lt;autotag group="BonusSplAt" tag="3"/&gt;
+      &lt;/bootstrap&gt;
+--&gt;
+    &lt;bootstrap thing="spSpeaAnim"&gt;
+      &lt;autotag group="Helper" tag="Memorized"/&gt;
+      &lt;autotag group="Helper" tag="Free"/&gt;
+      &lt;autotag group="SpellType" tag="cHelpPal"/&gt;
+      &lt;autotag group="BonusSplAt" tag="3"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="spMoonbeam"&gt;
+      &lt;autotag group="Helper" tag="Memorized"/&gt;
+      &lt;autotag group="Helper" tag="Free"/&gt;
+      &lt;autotag group="SpellType" tag="cHelpPal"/&gt;
+      &lt;autotag group="BonusSplAt" tag="5"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="spMistStep"&gt;
+      &lt;autotag group="Helper" tag="Memorized"/&gt;
+      &lt;autotag group="Helper" tag="Free"/&gt;
+      &lt;autotag group="SpellType" tag="cHelpPal"/&gt;
+      &lt;autotag group="BonusSplAt" tag="5"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="spPlanGrow"&gt;
+      &lt;autotag group="Helper" tag="Memorized"/&gt;
+      &lt;autotag group="Helper" tag="Free"/&gt;
+      &lt;autotag group="SpellType" tag="cHelpPal"/&gt;
+      &lt;autotag group="BonusSplAt" tag="9"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="spProtEner"&gt;
+      &lt;autotag group="Helper" tag="Memorized"/&gt;
+      &lt;autotag group="Helper" tag="Free"/&gt;
+      &lt;autotag group="SpellType" tag="cHelpPal"/&gt;
+      &lt;autotag group="BonusSplAt" tag="9"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="spIceStor"&gt;
+      &lt;autotag group="Helper" tag="Memorized"/&gt;
+      &lt;autotag group="Helper" tag="Free"/&gt;
+      &lt;autotag group="SpellType" tag="cHelpPal"/&gt;
+      &lt;autotag group="BonusSplAt" tag="13"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="spStoneski"&gt;
+      &lt;autotag group="Helper" tag="Memorized"/&gt;
+      &lt;autotag group="Helper" tag="Free"/&gt;
+      &lt;autotag group="SpellType" tag="cHelpPal"/&gt;
+      &lt;autotag group="BonusSplAt" tag="13"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="spCommNatu"&gt;
+      &lt;autotag group="Helper" tag="Memorized"/&gt;
+      &lt;autotag group="Helper" tag="Free"/&gt;
+      &lt;autotag group="SpellType" tag="cHelpPal"/&gt;
+      &lt;autotag group="BonusSplAt" tag="17"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="spTreeStri"&gt;
+      &lt;autotag group="Helper" tag="Memorized"/&gt;
+      &lt;autotag group="Helper" tag="Free"/&gt;
+      &lt;autotag group="SpellType" tag="cHelpPal"/&gt;
+      &lt;autotag group="BonusSplAt" tag="17"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cPalNatWra" name="Channel Divinity: Nature&apos;s Wrath" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;fieldval field="abRange" value="10"/&gt;
+    &lt;tag group="abDuration" tag="Instant"/&gt;
+    &lt;tag group="abAction" tag="Action"/&gt;
+    &lt;tag group="abCategory" tag="PalChanDiv" name="Paladin Channel Divinity"/&gt;
+    &lt;tag group="abSave" tag="aDEX"/&gt;
+    &lt;tag group="abSave" tag="aSTR"/&gt;
+    &lt;tag group="abRange" tag="Feet"/&gt;
+    &lt;tag group="StandardDC" tag="aCHA"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cPalTurFai" name="Channel Divinity: Turn the Faithless" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;fieldval field="abDuration" value="1"/&gt;
+    &lt;fieldval field="abRange" value="30"/&gt;
+    &lt;tag group="abDuration" tag="Minute"/&gt;
+    &lt;tag group="abAction" tag="Action"/&gt;
+    &lt;tag group="abCategory" tag="PalChanDiv" name="Paladin Channel Divinity"/&gt;
+    &lt;tag group="abRange" tag="Feet"/&gt;
+    &lt;tag group="abSave" tag="aWIS"/&gt;
+    &lt;tag group="StandardDC" tag="aCHA"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cPalAurWar" name="Aura of Warding" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;fieldval field="abRange" value="10"/&gt;
+    &lt;tag group="abRange" tag="Feet"/&gt;
+    &lt;tag group="abDuration" tag="Constant"/&gt;
+    &lt;tag group="LvNamePar" tag="IncRange"/&gt;
+    &lt;tag group="abAction" tag="None"/&gt;
+    &lt;tag group="DamageRes" tag="dtSpells" name="damage from spells"/&gt;
+    &lt;eval phase="PostLevel" priority="10000"&gt;&lt;![CDATA[
+      if (field[xAllLev].value &gt;= 18) then
+        field[abRange].value += 20
+        endif]]&gt;&lt;/eval&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cPalUndSen" name="Undying Sentinel" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;fieldval field="trkMax" value="1"/&gt;
+    &lt;tag group="abDuration" tag="Instant"/&gt;
+    &lt;tag group="User" tag="Tracker"/&gt;
+    &lt;tag group="Usage" tag="Day"/&gt;
+    &lt;tag group="abAction" tag="Free"/&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cPalEldCha" name="Elder Champion" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;fieldval field="abDuration" value="1"/&gt;
+    &lt;fieldval field="trkMax" value="1"/&gt;
+    &lt;fieldval field="abRange" value="10"/&gt;
+    &lt;tag group="abRange" tag="Feet"/&gt;
+    &lt;tag group="User" tag="Tracker"/&gt;
+    &lt;tag group="abAction" tag="Action"/&gt;
+    &lt;tag group="Usage" tag="Day"/&gt;
+    &lt;tag group="abDuration" tag="Minute"/&gt;
+    &lt;/thing&gt;
+
+  </pre><h4>Oath of Vengeance</h4><p class="body">Below are the necessary mechanics to model the Oath of Vengeance and associated abilities.</p><pre class="xml">
+  &lt;thing id="cPalOatVen" name="Oath of Vengeance" description="Placeholder..." compset="CustomSpec" summary="Placeholder..." uniqueness="unique"&gt;
+    &lt;tag group="Helper" tag="Secondary"/&gt;
+    &lt;tag group="abCategory" tag="PalSacOath" name="Paladin Sacred Oath"/&gt;
+    &lt;tag group="SpecSource" tag="cHelpPal"/&gt;
+    &lt;bootstrap thing="cPalAbjEne"&gt;
+      &lt;autotag group="ClSpecWhen" tag="3"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cPalVowEnm"&gt;
+      &lt;autotag group="ClSpecWhen" tag="3"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cPalRelAve"&gt;
+      &lt;autotag group="ClSpecWhen" tag="7"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cPalSouVen"&gt;
+      &lt;autotag group="ClSpecWhen" tag="15"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="cPalAveAng"&gt;
+      &lt;autotag group="ClSpecWhen" tag="20"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="spBane"&gt;
+      &lt;autotag group="Helper" tag="Memorized"/&gt;
+      &lt;autotag group="Helper" tag="Free"/&gt;
+      &lt;autotag group="SpellType" tag="cHelpPal"/&gt;
+      &lt;autotag group="BonusSplAt" tag="3"/&gt;
+      &lt;/bootstrap&gt;
+&lt;!-- Not in SRD
+    &lt;bootstrap thing="spHuntMark"&gt;
+      &lt;autotag group="Helper" tag="Memorized"/&gt;
+      &lt;autotag group="Helper" tag="Free"/&gt;
+      &lt;autotag group="SpellType" tag="cHelpPal"/&gt;
+      &lt;autotag group="BonusSplAt" tag="3"/&gt;
+      &lt;/bootstrap&gt;
+--&gt;
+    &lt;bootstrap thing="spHoldPers"&gt;
+      &lt;autotag group="Helper" tag="Memorized"/&gt;
+      &lt;autotag group="Helper" tag="Free"/&gt;
+      &lt;autotag group="SpellType" tag="cHelpPal"/&gt;
+      &lt;autotag group="BonusSplAt" tag="5"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="spMistStep"&gt;
+      &lt;autotag group="Helper" tag="Memorized"/&gt;
+      &lt;autotag group="Helper" tag="Free"/&gt;
+      &lt;autotag group="SpellType" tag="cHelpPal"/&gt;
+      &lt;autotag group="BonusSplAt" tag="5"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="spHaste"&gt;
+      &lt;autotag group="Helper" tag="Memorized"/&gt;
+      &lt;autotag group="Helper" tag="Free"/&gt;
+      &lt;autotag group="SpellType" tag="cHelpPal"/&gt;
+      &lt;autotag group="BonusSplAt" tag="9"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="spProtEner"&gt;
+      &lt;autotag group="Helper" tag="Memorized"/&gt;
+      &lt;autotag group="Helper" tag="Free"/&gt;
+      &lt;autotag group="SpellType" tag="cHelpPal"/&gt;
+      &lt;autotag group="BonusSplAt" tag="9"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="spBanishme"&gt;
+      &lt;autotag group="Helper" tag="Memorized"/&gt;
+      &lt;autotag group="Helper" tag="Free"/&gt;
+      &lt;autotag group="SpellType" tag="cHelpPal"/&gt;
+      &lt;autotag group="BonusSplAt" tag="13"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="spDimeDoor"&gt;
+      &lt;autotag group="Helper" tag="Memorized"/&gt;
+      &lt;autotag group="Helper" tag="Free"/&gt;
+      &lt;autotag group="SpellType" tag="cHelpPal"/&gt;
+      &lt;autotag group="BonusSplAt" tag="13"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="spHoldMons"&gt;
+      &lt;autotag group="Helper" tag="Memorized"/&gt;
+      &lt;autotag group="Helper" tag="Free"/&gt;
+      &lt;autotag group="SpellType" tag="cHelpPal"/&gt;
+      &lt;autotag group="BonusSplAt" tag="17"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;bootstrap thing="spScrying"&gt;
+      &lt;autotag group="Helper" tag="Memorized"/&gt;
+      &lt;autotag group="Helper" tag="Free"/&gt;
+      &lt;autotag group="SpellType" tag="cHelpPal"/&gt;
+      &lt;autotag group="BonusSplAt" tag="17"/&gt;
+      &lt;/bootstrap&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cPalAbjEne" name="Channel Divinity: Abjure Enemy" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;fieldval field="abRange" value="60"/&gt;
+    &lt;fieldval field="abDuration" value="1"/&gt;
+    &lt;tag group="abAction" tag="Action"/&gt;
+    &lt;tag group="abCategory" tag="PalChanDiv" name="Paladin Channel Divinity"/&gt;
+    &lt;tag group="abRange" tag="Feet"/&gt;
+    &lt;tag group="StandardDC" tag="aCHA"/&gt;
+    &lt;tag group="abSave" tag="aWIS"/&gt;
+    &lt;tag group="abDuration" tag="Minute"/&gt;
+    &lt;tag group="abSave" tag="HalfEffect"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cPalVowEnm" name="Channel Divinity: Vow of Enmity" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;fieldval field="abRange" value="10"/&gt;
+    &lt;fieldval field="abDuration" value="1"/&gt;
+    &lt;tag group="abCategory" tag="PalChanDiv" name="Paladin Channel Divinity"/&gt;
+    &lt;tag group="abRange" tag="Feet"/&gt;
+    &lt;tag group="abDuration" tag="Minute"/&gt;
+    &lt;tag group="abAction" tag="Bonus"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cPalRelAve" name="Relentless Avenger" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="abDuration" tag="Constant"/&gt;
+    &lt;tag group="User" tag="Tracker"/&gt;
+    &lt;tag group="Usage" tag="Day"/&gt;
+    &lt;tag group="ChargeCalc" tag="AttrUses1"/&gt;
+    &lt;tag group="ChargeAttr" tag="aCHA"/&gt;
+    &lt;tag group="abAction" tag="None"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cPalSouVen" name="Soul of Vengeance" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="abDuration" tag="Constant"/&gt;
+    &lt;tag group="User" tag="Tracker"/&gt;
+    &lt;tag group="Usage" tag="Day"/&gt;
+    &lt;tag group="ChargeCalc" tag="AttrUses1"/&gt;
+    &lt;tag group="ChargeAttr" tag="aCHA"/&gt;
+    &lt;tag group="abAction" tag="None"/&gt;
+    &lt;/thing&gt;
+  &lt;thing id="cPalAveAng" name="Avenging Angel" description="Placeholder..." compset="ClSpecial" summary="Placeholder..."&gt;
+    &lt;fieldval field="abDuration" value="1"/&gt;
+    &lt;fieldval field="trkMax" value="1"/&gt;
+    &lt;tag group="abDuration" tag="Hour"/&gt;
+    &lt;tag group="abRange" tag="Personal"/&gt;
+    &lt;tag group="User" tag="Tracker"/&gt;
+    &lt;tag group="abAction" tag="Action"/&gt;
+    &lt;tag group="Usage" tag="Day"/&gt;
+    &lt;tag group="abSave" tag="aWIS"/&gt;
+    &lt;tag group="StandardDC" tag="aCHA"/&gt;
+    &lt;/thing&gt;
+
+  </pre>
+
+<p class="body"><a href="../5ededit.htm">Go Back</a>.
+
+</body>
+
+</html>
