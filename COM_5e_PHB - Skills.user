@@ -9,4 +9,8 @@
   <thing id="skMason" name="Craft (Mason)" compset="Skill">
     <tag group="Helper" tag="Custom"/>
     </thing>
+  <thing id="skProfession" name="Profession" compset="Skill" uniqueness="useronce">
+    <fieldval field="skAbbrev" value="Profession"/>
+    <link linkage="skillattr" thing="aCHA"/>
+    </thing>
   </document>
